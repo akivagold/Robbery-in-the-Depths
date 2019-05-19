@@ -1,0 +1,28 @@
+{
+    "sounds": [
+        {
+            "name": "bt_click",
+            "path": "bt_click.ogg"
+        },
+        {
+            "name": "bt_hover",
+            "path": "bt_hover.ogg"
+        },
+        {
+            "name": "error",
+            "path": "error.ogg"
+        },
+        {
+            "name": "window_close",
+            "path": "window_close.ogg"
+        },
+        {
+            "name": "win",
+            "path": "win.ogg"
+        },
+        {
+            "name": "lose",
+            "path": "lose.ogg"
+        }
+    ]
+}

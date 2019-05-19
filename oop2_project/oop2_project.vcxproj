@@ -84,12 +84,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,12 +98,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,7 +112,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,7 +130,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -138,6 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,7 +147,64 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="oop2_project.cpp" />
+    <ClCompile Include="akiva_tests.cpp" />
+    <ClCompile Include="AlertDialog.cpp" />
+    <ClCompile Include="AnimationView.cpp" />
+    <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="EditText.cpp" />
+    <ClCompile Include="ErrorDialog.cpp" />
+    <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="ImageButton.cpp" />
+    <ClCompile Include="ImageTexture.cpp" />
+    <ClCompile Include="ImageView.cpp" />
+    <ClCompile Include="LoadResourceException.cpp" />
+    <ClCompile Include="main_tests.cpp" />
+    <ClCompile Include="matanel_tests.cpp" />
+    <ClCompile Include="nahum_tests.cpp" />
+    <ClCompile Include="RectUtils.cpp" />
+    <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="TextureInfo.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TextView.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AlertDialog.h" />
+    <ClInclude Include="AnimationView.h" />
+    <ClInclude Include="BaseScreen.h" />
+    <ClInclude Include="Border.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="EditText.h" />
+    <ClInclude Include="ErrorDialog.h" />
+    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="HorizontalLayout.h" />
+    <ClInclude Include="IHandler.h" />
+    <ClInclude Include="ImageButton.h" />
+    <ClInclude Include="ImageTexture.h" />
+    <ClInclude Include="ImageView.h" />
+    <ClInclude Include="LoadResourceException.h" />
+    <ClInclude Include="main_tests.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="RectUtils.h" />
+    <ClInclude Include="RelativeLayout.h" />
+    <ClInclude Include="ResourceLoader.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="TextureInfo.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="TextView.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Utilities.h" />
+    <ClInclude Include="VerticalLayout.h" />
+    <ClInclude Include="View.h" />
+    <ClInclude Include="ViewGroup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
