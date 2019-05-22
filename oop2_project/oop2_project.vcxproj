@@ -159,6 +159,7 @@
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
+    <ClCompile Include="KeyValueFile.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
     <ClCompile Include="main_tests.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
@@ -175,6 +176,8 @@
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
+    <ClInclude Include="AABBTree.h" />
     <ClInclude Include="AlertDialog.h" />
     <ClInclude Include="AnimationView.h" />
     <ClInclude Include="BaseScreen.h" />
@@ -185,10 +188,12 @@
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="HorizontalLayout.h" />
+    <ClInclude Include="IAABB.h" />
     <ClInclude Include="IHandler.h" />
     <ClInclude Include="ImageButton.h" />
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="ImageView.h" />
+    <ClInclude Include="KeyValueFile.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="main_tests.h" />
     <ClInclude Include="Matrix.h" />

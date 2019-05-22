@@ -63,11 +63,11 @@ void GUI::AnimationView::draw()
 
 string GUI::AnimationView::toString() const
 {
-	string str = "AnimationView: ";
+	string str = "AnimationView: { ";
 	if (isHaveAnimation()) {
 		str += "numOfImages = " + std::to_string(m_textureInfo->getNumOfImages()) + ", ";
 	}
-	str += m_timer.toString() + ", " + View::toString();
+	str += m_timer.toString() + ", " + View::toString() + " }";
 	return str;
 }
 
