@@ -10,6 +10,7 @@
 #include <iostream>
 #include "VerticalLayout.h"
 #include "ErrorDialog.h"
+#include "Button.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -39,6 +40,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testGUI();
 void testCleanScreen();
 #pragma endregion
 
@@ -55,12 +57,50 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testCleanScreen();
+		testGUI();
+		//testCleanScreen();
 	}
 	catch (const std::exception& ex)
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testGUI() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+	// create buttons
+	for (int i = 0; i < 3; i++) {
+		std::shared_ptr<Button> bt = std::make_shared<Button>(window, "Button " + std::to_string(i));
+		bt->addClickListener([](View& v) {
+			v.disable();
+		});
+		mainLayout.addView(bt);
+	}
+	
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
 	}
 }
 
