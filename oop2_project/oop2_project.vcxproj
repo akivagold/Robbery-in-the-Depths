@@ -153,6 +153,7 @@
     <ClCompile Include="Border.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CoinView.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="KeyValueFile.cpp" />
+    <ClCompile Include="LifeView.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
     <ClCompile Include="main_tests.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
@@ -184,6 +186,7 @@
     <ClInclude Include="Border.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="CoinView.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="FontManager.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="ImageView.h" />
     <ClInclude Include="KeyValueFile.h" />
+    <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="main_tests.h" />
     <ClInclude Include="Matrix.h" />

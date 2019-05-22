@@ -2,7 +2,7 @@
 //---- include section ------
 #include <string>
 #include <memory>
-#include "HorizontalLayout.h"
+#include "VerticalLayout.h"
 #include "ImageView.h"
 #include "TextView.h"
 
@@ -14,7 +14,7 @@ namespace GUI {
  * ImageButtom class
  */
 class ImageButton :
-	public HorizontalLayout<GUI::View>
+	public VerticalLayout<GUI::View>
 {
 public:
 	// constructor
@@ -47,7 +47,7 @@ private:
 	// init components
 	void initComponents(sf::RenderWindow& window, const string& text);
 	// redeclaring scope of base class functions in private section of derived class
-	using HorizontalLayout<GUI::View>::addView;
-	using HorizontalLayout<GUI::View>::removeView;
+	using VerticalLayout<GUI::View>::addView;
+	using VerticalLayout<GUI::View>::removeView;
 };
 }

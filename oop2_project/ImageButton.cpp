@@ -3,7 +3,7 @@
 #include "SoundManager.h"
 
 GUI::ImageButton::ImageButton(sf::RenderWindow& window, const string& text)
-	: HorizontalLayout<GUI::View>(window)
+	: VerticalLayout<GUI::View>(window)
 {
 	initComponents(window, text);
 }
@@ -40,7 +40,7 @@ void GUI::ImageButton::setTextHAligment(TextView::TextHAlignment textHAl)
 
 string GUI::ImageButton::toString() const
 {
-	return "ImageButton: { " + HorizontalLayout<GUI::View>::toString() + " }";
+	return "ImageButton: { " + VerticalLayout<GUI::View>::toString() + " }";
 }
 
 void GUI::ImageButton::initComponents(sf::RenderWindow& window, const string& text)
