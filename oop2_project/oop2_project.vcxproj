@@ -161,8 +161,10 @@
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="KeyValueFile.cpp" />
+    <ClCompile Include="LevelInfo.cpp" />
     <ClCompile Include="LifeView.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
+    <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="main_tests.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
     <ClCompile Include="nahum_tests.cpp" />
@@ -197,8 +199,10 @@
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="ImageView.h" />
     <ClInclude Include="KeyValueFile.h" />
+    <ClInclude Include="LevelInfo.h" />
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
+    <ClInclude Include="MainScreen.h" />
     <ClInclude Include="main_tests.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="RectUtils.h" />
@@ -214,6 +218,7 @@
     <ClInclude Include="VerticalLayout.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="ViewGroup.h" />
+    <ClInclude Include="~example_class.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

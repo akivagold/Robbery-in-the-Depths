@@ -84,12 +84,11 @@ void testLevelInfo() {
 			Cell cell(rowNum, colNum);
 			levelChars[cell] = 'a';
 		}
-	}
-	
+	}	
 	std::cout << levelInfo.toString() << std::endl;
 	std::cout << levelInfo.toJSON() << std::endl;
-	std::cout << "check inversed:" << std::endl;
-	std::cout << LevelInfo::parse(levelInfo.toJSON()).toJSON() << std::endl;
+	//std::cout << "check inversed:" << std::endl;
+	//std::cout << LevelInfo::parse(levelInfo.toJSON()).toJSON() << std::endl;
 }
 
 void testMainScreen() {
