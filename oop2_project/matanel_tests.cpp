@@ -11,6 +11,7 @@
 #include "VerticalLayout.h"
 #include "ErrorDialog.h"
 #include "Button.h"
+#include "MainScreen.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -40,6 +41,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testMainScreen();
 void testGUI();
 void testCleanScreen();
 #pragma endregion
@@ -57,7 +59,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testGUI();
+		testMainScreen();
+		//testGUI();
 		//testCleanScreen();
 	}
 	catch (const std::exception& ex)
@@ -65,6 +68,14 @@ void matanel_main()
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testMainScreen() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	MainScreen mainScreen(window);
+	mainScreen.run();
 }
 
 void testGUI() {
