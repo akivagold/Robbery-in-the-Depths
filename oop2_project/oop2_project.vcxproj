@@ -202,6 +202,7 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="TableLayout.h" />
     <ClInclude Include="TextureInfo.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TextView.h" />

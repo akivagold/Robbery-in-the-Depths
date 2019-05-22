@@ -33,7 +33,7 @@ void GUI::Button::initComponents()
 	getBorder().setColor(sf::Color::Black);
 	getBackground().setColor(m_btColor);
 
-	// init sounds at events
+	// init events
 	addEnterListener([this](View &view) {
 		SoundManager::getInterface().playSound("bt_hover");
 		view.getBackground().setColor(m_selectedBtColor);
