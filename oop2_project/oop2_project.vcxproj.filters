@@ -96,10 +96,10 @@
     <ClCompile Include="KeyValueFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainScreen.cpp">
+    <ClCompile Include="LifeView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelInfo.cpp">
+    <ClCompile Include="CoinView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -206,23 +206,11 @@
     <ClInclude Include="AABB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TableLayout.h">
+    <ClInclude Include="LifeView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainScreen.h">
+    <ClInclude Include="CoinView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="~example_class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fonts\fonts.json" />
-    <None Include="sounds\back_musics.json" />
-    <None Include="sounds\sounds.json" />
-    <None Include="textures\textures.json" />
   </ItemGroup>
 </Project>
