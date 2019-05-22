@@ -12,6 +12,7 @@
 #include "ErrorDialog.h"
 #include "Button.h"
 #include "MainScreen.h"
+#include "LevelInfo.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -41,6 +42,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testLevelInfo();
 void testMainScreen();
 void testGUI();
 void testCleanScreen();
@@ -59,7 +61,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testMainScreen();
+		testLevelInfo();
+		//testMainScreen();
 		//testGUI();
 		//testCleanScreen();
 	}
@@ -68,6 +71,14 @@ void matanel_main()
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testLevelInfo() {
+	LevelInfo levelInfo;
+	levelInfo.setIndex(2);
+	levelInfo.setName("dasds");
+	levelInfo.getLevelChars().resize(3, 5);
+	std::cout << levelInfo.toString() << std::endl;
 }
 
 void testMainScreen() {
