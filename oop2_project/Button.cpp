@@ -8,6 +8,13 @@ GUI::Button::Button(sf::RenderWindow& window, const string& text)
 	initComponents();
 }
 
+void GUI::Button::setButtonColor(const sf::Color& color)
+{
+	m_btColor = color;
+	if(isEnable())
+		getBackground().setColor(m_btColor);
+}
+
 void GUI::Button::enable()
 {
 	TextView::enable();
@@ -33,7 +40,7 @@ void GUI::Button::initComponents()
 	getBorder().setColor(sf::Color::Black);
 	getBackground().setColor(m_btColor);
 
-	// init sounds at events
+	// init events
 	addEnterListener([this](View &view) {
 		SoundManager::getInterface().playSound("bt_hover");
 		view.getBackground().setColor(m_selectedBtColor);

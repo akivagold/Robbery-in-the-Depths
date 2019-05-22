@@ -27,6 +27,10 @@
         {
             "name": "david",
             "path": "davidbd.ttf"
+        },
+        {
+            "name": "segoeprb",
+            "path": "segoeprb.ttf"
         }
     ]
 }
