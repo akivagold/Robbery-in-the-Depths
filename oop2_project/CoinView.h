@@ -22,8 +22,6 @@ public:
 private:
 	// num of Coins
 	int m_numOfCoins;
-	// image of coin
-	std::shared_ptr<GUI::ImageButton> m_image;
 	// check if num  of life is legal
 	void checkLegalCoinNum(int numOfCoins) const;
 	// init

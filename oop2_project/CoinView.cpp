@@ -2,7 +2,7 @@
 
 
 CoinView::CoinView(sf::RenderWindow & window, int numOfCoins)
-	:ImageButton(window), m_image(std::make_shared<GUI::ImageButton>(window))
+	:ImageButton(window)
 {
 	init();
 	setNumOfCoins(numOfCoins);
@@ -28,8 +28,9 @@ void CoinView::checkLegalCoinNum(int numOfCoins) const
 
 void CoinView::init()
 {
-	//m_image->getImage().setTexture("coin");
+	getImage().setTexture("coin");
 	setTextHAligment(GUI::TextView::TextHAlignment::CENTER);
+	setTextSize(30);
 	getBorder().setSize(1);
 	getBorder().setColor(sf::Color::Black);
 }

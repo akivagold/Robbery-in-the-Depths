@@ -29,6 +29,10 @@
       "path": "life.png"
     },
     {
+      "name": "coin",
+      "path": "coin.png"
+    },
+    {
       "name": "load",
       "path": "load.png",
       "numOfRows": 8,
