@@ -150,6 +150,7 @@
     <ClCompile Include="akiva_tests.cpp" />
     <ClCompile Include="AlertDialog.cpp" />
     <ClCompile Include="AnimationView.cpp" />
+    <ClCompile Include="BoardObject.cpp" />
     <ClCompile Include="Border.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
@@ -176,6 +178,8 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TextView.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tool.cpp" />
+    <ClCompile Include="ToolView.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
@@ -185,6 +189,7 @@
     <ClInclude Include="AlertDialog.h" />
     <ClInclude Include="AnimationView.h" />
     <ClInclude Include="BaseScreen.h" />
+    <ClInclude Include="BoardObject.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
@@ -192,6 +197,7 @@
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="GameScreen.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="IAABB.h" />
     <ClInclude Include="IHandler.h" />
@@ -214,11 +220,16 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TextView.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tool.h" />
+    <ClInclude Include="ToolView.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="VerticalLayout.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="ViewGroup.h" />
     <ClInclude Include="~example_class.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
