@@ -16,7 +16,7 @@ public:
 	// constructor
 	Character(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
 	// set life
-	virtual void setLife(int numOfLife);
+	virtual void setLife(int numOfLife) const;
 	// convert to string
 	virtual string toString() const override;
 private:

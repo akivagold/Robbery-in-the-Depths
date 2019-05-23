@@ -7,16 +7,16 @@ using std::string;
 
 /*
  * Tool class
- *//*
+ */
 class Tool
 {
 public:
 	// constructor
-	//Tool();
+	Tool();
 	// convert to string
-	virtual string toString() const {}; // overide;
+	//virtual string toString() const {}; // overide;
 private:
 	
-};*/
+};
 
 
