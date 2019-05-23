@@ -165,6 +165,7 @@
     <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="InteractableObject.cpp" />
     <ClCompile Include="KeyValueFile.cpp" />
+    <ClCompile Include="LevelFileManager.cpp" />
     <ClCompile Include="LevelInfo.cpp" />
     <ClCompile Include="LifeView.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
@@ -211,11 +212,12 @@
     <ClInclude Include="ImageView.h" />
     <ClInclude Include="InteractableObject.h" />
     <ClInclude Include="KeyValueFile.h" />
+    <ClInclude Include="LevelFileManager.h" />
     <ClInclude Include="LevelInfo.h" />
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
-    <ClInclude Include="main_tests.h" />
+    <ClInclude Include="~main_tests.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="Player.h" />
@@ -239,6 +241,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="fonts\fonts.json" />
+    <None Include="levels.json" />
+    <None Include="sounds\back_musics.json" />
+    <None Include="sounds\sounds.json" />
+    <None Include="textures\textures.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

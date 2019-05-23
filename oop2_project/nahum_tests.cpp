@@ -1,4 +1,4 @@
-#include "main_tests.h"
+#include "~main_tests.h"
 #ifdef NAHUM_TESTS
 
 //-------------- include section ---------------

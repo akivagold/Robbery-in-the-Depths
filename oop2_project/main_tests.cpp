@@ -1,5 +1,5 @@
 
-#include "main_tests.h"
+#include "~main_tests.h"
 
 //-------------- declarations -----------------
 void nahum_main();

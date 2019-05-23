@@ -132,11 +132,11 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelFileManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main_tests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -278,8 +278,19 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="~main_tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFileManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="levels.json" />
+    <None Include="fonts\fonts.json" />
+    <None Include="sounds\back_musics.json" />
+    <None Include="sounds\sounds.json" />
+    <None Include="textures\textures.json" />
   </ItemGroup>
 </Project>
