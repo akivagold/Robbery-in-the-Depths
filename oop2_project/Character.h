@@ -10,16 +10,17 @@ using std::string;
  * Character class
  */
 class Character
+	: public MovingObject
 {
 public:
 	// constructor
-	Character();
+	Character(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
+	// set life
+	virtual void setLife(int numOfLife);
 	// convert to string
-	// TODO
-	//virtual string toString() const override;
-	virtual void setLife(int life) { m_life = life; }
+	virtual string toString() const override;
 private:
-	int m_life;
+	int m_numOfLife;
 };
 
 

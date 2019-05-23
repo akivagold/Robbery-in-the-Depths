@@ -163,6 +163,7 @@
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
+    <ClCompile Include="InteractableObject.cpp" />
     <ClCompile Include="KeyValueFile.cpp" />
     <ClCompile Include="LevelInfo.cpp" />
     <ClCompile Include="LifeView.cpp" />
