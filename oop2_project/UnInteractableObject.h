@@ -1,7 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
-// TODO #include "BoardObject"
+#include "BoardObject.h"
 
 //---- using section --------
 using std::string;
