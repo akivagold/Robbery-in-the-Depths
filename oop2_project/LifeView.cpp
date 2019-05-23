@@ -12,18 +12,18 @@ LifeView::LifeView(sf::RenderWindow & window, int numOfLife)
 
 void LifeView::setLife(int numOfLife)
 {
-	checkLegalLife(numOfLife);
-	m_numOfLife = numOfLife;
-}
-
-void LifeView::setNumOfLife(int numOfLife)
-{
-	checkLegalLife(numOfLife);
 	removeAllViews();
 	for (int i = 0; i < numOfLife; ++i) {
 		std::shared_ptr<GUI::ImageView> lifeImage = crateLifeImage();
 		addView(lifeImage);
 	}
+}
+
+void LifeView::setNumOfLife(int numOfLife)
+{
+	checkLegalLife(numOfLife);
+	m_numOfLife = numOfLife;
+	setLife(numOfLife);
 }
 
 string LifeView::toString() const
@@ -46,6 +46,5 @@ void LifeView::checkLegalLife(int numOfLife) const
 
 void LifeView::init()
 {
-	//m_image->getImage().setTexture("life");
 	getBorder().setColor(sf::Color::Black);
 }

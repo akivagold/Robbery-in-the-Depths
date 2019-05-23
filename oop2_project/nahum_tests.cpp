@@ -82,11 +82,18 @@ void testLifeView() {
 	std::shared_ptr<LifeView> lf = std::make_shared<LifeView>(window, 3);
 	mainLayout.addView(lf);
 	lf->addClickListener([&lf](GUI::View& view) {
-		lf->setNumOfLife(-4);
+		int lives = lf->getNumOfLife();
+		++lives;
+		lf->setNumOfLife(lives);
 	});
 
 	std::shared_ptr<CoinView> cv = std::make_shared<CoinView>(window, 3);
 	mainLayout.addView(cv);
+	cv->addClickListener([&cv](GUI::View& view) {
+		int coins = cv->getNumOfCoins();
+		coins--;
+		cv->setNumOfCoins(coins);
+	});
 
 	while (window.isOpen())
 	{
