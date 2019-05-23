@@ -14,11 +14,11 @@ class MovingObject
 {
 public:
 	// constructor
-	MovingObject() = default;
+	explicit MovingObject(sf::RenderWindow& window, GameScreen& gameScreen);
 	// TODO 
 	/*void suicide();
 	void play();*/
-	virtual string toString() const override { "MovingObject: {" + InteractableObject::toString() + " }"; }
+	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; }
 private:
 	sf::Vector2f m_speed, m_interalAcceleration, m_externalAcc;
 	//sf::Vector2f getNextPosition();

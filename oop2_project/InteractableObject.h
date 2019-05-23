@@ -14,7 +14,7 @@ class InteractableObject
 {
 public:
 	// constructor
-	InteractableObject() = default;
+	explicit InteractableObject(sf::RenderWindow& window, GameScreen& gameScreen);
 	// convert to string
 	// TODO
 	virtual string toString() const override { return "InteractableObject: {" + BoardObject::toString() + "}"; }
