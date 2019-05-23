@@ -12,7 +12,7 @@ class ExampleClass
 {
 public:
 	// constructor
-	ExampleClass();
+	ExampleClass(); // explicit
 	// convert to string
 	virtual string toString() const; // overide;
 private:

@@ -1,4 +1,9 @@
 #include "LevelInfo.h"
+#include "ParseLevelException.h"
+
+LevelInfo::LevelInfo()
+	: m_index(0)
+{ }
 
 void LevelInfo::setIndex(int index)
 {
@@ -29,11 +34,16 @@ json LevelInfo::convertToJSON(const LevelInfo& levelInfo)
 LevelInfo LevelInfo::parse(const json& levelInfoJson)
 {
 	LevelInfo levelInfo;
-	levelInfo.setIndex(levelInfoJson["index"].get<int>());
-	levelInfo.setName(levelInfoJson["name"].get<string>());
-	const json& mapSizeJson = levelInfoJson["mapSize"];
-	levelInfo.getLevelChars().resize(mapSizeJson["rows"].get<int>(), mapSizeJson["cols"].get<int>());
-	putStrInLevelChars(levelInfoJson["mapChars"].get<string>(), levelInfo.getLevelChars());
+	try {		
+		levelInfo.setIndex(levelInfoJson["index"].get<int>());
+		levelInfo.setName(levelInfoJson["name"].get<string>());
+		const json& mapSizeJson = levelInfoJson["mapSize"];
+		levelInfo.getLevelChars().resize(mapSizeJson["rows"].get<int>(), mapSizeJson["cols"].get<int>());
+		putStrInLevelChars(levelInfoJson["mapChars"].get<string>(), levelInfo.getLevelChars());
+	}
+	catch (const nlohmann::detail::parse_error& ex) { // error when parse JSON
+		throw ParseLevelException("Cannot parse level from JSON, the error: " + string(ex.what()));
+	}	
 	return levelInfo;
 }
 

@@ -161,6 +161,7 @@
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
     <ClCompile Include="KeyValueFile.cpp" />
+    <ClCompile Include="LevelFileManager.cpp" />
     <ClCompile Include="LevelInfo.cpp" />
     <ClCompile Include="LifeView.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="main_tests.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
     <ClCompile Include="nahum_tests.cpp" />
+    <ClCompile Include="ParseLevelException.cpp" />
     <ClCompile Include="RectUtils.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -199,12 +201,14 @@
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="ImageView.h" />
     <ClInclude Include="KeyValueFile.h" />
+    <ClInclude Include="LevelFileManager.h" />
     <ClInclude Include="LevelInfo.h" />
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
     <ClInclude Include="main_tests.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="ParseLevelException.h" />
     <ClInclude Include="RectUtils.h" />
     <ClInclude Include="RelativeLayout.h" />
     <ClInclude Include="ResourceLoader.h" />

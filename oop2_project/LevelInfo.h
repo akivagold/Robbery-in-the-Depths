@@ -14,7 +14,7 @@ class LevelInfo
 {
 public:
 	// constructor
-	LevelInfo() = default;
+	LevelInfo();
 	// get level map characters
 	Matrix<char>& getLevelChars() { return m_levelChars; }
 	const Matrix<char>& getLevelChars() const { return m_levelChars; } // for const access

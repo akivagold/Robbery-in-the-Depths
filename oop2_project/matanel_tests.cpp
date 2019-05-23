@@ -13,6 +13,7 @@
 #include "Button.h"
 #include "MainScreen.h"
 #include "LevelInfo.h"
+#include "LevelFileManager.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -42,6 +43,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testLevelFileManager();
 void testLevelInfo();
 void testMainScreen();
 void testGUI();
@@ -61,7 +63,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testLevelInfo();
+		testLevelFileManager();
+		//testLevelInfo();
 		//testMainScreen();
 		//testGUI();
 		//testCleanScreen();
@@ -71,6 +74,19 @@ void matanel_main()
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testLevelFileManager() {
+	LevelFileManager lfm;
+	//std::cout << lfm.toString() << std::endl;
+	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
+		const LevelInfo& levelInfo = lfm.getLevel(i);
+		std::cout << levelInfo.toString() << std::endl;
+	}	
+	LevelInfo levelInfo = lfm.getLevel(0);
+	lfm.editLevel(levelInfo);
+	//const LevelInfo& levelInfo = lfm.getLevel("level2");
+	//lfm.addLevel(lfm.getLevel(0));
 }
 
 void testLevelInfo() {
@@ -87,8 +103,8 @@ void testLevelInfo() {
 	}	
 	std::cout << levelInfo.toString() << std::endl;
 	std::cout << levelInfo.toJSON() << std::endl;
-	//std::cout << "check inversed:" << std::endl;
-	//std::cout << LevelInfo::parse(levelInfo.toJSON()).toJSON() << std::endl;
+	std::cout << "check inversed:" << std::endl;
+	std::cout << LevelInfo::parse(levelInfo.toJSON()).toJSON() << std::endl;
 }
 
 void testMainScreen() {
