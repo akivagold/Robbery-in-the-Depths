@@ -42,6 +42,33 @@ public:
 			// set cell
 			void setCell(const Cell& cell) { m_cell = cell; }
 	};
+	// const iterator of matrix
+	class const_iterator {
+	public:
+		// constructor
+		explicit const_iterator(const Matrix<T>& matrix, const Cell& cell = { 0, 0 });
+		// check if iterator is in end of matrix
+		bool isEnd() const;
+		// get data
+		const T& operator*();
+		const T* operator->();
+		// go to next cell
+		const_iterator& operator++(); // prefix
+		const_iterator operator++(int); // postfix
+		// get cell
+		const Cell& getCell() const { return m_cell; }
+		// overload operators
+		bool operator==(const const_iterator& other) const { return m_cell == other.m_cell; }
+		bool operator!=(const const_iterator& other) const { return m_cell != other.m_cell; }
+	private:
+		// cell of iterator
+		Cell m_cell;
+		// matrix
+		const Matrix<T>& m_matrix;
+		// set cell
+		void setCell(const Cell& cell) { m_cell = cell; }
+	};
+
 
 	// constructor
 	explicit Matrix(int numOfRows = 0, int numOfCols = 0);
@@ -64,8 +91,12 @@ public:
     void forEach(std::function<void(const Cell&, T&)> onGetCellData);
 	// get iterator to begin of matrix
 	iterator begin() { return iterator(*this); }
+	const_iterator begin() const { return cbegin(); }
+	const_iterator cbegin() const { return const_iterator(*this); }
 	// get iterator to end of matrix
 	iterator end() { return iterator(*this, getEndCell()); }
+	const_iterator end() const { return cend(); }
+	const_iterator cend() const { return const_iterator(*this, getEndCell()); }
 	// check if cell exists
 	bool isCellExists(const Cell& cell) const { return ((cell.getRowNum() < m_numOfRows) && (cell.getColNum() < m_numOfCols)); }
 	// convert to string
@@ -78,7 +109,7 @@ private:
 	// check legal dimensions
 	bool isLegalSize(int numOfRows, int numOfCols) const { return ((numOfRows >= 0) && (numOfCols >= 0)); }
 	// get one cell after last cell
-	Cell getEndCell() { return Cell(getNumOfRows(), 0); };
+	Cell getEndCell() const { return Cell(getNumOfRows(), 0); };
 };
 
 template<class T>
@@ -170,4 +201,49 @@ template<class T>
 T* Matrix<T>::iterator::operator->()
 {
 	return &operator*();
+}
+
+template<class T>
+Matrix<T>::const_iterator::const_iterator(const Matrix<T>& matrix, const Cell& cell) : m_matrix(matrix)
+{
+	setCell(cell);
+}
+
+template<class T>
+bool Matrix<T>::const_iterator::isEnd() const
+{
+	return !m_matrix.isCellExists(m_cell);
+}
+
+template<class T>
+const T& Matrix<T>::const_iterator::operator*()
+{
+	if (isEnd())
+		throw std::out_of_range("Iterator of matrix at " + m_cell.toString() + " is out of range ");
+	return m_matrix[m_cell];
+}
+
+template<class T>
+const T* Matrix<T>::const_iterator::operator->()
+{
+	return &operator*();
+}
+
+template<class T>
+typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator++()
+{
+	// increment cell by one
+	if (m_cell.getColNum() + 1 == m_matrix.getNumOfCols())
+		m_cell.setCell(m_cell.getRowNum() + 1, 0);
+	else
+		m_cell.setColNum(m_cell.getColNum() + 1);
+	return *this;
+}
+
+template<class T>
+typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator++(int)
+{
+	const_iterator tempIt = *this;
+	++(*this);
+	return tempIt;
 }

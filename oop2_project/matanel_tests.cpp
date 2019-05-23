@@ -14,6 +14,7 @@
 #include "MainScreen.h"
 #include "LevelInfo.h"
 #include "LevelFileManager.h"
+#include "Matrix.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -43,6 +44,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testMatrix();
 void testLevelFileManager();
 void testLevelInfo();
 void testMainScreen();
@@ -63,9 +65,10 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		//testLevelFileManager();
+		//testMatrix();
+		testLevelFileManager();
 		//testLevelInfo();
-		testMainScreen();
+		//testMainScreen();
 		//testGUI();
 		//testCleanScreen();
 	}
@@ -76,6 +79,23 @@ void matanel_main()
 	}
 }
 
+void testMatrix() {
+	Matrix<int> m(5, 3);
+	int i = 0;
+	for (auto it = m.begin(); it != m.end(); ++it) {
+		(*it) = i;
+		i++;
+	}
+
+	for (auto it = m.cbegin(); it != m.cend(); ++it) {
+		std::cout << it.getCell().toString() << "\n";
+	}
+
+	for (auto n : m) {
+		std::cout << n << "\n";
+	}
+}
+
 void testLevelFileManager() {
 	LevelFileManager lfm;
 	//std::cout << lfm.toString() << std::endl;
@@ -83,8 +103,10 @@ void testLevelFileManager() {
 		const LevelInfo& levelInfo = lfm.getLevel(i);
 		std::cout << levelInfo.toString() << std::endl;
 	}	
-	LevelInfo levelInfo = lfm.getLevel(0);
-	lfm.editLevel(levelInfo);
+	//LevelInfo levelInfo = lfm.getLevel(0);
+	//levelInfo.getLevelChars().resize(0, 0);
+	//lfm.editLevel(levelInfo);
+
 	//const LevelInfo& levelInfo = lfm.getLevel("level2");
 	//lfm.addLevel(lfm.getLevel(0));
 }

@@ -50,11 +50,8 @@ LevelInfo LevelInfo::parse(const json& levelInfoJson)
 string LevelInfo::convertLevelCharsToStr(const Matrix<char>& levelChars)
 {
 	string mapChars = "";
-	for (int rowNum = 0; rowNum < levelChars.getNumOfRows(); ++rowNum) {
-		for (int colNum = 0; colNum < levelChars.getNumOfCols(); ++colNum) {
-			Cell cell(rowNum, colNum);
-			mapChars += levelChars[cell];
-		}
+	for (char c : levelChars) {
+		mapChars += c;
 	}
 	return mapChars;
 }
@@ -62,11 +59,8 @@ string LevelInfo::convertLevelCharsToStr(const Matrix<char>& levelChars)
 void LevelInfo::putStrInLevelChars(const string& charsStr, Matrix<char>& levelChars)
 {
 	int charIndex = 0;
-	for (int rowNum = 0; rowNum < levelChars.getNumOfRows(); ++rowNum) {
-		for (int colNum = 0; colNum < levelChars.getNumOfCols(); ++colNum) {
-			Cell cell(rowNum, colNum);
-			levelChars[cell] = charsStr[charIndex];
-			charIndex++;
-		}
+	for (Matrix<char>::iterator it = levelChars.begin(); it != levelChars.end(); ++it) {
+		*it = charsStr[charIndex];
+		++charIndex;
 	}
 }
