@@ -18,7 +18,7 @@ public:
 	// set num of life
 	void setNumOfLife(int numOfLife);
 	// get num of life
-	int getNUmOfLife() { return m_numOfLife; }
+	int getNumOfLife() { return m_numOfLife; }
 	// convert to string
 	virtual string toString() const override;
 private:
