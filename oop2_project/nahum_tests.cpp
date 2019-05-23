@@ -10,6 +10,8 @@
 #include <iostream>
 #include "VerticalLayout.h"
 #include "ErrorDialog.h"
+#include "LifeView.h"
+#include "CoinView.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -40,6 +42,7 @@ using namespace GUI; // for tests only
 //-------------- declare functions -------------
 #pragma region Declarations
 void testCleanScreen();
+void testLifeView();
 #pragma endregion
 
 // -------------- globals & constants -----------
@@ -55,12 +58,49 @@ void nahum_main()
 	srand(unsigned(time(NULL)));
 	try
 	{
-		testCleanScreen();
+		//testCleanScreen();
+		testLifeView();
 	}
 	catch (const std::exception& ex)
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testLifeView() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+	std::shared_ptr<LifeView> lf = std::make_shared<LifeView>(window, 3);
+	mainLayout.addView(lf);
+	lf->addClickListener([&lf](GUI::View& view) {
+		lf->setNumOfLife(-4);
+	});
+
+	std::shared_ptr<CoinView> cv = std::make_shared<CoinView>(window, 3);
+	mainLayout.addView(cv);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
 	}
 }
 

@@ -5,5 +5,7 @@
 /.vs
 /Debug
 /oop2_project/Debug
-/x64/Debug
+/oop2_project/x64/Debug/oop2_project.Build.CppClean.log
+/oop2_project/x64/Debug/oop2_project.log
 /oop2_project/x64/Debug
+/x64/Debug

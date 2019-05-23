@@ -1,35 +1,43 @@
 {
-    "textures": [
-        {
-            "name": "easy",
-            "path": "baby.png"
-        },
-        {
-            "name": "colors",
-            "path": "colors.png"
-        },
-        {
-            "name": "lose",
-            "path": "cry.png"
-        },
-        {
-            "name": "win",
-            "path": "win.png"
-        },
-        {
-            "name": "regular",
-            "path": "regular_person.png"
-        },
-        {
-            "name": "super",
-            "path": "super.png"
-        },
-        {
-            "name": "load",
-            "path": "load.png",
-            "numOfRows": 8,
-            "numOfCols": 5,
-            "numOfImages": 36
-        }
-    ]
+  "textures": [
+    {
+      "name": "easy",
+      "path": "baby.png"
+    },
+    {
+      "name": "colors",
+      "path": "colors.png"
+    },
+    {
+      "name": "lose",
+      "path": "cry.png"
+    },
+    {
+      "name": "win",
+      "path": "win.png"
+    },
+    {
+      "name": "regular",
+      "path": "regular_person.png"
+    },
+    {
+      "name": "super",
+      "path": "super.png"
+    },
+    {
+      "name": "life",
+      "path": "life.png"
+    },
+    {
+      "name": "coin",
+      "path": "coin.png"
+    },
+    {
+      "name": "load",
+      "path": "load.png",
+      "numOfRows": 8,
+      "numOfCols": 5,
+      "numOfImages": 36
+    }
+  ]
 }
