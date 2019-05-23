@@ -2,7 +2,3 @@
 
 
 
-MovingObject::MovingObject()
-{
-}
-

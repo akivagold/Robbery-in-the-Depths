@@ -10,13 +10,14 @@ using std::string;
  * InteractableObject class
  */
 class InteractableObject
+	:public BoardObject
 {
 public:
 	// constructor
-	InteractableObject() {};
+	InteractableObject() = default;
 	// convert to string
 	// TODO
-	//virtual string toString() const override;
+	virtual string toString() const override { return "InteractableObject: {" + BoardObject::toString() + "}"; }
 private:
 
 };
