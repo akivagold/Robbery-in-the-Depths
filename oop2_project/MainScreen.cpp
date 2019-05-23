@@ -17,6 +17,8 @@ string MainScreen::toString() const
 
 void MainScreen::initComponents()
 {
+	getBackground().setTexture("main_background");
+
 	// init title
 	m_titleTV->setFont("segoeprb");
 	m_titleTV->setTextColor(sf::Color(132, 60, 12));

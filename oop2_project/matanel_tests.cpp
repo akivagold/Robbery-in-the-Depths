@@ -63,9 +63,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testLevelFileManager();
+		//testLevelFileManager();
 		//testLevelInfo();
-		//testMainScreen();
+		testMainScreen();
 		//testGUI();
 		//testCleanScreen();
 	}

@@ -12,11 +12,11 @@ class CoinView
 {
 public:
 	// constructor
-	CoinView(sf::RenderWindow& window, int numOfCoins = 0);
-	//set num of coins
+	explicit CoinView(sf::RenderWindow& window, int numOfCoins = 0);
+	// set num of coins
 	void setNumOfCoins(int numOfCoins);
 	// get num of life
-	int getNumOfCoins() { return m_numOfCoins; }
+	int getNumOfCoins() const { return m_numOfCoins; }
 	// convert to string
 	virtual string toString() const override;
 private:

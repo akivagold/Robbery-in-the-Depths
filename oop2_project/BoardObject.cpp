@@ -13,7 +13,7 @@ void BoardObject::setDrawPriority(int drawPriority)
 		throw std::out_of_range("Draw priority " + std::to_string(drawPriority) + " is illegal");
 }
 
-float BoardObject::getDistance(const BoardObject & other)
+float BoardObject::getDistance(const BoardObject& other) const
 {
 	return sqrt(pow(getPosition().x - other.getPosition().x, 2) + pow(getPosition().y - other.getPosition().y, 2));
 }
