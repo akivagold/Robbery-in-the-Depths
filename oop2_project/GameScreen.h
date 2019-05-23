@@ -12,15 +12,15 @@ using std::string;
  */
 class GameScreen
 	: public GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>
-{}
-	/*
+{
+	
 public:
 	// constructor
-	GameScreen();
+	GameScreen(sf::RenderWindow& window);
 	// convert to string
 	virtual string toString() const; // overide;
 private:
 
-};*/
+};
 
 
