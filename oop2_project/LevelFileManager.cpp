@@ -48,7 +48,7 @@ string LevelFileManager::toString() const
 void LevelFileManager::loadLevels()
 {
 	json levelsFileJSON = readLevelsFileJSON();
-	const json& levelsArray = levelsFileJSON["levels"];
+	const json& levelsArray = levelsFileJSON.at("levels");
 	for (json::const_iterator it = levelsArray.begin(); it != levelsArray.end(); ++it) {
 		m_levelsInfo.push_back(LevelInfo::parse(*it));
 	}

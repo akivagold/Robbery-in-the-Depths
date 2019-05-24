@@ -161,6 +161,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameObjectInfo.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GOIFileParser.cpp" />
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameObjectInfo.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="IAABB.h" />
     <ClInclude Include="IHandler.h" />
@@ -246,6 +248,7 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="fonts\fonts.json" />
+    <None Include="game_objects.json" />
     <None Include="levels.json" />
     <None Include="sounds\back_musics.json" />
     <None Include="sounds\sounds.json" />

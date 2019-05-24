@@ -1,0 +1,14 @@
+{
+    "gameObjects": [
+        {
+            "isUnique": true,
+            "name": "player",
+            "specialChar": 119
+        },
+        {
+            "isUnique": false,
+            "name": "wall",
+            "specialChar": 120
+        }
+    ]
+}

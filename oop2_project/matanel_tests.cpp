@@ -16,6 +16,7 @@
 #include "LevelFileManager.h"
 #include "Matrix.h"
 #include "GameObjectInfo.h"
+#include "GOIFileParser.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -83,9 +84,13 @@ void matanel_main()
 }
 
 void testGameObjectInfo() {
-	json goiJSON = { { "name", "player" }, { "isUnique", true }, { "specialChar", 'a' } };
-	GameObjectInfo goi = GameObjectInfo::parse(goiJSON);
-	std::cout << goi.toString() << std::endl;
+	std::vector<GameObjectInfo> gois = GOIFileParser::parseGOIFile();
+	for (GameObjectInfo& goi : gois)
+		std::cout << goi.toString() << std::endl;
+
+	//json goiJSON = { { "name", "player" }, { "isUnique", true }, { "specialChar", 'a' } };
+	//GameObjectInfo goi = GameObjectInfo::parse(goiJSON);
+	//std::cout << goi.toString() << std::endl;
 }
 
 void testMatrix() {

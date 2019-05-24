@@ -35,13 +35,13 @@ LevelInfo LevelInfo::parse(const json& levelInfoJson)
 {
 	LevelInfo levelInfo;
 	try {		
-		levelInfo.setIndex(levelInfoJson["index"].get<int>());
-		levelInfo.setName(levelInfoJson["name"].get<string>());
-		const json& mapSizeJson = levelInfoJson["mapSize"];
-		levelInfo.getLevelChars().resize(mapSizeJson["rows"].get<int>(), mapSizeJson["cols"].get<int>());
-		putStrInLevelChars(levelInfoJson["mapChars"].get<string>(), levelInfo.getLevelChars());
+		levelInfo.setIndex(levelInfoJson.at("index").get<int>());
+		levelInfo.setName(levelInfoJson.at("name").get<string>());
+		const json& mapSizeJson = levelInfoJson.at("mapSize");
+		levelInfo.getLevelChars().resize(mapSizeJson.at("rows").get<int>(), mapSizeJson.at("cols").get<int>());
+		putStrInLevelChars(levelInfoJson.at("mapChars").get<string>(), levelInfo.getLevelChars());
 	}
-	catch (const nlohmann::detail::parse_error& ex) { // error when parse JSON
+	catch (const nlohmann::json::exception& ex) { // error when parse JSON
 		throw ParseLevelException("Cannot parse level from JSON, the error: " + string(ex.what()));
 	}	
 	return levelInfo;

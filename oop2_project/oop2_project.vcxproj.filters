@@ -141,6 +141,9 @@
     <ClCompile Include="ParseGOIException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GOIFileParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h">
@@ -296,6 +299,9 @@
     <ClInclude Include="ParseGOIException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GOIFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -304,5 +310,6 @@
     <None Include="sounds\back_musics.json" />
     <None Include="sounds\sounds.json" />
     <None Include="textures\textures.json" />
+    <None Include="game_objects.json" />
   </ItemGroup>
 </Project>
