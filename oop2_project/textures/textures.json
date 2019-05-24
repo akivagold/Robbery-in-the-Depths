@@ -1,28 +1,12 @@
 {
     "textures": [
         {
-            "name": "easy",
-            "path": "baby.png"
-        },
-        {
-            "name": "colors",
-            "path": "colors.png"
-        },
-        {
             "name": "lose",
             "path": "cry.png"
         },
         {
             "name": "win",
             "path": "win.png"
-        },
-        {
-            "name": "regular",
-            "path": "regular_person.png"
-        },
-        {
-            "name": "super",
-            "path": "super.png"
         },
         {
             "name": "life",

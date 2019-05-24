@@ -37,7 +37,7 @@ void LevelFileManager::editLevel(const LevelInfo& levelInfo)
 
 string LevelFileManager::toString() const
 {
-	string str = "LevelFileManager: { levelsFileName=" + LEVELS_FILE_PATH + " } levels: { ";
+	string str = "LevelFileManager: { levelsFileName=" + LEVELS_FILE_PATH + ", levels: { ";
 	for (const LevelInfo& levelInfo : m_levelsInfo) {
 		str += levelInfo.toString() + ", ";
 	}

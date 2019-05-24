@@ -15,6 +15,7 @@
 #include "LevelInfo.h"
 #include "LevelFileManager.h"
 #include "Matrix.h"
+#include "GameObjectInfo.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -44,6 +45,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testGameObjectInfo();
 void testMatrix();
 void testLevelFileManager();
 void testLevelInfo();
@@ -65,8 +67,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		testGameObjectInfo();
 		//testMatrix();
-		testLevelFileManager();
+		//testLevelFileManager();
 		//testLevelInfo();
 		//testMainScreen();
 		//testGUI();
@@ -77,6 +80,12 @@ void matanel_main()
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testGameObjectInfo() {
+	json goiJSON = { { "name", "player" }, { "isUnique", true }, { "specialChar", 'a' } };
+	GameObjectInfo goi = GameObjectInfo::parse(goiJSON);
+	std::cout << goi.toString() << std::endl;
 }
 
 void testMatrix() {
@@ -98,11 +107,11 @@ void testMatrix() {
 
 void testLevelFileManager() {
 	LevelFileManager lfm;
-	//std::cout << lfm.toString() << std::endl;
-	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
+	std::cout << lfm.toString() << std::endl;
+	/*for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);
 		std::cout << levelInfo.toString() << std::endl;
-	}	
+	}	*/
 	//LevelInfo levelInfo = lfm.getLevel(0);
 	//levelInfo.getLevelChars().resize(0, 0);
 	//lfm.editLevel(levelInfo);

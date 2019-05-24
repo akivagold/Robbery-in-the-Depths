@@ -119,8 +119,10 @@ bool GUI::ViewGroup<ViewType>::handleClickEvent(float mouseX, float mouseY)
 
 	if (isEnable()) {
 		// handle children
-		for (const auto& view : m_views)
-			view->handleClickEvent(mouseX, mouseY);
+		for (const auto& view : m_views) {
+			if (view->handleClickEvent(mouseX, mouseY))
+				break;
+		}
 	}
 
 	return clicked;
