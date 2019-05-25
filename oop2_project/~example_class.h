@@ -14,7 +14,7 @@ public:
 	// constructor
 	ExampleClass(); // explicit
 	// convert to string
-	virtual string toString() const; // overide;
+	virtual string toString() const; // override;
 private:
 
 };

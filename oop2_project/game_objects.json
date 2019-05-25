@@ -2,12 +2,12 @@
     "gameObjects": [
         {
             "isUnique": true,
-            "name": "player",
+            "name": "life",
             "specialChar": 119
         },
         {
             "isUnique": false,
-            "name": "wall",
+            "name": "coin",
             "specialChar": 120
         }
     ]
