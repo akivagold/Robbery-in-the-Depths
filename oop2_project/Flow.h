@@ -19,6 +19,6 @@ public:
 	// convert to string
 	virtual string toString() const override { return "Flow: {" + StaticObject::toString() + "}"; }
 private:
-	float m_angle, m_power;
+	float m_flowAngle, m_flowPower;
 };
 
