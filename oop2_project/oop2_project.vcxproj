@@ -151,6 +151,7 @@
     <ClCompile Include="AlertDialog.cpp" />
     <ClCompile Include="AnimationView.cpp" />
     <ClCompile Include="BoardObject.cpp" />
+    <ClCompile Include="BODS.cpp" />
     <ClCompile Include="Border.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="AnimationView.h" />
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="BoardObject.h" />
+    <ClInclude Include="BODS.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
