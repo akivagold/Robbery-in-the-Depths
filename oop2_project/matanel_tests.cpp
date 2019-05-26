@@ -18,6 +18,7 @@
 #include "GameObjectInfo.h"
 #include "GOIFileParser.h"
 #include "GameObjectView.h"
+#include "GameObjectsList.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -100,12 +101,12 @@ void testGameObjectView() {
 	mainLayout.getBorder().setSize(1.f);
 
 
-	std::vector<GameObjectInfo> gois = GOIFileParser::parseGOIFile();
-	for (GameObjectInfo& goi : gois) {
-		// create GameObjectView
-		std::shared_ptr<GameObjectView> gov = std::make_shared<GameObjectView>(window, goi);
-		mainLayout.addView(gov);
-	}
+	std::shared_ptr<GameObjectsList> gol = std::make_shared<GameObjectsList>(window);
+	mainLayout.addView(gol);
+
+	gol->addGOVClickListener([](const std::shared_ptr<GameObjectView>& gov) {
+		std::cout << gov->getGameObjectInfo().getName() << std::endl;
+	});
 
 	std::cout << mainLayout.toString() << std::endl;
 	
