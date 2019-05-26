@@ -17,6 +17,8 @@
 #include "Matrix.h"
 #include "GameObjectInfo.h"
 #include "GOIFileParser.h"
+#include "GameObjectView.h"
+#include "GameObjectsList.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -46,6 +48,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testGameObjectView();
 void testGameObjectInfo();
 void testMatrix();
 void testLevelFileManager();
@@ -68,7 +71,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testGameObjectInfo();
+		testGameObjectView();
+		//testGameObjectInfo();
 		//testMatrix();
 		//testLevelFileManager();
 		//testLevelInfo();
@@ -80,6 +84,46 @@ void matanel_main()
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testGameObjectView() {
+	
+
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+
+	std::shared_ptr<GameObjectsList> gol = std::make_shared<GameObjectsList>(window);
+	mainLayout.addView(gol);
+
+	gol->addGOVClickListener([](const std::shared_ptr<GameObjectView>& gov) {
+		std::cout << gov->getGameObjectInfo().getName() << std::endl;
+	});
+
+	std::cout << mainLayout.toString() << std::endl;
+	
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
 	}
 }
 
