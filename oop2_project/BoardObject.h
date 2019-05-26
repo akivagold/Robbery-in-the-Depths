@@ -20,7 +20,7 @@ public:
 	//set draw priority
 	void setDrawPriority(int drawPriority);
 	// get main screen
-	GameScreen& getGameScreen() { return m_gameScreen; }
+	const GameScreen& getGameScreen() const { return m_gameScreen; }
 	// get draw priority
 	int getDrawPriority() const { return m_drawPriority; }
 	// check if collide with another

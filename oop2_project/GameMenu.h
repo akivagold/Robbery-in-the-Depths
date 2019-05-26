@@ -23,7 +23,7 @@ public:
 	// get exit button
 	const std::shared_ptr<LifeView>& getLifeView() const { return m_lifeView; }
 	// get turn button
-	const std::shared_ptr<GUI::ImageButton>& getToolView() const { return m_toolView; }
+	const std::shared_ptr<ToolView>& getToolView() const { return m_toolView; }
 	// get level num
 	const std::shared_ptr<GUI::TextView>& getLevelNumTV() { return m_levelNumTV; }
 	// convert to string
