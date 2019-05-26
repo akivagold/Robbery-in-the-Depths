@@ -14,7 +14,7 @@ class UnInteractableObject
 {
 public:
 	// constructor
-	UnInteractableObject() = default;
+	explicit UnInteractableObject() = default;
 	// convert to string
 	virtual string toString() const override { return "UnInteractableObject: {" + BoardObject::toString() + "}"; }
 private:

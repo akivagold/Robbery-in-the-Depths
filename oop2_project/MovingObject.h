@@ -15,9 +15,9 @@ class MovingObject
 public:
 	// constructor
 	explicit MovingObject(sf::RenderWindow& window, GameScreen& gameScreen);
-	// TODO 
-	/*void suicide();
-	void play();*/
+	// play
+	virtual void play() = 0;
+	// convert to string
 	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; }
 private:
 	sf::Vector2f m_speed, m_interalAcceleration, m_externalAcc;

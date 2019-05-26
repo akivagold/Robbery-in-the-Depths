@@ -157,8 +157,10 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CoinView.cpp" />
+    <ClCompile Include="Cop.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
+    <ClCompile Include="Flow.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameObjectInfo.cpp" />
     <ClCompile Include="GameObjectsList.cpp" />
@@ -179,11 +181,14 @@
     <ClCompile Include="matanel_tests.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="nahum_tests.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ParseGOIException.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RectUtils.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="Shark.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="TextureInfo.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -207,8 +212,10 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CoinView.h" />
+    <ClInclude Include="Cop.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
+    <ClInclude Include="Flow.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameObjectInfo.h" />
     <ClInclude Include="GameObjectsList.h" />
@@ -228,7 +235,10 @@
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="ParseGOIException.h" />
+    <ClInclude Include="Shark.h" />
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="~main_tests.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MovingObject.h" />
