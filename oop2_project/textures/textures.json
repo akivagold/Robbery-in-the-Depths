@@ -1,31 +1,35 @@
 {
-    "textures": [
-        {
-            "name": "lose",
-            "path": "cry.png"
-        },
-        {
-            "name": "win",
-            "path": "win.png"
-        },
-        {
-            "name": "life",
-            "path": "life.png"
-        },
-        {
-            "name": "coin",
-            "path": "coin.png"
-        },
-        {
-            "name": "main_background",
-            "path": "main_background.png"
-        },
-        {
-            "name": "load",
-            "path": "load.png",
-            "numOfRows": 8,
-            "numOfCols": 5,
-            "numOfImages": 36
-        }
-    ]
+  "textures": [
+    {
+      "name": "lose",
+      "path": "cry.png"
+    },
+    {
+      "name": "win",
+      "path": "win.png"
+    },
+    {
+      "name": "life",
+      "path": "life.png"
+    },
+    {
+      "name": "coin",
+      "path": "coin.png"
+    },
+    {
+      "name": "ak47",
+      "path": "ak47.png"
+    },
+    {
+      "name": "main_background",
+      "path": "main_background.png"
+    },
+    {
+      "name": "load",
+      "path": "load.png",
+      "numOfRows": 8,
+      "numOfCols": 5,
+      "numOfImages": 36
+    }
+  ]
 }

@@ -159,6 +159,7 @@
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObjectInfo.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObjectInfo.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GOIFileParser.h" />
