@@ -4,6 +4,8 @@
 #include "AnimationView.h"
 #include "GameScreen.h"
 #include <math.h>
+#include "IAABB.h"
+#include "AABB.h"
 
 //---- using section --------
 using std::string;
@@ -12,12 +14,17 @@ using std::string;
  * BoardObject class
  */
 class BoardObject :
-	public GUI::AnimationView
+	public GUI::AnimationView, public IAABB
 {
 public:
 	// constructor
-	explicit BoardObject(sf::RenderWindow& window, GameScreen& gameScreen,  int drawPriority = 0); 
-	//set draw priority
+	explicit BoardObject(sf::RenderWindow& window, GameScreen& gameScreen,  int drawPriority = 0); // TODO set in protected
+	// get AABB
+	virtual AABB getAABB() const override;
+
+	// TODO add: get collides objects
+
+	// set draw priority
 	void setDrawPriority(int drawPriority);
 	// get main screen
 	GameScreen& getGameScreen() { return m_gameScreen; }
@@ -28,7 +35,7 @@ public:
 	// get distance from another object
 	float getDistance(const BoardObject& other) const;
 	// update AABB
-	void updateAABB() {} 
+	void updateAABB();									// TODO must be private
 	// convert to string
 	virtual string toString() const override;
 private:

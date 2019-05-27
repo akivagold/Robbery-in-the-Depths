@@ -12,14 +12,22 @@ using std::string;
 
 /*
  * BoardObjectDataStructure class
- *//*
+ */
 class BODS
 {
 public:
+	// custom compare board objects
+	struct BOCompare
+	{
+		bool operator()(const std::shared_ptr<BoardObject>& lhs, const std::shared_ptr<BoardObject>& rhs) const
+		{
+			return lhs->getDrawPriority() < rhs->getDrawPriority();
+		}
+	};	
+	// board data structure
+	using BoardDS = std::multiset<std::shared_ptr<BoardObject>, BOCompare>;
 	// constructor
 	BODS() = default;
-	// board data structure
-	using BoardDS = std::set<std::shared_ptr<BoardObject>>;
 	// request add board object
 	void requestAddBO(const std::shared_ptr<BoardObject>& boardObject) { m_addQueue.push(boardObject); }
 	// request remove board object
@@ -31,14 +39,14 @@ public:
 	// get player
 	const std::shared_ptr<Player>& getPlayer() const { return m_player; }
 	// handle requests queues
-	void handleRequestsQueues();
+	void handleRequests();
 	// convert to string
 	virtual string toString() const;
 private:
 	// player
 	std::shared_ptr<Player> m_player;              // TODO need to set when level loaded
 	// all board objects
-	BoardDS m_boardObjects;                        // TODO need to sort by draw priority
+	BoardDS m_boardObjects;
 	// add/remove request queues
 	std::queue<std::shared_ptr<BoardObject>> m_addQueue, m_removeQueue;
 	// AABB tree
@@ -54,5 +62,3 @@ private:
 	// build BoardObjects as string
 	string buildBOStr() const;
 };
-
-*/

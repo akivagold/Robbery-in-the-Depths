@@ -19,6 +19,8 @@
 #include "GOIFileParser.h"
 #include "GameObjectView.h"
 #include "GameObjectsList.h"
+#include "BODS.h"
+#include "GameScreen.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -48,6 +50,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testBODS();
 void testGameObjectView();
 void testGameObjectInfo();
 void testMatrix();
@@ -71,7 +74,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testGameObjectView();
+		testBODS();
+		//testGameObjectView();
 		//testGameObjectInfo();
 		//testMatrix();
 		//testLevelFileManager();
@@ -85,6 +89,39 @@ void matanel_main()
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testBODS() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	GameScreen gameScreen(window);
+	BODS bods;
+
+	for (int i = 0; i < 15; ++i) {
+		std::shared_ptr<BoardObject> bo = std::make_shared<BoardObject>(window, gameScreen, i%3);
+		bo->setPosition(sf::Vector2f{ float(i),float(i) });
+		bo->setSize(sf::Vector2i{ i,i });
+		bods.requestAddBO(bo);
+	}
+
+
+	bods.handleRequests();
+
+	for (auto it = bods.getBOs().begin(); it != bods.getBOs().end(); ++it) {
+		BoardObject* bo = &**it;
+		bods.getAABBTree().updateObject(bo);
+		auto ov = bods.getAABBTree().queryOverlaps(bo);
+		int ovSize = 0;
+		for (auto ovIt = ov.begin(); ovIt != ov.end(); ++ovIt)
+			ovSize++;
+		std::cout << ovSize << std::endl;
+	}
+	
+	//bods.requestRemoveBO(*bods.getBOs().begin());
+	//bods.handleRequests();
+
+	std::cout << bods.toString() << std::endl;
 }
 
 void testGameObjectView() {

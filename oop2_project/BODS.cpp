@@ -1,6 +1,6 @@
 #include "BODS.h"
-/*
-void BODS::handleRequestsQueues()
+
+void BODS::handleRequests()
 {
 	handleRemoveRequestsQueue();
 	handleAddRequestsQueue();
@@ -18,7 +18,7 @@ void BODS::handleAddRequestsQueue()
 void BODS::handleRemoveRequestsQueue()
 {
 	while (!m_removeQueue.empty()) {
-		auto& bo = m_addQueue.front();
+		auto& bo = m_removeQueue.front();
 		removeBO(bo);
 		m_removeQueue.pop();
 	}
@@ -33,10 +33,10 @@ void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)
 {
 	auto it = m_boardObjects.find(boardObject);
-	if (it == m_boardObjects.end())
-		throw std::invalid_argument("Cannot find " + boardObject->toString() + " to remove");
-	m_boardObjects.erase(it);
-	m_aabbTree.insertObject(&(*boardObject));
+	if (it != m_boardObjects.end()) {
+		m_boardObjects.erase(it);
+		m_aabbTree.insertObject(&(*boardObject));
+	}	
 }
 
 string BODS::toString() const
@@ -47,10 +47,9 @@ string BODS::toString() const
 
 string BODS::buildBOStr() const
 {
-	string str = "BO: {";
+	string str = "BoardObjects: {";
 	for (auto& bo : m_boardObjects)
 		str += bo->toString() + "\n";
 	str += " }";
 	return str;
 }
-*/
