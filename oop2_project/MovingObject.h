@@ -10,7 +10,7 @@ using std::string;
  * MovingObject class
  */
 class MovingObject
-	:public InteractableObject
+	: public InteractableObject
 {
 public:
 	// constructor

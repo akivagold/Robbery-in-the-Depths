@@ -8,10 +8,9 @@ using std::string;
 
 /*
  * class Flow
- class
  */
 class Flow
-	:public StaticObject
+	: public StaticObject
 {
 public:
 	// constructor
@@ -19,6 +18,7 @@ public:
 	// convert to string
 	virtual string toString() const override { return "Flow: {" + StaticObject::toString() + "}"; }
 private:
+	// angle & power
 	float m_flowAngle, m_flowPower;
 };
 

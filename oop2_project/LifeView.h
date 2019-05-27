@@ -12,20 +12,20 @@ class LifeView
 {
 public:
 	// constructor
-	LifeView(sf::RenderWindow& window, int numOfLife = 0);
-	//set life
+	explicit LifeView(sf::RenderWindow& window, int numOfLife = 0);
+	// set life
 	void setLife(int numOflife);
 	// set num of life
 	void setNumOfLife(int numOfLife);
 	// get num of life
-	int getNumOfLife() { return m_numOfLife; }
+	int getNumOfLife() const { return m_numOfLife; }
 	// convert to string
 	virtual string toString() const override;
 private:
-	//num of life
+	// num of life
 	int m_numOfLife;
-	// crate life image
-	std::shared_ptr<GUI::ImageView> crateLifeImage();
+	// create life image
+	std::shared_ptr<GUI::ImageView> createLifeImage();
 	// check if num  of life is legal
 	void checkLegalLife(int numOfLife) const;
 	// init

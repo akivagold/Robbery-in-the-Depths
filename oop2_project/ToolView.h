@@ -26,7 +26,7 @@ public:
 	// get cuurent tool
 	Tool& getCurrTool() { return m_currTool; }
 	// get ammo
-	int getAmmo() { return m_ammo; }
+	int getAmmo() const { return m_ammo; }
 	// convert to string
 	virtual string toString() const override; 
 private:

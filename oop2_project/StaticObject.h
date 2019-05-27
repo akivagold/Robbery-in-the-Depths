@@ -8,10 +8,9 @@ using std::string;
 
 /*
  * class StaticObject
- class
  */
 class StaticObject
-	:public InteractableObject
+	: public InteractableObject
 {
 public:
 	// constructor

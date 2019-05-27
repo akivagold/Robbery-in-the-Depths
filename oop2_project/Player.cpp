@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(sf::RenderWindow & window, GameScreen & gameScreen, int numOfLife)
+Player::Player(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
 	: Character(window, gameScreen)
 {}
 
@@ -19,5 +19,5 @@ void Player::setLife(int numOfLife) const
 
 string Player::toString() const
 {
-	return "Player: { " + Character::toString() + " } ";
+	return "Player: { " + Character::toString() + " }";
 }

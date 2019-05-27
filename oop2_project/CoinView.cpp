@@ -23,7 +23,7 @@ string CoinView::toString() const
 void CoinView::checkLegalCoinNum(int numOfCoins) const
 {
 	if(numOfCoins < 0)
-		throw std::out_of_range("Num of Coins - " + std::to_string(numOfCoins) + " - is illegal");
+		throw std::out_of_range("Number of coins (=" + std::to_string(numOfCoins) + ") is illegal");
 }
 
 void CoinView::init()

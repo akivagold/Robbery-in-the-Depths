@@ -10,7 +10,7 @@ using std::string;
  * UnInteractableObject class
  */
 class UnInteractableObject
-	:public BoardObject
+	: public BoardObject
 {
 public:
 	// constructor
