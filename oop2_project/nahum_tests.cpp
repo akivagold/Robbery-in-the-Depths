@@ -12,6 +12,8 @@
 #include "ErrorDialog.h"
 #include "LifeView.h"
 #include "CoinView.h"
+#include "ToolView.h"
+#include "GameMenu.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -93,6 +95,16 @@ void testLifeView() {
 		int coins = cv->getNumOfCoins();
 		coins--;
 		cv->setNumOfCoins(coins);
+	});
+	std::shared_ptr<GameMenu> gm = std::make_shared<GameMenu>(window);
+	mainLayout.addView(gm);
+
+	std::shared_ptr<ToolView> tv = std::make_shared<ToolView>(window);
+	mainLayout.addView(tv);
+	tv->addClickListener([&tv](GUI::View& view) {
+		int ammo = tv->getAmmo();
+		ammo--;
+		tv->setAmmo(ammo);
 	});
 
 	while (window.isOpen())

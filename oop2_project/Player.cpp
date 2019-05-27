@@ -12,7 +12,9 @@ void Player::changeTool(const std::shared_ptr<Tool>& tool)
 void Player::setLife(int numOfLife) const
 {
 	Character::setLife(numOfLife);
-	//TODO : update GameMenu
+
+	// update game menu
+	getGameScreen().getGmaeMenu()->getLifeView()->setLife(numOfLife);
 }
 
 string Player::toString() const

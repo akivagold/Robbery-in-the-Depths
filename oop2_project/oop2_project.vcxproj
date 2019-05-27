@@ -162,6 +162,7 @@
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Flow.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameObjectInfo.cpp" />
     <ClCompile Include="GameObjectsList.cpp" />
     <ClCompile Include="GameObjectView.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Flow.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameObjectInfo.h" />
     <ClInclude Include="GameObjectsList.h" />
     <ClInclude Include="GameObjectView.h" />

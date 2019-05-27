@@ -144,13 +144,7 @@
     <ClCompile Include="GOIFileParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectsList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BODS.cpp">
+    <ClCompile Include="GameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -311,17 +305,12 @@
     <ClInclude Include="GOIFileParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectsList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BODS.h">
+    <ClInclude Include="GameMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="levels.json" />
     <None Include="fonts\fonts.json" />
     <None Include="sounds\back_musics.json" />
