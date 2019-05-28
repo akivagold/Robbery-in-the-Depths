@@ -17,9 +17,9 @@ public:
 	// constructor
 	explicit World(sf::RenderWindow& window);
 	// get BoardObjectDataStructure
-	BODS& getDODS() { return m_bods; }
+	BODS& getBODS() { return m_bods; }
 	// load level
-	void loadLevel(const LevelInfo& levelInfo);
+	void loadLevel(const LevelInfo& levelInfo);            // TODO not working yet
 	// draw
 	virtual void draw() override;
 	// convert to string

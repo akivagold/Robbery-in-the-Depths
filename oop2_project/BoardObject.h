@@ -19,8 +19,6 @@ class BoardObject :
 public:
 	// default size in pixels
 	static const sf::Vector2i DEFAULT_SIZE;
-	// constructor
-	explicit BoardObject(sf::RenderWindow& window, GameScreen& gameScreen,  int drawPriority = 0); // TODO set in protected
 	// get AABB
 	virtual AABB getAABB() const override;
 
@@ -36,19 +34,30 @@ public:
 	bool isCollideWith(const BoardObject& other) const { return getBound().intersects(other.getBound()); }
 	// get distance from another object
 	float getDistance(const BoardObject& other) const;
-	// update AABB
-	//void updateAABB();									// TODO must be private
 	// convert to string
 	virtual string toString() const override;
-	virtual bool canMoveThroughMe() { return m_canMoveThroughMe; }
+	// check if this object is don't blocking movement
+	virtual bool canMoveThroughMe() const { return m_canMoveThroughMe; }
+	// change flag that object in game
+	void setInGame() { m_inGame = true; }
+	// check if object in game
+	bool isInGame() const { return m_inGame; }
 protected:
 	// if another object can move through me
-	bool m_canMoveThroughMe;
+	bool m_canMoveThroughMe;                      // TODO need be private and use by function
+	// update components
+	virtual void updateComponents() override;
+	// constructor
+	explicit BoardObject(GameScreen& gameScreen, int drawPriority = 0);
 private:
+	// flag that check if object in game
+	bool m_inGame;
 	// draw priority
 	int m_drawPriority;
 	// game screen
 	GameScreen& m_gameScreen;
+	// update AABB
+	void updateAABB();
 	// init
 	void init();
 };

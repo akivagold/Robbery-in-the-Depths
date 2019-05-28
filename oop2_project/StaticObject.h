@@ -13,9 +13,10 @@ class StaticObject
 	: public InteractableObject
 {
 public:
-	// constructor
-	explicit StaticObject(sf::RenderWindow& window, GameScreen& gameScreen);
 	// convert to string
-	virtual string toString() const override { return "StaticObject: {" + InteractableObject::toString() + "}"; }
+	virtual string toString() const override { return "StaticObject: { " + InteractableObject::toString() + " }"; }
+protected:
+	// constructor
+	explicit StaticObject(GameScreen& gameScreen);
 };
 

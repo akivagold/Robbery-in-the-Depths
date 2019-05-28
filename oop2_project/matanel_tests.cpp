@@ -128,9 +128,12 @@ void testWorld() {
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
 		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 
-		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
 		shark->setPosition(pos);
-		gameScreen.getWorld().getDODS().requestAddBO(shark);
+		shark->addClickListener([&gameScreen, shark](View& v) {
+			// TODO
+		});
+		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
 	
@@ -155,7 +158,7 @@ void testWorld() {
 				window.close();
 		}
 
-		gameScreen.getWorld().getDODS().handleRequests();
+		gameScreen.getWorld().getBODS().handleRequests();
 
 		window.clear();
 		gameScreen.getWorld().draw();
@@ -171,12 +174,12 @@ void testBODS() {
 	BODS bods;
 
 	for (int i = 0; i < 15; ++i) {
-		std::shared_ptr<BoardObject> bo = std::make_shared<BoardObject>(window, gameScreen, i%3);
+		std::shared_ptr<Shark> bo = std::make_shared<Shark>(gameScreen);
 		bo->setPosition(sf::Vector2f{ float(i),float(i) });
 		bo->setSize(sf::Vector2i{ i,i });
 		bods.requestAddBO(bo);
 	}
-	bods.requestAddBO(std::make_shared<Player>(window, gameScreen));
+	bods.requestAddBO(std::make_shared<Player>(gameScreen));
 
 	bods.handleRequests();
 

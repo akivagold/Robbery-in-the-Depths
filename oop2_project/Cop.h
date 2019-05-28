@@ -14,7 +14,7 @@ class Cop
 {
 public:
 	// constructor
-	explicit Cop(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
+	explicit Cop(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
 	virtual string toString() const override { return "Cop: { " + NPC::toString() + " }"; };
 private:

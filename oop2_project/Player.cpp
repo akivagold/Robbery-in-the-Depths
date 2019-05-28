@@ -1,8 +1,8 @@
 #include "Player.h"
 #include "GameScreen.h"
 
-Player::Player(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
-	: Character(window, gameScreen)
+Player::Player(GameScreen& gameScreen, int numOfLife)
+	: Character(gameScreen)
 {
 	init();
 }
@@ -12,9 +12,9 @@ void Player::changeTool(const std::shared_ptr<Tool>& tool)
 	//TODO
 }
 
-void Player::setLife(int numOfLife)
+void Player::setNumOfLife(int numOfLife)
 {
-	Character::setLife(numOfLife);
+	Character::setNumOfLife(numOfLife);
 
 	// update game menu
 	getGameScreen().getGameMenu()->getLifeView()->setLife(numOfLife);
@@ -22,7 +22,7 @@ void Player::setLife(int numOfLife)
 
 void Player::playChoice()
 {
-	
+	// TODO
 }
 
 string Player::toString() const
@@ -32,7 +32,8 @@ string Player::toString() const
 
 void Player::init()
 {
-	setAnimation("coin");
+	setAnimation("coin"); // TODO change
+	//setAnimationFrequency(?)
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		float offset = 5;
 		switch (keyCode)

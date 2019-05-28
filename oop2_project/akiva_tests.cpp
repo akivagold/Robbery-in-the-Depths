@@ -114,7 +114,7 @@ void testWorld() {
 
 	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen.getWindow(), gameScreen);
 	player->setPosition(0,0);
-	gameScreen.getWorld().getDODS().requestAddBO(player);
+	gameScreen.getWorld().getBODS().requestAddBO(player);
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
@@ -145,7 +145,7 @@ void testWorld() {
 
 		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
 		shark->setPosition(pos);
-		gameScreen.getWorld().getDODS().requestAddBO(shark);
+		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
 
@@ -170,7 +170,7 @@ void testWorld() {
 				window.close();
 		}
 
-		gameScreen.getWorld().getDODS().handleRequests();
+		gameScreen.getWorld().getBODS().handleRequests();
 
 		window.clear();
 		gameScreen.getWorld().draw();

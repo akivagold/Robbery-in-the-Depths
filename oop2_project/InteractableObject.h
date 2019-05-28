@@ -13,11 +13,13 @@ class InteractableObject
 	: public BoardObject
 {
 public:
-	// constructor
-	explicit InteractableObject(sf::RenderWindow& window, GameScreen& gameScreen);
+	// get damage
+	int getDamage() const { return m_damage; }
 	// convert to string
-	virtual string toString() const override { return "InteractableObject: {" + BoardObject::toString() + "}"; }
+	virtual string toString() const override { return "InteractableObject: { " + BoardObject::toString() + ", damage=" + std::to_string(m_damage) + " }"; }
 protected:
+	// constructor
+	explicit InteractableObject(GameScreen& gameScreen);
 	// set damge
 	void setDamage(int damage) { m_damage = damage; }
 private:

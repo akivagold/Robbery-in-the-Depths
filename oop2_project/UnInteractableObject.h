@@ -13,10 +13,11 @@ class UnInteractableObject
 	: public BoardObject
 {
 public:
-	// constructor
-	explicit UnInteractableObject() = default;
 	// convert to string
 	virtual string toString() const override { return "UnInteractableObject: {" + BoardObject::toString() + "}"; }
+protected:
+	// constructor
+	using BoardObject::BoardObject;
 private:
 
 };

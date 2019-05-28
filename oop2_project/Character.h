@@ -13,13 +13,19 @@ class Character
 	: public MovingObject
 {
 public:
-	// constructor
-	Character(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
 	// set life
-	virtual void setLife(int numOfLife);
+	virtual void setNumOfLife(int numOfLife);
+	// get number of life
+	int getNumOfLife() const { return m_numOfLife; }
+	// check if has no life
+	bool hasNoLife() const { return (m_numOfLife == 0); }
 	// convert to string
 	virtual string toString() const override;
+protected:
+	// constructor
+	explicit Character(GameScreen& gameScreen, int numOfLife = 0);
 private:
+	// number of life
 	int m_numOfLife;
 };
 

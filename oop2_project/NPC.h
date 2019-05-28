@@ -14,7 +14,7 @@ class NPC
 {
 public:
 	// constructor
-	explicit NPC(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
+	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
 	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; };
 };

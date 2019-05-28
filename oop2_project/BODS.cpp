@@ -34,6 +34,7 @@ void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 {
 	m_boardObjects.insert(boardObject);
 	m_aabbTree.insertObject(&(*boardObject));
+	boardObject->setInGame();
 }
 
 void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)

@@ -1,15 +1,16 @@
 #include "Character.h"
 
-Character::Character(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
-	: MovingObject(window, gameScreen)
+Character::Character(GameScreen& gameScreen, int numOfLife)
+	: MovingObject(gameScreen)
 {
-	setLife(numOfLife);
+	setNumOfLife(numOfLife);
 }
 
-void Character::setLife(int numOfLife)
+void Character::setNumOfLife(int numOfLife)
 {
 	if (numOfLife < 0)
 		throw std::out_of_range("num of life " + std::to_string(numOfLife) + " is illegal");
+	m_numOfLife = numOfLife;
 }
 
 string Character::toString() const

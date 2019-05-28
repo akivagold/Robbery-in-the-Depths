@@ -3,14 +3,7 @@
 ToolView::ToolView(sf::RenderWindow& window)
 	: ImageButton(window)
 {
-	//setTool(currentTool);
 	init();
-}
-
-void ToolView::setTool(Tool& tool)
-{
-	//TODO: switch?
-	
 }
 
 void ToolView::setAmmo(int ammoQuntity)

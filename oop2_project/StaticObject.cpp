@@ -1,5 +1,5 @@
 #include "StaticObject.h"
 
-StaticObject::StaticObject(sf::RenderWindow & window, GameScreen & gameScreen)
-	: InteractableObject(window,gameScreen)
+StaticObject::StaticObject(GameScreen& gameScreen)
+	: InteractableObject(gameScreen)
 {}

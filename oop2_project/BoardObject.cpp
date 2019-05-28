@@ -4,8 +4,8 @@
 // init 
 const sf::Vector2i BoardObject::DEFAULT_SIZE(50, 50);
 
-BoardObject::BoardObject(sf::RenderWindow& window, GameScreen& gameScreen, int drawPriority)
-	: AnimationView(window), m_gameScreen(gameScreen), m_canMoveThroughMe(true)
+BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
+	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_canMoveThroughMe(true), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();
@@ -33,6 +33,19 @@ float BoardObject::getDistance(const BoardObject& other) const
 string BoardObject::toString() const
 {
 	return "BoardObject: { drawPriority=" + std::to_string(m_drawPriority) + ", " + AnimationView::toString() + " }";
+}
+
+void BoardObject::updateComponents()
+{
+	AnimationView::updateComponents();
+
+	if (isInGame())
+		updateAABB();
+}
+
+void BoardObject::updateAABB()
+{
+	getGameScreen().getWorld().getBODS().getAABBTree().updateObject(this);
 }
 
 void BoardObject::init()

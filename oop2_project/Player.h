@@ -15,10 +15,10 @@ class Player :
 {
 public:
 	// constructor
-	Player(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
-	// add tool
+	explicit Player(GameScreen& gameScreen, int numOfLife = 0);
+	// add new tool
 	void addTool(std::shared_ptr<Tool> tool) { m_tools.push_back(tool); }
-	// num of tools
+	// get number of tools
 	int getNumOfTool() const { return int(m_tools.size()) - 1; }
 	// get score
 	int getScore() const { return m_score; }
@@ -27,11 +27,12 @@ public:
 	// get current tool
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
-	virtual void setLife(int numOfLife) override;
-	// choose what to do
-	virtual void playChoice() override; 
+	virtual void setNumOfLife(int numOfLife) override;
 	// convert to string
 	virtual string toString() const override;
+protected:
+	// choose what to do
+	virtual void playChoice() override;
 private:
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;

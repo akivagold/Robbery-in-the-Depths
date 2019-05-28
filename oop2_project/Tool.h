@@ -11,10 +11,12 @@ using std::string;
 class Tool
 {
 public:
-	// constructor
-	Tool();
+	
 	// convert to string
 	//virtual string toString() const {}; // overide;
+protected:
+	// constructor
+	Tool();
 private:
 	
 };

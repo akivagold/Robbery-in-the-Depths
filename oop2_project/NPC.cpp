@@ -1,6 +1,5 @@
 #include "NPC.h"
 
-NPC::NPC(sf::RenderWindow & window, GameScreen & gameScreen, int numOfLife)
-	:Character(window, gameScreen, numOfLife)
-{
-}
+NPC::NPC(GameScreen& gameScreen, int numOfLife)
+	: Character(gameScreen, numOfLife)
+{ }

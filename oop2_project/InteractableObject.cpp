@@ -1,6 +1,6 @@
 #include "InteractableObject.h"
 
-InteractableObject::InteractableObject(sf::RenderWindow& window, GameScreen& gameScreen)
-	: BoardObject(window, gameScreen), m_damage(0)
+InteractableObject::InteractableObject(GameScreen& gameScreen)
+	: BoardObject(gameScreen), m_damage(0)
 {
 }

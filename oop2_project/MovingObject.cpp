@@ -1,8 +1,8 @@
 #include "MovingObject.h"
 #include "GameScreen.h"
 
-MovingObject::MovingObject(sf::RenderWindow& window, GameScreen& gameScreen)
-	: InteractableObject(window, gameScreen)
+MovingObject::MovingObject(GameScreen& gameScreen)
+	: InteractableObject(gameScreen)
 {}
 
 void MovingObject::play()
@@ -16,7 +16,7 @@ void MovingObject::play()
 	setPosition(getNextPosition());
 
 	std::forward_list<BoardObject*> collideList;
-	collideList = getGameScreen().getWorld().getDODS().getAABBTree().queryOverlaps(this);
+	collideList = getGameScreen().getWorld().getBODS().getAABBTree().queryOverlaps(this);
 	// check if can move to new position
 	if (!canMove(collideList)) {
 		setPosition(prePos);
@@ -31,15 +31,16 @@ void MovingObject::draw()
 
 sf::Vector2f MovingObject::getNextPosition()
 {
-	float x_pos = getPosition().x + m_speed.x * m_clock.getElapsedTime().asMilliseconds();
-	float y_pos = getPosition().y + m_speed.y * m_clock.getElapsedTime().asMilliseconds();
-	//sf::Vector2f nextPos = getPosition() + (m_speed * m_clock.getElapsedTime().asMilliseconds);
-	sf::Vector2f nextPos = sf::Vector2f(x_pos, y_pos);
+	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
+	float x_pos = getPosition().x + m_speed.x * elapsedTime;
+	float y_pos = getPosition().y + m_speed.y * elapsedTime;
+	//sf::Vector2f nextPos = getPosition() + (m_speed * m_clock.getElapsedTime().asMilliseconds);
+	sf::Vector2f nextPos = sf::Vector2f(x_pos, y_pos);	
 	return nextPos;
 }
 
-bool MovingObject::canMove(std::forward_list<BoardObject*> collideList)
+bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
 {
 	// check all list
 	for (auto object : collideList) {

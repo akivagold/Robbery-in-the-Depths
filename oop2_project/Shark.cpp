@@ -1,7 +1,7 @@
 #include "Shark.h"
 
-Shark::Shark(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
-	: NPC(window, gameScreen, numOfLife)
+Shark::Shark(GameScreen& gameScreen, int numOfLife)
+	: NPC(gameScreen, numOfLife)
 {
 	init();
 }
@@ -9,6 +9,7 @@ Shark::Shark(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
 void Shark::init()
 {
 	setAnimation("life"); // TODO change animation
+	//setAnimationFrequency(?)
 	// TODO setDrawPriority()
 	// TODO setDamge();
 }

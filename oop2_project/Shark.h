@@ -14,12 +14,12 @@ class Shark
 {
 public:
 	// constructor
-	explicit Shark(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife = 0);
+	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
-	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }
+	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
+protected:
 	// play
 	virtual void play() override {}				// TODO
-protected:
 	// the object choose where to go
 	virtual void playChoice() override {}       // TODO
 private:

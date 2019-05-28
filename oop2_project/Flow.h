@@ -14,9 +14,9 @@ class Flow
 {
 public:
 	// constructor
-	explicit Flow(sf::RenderWindow& window, GameScreen& gameScreen);
+	explicit Flow(GameScreen& gameScreen);
 	// convert to string
-	virtual string toString() const override { return "Flow: {" + StaticObject::toString() + "}"; }
+	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
 private:
 	// angle & power
 	float m_flowAngle, m_flowPower;
