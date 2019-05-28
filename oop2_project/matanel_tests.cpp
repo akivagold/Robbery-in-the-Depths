@@ -21,6 +21,7 @@
 #include "GameObjectsList.h"
 #include "BODS.h"
 #include "GameScreen.h"
+#include "World.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -50,6 +51,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testWorld();
 void testBODS();
 void testGameObjectView();
 void testGameObjectInfo();
@@ -74,7 +76,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testBODS();
+		testWorld();
+		//testBODS();
 		//testGameObjectView();
 		//testGameObjectInfo();
 		//testMatrix();
@@ -88,6 +91,53 @@ void matanel_main()
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testWorld() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	World world(window);
+	world.addKeyDownListener([&world](sf::Keyboard::Key& keyCode) {
+		float offset = 5.f;
+		switch (keyCode)
+		{
+			case sf::Keyboard::Key::Left: {
+				world.getCamera().move(-offset, 0);
+			} break;
+			case sf::Keyboard::Key::Right: {
+				world.getCamera().move(offset, 0);
+			} break;
+			case sf::Keyboard::Key::Up: {
+				world.getCamera().move(0, -offset);
+			} break;
+			case sf::Keyboard::Key::Down: {
+				world.getCamera().move(0, offset);
+			} break;
+		}
+	});
+
+	
+	// load level info
+	LevelFileManager lfm;
+	world.loadLevel(lfm.getLevel("testLevel"));
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			world.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		world.getDODS().handleRequests();
+
+		window.clear();
+		world.draw();
+		window.display();
 	}
 }
 

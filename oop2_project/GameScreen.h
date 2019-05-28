@@ -16,12 +16,14 @@ class GameScreen
 {
 	
 public:
+	// base class
+	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// constructor
 	GameScreen(sf::RenderWindow& window);
 	// get game screen
-	const std::shared_ptr<GameMenu>& getGmaeMenu() const { return m_gameMenu; }
+	const std::shared_ptr<GameMenu>& getGameMenu() const { return m_gameMenu; }
 	// convert to string
-	virtual string toString() const; // overide;
+	virtual string toString() const override;
 private:
 	// game menu ptr
 	std::shared_ptr<GameMenu> m_gameMenu;

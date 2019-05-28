@@ -199,6 +199,7 @@
     <ClCompile Include="ToolView.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="View.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
@@ -241,6 +242,7 @@
     <ClInclude Include="ParseGOIException.h" />
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="World.h" />
     <ClInclude Include="~main_tests.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MovingObject.h" />
