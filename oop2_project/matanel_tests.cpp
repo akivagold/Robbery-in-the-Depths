@@ -130,8 +130,6 @@ void testWorld() {
 
 		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
 		shark->setPosition(pos);
-		shark->setSize(20, 20);
-		shark->setParent(gameScreen.getWorld());
 		gameScreen.getWorld().getDODS().requestAddBO(shark);
 	});
 

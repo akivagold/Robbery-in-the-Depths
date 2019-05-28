@@ -1,7 +1,6 @@
 #include "World.h"
 
-// init 
-const sf::Vector2i World::BO_REG_SIZE(50, 50);
+
 
 World::World(sf::RenderWindow& window)
 	: GUI::View(window)
@@ -12,7 +11,7 @@ World::World(sf::RenderWindow& window)
 void World::loadLevel(const LevelInfo& levelInfo)
 {
 	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
-	setSize(levelSize.x*BO_REG_SIZE.y, levelSize.y*BO_REG_SIZE.x);
+	setSize(levelSize.x*BoardObject::DEFAULT_SIZE.y, levelSize.y*BoardObject::DEFAULT_SIZE.x);
 
 	// TODO 
 

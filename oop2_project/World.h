@@ -43,7 +43,5 @@ private:
 	BODS m_bods;
 	// init
 	void init();
-	// size of regular board object
-	static const sf::Vector2i BO_REG_SIZE;
 };
 
