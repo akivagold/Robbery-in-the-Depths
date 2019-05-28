@@ -35,9 +35,13 @@ public:
 	// get distance from another object
 	float getDistance(const BoardObject& other) const;
 	// update AABB
-	void updateAABB();									// TODO must be private
+	//void updateAABB();									// TODO must be private
 	// convert to string
 	virtual string toString() const override;
+	virtual bool canMoveThroughMe() { return m_canMoveThroughMe; }
+protected:
+	// if another object can move through me
+	bool m_canMoveThroughMe;
 private:
 	// draw priority
 	int m_drawPriority;

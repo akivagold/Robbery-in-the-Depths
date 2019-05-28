@@ -17,6 +17,11 @@ void Player::setLife(int numOfLife) const
 	getGameScreen().getGmaeMenu()->getLifeView()->setLife(numOfLife);
 }
 
+void Player::playChoice()
+{
+	
+}
+
 string Player::toString() const
 {
 	return "Player: { " + Character::toString() + " }";

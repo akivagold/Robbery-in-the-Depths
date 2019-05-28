@@ -1,7 +1,7 @@
 #include "BoardObject.h"
 
 BoardObject::BoardObject(sf::RenderWindow& window, GameScreen& gameScreen, int drawPriority)
-	: AnimationView(window), m_gameScreen(gameScreen)
+	: AnimationView(window), m_gameScreen(gameScreen), m_canMoveThroughMe(true)
 {
 	setDrawPriority(drawPriority);
 }
