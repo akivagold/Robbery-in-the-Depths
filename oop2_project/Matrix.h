@@ -1,5 +1,6 @@
 #pragma once
 //---- include section ------
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <functional>
 #include <vector>
@@ -78,6 +79,8 @@ public:
 	int getNumOfRows() const { return m_numOfRows; }
 	// get number of columns
 	int getNumOfCols() const { return m_numOfCols; }
+	// get size
+	sf::Vector2i getSize() const { return sf::Vector2i(m_numOfRows, m_numOfCols); }
 	// clear
 	void clear() { m_data.clear(); }
 	// overload ==,!= operators
