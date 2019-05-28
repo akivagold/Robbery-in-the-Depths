@@ -2,7 +2,7 @@
 //---- include section ------
 #include <string>
 #include "AnimationView.h"
-#include "GameScreen.h"
+class GameScreen;
 #include <math.h>
 #include "IAABB.h"
 #include "AABB.h"

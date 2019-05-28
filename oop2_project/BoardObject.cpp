@@ -1,4 +1,5 @@
 #include "BoardObject.h"
+#include "GameScreen.h"
 
 BoardObject::BoardObject(sf::RenderWindow& window, GameScreen& gameScreen, int drawPriority)
 	: AnimationView(window), m_gameScreen(gameScreen), m_canMoveThroughMe(true)
