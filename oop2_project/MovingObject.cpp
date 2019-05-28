@@ -1,4 +1,5 @@
 #include "MovingObject.h"
+#include "GameScreen.h"
 
 MovingObject::MovingObject(sf::RenderWindow& window, GameScreen& gameScreen)
 	: InteractableObject(window, gameScreen)
@@ -15,7 +16,7 @@ void MovingObject::play()
 	setPosition(getNextPosition());
 
 	std::forward_list<BoardObject*> collideList;
-	//std::forward_list<BoardObject*> collideList = get.. 
+	collideList = getGameScreen().getWorld().getDODS().getAABBTree().queryOverlaps(this);
 	// check if can move to new position
 	if (!canMove(collideList)) {
 		setPosition(prePos);

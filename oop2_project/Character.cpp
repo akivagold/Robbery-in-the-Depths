@@ -6,7 +6,7 @@ Character::Character(sf::RenderWindow& window, GameScreen& gameScreen, int numOf
 	setLife(numOfLife);
 }
 
-void Character::setLife(int numOfLife) const
+void Character::setLife(int numOfLife)
 {
 	if (numOfLife < 0)
 		throw std::out_of_range("num of life " + std::to_string(numOfLife) + " is illegal");

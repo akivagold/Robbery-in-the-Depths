@@ -10,7 +10,7 @@ void Player::changeTool(const std::shared_ptr<Tool>& tool)
 	//TODO
 }
 
-void Player::setLife(int numOfLife) const
+void Player::setLife(int numOfLife)
 {
 	Character::setLife(numOfLife);
 

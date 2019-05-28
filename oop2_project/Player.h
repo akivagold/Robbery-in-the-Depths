@@ -27,7 +27,7 @@ public:
 	// get current tool
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
-	virtual void setLife(int numOfLife) const override;
+	virtual void setLife(int numOfLife) override;
 	// choose what to do
 	virtual void playChoice() override; 
 	// convert to string
