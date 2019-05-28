@@ -104,11 +104,15 @@ void testBODS() {
 		bo->setSize(sf::Vector2i{ i,i });
 		bods.requestAddBO(bo);
 	}
-
+	bods.requestAddBO(std::make_shared<Player>(window, gameScreen));
 
 	bods.handleRequests();
 
-	for (auto it = bods.getBOs().begin(); it != bods.getBOs().end(); ++it) {
+	bods.prepareLevel(); // must use this!!!!!!!
+
+
+
+	/*for (auto it = bods.getBOs().begin(); it != bods.getBOs().end(); ++it) {
 		BoardObject* bo = &**it;
 		bods.getAABBTree().updateObject(bo);
 		auto ov = bods.getAABBTree().queryOverlaps(bo);
@@ -116,12 +120,13 @@ void testBODS() {
 		for (auto ovIt = ov.begin(); ovIt != ov.end(); ++ovIt)
 			ovSize++;
 		std::cout << ovSize << std::endl;
-	}
+	}*/
 	
 	//bods.requestRemoveBO(*bods.getBOs().begin());
 	//bods.handleRequests();
 
-	std::cout << bods.toString() << std::endl;
+	std::cout << bods.getPlayer()->toString() << std::endl;
+	//std::cout << bods.toString() << std::endl;
 }
 
 void testGameObjectView() {

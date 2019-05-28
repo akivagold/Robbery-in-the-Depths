@@ -1,9 +1,15 @@
 #include "BODS.h"
+#include "ParseLevelException.h"
 
 void BODS::handleRequests()
 {
 	handleRemoveRequestsQueue();
 	handleAddRequestsQueue();
+}
+
+void BODS::prepareLevel()
+{
+	connectPlayerMember();
 }
 
 void BODS::handleAddRequestsQueue()
@@ -52,4 +58,19 @@ string BODS::buildBOStr() const
 		str += bo->toString() + "\n";
 	str += " }";
 	return str;
+}
+
+void BODS::connectPlayerMember()
+{
+	// find player
+	for (auto& boardObject : m_boardObjects) {
+		// check if is player
+		if (std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(boardObject)) {
+			m_player = player;
+			break;
+		}
+	}
+	// check if not found player
+	if (!m_player)
+		throw ParseLevelException("Cannot find player at game");
 }

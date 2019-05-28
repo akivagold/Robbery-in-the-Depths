@@ -28,6 +28,8 @@ public:
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
 	virtual void setLife(int numOfLife) const override;
+	// play
+	virtual void play() {}; // TODO
 	// convert to string
 	virtual string toString() const override;
 private:

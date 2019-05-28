@@ -40,11 +40,15 @@ public:
 	const std::shared_ptr<Player>& getPlayer() const { return m_player; }
 	// handle requests queues
 	void handleRequests();
+	// prepare level
+	void prepareLevel();
+	// clear
+	//  void clear();                                           TODO
 	// convert to string
 	virtual string toString() const;
 private:
 	// player
-	std::shared_ptr<Player> m_player;              // TODO need to set when level loaded
+	std::shared_ptr<Player> m_player;
 	// all board objects
 	BoardDS m_boardObjects;
 	// add/remove request queues
@@ -61,4 +65,6 @@ private:
 	void removeBO(const std::shared_ptr<BoardObject>& boardObject);
 	// build BoardObjects as string
 	string buildBOStr() const;
+	// connect player member
+	void connectPlayerMember();
 };
