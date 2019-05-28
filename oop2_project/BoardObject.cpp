@@ -1,10 +1,14 @@
 #include "BoardObject.h"
 #include "GameScreen.h"
 
+// init 
+const sf::Vector2i BoardObject::DEFAULT_SIZE(50, 50);
+
 BoardObject::BoardObject(sf::RenderWindow& window, GameScreen& gameScreen, int drawPriority)
 	: AnimationView(window), m_gameScreen(gameScreen), m_canMoveThroughMe(true)
 {
 	setDrawPriority(drawPriority);
+	init();
 }
 
 AABB BoardObject::getAABB() const
@@ -29,4 +33,10 @@ float BoardObject::getDistance(const BoardObject& other) const
 string BoardObject::toString() const
 {
 	return "BoardObject: { drawPriority=" + std::to_string(m_drawPriority) + ", " + AnimationView::toString() + " }";
+}
+
+void BoardObject::init()
+{
+	setParent(getGameScreen().getWorld());
+	setSize(BoardObject::DEFAULT_SIZE);
 }

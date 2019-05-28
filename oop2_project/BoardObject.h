@@ -17,6 +17,8 @@ class BoardObject :
 	public GUI::AnimationView, public IAABB
 {
 public:
+	// default size in pixels
+	static const sf::Vector2i DEFAULT_SIZE;
 	// constructor
 	explicit BoardObject(sf::RenderWindow& window, GameScreen& gameScreen,  int drawPriority = 0); // TODO set in protected
 	// get AABB
@@ -47,5 +49,7 @@ private:
 	int m_drawPriority;
 	// game screen
 	GameScreen& m_gameScreen;
+	// init
+	void init();
 };
 
