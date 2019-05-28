@@ -45,7 +45,7 @@ void BoardObject::updateComponents()
 
 void BoardObject::updateAABB()
 {
-	getGameScreen().getWorld().getBODS().getAABBTree().updateObject(this);
+	// TODO getGameScreen().getWorld().getBODS().getAABBTree().updateObject(this);
 }
 
 void BoardObject::init()

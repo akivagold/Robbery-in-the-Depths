@@ -12,15 +12,20 @@ void MovingObject::play()
 
 	// save previous location
 	sf::Vector2f prePos = getPosition();
-	// move to next position
-	setPosition(getNextPosition());
 
-	std::forward_list<BoardObject*> collideList;
-	collideList = getGameScreen().getWorld().getBODS().getAABBTree().queryOverlaps(this);
-	// check if can move to new position
-	if (!canMove(collideList)) {
-		setPosition(prePos);
-	}
+	// get next position
+	sf::Vector2f nextPos = getNextPosition();
+
+	if (nextPos != prePos) {
+		// move to next position
+		setPosition(nextPos);
+
+		std::forward_list<BoardObject*> collideList = getCollidesList();
+		// check if can move to new position
+		if (!canMove(collideList)) {
+			setPosition(prePos);
+		}
+	}	
 }
 
 void MovingObject::draw()
@@ -50,5 +55,10 @@ bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
 		}
 	}
 	return true;
+}
+
+std::forward_list<BoardObject*> MovingObject::getCollidesList()
+{
+	return getGameScreen().getWorld().getBODS().getAABBTree().queryOverlaps(this);
 }
 

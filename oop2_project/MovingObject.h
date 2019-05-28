@@ -37,5 +37,7 @@ private:
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	sf::Vector2f m_speed, m_interalAcceleration, m_externalAcc;
 	sf::Clock m_clock;
+	// get collides list
+	std::forward_list<BoardObject*> getCollidesList();
 };
 

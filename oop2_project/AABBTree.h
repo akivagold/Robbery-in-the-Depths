@@ -140,8 +140,11 @@ void AABBTree<T>::removeObject(T* object)
 template <class T>
 void AABBTree<T>::updateObject(T* object)
 {
-	unsigned nodeIndex = _objectNodeIndexMap[object];
-	updateLeaf(nodeIndex, object->getAABB());
+	auto it = _objectNodeIndexMap.find(object);
+	if (it != _objectNodeIndexMap.end()) {
+		unsigned nodeIndex = it->second;
+		updateLeaf(nodeIndex, object->getAABB());
+	}	
 }
 
 template <class T>
@@ -301,7 +304,7 @@ void AABBTree<T>::removeLeaf(unsigned leafNodeIndex)
 
 	AABBNode<T>& leafNode = _nodes[leafNodeIndex];
 	unsigned parentNodeIndex = leafNode.parentNodeIndex;
-	const AABBNode<T>& parentNode = _nodes[parentNodeIndex];
+	const AABBNode<T>& parentNode = _nodes[parentNodeIndex]; //			TODO crash here when update
 	unsigned grandParentNodeIndex = parentNode.parentNodeIndex;
 	unsigned siblingNodeIndex = parentNode.leftNodeIndex == leafNodeIndex ? parentNode.rightNodeIndex : parentNode.leftNodeIndex;
 	assert(siblingNodeIndex != AABB_NULL_NODE); // we must have a sibling
@@ -335,20 +338,24 @@ void AABBTree<T>::removeLeaf(unsigned leafNodeIndex)
 
 	leafNode.parentNodeIndex = AABB_NULL_NODE;
 }
-
+#include <iostream>
 template <class T>
 void AABBTree<T>::updateLeaf(unsigned leafNodeIndex, const AABB& newAaab)
 {
+	std::cout << "l=" << leafNodeIndex << std::endl;
+	std::cout << "n=" << _nodes.size() << std::endl;
 	AABBNode<T>& node = _nodes[leafNodeIndex];
-
+	
 	// if the node contains the new aabb then we just leave things
 	// TODO: when we add velocity this check should kick in as often an update will lie within the velocity fattened initial aabb
 	// to support this we might need to differentiate between velocity fattened aabb and actual aabb
 	if (node.aabb.contains(newAaab)) return;
 
 	removeLeaf(leafNodeIndex);
+	std::cout << "r" << std::endl;
 	node.aabb = newAaab;
 	insertLeaf(leafNodeIndex);
+	std::cout << "i" << std::endl;
 }
 
 template <class T>
