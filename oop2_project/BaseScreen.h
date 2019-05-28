@@ -29,11 +29,15 @@ namespace GUI {
 		void run(Timer& timer);
 		// destructor
 		virtual ~BaseScreen() = default;
+		// add backgroud root view
+		void addBackRootView(const std::shared_ptr<GUI::View>& rootView) { m_backRootViews.push_back(rootView); }
 		// convert to string
 		virtual string toString() const override { return "BaseScreen: { " + ViewType::toString() + " }"; }
 	protected:
 		// close flag
 		bool m_closeFlag;
+		// background root views
+		std::vector<std::shared_ptr<GUI::View>> m_backRootViews;
 		// constructor
 		explicit BaseScreen(sf::RenderWindow& window);
 		// run the screen and listen to updates with timer
@@ -73,12 +77,16 @@ namespace GUI {
 			sf::Event event;
 			while (ViewType::getWindow().pollEvent(event))
 			{
+				for (auto& backRootView : m_backRootViews)
+					backRootView->handleEvent(event);
 				ViewType::handleEvent(event);
 				if (event.type == sf::Event::Closed)
 					ViewType::getWindow().close();
 			}
 
 			ViewType::getWindow().clear();
+			for (auto& backRootView : m_backRootViews)
+				backRootView->draw();
 			ViewType::draw();
 			ViewType::getWindow().display();
 

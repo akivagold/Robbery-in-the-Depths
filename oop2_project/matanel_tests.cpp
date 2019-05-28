@@ -151,23 +151,11 @@ void testWorld() {
 	LevelInfo li;
 	li.getLevelChars().resize(100, 100);
 	gameScreen.getWorld().loadLevel(li);
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			gameScreen.getWorld().handleEvent(event);
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
+	Timer frameTimer;
+	frameTimer.start(10, [&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-
-		window.clear();
-		gameScreen.getWorld().draw();
-		window.display();
-	}
+	});
+	gameScreen.run(frameTimer);
 }
 
 void testBODS() {

@@ -22,16 +22,18 @@ public:
 	// constructor
 	GameScreen(sf::RenderWindow& window);
 	// get world
-	World& getWorld() { return m_world; }
+	World& getWorld() { return *m_world; }
 	// get game screen
 	const std::shared_ptr<GameMenu>& getGameMenu() const { return m_gameMenu; }
 	// convert to string
 	virtual string toString() const override;
 private:
 	// world
-	World m_world;
+	std::shared_ptr<World> m_world;
 	// game menu ptr
 	std::shared_ptr<GameMenu> m_gameMenu;
+	// init
+	void init();
 };
 
 

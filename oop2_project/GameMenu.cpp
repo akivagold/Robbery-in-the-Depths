@@ -17,6 +17,9 @@ string GameMenu::toString() const
 
 void GameMenu::initComponents()
 {
+	getBackground().setColor(sf::Color(255, 240, 164));
+	getBorder().setSize(2);
+	getBorder().setColor(sf::Color::Black);
 	addView(m_coinView);
 	m_lifeView->setLife(3);
 	addView(m_lifeView);
