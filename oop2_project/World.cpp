@@ -16,7 +16,7 @@ void World::loadLevel(const LevelInfo& levelInfo)
 
 	// TODO 
 
-	m_bods.prepareLevel();
+	//m_bods.prepareLevel();
 }
 
 void World::draw()

@@ -22,6 +22,7 @@
 #include "BODS.h"
 #include "GameScreen.h"
 #include "World.h"
+#include "Shark.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -98,45 +99,68 @@ void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
 
-	World world(window);
-	world.addKeyDownListener([&world](sf::Keyboard::Key& keyCode) {
-		float offset = 5.f;
+	GameScreen gameScreen(window);
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+		float offset = 10.f;
 		switch (keyCode)
 		{
 			case sf::Keyboard::Key::Left: {
-				world.getCamera().move(-offset, 0);
+				gameScreen.getWorld().getCamera().move(-offset, 0);
 			} break;
 			case sf::Keyboard::Key::Right: {
-				world.getCamera().move(offset, 0);
+				gameScreen.getWorld().getCamera().move(offset, 0);
 			} break;
 			case sf::Keyboard::Key::Up: {
-				world.getCamera().move(0, -offset);
+				gameScreen.getWorld().getCamera().move(0, -offset);
 			} break;
 			case sf::Keyboard::Key::Down: {
-				world.getCamera().move(0, offset);
+				gameScreen.getWorld().getCamera().move(0, offset);
+			} break;
+			case sf::Keyboard::Key::Q: {
+				gameScreen.getWorld().getCamera().zoom(0.95f);
+			} break;
+			case sf::Keyboard::Key::W: {
+				gameScreen.getWorld().getCamera().zoom(1.05f);
 			} break;
 		}
 	});
+	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
+		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
+		shark->setPosition(pos);
+		shark->setSize(20, 20);
+		shark->setParent(gameScreen.getWorld());
+		gameScreen.getWorld().getDODS().requestAddBO(shark);
+	});
+
+	
 
 	
 	// load level info
-	LevelFileManager lfm;
-	world.loadLevel(lfm.getLevel("testLevel"));
+	//LevelFileManager lfm;
+	//world.loadLevel(lfm.getLevel("testLevel"));
+
+
+	LevelInfo li;
+	li.getLevelChars().resize(100, 100);
+	gameScreen.getWorld().loadLevel(li);
 
 	while (window.isOpen())
 	{
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			world.handleEvent(event);
+			gameScreen.getWorld().handleEvent(event);
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
 
-		world.getDODS().handleRequests();
+		gameScreen.getWorld().getDODS().handleRequests();
 
 		window.clear();
-		world.draw();
+		gameScreen.getWorld().draw();
 		window.display();
 	}
 }
