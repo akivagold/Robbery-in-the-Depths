@@ -10,6 +10,19 @@
 #include <iostream>
 #include "VerticalLayout.h"
 #include "ErrorDialog.h"
+#include "Button.h"
+#include "MainScreen.h"
+#include "LevelInfo.h"
+#include "LevelFileManager.h"
+#include "Matrix.h"
+#include "GameObjectInfo.h"
+#include "GOIFileParser.h"
+#include "GameObjectView.h"
+#include "GameObjectsList.h"
+#include "BODS.h"
+#include "GameScreen.h"
+#include "World.h"
+#include "Shark.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -40,6 +53,7 @@ using namespace GUI; // for tests only
 //-------------- declare functions -------------
 #pragma region Declarations
 void testCleanScreen();
+void testWorld();
 #pragma endregion
 
 // -------------- globals & constants -----------
@@ -55,7 +69,7 @@ void akiva_main()
 	srand(unsigned(time(NULL)));
 	try
 	{
-		testCleanScreen();
+		testWorld();
 	}
 	catch (const std::exception& ex)
 	{
@@ -87,6 +101,79 @@ void testCleanScreen() {
 
 		window.clear();
 		mainLayout.draw();
+		window.display();
+	}
+}
+
+void testWorld() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	GameScreen gameScreen(window);
+
+
+	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen.getWindow(), gameScreen);
+	player->setPosition(0,0);
+	gameScreen.getWorld().getDODS().requestAddBO(player);
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+		float offset = 10.f;
+		switch (keyCode)
+		{
+		case sf::Keyboard::Key::Left: {
+			gameScreen.getWorld().getCamera().move(-offset, 0);
+		} break;
+		case sf::Keyboard::Key::Right: {
+			gameScreen.getWorld().getCamera().move(offset, 0);
+		} break;
+		case sf::Keyboard::Key::Up: {
+			gameScreen.getWorld().getCamera().move(0, -offset);
+		} break;
+		case sf::Keyboard::Key::Down: {
+			gameScreen.getWorld().getCamera().move(0, offset);
+		} break;
+		case sf::Keyboard::Key::Q: {
+			gameScreen.getWorld().getCamera().zoom(0.95f);
+		} break;
+		case sf::Keyboard::Key::W: {
+			gameScreen.getWorld().getCamera().zoom(1.05f);
+		} break;
+		}
+	});
+	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
+		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
+		shark->setPosition(pos);
+		gameScreen.getWorld().getDODS().requestAddBO(shark);
+	});
+
+
+
+
+	// load level info
+	//LevelFileManager lfm;
+	//world.loadLevel(lfm.getLevel("testLevel"));
+
+
+	LevelInfo li;
+	li.getLevelChars().resize(100, 100);
+	gameScreen.getWorld().loadLevel(li);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			gameScreen.getWorld().handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		gameScreen.getWorld().getDODS().handleRequests();
+
+		window.clear();
+		gameScreen.getWorld().draw();
 		window.display();
 	}
 }

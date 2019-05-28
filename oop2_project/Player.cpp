@@ -3,7 +3,9 @@
 
 Player::Player(sf::RenderWindow& window, GameScreen& gameScreen, int numOfLife)
 	: Character(window, gameScreen)
-{}
+{
+	init();
+}
 
 void Player::changeTool(const std::shared_ptr<Tool>& tool)
 {
@@ -30,6 +32,7 @@ string Player::toString() const
 
 void Player::init()
 {
+	setAnimation("coin");
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		float offset = 5;
 		switch (keyCode)
