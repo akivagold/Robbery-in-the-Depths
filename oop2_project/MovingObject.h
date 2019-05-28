@@ -20,9 +20,13 @@ public:
 	virtual void play();
 	// convert to string
 	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; }
+	// draw
+	virtual void draw() override;
 	// return where the object is trying to move
 	sf::Vector2f getNextPosition();
+	const sf::Vector2f& getSpeed() const { return m_speed; }
 protected:
+	sf::Vector2f& getSpeed() { return m_speed; }
 	// the object choose where to go
 	virtual void playChoice() = 0;
 private:

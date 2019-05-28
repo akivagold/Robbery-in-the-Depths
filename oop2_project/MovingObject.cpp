@@ -23,6 +23,12 @@ void MovingObject::play()
 	}
 }
 
+void MovingObject::draw()
+{
+	InteractableObject::draw();
+	play();
+}
+
 sf::Vector2f MovingObject::getNextPosition()
 {
 	float x_pos = getPosition().x + m_speed.x * m_clock.getElapsedTime().asMilliseconds();

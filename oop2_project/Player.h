@@ -39,6 +39,8 @@ private:
 	std::shared_ptr<Tool> m_currTool;
 	// score
 	int m_score;
+	// init
+	void init();
 };
 
 

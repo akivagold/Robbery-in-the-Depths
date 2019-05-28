@@ -27,3 +27,43 @@ string Player::toString() const
 {
 	return "Player: { " + Character::toString() + " }";
 }
+
+void Player::init()
+{
+	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
+		float offset = 5;
+		switch (keyCode)
+		{
+			case sf::Keyboard::Key::Left: {
+				getSpeed().x = -offset;
+			} break;
+			case sf::Keyboard::Key::Right: {
+				getSpeed().x = offset;
+			} break;
+			case sf::Keyboard::Key::Up: {
+				getSpeed().y = -offset;
+			} break;
+			case sf::Keyboard::Key::Down: {
+				getSpeed().y = offset;
+			} break;
+		}
+	});
+	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
+		float offset = 0;
+		switch (keyCode)
+		{
+		case sf::Keyboard::Key::Left: {
+			getSpeed().x = -offset;
+		} break;
+		case sf::Keyboard::Key::Right: {
+			getSpeed().x = offset;
+		} break;
+		case sf::Keyboard::Key::Up: {
+			getSpeed().y = -offset;
+		} break;
+		case sf::Keyboard::Key::Down: {
+			getSpeed().y = offset;
+		} break;
+		}
+	});
+}
