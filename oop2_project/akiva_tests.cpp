@@ -105,14 +105,14 @@ void testCleanScreen() {
 	}
 }
 
+
 void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
 
 	GameScreen gameScreen(window);
 
-
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen.getWindow(), gameScreen);
+	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
 	player->setPosition(0,0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
 
@@ -120,37 +120,40 @@ void testWorld() {
 		float offset = 10.f;
 		switch (keyCode)
 		{
-		case sf::Keyboard::Key::Left: {
-			gameScreen.getWorld().getCamera().move(-offset, 0);
-		} break;
-		case sf::Keyboard::Key::Right: {
-			gameScreen.getWorld().getCamera().move(offset, 0);
-		} break;
-		case sf::Keyboard::Key::Up: {
-			gameScreen.getWorld().getCamera().move(0, -offset);
-		} break;
-		case sf::Keyboard::Key::Down: {
-			gameScreen.getWorld().getCamera().move(0, offset);
-		} break;
-		case sf::Keyboard::Key::Q: {
-			gameScreen.getWorld().getCamera().zoom(0.95f);
-		} break;
-		case sf::Keyboard::Key::W: {
-			gameScreen.getWorld().getCamera().zoom(1.05f);
-		} break;
+			case sf::Keyboard::Key::Left: {
+				gameScreen.getWorld().getCamera().move(-offset, 0);
+			} break;
+			case sf::Keyboard::Key::Right: {
+				gameScreen.getWorld().getCamera().move(offset, 0);
+			} break;
+			case sf::Keyboard::Key::Up: {
+				gameScreen.getWorld().getCamera().move(0, -offset);
+			} break;
+			case sf::Keyboard::Key::Down: {
+				gameScreen.getWorld().getCamera().move(0, offset);
+			} break;
+			case sf::Keyboard::Key::Q: {
+				gameScreen.getWorld().getCamera().zoom(0.95f);
+			} break;
+			case sf::Keyboard::Key::W: {
+				gameScreen.getWorld().getCamera().zoom(1.05f);
+			} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
 		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 
-		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen.getWindow(), gameScreen);
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
 		shark->setPosition(pos);
+		shark->addClickListener([&gameScreen, shark](View& v) {
+			// TODO
+		});
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
+	
 
-
-
+	
 	// load level info
 	//LevelFileManager lfm;
 	//world.loadLevel(lfm.getLevel("testLevel"));
@@ -159,23 +162,10 @@ void testWorld() {
 	LevelInfo li;
 	li.getLevelChars().resize(100, 100);
 	gameScreen.getWorld().loadLevel(li);
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			gameScreen.getWorld().handleEvent(event);
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
+	Timer frameTimer;
+	frameTimer.start(10, [&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-
-		window.clear();
-		gameScreen.getWorld().draw();
-		window.display();
-	}
+	});
+	gameScreen.run(frameTimer);
 }
-
 #endif // AKIVA_TESTS

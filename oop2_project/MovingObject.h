@@ -35,12 +35,16 @@ public:
 	// TODO void suicide() { getGameScreen().getWorld().getBODS().requestRemoveBO(?); }
 	// get speed (const access)
 	const sf::Vector2f& getSpeed() const { return m_speed; }
-	sf::Vector2f& getSpeed() { return m_speed; }
+	// get interalAcceleration (const access)
+	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }
+	sf::Vector2f& getFriction();
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
 	// get speed (can change)
-	//sf::Vector2f& getSpeed() { return m_speed; }
+	sf::Vector2f& getSpeed() { return m_speed; }
+	// get interalAcceleration (can change)
+	sf::Vector2f& getInteralAcceleration() { return m_interalAcceleration; }
 	// the object choose where to go
 	virtual void playChoice() = 0;
 	// play
@@ -49,7 +53,7 @@ private:
 	// if can move to new position
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	// speed, internal land external acceleration
-	sf::Vector2f m_speed, m_interalAcceleration, m_externalAcc;
+	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc; //TODO external max speed
 	// time
 	sf::Clock m_clock;
 	// get collides list
