@@ -135,7 +135,7 @@ void testWorld() {
 		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
 		shark->setPosition(pos);
 		shark->addClickListener([&gameScreen, shark](View& v) {
-			// TODO
+			//gameScreen.getWorld().getBODS().requestRemoveBO(shark);                // error
 		});
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
