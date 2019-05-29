@@ -19,12 +19,16 @@ public:
 	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
 protected:
 	// play
-	virtual void play() override {}				// TODO
+	//virtual void play() override {}				// TODO
 	// the object choose where to go
-	virtual void playChoice() override {}       // TODO
+	virtual void playChoice() override;       // TODO
 private:
 	// init
 	void init();
+	// radius attak
+	float m_radiusAttak;
+	
+	
 };
 
 

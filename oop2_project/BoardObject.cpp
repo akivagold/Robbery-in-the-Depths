@@ -25,9 +25,9 @@ void BoardObject::setDrawPriority(int drawPriority)
 	m_drawPriority = drawPriority;
 }
 
-float BoardObject::getDistance(const BoardObject& other) const
+float BoardObject::getDistance(const std::shared_ptr<BoardObject>& other) const
 {
-	return sqrt(pow(getPosition().x - other.getPosition().x, 2) + pow(getPosition().y - other.getPosition().y, 2));
+	return sqrt(pow(getPosition().x - other->getPosition().x, 2) + pow(getPosition().y - other->getPosition().y, 2));
 }
 
 string BoardObject::toString() const
