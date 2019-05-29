@@ -23,6 +23,7 @@ public:
 	GameScreen(sf::RenderWindow& window);
 	// get world
 	World& getWorld() { return *m_world; }
+	const World& getWorld() const { return *m_world; }
 	// get game screen
 	const std::shared_ptr<GameMenu>& getGameMenu() const { return m_gameMenu; }
 	// convert to string

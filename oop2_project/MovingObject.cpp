@@ -1,6 +1,7 @@
 #include "MovingObject.h"
 #include "GameScreen.h"
 
+
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen)
 {}
@@ -45,8 +46,19 @@ sf::Vector2f MovingObject::getNextPosition()
 	return nextPos;
 }
 
+MovingObject::Direction MovingObject::getRandomDirect() const
+{
+	int num = rand() % NUM_OF_DIRECTIONS;
+	Direction direct = static_cast<Direction>(num);
+	return direct;
+
+}
+
 bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
 {
+	if((getPosition().x < 0 || getPosition().x  + getSize().x > getGameScreen().getWorld().getSize().x ) ||
+		((getPosition().y < 0 || getPosition().y + getSize().y > getGameScreen().getWorld().getSize().y)))
+		return false;
 	// check all list
 	for (auto object : collideList) {
 		// if can't go through at least one return false

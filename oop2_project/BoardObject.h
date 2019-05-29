@@ -28,12 +28,13 @@ public:
 	void setDrawPriority(int drawPriority);
 	// get main screen
 	GameScreen& getGameScreen() { return m_gameScreen; }
+	const GameScreen& getGameScreen() const { return m_gameScreen; }
 	// get draw priority
 	int getDrawPriority() const { return m_drawPriority; }
 	// check if collide with another
 	bool isCollideWith(const BoardObject& other) const { return getBound().intersects(other.getBound()); }
 	// get distance from another object
-	float getDistance(const BoardObject& other) const;
+	float getDistance(const std::shared_ptr<BoardObject>& other) const;
 	// convert to string
 	virtual string toString() const override;
 	// check if this object is don't blocking movement
