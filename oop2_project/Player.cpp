@@ -35,21 +35,21 @@ void Player::init()
 	setAnimation("coin"); // TODO change
 	//setAnimationFrequency(?)
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
-		float offset = 5;
+		float offset = 0.0025;
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Left: {
-				getSpeed().x = -offset;
-			} break;
-			case sf::Keyboard::Key::Right: {
-				getSpeed().x = offset;
-			} break;
-			case sf::Keyboard::Key::Up: {
-				getSpeed().y = -offset;
-			} break;
-			case sf::Keyboard::Key::Down: {
-				getSpeed().y = offset;
-			} break;
+		case sf::Keyboard::Key::Left: {
+			getInteralAcceleration().x = -offset;
+		} break;
+		case sf::Keyboard::Key::Right: {
+			getInteralAcceleration().x = offset;
+		} break;
+		case sf::Keyboard::Key::Up: {
+			getInteralAcceleration().y = -offset;
+		} break;
+		case sf::Keyboard::Key::Down: {
+			getInteralAcceleration().y = offset;
+		} break;
 		}
 	});
 	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
@@ -57,16 +57,16 @@ void Player::init()
 		switch (keyCode)
 		{
 		case sf::Keyboard::Key::Left: {
-			getSpeed().x = -offset;
+			getInteralAcceleration().x = -offset;
 		} break;
 		case sf::Keyboard::Key::Right: {
-			getSpeed().x = offset;
+			getInteralAcceleration().x = offset;
 		} break;
 		case sf::Keyboard::Key::Up: {
-			getSpeed().y = -offset;
+			getInteralAcceleration().y = -offset;
 		} break;
 		case sf::Keyboard::Key::Down: {
-			getSpeed().y = offset;
+			getInteralAcceleration().y = offset;
 		} break;
 		}
 	});

@@ -2,8 +2,18 @@
 #include "GameScreen.h"
 
 
+sf::Vector2f & MovingObject::getFriction()
+{
+	sf::Vector2f friction;
+	//TODO add external acc(?)
+
+	friction.x = m_speed.x / m_maxSpeed.x;
+	friction.y = m_speed.y / m_maxSpeed.y;
+	return friction;
+}
+
 MovingObject::MovingObject(GameScreen& gameScreen)
-	: InteractableObject(gameScreen)
+	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500))	//TODO enum
 {}
 
 void MovingObject::play()
@@ -26,7 +36,7 @@ void MovingObject::play()
 		if (!canMove(collideList)) {
 			setPosition(prePos);
 		}
-	}	
+	}
 }
 
 void MovingObject::draw()
@@ -37,12 +47,14 @@ void MovingObject::draw()
 
 sf::Vector2f MovingObject::getNextPosition()
 {
+	sf::Vector2f friction = getFriction();
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
+	m_speed.x += (m_interalAcceleration.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.y += (m_interalAcceleration.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
-	//sf::Vector2f nextPos = getPosition() + (m_speed * m_clock.getElapsedTime().asMilliseconds);
-	sf::Vector2f nextPos = sf::Vector2f(x_pos, y_pos);	
+	sf::Vector2f nextPos = sf::Vector2f(x_pos, y_pos);
 	return nextPos;
 }
 
@@ -56,7 +68,7 @@ MovingObject::Direction MovingObject::getRandomDirect() const
 
 bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
 {
-	if((getPosition().x < 0 || getPosition().x  + getSize().x > getGameScreen().getWorld().getSize().x ) ||
+	if ((getPosition().x < 0 || getPosition().x + getSize().x > getGameScreen().getWorld().getSize().x) ||
 		((getPosition().y < 0 || getPosition().y + getSize().y > getGameScreen().getWorld().getSize().y)))
 		return false;
 	// check all list
