@@ -42,7 +42,7 @@ void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)
 	auto it = m_boardObjects.find(boardObject);
 	if (it != m_boardObjects.end()) {
 		m_boardObjects.erase(it);
-		m_aabbTree.insertObject(&(*boardObject));
+		m_aabbTree.removeObject(&(*boardObject));
 	}	
 }
 
