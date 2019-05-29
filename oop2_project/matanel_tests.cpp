@@ -3,6 +3,7 @@
 
  //-------------- include section ---------------
 #pragma region Includes
+#include <Box2D/Box2D.h>
 #include <SFML/Network.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -23,6 +24,7 @@
 #include "GameScreen.h"
 #include "World.h"
 #include "Shark.h"
+
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -52,6 +54,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testBox2DLib();
 void testWorld();
 void testBODS();
 void testGameObjectView();
@@ -77,7 +80,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testWorld();
+		testBox2DLib();
+		//testWorld();
 		//testBODS();
 		//testGameObjectView();
 		//testGameObjectInfo();
@@ -92,6 +96,38 @@ void matanel_main()
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testBox2DLib() {
+	struct Actor {
+		int id;
+		int32 m_proxyId;
+		b2AABB m_aabb;
+	};
+
+	std::vector<std::shared_ptr<Actor>> actors;
+	b2DynamicTree tree;
+	
+	for (int i = 0; i < 10; ++i) {
+		std::shared_ptr<Actor> actor = std::make_shared<Actor>();
+		actors.push_back(actor);
+		actor->id = i;
+		actor->m_proxyId = tree.CreateProxy(actor->m_aabb, static_cast<void*>(actor.get()));
+	}
+
+	for (auto& actor : actors) {
+		b2AABB aabb0 = actor->m_aabb;
+		b2Vec2 displacement = actor->m_aabb.GetCenter() - aabb0.GetCenter();
+		tree.MoveProxy(actor->m_proxyId, actor->m_aabb, displacement);
+	}
+	
+	for (auto& actor : actors) {
+		tree.DestroyProxy(actor->m_proxyId);
+	}
+	
+	for (auto& actor : actors) {
+		// TODO tree.Query()
 	}
 }
 
