@@ -118,7 +118,8 @@ void testWorld() {
 	gameScreen.getWorld().getBODS().requestAddBO(player);
 
 	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-	flow->setPosition(0, 0);
+	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
 	gameScreen.getWorld().getBODS().requestAddBO(flow);
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
@@ -158,7 +159,8 @@ void testWorld() {
 
 	
 
-	
+	gameScreen.getWorld().getBODS().handleRequests();
+	gameScreen.getWorld().getBODS().prepareLevel();
 	// load level info
 	//LevelFileManager lfm;
 	//world.loadLevel(lfm.getLevel("testLevel"));

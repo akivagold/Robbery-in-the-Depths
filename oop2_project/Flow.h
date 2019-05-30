@@ -18,7 +18,7 @@ public:
 	// convert to string
 	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
 	void init();
-	virtual void onCollide(const std::shared_ptr<MovingObject>& obj) override;
+	virtual void onCollide(MovingObject* obj) override;
 	virtual bool canMoveThroughMe() const override { return true; };
 private:
 	// angle & power

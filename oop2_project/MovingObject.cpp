@@ -19,13 +19,14 @@ void MovingObject::setExternalSpeed(sf::Vector2f speed, sf::Vector2f acceleratio
 	m_externalMaxSpeed.x += speed.x;
 	m_externalMaxSpeed.y += speed.y;
 }
-
+#include <iostream>
 void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 {
 	setExternalSpeed(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f));
 	// check all list
 	for (auto object : collideList) {
-		object->onCollide(getSelf());
+		//std::cout<<object->toString();
+		object->onCollide(this);
 	}
 }
 
