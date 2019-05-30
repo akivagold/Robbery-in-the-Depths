@@ -157,7 +157,7 @@ void testBox2DLib() {
 
 void testWorld() {
 	// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+	sf::RenderWindow window(sf::VideoMode(1200, 900), "Screen");
 
 	GameScreen gameScreen(window);
 

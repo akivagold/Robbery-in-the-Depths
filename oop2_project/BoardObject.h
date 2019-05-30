@@ -17,8 +17,6 @@ class BoardObject :
 	public GUI::AnimationView
 {
 public:
-	// default size in pixels
-	static const sf::Vector2i DEFAULT_SIZE;
 	// get AABB
 	const b2AABB& getAABB() const { return m_aabb; }
 	// set draw priority
@@ -48,6 +46,8 @@ public:
 	std::forward_list<BoardObject*> getCollidesList();
 	// get self
 	const std::shared_ptr<BoardObject>& getSelf() const;
+	// get default size of object
+	static const sf::Vector2i& getDefaultSize();
 protected:
 	// update components
 	virtual void updateComponents() override;
