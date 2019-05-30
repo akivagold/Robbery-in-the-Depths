@@ -5,7 +5,7 @@
 const sf::Vector2i BoardObject::DEFAULT_SIZE(50, 50);
 
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
-	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_canMoveThroughMe(true), m_inGame(false)
+	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();

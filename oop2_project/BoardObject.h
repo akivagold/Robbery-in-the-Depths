@@ -35,7 +35,7 @@ public:
 	// convert to string
 	virtual string toString() const override;
 	// check if this object is don't blocking movement
-	virtual bool canMoveThroughMe() const { return m_canMoveThroughMe; }
+	virtual bool canMoveThroughMe() const = 0;
 	// change flag that object in game
 	void setInGame(const std::shared_ptr<BoardObject>& self);
 	// check if object in game
@@ -49,8 +49,6 @@ public:
 	// get self
 	const std::shared_ptr<BoardObject>& getSelf() const;
 protected:
-	// if another object can move through me
-	bool m_canMoveThroughMe;                      // TODO need be private and use by function
 	// update components
 	virtual void updateComponents() override;
 	// constructor

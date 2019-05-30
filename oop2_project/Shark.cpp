@@ -21,12 +21,12 @@ void Shark::playChoice()
 	if (distanceFromPlayer <= m_radiusAttak) {
 		m_inChase = true;
 		sf::Vector2f direction = getPosition() - player->getPosition();
-		getInteralAcceleration().x = -direction.x*0.000025f;
-		getInteralAcceleration().y = -direction.y*0.000025f;
+		getInteralAcceleration().x = -direction.x*0.0000025f;
+		getInteralAcceleration().y = -direction.y*0.0000025f;
 	}
 	else{
 		m_inChase = false;
-		float offset = 0.00025;
+		float offset = 0.00025f;
 		//Direction direct = getDirection();
 		switch (direct)
 		{

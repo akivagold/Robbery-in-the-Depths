@@ -16,6 +16,7 @@ class MovingObject
 public:
 	// direction of moving
 	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT , UP_LEFT, STANDING };
+	// number of directions
 	static const int NUM_OF_DIRECTIONS = 8;
 	// convert to string
 	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
@@ -35,6 +36,8 @@ public:
 	const sf::Vector2f& getSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
+	// check if this object is don't blocking movement
+	virtual bool canMoveThroughMe() const {	return true; }
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
