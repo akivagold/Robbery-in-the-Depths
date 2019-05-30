@@ -26,6 +26,8 @@ public:
 	void setDirection(Direction direct);
 	// get direction
 	Direction getDirection() const { return m_direction; }
+	// get last direction
+	Direction getLastDirection() const { return m_lastDirection; }
 	// get ranodm direction
 	Direction getRandomDirect() const;
 	// event when direction changed
