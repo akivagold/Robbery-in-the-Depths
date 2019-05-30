@@ -15,6 +15,8 @@ class Shark
 public:
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
+	// draw
+	virtual void draw() override;
 	// convert to string
 	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
 protected:
@@ -27,6 +29,8 @@ private:
 	void init();
 	// radius attak
 	float m_radiusAttak;
+	Timer m_time;
+	bool m_inChase;
 	
 	
 };
