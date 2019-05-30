@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AK47.cpp" />
     <ClCompile Include="akiva_tests.cpp" />
     <ClCompile Include="AlertDialog.cpp" />
     <ClCompile Include="AnimationView.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="GameObjectView.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
+    <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="ImageView.cpp" />
@@ -209,9 +211,12 @@
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WorkingTool.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AK47.h" />
     <ClInclude Include="AlertDialog.h" />
     <ClInclude Include="AnimationView.h" />
     <ClInclude Include="BaseScreen.h" />
@@ -235,6 +240,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="HorizontalLayout.h" />
+    <ClInclude Include="HotWeapon.h" />
     <ClInclude Include="IHandler.h" />
     <ClInclude Include="ImageButton.h" />
     <ClInclude Include="ImageTexture.h" />
@@ -251,6 +257,8 @@
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WorkingTool.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="~main_tests.h" />
     <ClInclude Include="Matrix.h" />
