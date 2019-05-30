@@ -25,6 +25,7 @@
 #include "World.h"
 #include "Shark.h"
 #include "GameMenu.h"
+#include "Wall.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -84,20 +85,75 @@ void nahum_main()
 }
 
 void testWorld() {
-	/*sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
 
 	GameScreen gameScreen(window);
+
 	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
 	player->setPosition(0, 0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
-	sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 
-	std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
-	shark->setPosition(0.5f, 0.5f);
-	gameScreen.getWorld().getBODS().requestAddBO(shark);
-	std::cout << shark->getDistance(player);*/
+	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+		float offset = 10.f;
+		switch (keyCode)
+		{
+			/*case sf::Keyboard::Key::Left: {
+				gameScreen.getWorld().getCamera().move(-offset, 0);
+			} break;
+			case sf::Keyboard::Key::Right: {
+				gameScreen.getWorld().getCamera().move(offset, 0);
+			} break;
+			case sf::Keyboard::Key::Up: {
+				gameScreen.getWorld().getCamera().move(0, -offset);
+			} break;
+			case sf::Keyboard::Key::Down: {
+				gameScreen.getWorld().getCamera().move(0, offset);
+			} break;*/
+		case sf::Keyboard::Key::Q: {
+			gameScreen.getWorld().getCamera().zoom(0.95f);
+		} break;
+		case sf::Keyboard::Key::W: {
+			gameScreen.getWorld().getCamera().zoom(1.05f);
+		} break;
+		case sf::Keyboard::Key::P: {
+			std::cout << "-------------------------------------------------" << std::endl;
+			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
+		} break;
+		case sf::Keyboard::Key::R: {
+			sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
+			wall->setPosition(pos);
+			gameScreen.getWorld().getBODS().requestAddBO(wall);
+		} break;
+		}
+	});
+	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
+		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 
-	// create window
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
+		shark->setPosition(pos);
+		gameScreen.getWorld().getBODS().requestAddBO(shark);
+	});
+
+
+	gameScreen.getWorld().getBODS().handleRequests();
+	gameScreen.getWorld().getBODS().prepareLevel();
+	// load level info
+	//LevelFileManager lfm;
+	//world.loadLevel(lfm.getLevel("testLevel"));
+
+
+	LevelInfo li;
+	li.getLevelChars().resize(100, 100);
+	gameScreen.getWorld().loadLevel(li);
+	Timer frameTimer;
+	frameTimer.start(1, [&gameScreen, &player]() {
+		gameScreen.getWorld().getBODS().handleRequests();
+		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
+	});
+	gameScreen.run(frameTimer);
+
+	/*// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
 
 	GameScreen gameScreen(window);
@@ -139,7 +195,7 @@ void testWorld() {
 		sf::Vector2f direction = shark->getPosition() - player->getPosition();
 		shark->getSpeed().x = direction.x*0.5f;
 		shark->getSpeed().y = direction.y*0.5f;
-	}*/
+	}
 	gameScreen.getWorld().getBODS().prepareLevel();
 	gameScreen.getWorld().addClickListener([&gameScreen, player](View& view) {
 		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
@@ -148,14 +204,7 @@ void testWorld() {
 		shark->setPosition(pos);
 		shark->addClickListener([&gameScreen, shark, player](View& v) {
 			//std::cout << shark->getDistance(player);
-			/*float distanceFromPlayer = shark->getDistance(player);
-			if (distanceFromPlayer <= 2000.f) {
-				float x = shark->getPosition().x - player->getPosition().x;
-				float y = shark->getPosition().y - player->getPosition().y;
-				sf::Vector2f direction = sf::Vector2f(x, y);
-		       // shark->getSpeed().x = direction.x*0.5f;
-		      // shark->getSpeed().y = direction.y*0.5f;
-			}*/
+		
 		});
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
@@ -174,7 +223,7 @@ void testWorld() {
 	frameTimer.start(10, [&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 	});
-	gameScreen.run(frameTimer);
+	gameScreen.run(frameTimer);*/
 }
 
 void testLifeView() {

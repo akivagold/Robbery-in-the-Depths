@@ -52,6 +52,13 @@
             "numOfRows": 4,
             "numOfCols": 6,
             "numOfImages": 22
+        },
+        {
+            "name": "adhd_crap",
+            "path": "adhd_crab.png",
+            "numOfRows": 4,
+            "numOfCols": 6,
+            "numOfImages": 24
         }
     ]
 }
