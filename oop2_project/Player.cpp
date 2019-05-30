@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen)
+	: Character(gameScreen), m_score(0)
 {
 	init();
 }

@@ -21,6 +21,10 @@ void Crab::playChoice(Direction lastDirection, bool isCollided)
 	if (isCollided) {
 		Direction newDirection = (lastDirection == Direction::RIGHT) ? Direction::LEFT : Direction::RIGHT;
 		setDirection(newDirection);
+		//getInteralAcceleration().y = 0.f;
+	}
+	else {
+		//getInteralAcceleration().y = 0.001f;
 	}
 
 	// check if user in my radius
