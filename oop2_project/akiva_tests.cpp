@@ -120,7 +120,27 @@ void testWorld() {
 	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
 	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
 	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
+	flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
 	gameScreen.getWorld().getBODS().requestAddBO(flow);
+
+	std::shared_ptr<Flow> flow1 = std::make_shared<Flow>(gameScreen);
+	flow1->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow1->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 4.f);
+	flow1->setFlowPower(sf::Vector2f(0.f, 0.0025f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow1);
+
+	std::shared_ptr<Flow> flow2 = std::make_shared<Flow>(gameScreen);
+	flow2->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow2->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 12.f);
+	flow2->setFlowPower(sf::Vector2f(0.f, -0.0025f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow2);
+
+	std::shared_ptr<Flow> flow3 = std::make_shared<Flow>(gameScreen);
+	flow3->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow3->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 12.f);
+	flow3->setFlowPower(sf::Vector2f(-0.0025f, 0.f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow3);
+
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;

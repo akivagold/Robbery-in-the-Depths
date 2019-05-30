@@ -7,22 +7,21 @@ sf::Vector2f MovingObject::getFriction()
 	sf::Vector2f friction;
 	//TODO add external acc(?)
 
-	friction.x = m_speed.x / (m_maxSpeed.x + m_externalMaxSpeed.x);
-	friction.y = m_speed.y / (m_maxSpeed.y + m_externalMaxSpeed.y);
+	friction.x = m_speed.x / (m_maxSpeed.x);// + m_externalMaxSpeed.x);
+	friction.y = m_speed.y / (m_maxSpeed.y);// + m_externalMaxSpeed.y);
 	return friction;
 }
 
-void MovingObject::setExternalSpeed(sf::Vector2f speed, sf::Vector2f acceleration)
+void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)
 {
-	m_externalMaxSpeed.x += speed.x;
-	m_externalMaxSpeed.y += speed.y;
-	m_externalMaxSpeed.x += speed.x;
-	m_externalMaxSpeed.y += speed.y;
+	// need m_externalMaxSpeed?
+	m_externalAcc.x = acceleration.x;
+	m_externalAcc.y = acceleration.y;
 }
 #include <iostream>
 void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 {
-	setExternalSpeed(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f));
+	setExternaAlcceleration(sf::Vector2f(0.f, 0.f));
 	// check all list
 	for (auto object : collideList) {
 		//std::cout<<object->toString();
@@ -33,7 +32,10 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
 	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
-{}
+{
+	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
+	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
+}
 
 void MovingObject::play()
 {

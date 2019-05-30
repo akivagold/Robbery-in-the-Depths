@@ -19,9 +19,10 @@ public:
 	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
 	void init();
 	virtual void onCollide(MovingObject* obj) override;
-	virtual bool canMoveThroughMe() const override { return true; };
+	virtual bool canMoveThroughMe() const override { return true; }
+	void setFlowPower(sf::Vector2f flow) { m_flowPower = flow; }
 private:
 	// angle & power
-	float m_flowAngle, m_flowPower;
+	sf::Vector2f m_flowPower;
 };
 
