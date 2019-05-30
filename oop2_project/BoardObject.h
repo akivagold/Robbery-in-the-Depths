@@ -6,6 +6,8 @@
 class GameScreen;
 #include <math.h>
 #include <forward_list>
+class Flow;
+class MovingObject;
 
 //---- using section --------
 using std::string;
@@ -48,6 +50,9 @@ public:
 	std::forward_list<BoardObject*> getCollidesList();
 	// get self
 	const std::shared_ptr<BoardObject>& getSelf() const;
+	virtual void onCollide(const std::shared_ptr<BoardObject>& obj);
+	virtual void onCollide(const std::shared_ptr<MovingObject>& obj){}
+	//virtual void onCollide(const std::shared_ptr<Flow>& obj){}
 protected:
 	// update components
 	virtual void updateComponents() override;

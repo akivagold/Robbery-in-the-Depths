@@ -80,6 +80,11 @@ const std::shared_ptr<BoardObject>& BoardObject::getSelf() const
 	return m_self;
 }
 
+void BoardObject::onCollide(const std::shared_ptr<BoardObject>& obj)
+{
+	 obj->onCollide(getSelf()); 
+}
+
 void BoardObject::updateComponents()
 {
 	AnimationView::updateComponents();
