@@ -23,6 +23,7 @@
 #include "GameScreen.h"
 #include "World.h"
 #include "Shark.h"
+#include"Flow.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -116,6 +117,11 @@ void testWorld() {
 	player->setPosition(0,0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
 
+	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
+	gameScreen.getWorld().getBODS().requestAddBO(flow);
+
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		switch (keyCode)
@@ -153,7 +159,8 @@ void testWorld() {
 
 	
 
-	
+	gameScreen.getWorld().getBODS().handleRequests();
+	gameScreen.getWorld().getBODS().prepareLevel();
 	// load level info
 	//LevelFileManager lfm;
 	//world.loadLevel(lfm.getLevel("testLevel"));

@@ -8,6 +8,11 @@ BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	init();
 }
 
+void BoardObject::onCollide(BoardObject* obj)
+{
+	obj->onCollide(this);
+}
+
 void BoardObject::setDrawPriority(int drawPriority)
 {
 	if (drawPriority < 0)
