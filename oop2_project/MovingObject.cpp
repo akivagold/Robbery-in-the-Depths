@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 
-sf::Vector2f & MovingObject::getFriction()
+sf::Vector2f MovingObject::getFriction()
 {
 	sf::Vector2f friction;
 	//TODO add external acc(?)
@@ -79,10 +79,5 @@ bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
 		}
 	}
 	return true;
-}
-
-std::forward_list<BoardObject*> MovingObject::getCollidesList()
-{
-	return getGameScreen().getWorld().getBODS().getAABBTree().queryOverlaps(this);
 }
 

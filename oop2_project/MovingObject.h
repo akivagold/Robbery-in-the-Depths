@@ -37,7 +37,7 @@ public:
 	const sf::Vector2f& getSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }
-	sf::Vector2f& getFriction();
+	sf::Vector2f getFriction();
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
@@ -56,8 +56,6 @@ private:
 	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc; //TODO external max speed
 	// time
 	sf::Clock m_clock;
-	// get collides list
-	std::forward_list<BoardObject*> getCollidesList();
 	// direction
 	Direction m_direction;
 };

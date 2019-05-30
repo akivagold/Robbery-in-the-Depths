@@ -1,6 +1,13 @@
 #include "BODS.h"
 #include "ParseLevelException.h"
 
+const std::shared_ptr<Player>& BODS::getPlayer() const
+{
+	if (!m_player)
+		throw std::logic_error("Cannot get player, because player not in game!");
+	return m_player;
+}
+
 void BODS::handleRequests()
 {
 	handleRemoveRequestsQueue();
@@ -11,6 +18,15 @@ void BODS::prepareLevel()
 {
 	connectPlayerMember();
 }
+/*
+void BODS::clear()
+{
+	m_player = nullptr;
+	while (!m_addQueue.empty()) m_addQueue.pop();
+	while (!m_removeQueue.empty()) m_addQueue.pop();
+	// TODO delete tree
+}
+*/
 
 void BODS::handleAddRequestsQueue()
 {
@@ -33,7 +49,8 @@ void BODS::handleRemoveRequestsQueue()
 void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 {
 	m_boardObjects.insert(boardObject);
-	m_aabbTree.insertObject(&(*boardObject));
+	int32 proxyId = m_aabbTree.CreateProxy(boardObject->getAABB(), static_cast<void*>(boardObject.get()));
+	boardObject->setProxyId(proxyId);
 	boardObject->setInGame();
 }
 
@@ -41,8 +58,8 @@ void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)
 {
 	auto it = m_boardObjects.find(boardObject);
 	if (it != m_boardObjects.end()) {
+		m_aabbTree.DestroyProxy(boardObject->getProxyId());
 		m_boardObjects.erase(it);
-		m_aabbTree.removeObject(&(*boardObject));
 	}	
 }
 
