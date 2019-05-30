@@ -22,10 +22,8 @@ public:
 	// convert to string
 	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
 protected:
-	// play
-	//virtual void play() override {}				// TODO
 	// the object choose where to go
-	virtual void playChoice() override;       // TODO
+	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// init
 	void init();

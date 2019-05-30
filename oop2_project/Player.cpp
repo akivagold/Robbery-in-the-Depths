@@ -20,7 +20,7 @@ void Player::setNumOfLife(int numOfLife)
 	getGameScreen().getGameMenu()->getLifeView()->setLife(numOfLife);
 }
 
-void Player::playChoice()
+void Player::playChoice(Direction lastDirection, bool isCollided)
 {
 	// TODO
 }

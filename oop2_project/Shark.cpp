@@ -13,7 +13,7 @@ void Shark::draw()
 	m_time.checkTimer();
 }
 
-void Shark::playChoice()
+void Shark::playChoice(Direction lastDirection, bool isCollided)
 {
 	Direction direct = getDirection();
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();

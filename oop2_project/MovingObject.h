@@ -46,10 +46,14 @@ protected:
 	// get interalAcceleration (can change)
 	sf::Vector2f& getInteralAcceleration() { return m_interalAcceleration; }
 	// the object choose where to go
-	virtual void playChoice() = 0;
+	virtual void playChoice(Direction lastDirection, bool isCollided) = 0;
 	// get friction
 	sf::Vector2f getFriction();
 private:
+	// last direction
+	Direction m_lastDirection;
+	// flag that check if collide last time
+	bool m_isCollided;
 	// if can move to new position
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	// return where the object is trying to move

@@ -33,8 +33,8 @@ public:
 	// convert to string
 	virtual string toString() const override;
 protected:
-	// choose what to do
-	virtual void playChoice() override;
+	// the object choose where to go
+	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;

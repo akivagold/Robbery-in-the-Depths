@@ -13,13 +13,14 @@ sf::Vector2f MovingObject::getFriction()
 }
 
 MovingObject::MovingObject(GameScreen& gameScreen)
-	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500))	//TODO enum
+	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
+	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
 {}
 
 void MovingObject::play()
 {
 	// choose where to go
-	playChoice();
+	playChoice(m_lastDirection, m_isCollided);
 
 	// save previous location
 	sf::Vector2f prePos = getPosition();
@@ -34,8 +35,12 @@ void MovingObject::play()
 		std::forward_list<BoardObject*> collideList = getCollidesList();
 		// check if can move to new position
 		if (!canMove(collideList)) {
+			m_isCollided = true;
 			setPosition(prePos);
 			m_speed = sf::Vector2f(0, 0);
+		}
+		else {
+			m_isCollided = false;
 		}
 	}
 }
@@ -49,6 +54,7 @@ void MovingObject::draw()
 void MovingObject::setDirection(Direction direct)
 {
 	if (direct != m_direction) {
+		m_lastDirection = m_direction;
 		m_direction = direct;
 		onDirectionChanged();
 	}
