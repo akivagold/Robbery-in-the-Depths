@@ -37,7 +37,7 @@ public:
 	const sf::Vector2f& getSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }
-	sf::Vector2f& getFriction();
+	sf::Vector2f getFriction();
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);

@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 
-sf::Vector2f & MovingObject::getFriction()
+sf::Vector2f MovingObject::getFriction()
 {
 	sf::Vector2f friction;
 	//TODO add external acc(?)
@@ -35,6 +35,7 @@ void MovingObject::play()
 		// check if can move to new position
 		if (!canMove(collideList)) {
 			setPosition(prePos);
+			m_speed = sf::Vector2f(0, 0);
 		}
 	}
 }
