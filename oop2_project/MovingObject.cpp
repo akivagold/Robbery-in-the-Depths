@@ -35,6 +35,7 @@ void MovingObject::play()
 		// check if can move to new position
 		if (!canMove(collideList)) {
 			setPosition(prePos);
+			m_speed = sf::Vector2f(0, 0);
 		}
 	}
 }
