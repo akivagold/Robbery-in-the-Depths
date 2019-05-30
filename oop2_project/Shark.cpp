@@ -15,7 +15,17 @@ void Shark::draw()
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)
 {
-	Direction direct = getDirection();
+	if (isCollided) {
+		setDirection(getRandomDirect());
+	/*	if(isUpDirections(lastDirection))
+			setDirection(getRandomDownDirections());
+		if (isDownDirections(lastDirection))
+			setDirection(getRandomUPDirections());
+		if (isRightDirections(lastDirection))
+			setDirection(getRandomLeftDirections());
+		if (isLeftDirections(lastDirection))
+			setDirection(getRandomRightDirections());*/
+	}
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getDistance(player);
 	if (distanceFromPlayer <= m_radiusAttak) {
@@ -27,7 +37,7 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 	else{
 		m_inChase = false;
 		float offset = 0.00025f;
-		//Direction direct = getDirection();
+		Direction direct = getDirection();
 		switch (direct)
 		{
 			case Direction::UP: {
@@ -59,9 +69,7 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 				getInteralAcceleration().x = -offset;
 			} break;
 		}
-		
 	}
-
 }
 
 void Shark::init()
@@ -71,8 +79,19 @@ void Shark::init()
 	setDirection(getRandomDirect());
 	m_inChase = false;
 	m_time.start(3000, [this] {
-		if(!m_inChase)
+		if (!m_inChase) {
+			/*Direction direct;
+			if (isUpDirections(getLastDirection()))
+				direct = getRandomDownDirections();
+			else if (isDownDirections(getLastDirection()))
+				direct = getRandomUPDirections();
+			else if (isRightDirections(getLastDirection()))
+				direct = getRandomLeftDirections();
+			else 
+				direct = getRandomRightDirections();*/
+
 			setDirection(getRandomDirect());
+		}
 	});
 	//setAnimationFrequency(?)
 	// TODO setDrawPriority()

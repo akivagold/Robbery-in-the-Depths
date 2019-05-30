@@ -14,7 +14,7 @@ sf::Vector2f MovingObject::getFriction()
 
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
-	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
+	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
 {}
 
 void MovingObject::play()
