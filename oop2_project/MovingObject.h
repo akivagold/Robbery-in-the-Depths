@@ -41,7 +41,7 @@ public:
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
 	// check if this object is don't blocking movement
-	virtual bool canMoveThroughMe() const {	return true; }
+	virtual bool canMoveThroughMe() const override { return true; }
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);

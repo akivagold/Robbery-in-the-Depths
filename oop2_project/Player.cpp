@@ -33,6 +33,7 @@ string Player::toString() const
 void Player::init()
 {
 	setAnimation("coin"); // TODO change
+	setDrawPriority(DRAW_PRIORITY);
 	//setAnimationFrequency(?)
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		float offset = 0.0025f;
