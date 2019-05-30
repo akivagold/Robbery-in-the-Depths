@@ -8,6 +8,11 @@ BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	init();
 }
 
+void BoardObject::onCollide(const std::shared_ptr<BoardObject>& obj)
+{
+	obj->onCollide(getSelf());
+}
+
 void BoardObject::setDrawPriority(int drawPriority)
 {
 	if (drawPriority < 0)
