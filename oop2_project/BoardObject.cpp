@@ -1,14 +1,16 @@
 #include "BoardObject.h"
 #include "GameScreen.h"
 
-// init 
-const sf::Vector2i BoardObject::DEFAULT_SIZE(50, 50);
-
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();
+}
+
+void BoardObject::onCollide(const std::shared_ptr<BoardObject>& obj)
+{
+	obj->onCollide(getSelf());
 }
 
 void BoardObject::setDrawPriority(int drawPriority)
@@ -20,7 +22,8 @@ void BoardObject::setDrawPriority(int drawPriority)
 
 float BoardObject::getDistance(const std::shared_ptr<BoardObject>& other) const
 {
-	return sqrt(pow(getPosition().x - other->getPosition().x, 2) + pow(getPosition().y - other->getPosition().y, 2));
+	sf::Vector2f myCenter = getCenter(), otherCenter = other->getPosition();
+	return sqrt(pow(myCenter.x - otherCenter.x, 2) + pow(myCenter.y - otherCenter.y, 2));
 }
 
 string BoardObject::toString() const
@@ -80,6 +83,13 @@ const std::shared_ptr<BoardObject>& BoardObject::getSelf() const
 	return m_self;
 }
 
+const sf::Vector2i& BoardObject::getDefaultSize()
+{
+	// init 
+	static sf::Vector2i DEFAULT_SIZE(50, 50);
+	return DEFAULT_SIZE;
+}
+
 void BoardObject::updateComponents()
 {
 	AnimationView::updateComponents();
@@ -108,5 +118,5 @@ void BoardObject::updateAABB()
 void BoardObject::init()
 {
 	setParent(getGameScreen().getWorld());
-	setSize(BoardObject::DEFAULT_SIZE);
+	setSize(getDefaultSize());
 }

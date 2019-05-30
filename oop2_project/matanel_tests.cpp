@@ -26,6 +26,7 @@
 #include "Shark.h"
 #include "Wall.h"
 #include "Crab.h"
+#include "Chest.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -157,7 +158,7 @@ void testBox2DLib() {
 
 void testWorld() {
 	// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
 	GameScreen gameScreen(window);
 
@@ -202,6 +203,11 @@ void testWorld() {
 				std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
 				crab->setPosition(mousePos);
 				gameScreen.getWorld().getBODS().requestAddBO(crab);
+			} break;
+			case sf::Keyboard::Key::T: {
+				std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
+				chest->setPosition(mousePos);
+				gameScreen.getWorld().getBODS().requestAddBO(chest);
 			} break;
 		}
 	});

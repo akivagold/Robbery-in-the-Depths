@@ -165,7 +165,9 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Chest.cpp" />
     <ClCompile Include="CoinView.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="Cop.cpp" />
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="EditText.cpp" />
@@ -202,6 +204,7 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="Surprise.cpp" />
     <ClCompile Include="TextureInfo.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TextView.cpp" />
@@ -226,7 +229,9 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="Chest.h" />
     <ClInclude Include="CoinView.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Cop.h" />
     <ClInclude Include="Crab.h" />
     <ClInclude Include="EditText.h" />
@@ -256,6 +261,7 @@
     <ClInclude Include="ParseGOIException.h" />
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="Surprise.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WorkingTool.h" />

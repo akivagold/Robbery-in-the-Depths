@@ -7,9 +7,26 @@ sf::Vector2f MovingObject::getFriction()
 	sf::Vector2f friction;
 	//TODO add external acc(?)
 
-	friction.x = m_speed.x / m_maxSpeed.x;
-	friction.y = m_speed.y / m_maxSpeed.y;
+	friction.x = m_speed.x / (m_maxSpeed.x + m_externalMaxSpeed.x);
+	friction.y = m_speed.y / (m_maxSpeed.y + m_externalMaxSpeed.y);
 	return friction;
+}
+
+void MovingObject::setExternalSpeed(sf::Vector2f speed, sf::Vector2f acceleration)
+{
+	m_externalMaxSpeed.x += speed.x;
+	m_externalMaxSpeed.y += speed.y;
+	m_externalMaxSpeed.x += speed.x;
+	m_externalMaxSpeed.y += speed.y;
+}
+
+void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
+{
+	setExternalSpeed(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f));
+	// check all list
+	for (auto object : collideList) {
+		object->onCollide(getSelf());
+	}
 }
 
 MovingObject::MovingObject(GameScreen& gameScreen)
@@ -42,7 +59,11 @@ void MovingObject::play()
 		else {
 			m_isCollided = false;
 		}
+		// check collision effect
+		checkCollide(collideList);
 	}
+
+	
 }
 
 void MovingObject::draw()
@@ -65,8 +86,8 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Vector2f friction = getFriction();
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
-	m_speed.x += (m_interalAcceleration.x - friction.x) * elapsedTime; // TODO external acc
-	m_speed.y += (m_interalAcceleration.y - friction.y) * elapsedTime;
+	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
 	return sf::Vector2f(x_pos, y_pos);

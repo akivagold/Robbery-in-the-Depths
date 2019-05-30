@@ -1,5 +1,8 @@
 #include "Crab.h"
 
+// init
+const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*4.f;
+
 Crab::Crab(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife), m_isPlayerInRadius(false)
 {
@@ -21,6 +24,18 @@ void Crab::playChoice(Direction lastDirection, bool isCollided)
 	}
 
 	// check if user in my radius
+	if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
+		if (!m_isPlayerInRadius) {
+			setAnimation("adhd_crab");
+			m_isPlayerInRadius = true;
+		}
+	}
+	else {
+		if (m_isPlayerInRadius) {
+			setAnimation("walking_crab");
+			m_isPlayerInRadius = false;
+		}	
+	}
 
 	// set speed
 	if (getDirection() == Direction::RIGHT) {

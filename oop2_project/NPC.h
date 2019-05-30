@@ -33,6 +33,8 @@ public:
 	static bool isDownDirections(Direction direct);
 	// check if is left directions
 	static bool isLeftDirections(Direction direct);
+	// get radius from player
+	float getRadiusFromPlayer() const;
 };
 
 
