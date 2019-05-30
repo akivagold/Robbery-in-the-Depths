@@ -18,6 +18,7 @@ public:
 	explicit World(sf::RenderWindow& window);
 	// get BoardObjectDataStructure
 	BODS& getBODS() { return m_bods; }
+	const BODS& getBODS() const { return m_bods; }
 	// load level
 	void loadLevel(const LevelInfo& levelInfo);            // TODO not working yet
 	// draw

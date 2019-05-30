@@ -10,8 +10,9 @@ World::World(sf::RenderWindow& window)
 
 void World::loadLevel(const LevelInfo& levelInfo)
 {
+	const sf::Vector2i& defaultSize = BoardObject::getDefaultSize();
 	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
-	setSize(levelSize.x*BoardObject::DEFAULT_SIZE.y, levelSize.y*BoardObject::DEFAULT_SIZE.x);
+	setSize(levelSize.x*defaultSize.y, levelSize.y*defaultSize.x);
 
 	// TODO 
 

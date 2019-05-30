@@ -41,10 +41,7 @@ public:
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
 	// check if this object is don't blocking movement
-	virtual bool canMoveThroughMe() const {	return true; }
-	// set external speed and acceleration
-	void setExternalSpeed(sf::Vector2f speed, sf::Vector2f acceleration);
-	void checkCollide(std::forward_list<BoardObject*> collideList);
+	virtual bool canMoveThroughMe() const override { return true; }
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
@@ -68,7 +65,7 @@ private:
 	// play
 	void play();
 	// speed, internal land external acceleration
-	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc, m_externalMaxSpeed;
+	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc; //TODO external max speed
 	// time
 	sf::Clock m_clock;
 	// direction

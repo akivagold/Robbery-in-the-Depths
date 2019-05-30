@@ -1,4 +1,5 @@
 #include "NPC.h"
+#include "GameScreen.h"
 
 NPC::NPC(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)
@@ -54,4 +55,9 @@ bool NPC::isDownDirections(Direction direct)
 bool NPC::isLeftDirections(Direction direct)
 {
 	return (direct == Direction::LEFT || direct == Direction::DOWN_LEFT || direct == Direction::UP_LEFT);
+}
+
+float NPC::getRadiusFromPlayer() const
+{
+	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());
 }

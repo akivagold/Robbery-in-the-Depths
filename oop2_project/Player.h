@@ -36,6 +36,8 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
+	// draw priority
+	static const int DRAW_PRIORITY = 100;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool

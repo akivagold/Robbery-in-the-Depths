@@ -28,7 +28,7 @@ private:
 	// draw priority
 	static const int DRAW_PRIORITY = 20;
 	// minimum radius to see the player
-	static const int MIN_PLAYER_RADIUS;
+	static const float MIN_PLAYER_RADIUS;
 	// flag that check if player in crab radius
 	bool m_isPlayerInRadius;
 	// timer
