@@ -32,6 +32,12 @@ string BoardObject::toString() const
 	return str;
 }
 
+void BoardObject::setInGame(const std::shared_ptr<BoardObject>& self)
+{
+	m_inGame = true;
+	m_self = self;
+}
+
 std::forward_list<BoardObject*> BoardObject::getCollidesList()
 {
 	struct QueryHandler
@@ -65,6 +71,13 @@ std::forward_list<BoardObject*> BoardObject::getCollidesList()
 
 	QueryHandler quaryHandler(m_gameScreen, this);
 	return quaryHandler.quaryCollides();
+}
+
+const std::shared_ptr<BoardObject>& BoardObject::getSelf() const
+{
+	if (!isInGame())
+		std::logic_error("Cannot get self because object not in game");
+	return m_self;
 }
 
 void BoardObject::updateComponents()

@@ -28,6 +28,8 @@ public:
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
 	virtual void setNumOfLife(int numOfLife) override;
+	// event when direction changed
+	virtual void onDirectionChanged() override {}; // TODO: use this
 	// convert to string
 	virtual string toString() const override;
 protected:

@@ -43,7 +43,7 @@ public:
 	// prepare level
 	void prepareLevel();
 	// clear
-	//void clear();
+	//TODO void clear();
 	// convert to string
 	virtual string toString() const;
 private:

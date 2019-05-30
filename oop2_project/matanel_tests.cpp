@@ -191,7 +191,6 @@ void testWorld() {
 				std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 			} break;
 			case sf::Keyboard::Key::R: {
-				
 			} break;
 		}
 	});

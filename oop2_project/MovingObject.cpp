@@ -46,6 +46,14 @@ void MovingObject::draw()
 	play();
 }
 
+void MovingObject::setDirection(Direction direct)
+{
+	if (direct != m_direction) {
+		m_direction = direct;
+		onDirectionChanged();
+	}
+}
+
 sf::Vector2f MovingObject::getNextPosition()
 {
 	sf::Vector2f friction = getFriction();
@@ -55,8 +63,7 @@ sf::Vector2f MovingObject::getNextPosition()
 	m_speed.y += (m_interalAcceleration.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
-	sf::Vector2f nextPos = sf::Vector2f(x_pos, y_pos);
-	return nextPos;
+	return sf::Vector2f(x_pos, y_pos);
 }
 
 MovingObject::Direction MovingObject::getRandomDirect() const
@@ -64,7 +71,11 @@ MovingObject::Direction MovingObject::getRandomDirect() const
 	int num = rand() % NUM_OF_DIRECTIONS;
 	Direction direct = static_cast<Direction>(num);
 	return direct;
+}
 
+void MovingObject::suicide()
+{
+	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
 }
 
 bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
