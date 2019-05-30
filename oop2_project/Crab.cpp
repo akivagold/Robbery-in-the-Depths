@@ -1,7 +1,7 @@
 #include "Crab.h"
 
 Crab::Crab(GameScreen& gameScreen, int numOfLife)
-	: NPC(gameScreen, numOfLife)
+	: NPC(gameScreen, numOfLife), m_isPlayerInRadius(false)
 {
 	init();
 }
@@ -14,11 +14,15 @@ void Crab::draw()
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)
 {
+	// check is collided
 	if (isCollided) {
 		Direction newDirection = (lastDirection == Direction::RIGHT) ? Direction::LEFT : Direction::RIGHT;
 		setDirection(newDirection);
 	}
 
+	// check if user in my radius
+
+	// set speed
 	if (getDirection() == Direction::RIGHT) {
 		getInteralAcceleration().x = 0.0002f;
 	}

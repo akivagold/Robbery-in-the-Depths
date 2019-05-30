@@ -27,9 +27,13 @@ protected:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 20;
-	// init
-	void init();
+	// minimum radius to see the player
+	static const int MIN_PLAYER_RADIUS;
+	// flag that check if player in crab radius
+	bool m_isPlayerInRadius;
 	// timer
 	Timer m_timer;
+	// init
+	void init();	
 };
 
