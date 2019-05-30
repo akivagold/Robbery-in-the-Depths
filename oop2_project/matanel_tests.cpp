@@ -168,7 +168,7 @@ void testWorld() {
 		float offset = 10.f;
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Left: {
+			/*case sf::Keyboard::Key::Left: {
 				gameScreen.getWorld().getCamera().move(-offset, 0);
 			} break;
 			case sf::Keyboard::Key::Right: {
@@ -179,7 +179,7 @@ void testWorld() {
 			} break;
 			case sf::Keyboard::Key::Down: {
 				gameScreen.getWorld().getCamera().move(0, offset);
-			} break;
+			} break;*/
 			case sf::Keyboard::Key::Q: {
 				gameScreen.getWorld().getCamera().zoom(0.95f);
 			} break;
