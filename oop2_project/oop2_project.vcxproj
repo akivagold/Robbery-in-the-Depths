@@ -210,8 +210,6 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AABB.h" />
-    <ClInclude Include="AABBTree.h" />
     <ClInclude Include="AlertDialog.h" />
     <ClInclude Include="AnimationView.h" />
     <ClInclude Include="BaseScreen.h" />
@@ -234,7 +232,6 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="HorizontalLayout.h" />
-    <ClInclude Include="IAABB.h" />
     <ClInclude Include="IHandler.h" />
     <ClInclude Include="ImageButton.h" />
     <ClInclude Include="ImageTexture.h" />

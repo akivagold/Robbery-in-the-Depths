@@ -35,7 +35,7 @@ void Player::init()
 	setAnimation("coin"); // TODO change
 	//setAnimationFrequency(?)
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
-		float offset = 0.0025;
+		float offset = 0.0025f;
 		switch (keyCode)
 		{
 		case sf::Keyboard::Key::Left: {

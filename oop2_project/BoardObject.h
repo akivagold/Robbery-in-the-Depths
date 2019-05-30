@@ -1,11 +1,11 @@
 #pragma once
 //---- include section ------
 #include <string>
+#include <Box2D/Box2D.h>
 #include "AnimationView.h"
 class GameScreen;
 #include <math.h>
-#include "IAABB.h"
-#include "AABB.h"
+#include <forward_list>
 
 //---- using section --------
 using std::string;
@@ -14,16 +14,13 @@ using std::string;
  * BoardObject class
  */
 class BoardObject :
-	public GUI::AnimationView, public IAABB
+	public GUI::AnimationView
 {
 public:
 	// default size in pixels
 	static const sf::Vector2i DEFAULT_SIZE;
 	// get AABB
-	virtual AABB getAABB() const override;
-
-	// TODO add: get collides objects
-
+	const b2AABB& getAABB() const { return m_aabb; }
 	// set draw priority
 	void setDrawPriority(int drawPriority);
 	// get main screen
@@ -40,9 +37,17 @@ public:
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const { return m_canMoveThroughMe; }
 	// change flag that object in game
-	void setInGame() { m_inGame = true; }
+	void setInGame(const std::shared_ptr<BoardObject>& self);
 	// check if object in game
 	bool isInGame() const { return m_inGame; }
+	// get proxy id
+	int32 getProxyId() const { return m_proxyId; }
+	// set proxy id
+	void setProxyId(int32 proxyId) { m_proxyId = proxyId; }
+	// get collides list
+	std::forward_list<BoardObject*> getCollidesList();
+	// get self
+	const std::shared_ptr<BoardObject>& getSelf() const;
 protected:
 	// if another object can move through me
 	bool m_canMoveThroughMe;                      // TODO need be private and use by function
@@ -57,6 +62,12 @@ private:
 	int m_drawPriority;
 	// game screen
 	GameScreen& m_gameScreen;
+	// AABB
+	b2AABB m_aabb;
+	// proxy id (for AABB tree)
+	int32 m_proxyId;
+	// self
+	std::shared_ptr<BoardObject> m_self;
 	// update AABB
 	void updateAABB();
 	// init

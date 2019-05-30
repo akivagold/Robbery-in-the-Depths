@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 #include <queue>
-#include "AABBTree.h"
+#include <Box2D/Box2D.h>
 #include "Player.h"
 #include "BoardObject.h"
 
@@ -33,17 +33,17 @@ public:
 	// request remove board object
 	void requestRemoveBO(const std::shared_ptr<BoardObject>& boardObject) { m_removeQueue.push(boardObject); }
 	// get AABB tree
-	AABBTree<BoardObject>& getAABBTree() { return m_aabbTree; }
+	b2DynamicTree& getAABBTree() { return m_aabbTree; }
 	// get board objects
 	BoardDS& getBOs() { return m_boardObjects; }
 	// get player
-	const std::shared_ptr<Player>& getPlayer() const { return m_player; }
+	const std::shared_ptr<Player>& getPlayer() const;
 	// handle requests queues
 	void handleRequests();
 	// prepare level
 	void prepareLevel();
 	// clear
-	//  void clear();                                           TODO
+	//TODO void clear();
 	// convert to string
 	virtual string toString() const;
 private:
@@ -54,7 +54,7 @@ private:
 	// add/remove request queues
 	std::queue<std::shared_ptr<BoardObject>> m_addQueue, m_removeQueue;
 	// AABB tree
-	AABBTree<BoardObject> m_aabbTree;
+	b2DynamicTree m_aabbTree;
 	// handle add request queue
 	void handleAddRequestsQueue();
 	// handle remove request queue
