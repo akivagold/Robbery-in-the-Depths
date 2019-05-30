@@ -51,7 +51,7 @@ void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 	m_boardObjects.insert(boardObject);
 	int32 proxyId = m_aabbTree.CreateProxy(boardObject->getAABB(), static_cast<void*>(boardObject.get()));
 	boardObject->setProxyId(proxyId);
-	boardObject->setInGame();
+	boardObject->setInGame(boardObject);
 }
 
 void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)

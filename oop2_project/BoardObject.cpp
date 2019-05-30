@@ -5,7 +5,7 @@
 const sf::Vector2i BoardObject::DEFAULT_SIZE(50, 50);
 
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
-	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_canMoveThroughMe(true), m_inGame(false)
+	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();
@@ -30,6 +30,12 @@ string BoardObject::toString() const
 	str += ", upper: { x=" + std::to_string(m_aabb.upperBound.x) + ", y=" + std::to_string(m_aabb.upperBound.y) + " }";
 	str += ", " + AnimationView::toString() + " }";
 	return str;
+}
+
+void BoardObject::setInGame(const std::shared_ptr<BoardObject>& self)
+{
+	m_inGame = true;
+	m_self = self;
 }
 
 std::forward_list<BoardObject*> BoardObject::getCollidesList()
@@ -65,6 +71,13 @@ std::forward_list<BoardObject*> BoardObject::getCollidesList()
 
 	QueryHandler quaryHandler(m_gameScreen, this);
 	return quaryHandler.quaryCollides();
+}
+
+const std::shared_ptr<BoardObject>& BoardObject::getSelf() const
+{
+	if (!isInGame())
+		std::logic_error("Cannot get self because object not in game");
+	return m_self;
 }
 
 void BoardObject::updateComponents()

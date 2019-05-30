@@ -28,11 +28,13 @@ public:
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
 	virtual void setNumOfLife(int numOfLife) override;
+	// event when direction changed
+	virtual void onDirectionChanged() override {}; // TODO: use this
 	// convert to string
 	virtual string toString() const override;
 protected:
-	// choose what to do
-	virtual void playChoice() override;
+	// the object choose where to go
+	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;

@@ -15,18 +15,22 @@ class Shark
 public:
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
+	// event when direction changed
+	virtual void onDirectionChanged() override {}; // TODO: use this
+	// draw
+	virtual void draw() override;
 	// convert to string
 	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
 protected:
-	// play
-	//virtual void play() override {}				// TODO
 	// the object choose where to go
-	virtual void playChoice() override;       // TODO
+	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// init
 	void init();
 	// radius attak
 	float m_radiusAttak;
+	Timer m_time;
+	bool m_inChase;
 	
 	
 };

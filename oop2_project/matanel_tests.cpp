@@ -24,6 +24,7 @@
 #include "GameScreen.h"
 #include "World.h"
 #include "Shark.h"
+#include "Wall.h"
 
 #pragma endregion
 
@@ -168,7 +169,7 @@ void testWorld() {
 		float offset = 10.f;
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Left: {
+			/*case sf::Keyboard::Key::Left: {
 				gameScreen.getWorld().getCamera().move(-offset, 0);
 			} break;
 			case sf::Keyboard::Key::Right: {
@@ -179,7 +180,7 @@ void testWorld() {
 			} break;
 			case sf::Keyboard::Key::Down: {
 				gameScreen.getWorld().getCamera().move(0, offset);
-			} break;
+			} break;*/
 			case sf::Keyboard::Key::Q: {
 				gameScreen.getWorld().getCamera().zoom(0.95f);
 			} break;
@@ -191,7 +192,10 @@ void testWorld() {
 				std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 			} break;
 			case sf::Keyboard::Key::R: {
-				
+				sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+				std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
+				wall->setPosition(pos);
+				gameScreen.getWorld().getBODS().requestAddBO(wall);
 			} break;
 		}
 	});
@@ -215,8 +219,9 @@ void testWorld() {
 	li.getLevelChars().resize(100, 100);
 	gameScreen.getWorld().loadLevel(li);
 	Timer frameTimer;
-	frameTimer.start(10, [&gameScreen]() {
+	frameTimer.start(1, [&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
+		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 	gameScreen.run(frameTimer);
 }

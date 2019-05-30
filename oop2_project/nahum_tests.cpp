@@ -147,15 +147,15 @@ void testWorld() {
 		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
 		shark->setPosition(pos);
 		shark->addClickListener([&gameScreen, shark, player](View& v) {
-			std::cout << shark->getDistance(player);
-			float distanceFromPlayer = shark->getDistance(player);
+			//std::cout << shark->getDistance(player);
+			/*float distanceFromPlayer = shark->getDistance(player);
 			if (distanceFromPlayer <= 2000.f) {
 				float x = shark->getPosition().x - player->getPosition().x;
 				float y = shark->getPosition().y - player->getPosition().y;
 				sf::Vector2f direction = sf::Vector2f(x, y);
-		        shark->getSpeed().x = direction.x*0.5f;
-		       shark->getSpeed().y = direction.y*0.5f;
-			}
+		       // shark->getSpeed().x = direction.x*0.5f;
+		      // shark->getSpeed().y = direction.y*0.5f;
+			}*/
 		});
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
