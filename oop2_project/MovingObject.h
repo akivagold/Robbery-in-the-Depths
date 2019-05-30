@@ -27,7 +27,9 @@ public:
 	// get direction
 	Direction getDirection() const { return m_direction; }
 	// get ranodm direction
-	Direction getRandomDirect() const;
+	static Direction getRandomDirect();
+	// get ranodm direction
+	static Direction getRandomLeftRightDirect();
 	// event when direction changed
 	virtual void onDirectionChanged() = 0;
 	// suicide

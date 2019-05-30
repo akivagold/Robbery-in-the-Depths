@@ -3,8 +3,8 @@
 #include "TextureManager.h"
 
 GUI::AnimationView::AnimationView(sf::RenderWindow& window)
-	: View(window), m_currentImageIndex(0), m_textureInfo(nullptr)
-{ }
+	: View(window), m_currentImageIndex(0), m_textureInfo(nullptr), m_isFlipped(false)
+{}
 
 GUI::AnimationView::AnimationView(const AnimationView& anotherAnimView)
 	: View(anotherAnimView) // copy the view part of another animation view
@@ -61,6 +61,12 @@ void GUI::AnimationView::draw()
 	}
 }
 
+void GUI::AnimationView::flipAnimation()
+{
+	m_isFlipped = !m_isFlipped;
+	updateComponents();
+}
+
 string GUI::AnimationView::toString() const
 {
 	string str = "AnimationView: { ";
@@ -96,6 +102,13 @@ void GUI::AnimationView::updateSprite()
 		// update sprite
 		m_sprite.setTextureRect(imageBounds);
 		m_sprite.setPosition(getPosition());
-		m_sprite.setScale((float)getBound().width / pixelsPerCol, (float)getBound().height / pixelsPerRow);
+		float scaleX = (float)getBound().width / pixelsPerCol;
+		float scaleY = (float)getBound().height / pixelsPerRow;
+
+		if (m_isFlipped) {
+			scaleX = -scaleX;
+			m_sprite.setPosition(getPosition().x + getSize().x, getPosition().y);
+		}
+		m_sprite.setScale(scaleX, scaleY);
 	}	
 }

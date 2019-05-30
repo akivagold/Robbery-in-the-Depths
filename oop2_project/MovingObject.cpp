@@ -72,11 +72,16 @@ sf::Vector2f MovingObject::getNextPosition()
 	return sf::Vector2f(x_pos, y_pos);
 }
 
-MovingObject::Direction MovingObject::getRandomDirect() const
+MovingObject::Direction MovingObject::getRandomDirect()
 {
 	int num = rand() % NUM_OF_DIRECTIONS;
 	Direction direct = static_cast<Direction>(num);
 	return direct;
+}
+
+MovingObject::Direction MovingObject::getRandomLeftRightDirect()
+{
+	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;	
 }
 
 void MovingObject::suicide()

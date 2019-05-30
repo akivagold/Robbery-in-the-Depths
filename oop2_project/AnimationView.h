@@ -28,6 +28,12 @@ public:
 	void stopAnimation() { m_timer.stop(); }
 	// draw
 	virtual void draw() override;
+	// rotate
+	// TODO void rotateAnimation(float angle);
+	// flip
+	void flipAnimation();
+	// check if animation is flipped
+	bool isFlipped() const { return m_isFlipped; }
 	// convert to string
 	virtual string toString() const override;
 protected:
@@ -42,6 +48,8 @@ private:
 	int m_currentImageIndex;
 	// timer for frames
 	Timer m_timer;
+	// is flipped
+	bool m_isFlipped;
 	// set current image
 	void setCurrentImage(int index);
 	// update sprite

@@ -166,6 +166,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CoinView.cpp" />
     <ClCompile Include="Cop.cpp" />
+    <ClCompile Include="Crab.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Flow.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CoinView.h" />
     <ClInclude Include="Cop.h" />
+    <ClInclude Include="Crab.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Flow.h" />

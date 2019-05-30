@@ -25,7 +25,7 @@
 #include "World.h"
 #include "Shark.h"
 #include "Wall.h"
-
+#include "Crab.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -164,23 +164,25 @@ void testWorld() {
 	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
 	player->setPosition(0,0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
+	player->getBorder().setColor(sf::Color::Black);
+	player->getBorder().setSize(1.f);
+	player->addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
+		switch (keyCode)
+		{
+			case sf::Keyboard::Key::F: {
+				player->flipAnimation();
+			} break;
+			case sf::Keyboard::Key::G: {
+				// TODO player->rotateAnimation(10);
+			} break;
+		}
+	});
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
+		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
-			/*case sf::Keyboard::Key::Left: {
-				gameScreen.getWorld().getCamera().move(-offset, 0);
-			} break;
-			case sf::Keyboard::Key::Right: {
-				gameScreen.getWorld().getCamera().move(offset, 0);
-			} break;
-			case sf::Keyboard::Key::Up: {
-				gameScreen.getWorld().getCamera().move(0, -offset);
-			} break;
-			case sf::Keyboard::Key::Down: {
-				gameScreen.getWorld().getCamera().move(0, offset);
-			} break;*/
 			case sf::Keyboard::Key::Q: {
 				gameScreen.getWorld().getCamera().zoom(0.95f);
 			} break;
@@ -192,10 +194,14 @@ void testWorld() {
 				std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 			} break;
 			case sf::Keyboard::Key::R: {
-				sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 				std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
-				wall->setPosition(pos);
+				wall->setPosition(mousePos);
 				gameScreen.getWorld().getBODS().requestAddBO(wall);
+			} break;
+			case sf::Keyboard::Key::C: {
+				std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
+				crab->setPosition(mousePos);
+				gameScreen.getWorld().getBODS().requestAddBO(crab);
 			} break;
 		}
 	});
