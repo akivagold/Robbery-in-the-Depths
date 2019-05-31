@@ -14,6 +14,6 @@ void Flow::init()
 
 void Flow::onCollide(MovingObject* obj)
 {
-	obj->setExternalSpeed(sf::Vector2f(100.f, 100.f), sf::Vector2f(0.0025f, 0.0025f));
+	obj->setExternaAlcceleration(m_flowPower);
 }
 
