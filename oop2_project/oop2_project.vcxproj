@@ -170,6 +170,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Cop.cpp" />
     <ClCompile Include="Crab.cpp" />
+    <ClCompile Include="EditMapView.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Flow.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="LoadResourceException.cpp" />
     <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="main_tests.cpp" />
+    <ClCompile Include="MapCellView.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="nahum_tests.cpp" />
@@ -234,6 +236,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="Cop.h" />
     <ClInclude Include="Crab.h" />
+    <ClInclude Include="EditMapView.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Flow.h" />
@@ -257,6 +260,7 @@
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
+    <ClInclude Include="MapCellView.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ParseGOIException.h" />
     <ClInclude Include="Shark.h" />
