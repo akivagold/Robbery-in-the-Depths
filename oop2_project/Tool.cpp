@@ -7,5 +7,5 @@ Tool::Tool(std::shared_ptr<BoardObject>& object, string toolName)
 
 string Tool::toString() const
 {
-	return "Tool: { MyOwner: " + m_owner->toString() + " } ";
+	return "Tool: { MyOwner=" + m_owner->toString() + " }";
 }

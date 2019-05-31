@@ -28,7 +28,7 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 	}
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getDistance(player);
-	if (distanceFromPlayer <= m_radiusAttak) {
+	if (distanceFromPlayer <= m_radiusAttack) {
 		m_inChase = true;
 		sf::Vector2f direction = getPosition() - player->getPosition();
 		getInteralAcceleration().x = -direction.x*0.0000025f;
@@ -75,7 +75,7 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 void Shark::init()
 {
 	setAnimation("life"); // TODO change animation
-	m_radiusAttak = 1000;
+	m_radiusAttack = 1000;
 	setDirection(getRandomDirect());
 	m_inChase = false;
 	m_time.start(3000, [this] {

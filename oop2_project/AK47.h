@@ -12,7 +12,7 @@ class AK47 :
 {
 public:
 	// constructor
-	AK47(std::shared_ptr<BoardObject>& object);
+	explicit AK47(std::shared_ptr<BoardObject>& owner);
 	// convert to string
 	virtual string toString() const override;
 	// fire

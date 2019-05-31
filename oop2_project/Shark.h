@@ -20,15 +20,15 @@ public:
 	// draw
 	virtual void draw() override;
 	// convert to string
-	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }	
+	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// init
 	void init();
-	// radius attak
-	float m_radiusAttak;
+	// radius attack
+	float m_radiusAttack;
 	Timer m_time;
 	bool m_inChase;
 	

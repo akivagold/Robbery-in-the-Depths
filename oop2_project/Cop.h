@@ -16,7 +16,7 @@ public:
 	// constructor
 	explicit Cop(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
-	virtual string toString() const override { return "Cop: { " + NPC::toString() + " }"; };
+	virtual string toString() const override { return "Cop: { " + NPC::toString() + " }"; }
 private:
 	// TODO play();
 };

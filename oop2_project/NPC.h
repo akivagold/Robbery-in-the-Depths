@@ -16,7 +16,7 @@ public:
 	// constructor
 	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
-	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; };
+	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; }
 	// get ranodm up directions
 	static Direction getRandomUPDirections();
 	// get ranodm right directions

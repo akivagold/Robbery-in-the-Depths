@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 
-sf::Vector2f MovingObject::getFriction()
+sf::Vector2f MovingObject::getFriction() const
 {
 	sf::Vector2f friction;
 	//TODO add external acc(?)
