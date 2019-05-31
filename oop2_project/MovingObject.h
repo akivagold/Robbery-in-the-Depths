@@ -46,6 +46,8 @@ public:
 	void setExternaAlcceleration(sf::Vector2f acceleration);
 	// check collide
 	void checkCollide(std::forward_list<BoardObject*> collideList);
+	// get default size of moving object
+	static const sf::Vector2i& getMODefSize();
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
@@ -66,13 +68,15 @@ private:
 	sf::Clock m_clock;
 	// direction
 	Direction m_direction;
+	// speed, internal and external acceleration
+	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
 	// if can move to new position
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	// return where the object is trying to move
 	sf::Vector2f getNextPosition();
 	// play
 	void play();
-	// speed, internal and external acceleration
-	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;	
+	// init
+	void init();
 };
 

@@ -1,40 +1,13 @@
 {
     "levels": [
         {
-            "index": 0,
-            "mapChars": "",
-            "mapSize": {
-                "cols": 0,
-                "rows": 0
-            },
-            "name": "level1"
-        },
-        {
             "index": 1,
-            "mapChars": "aaaaaaaaaaaaaaa",
+            "mapChars": "pwck  m  ",
             "mapSize": {
-                "cols": 5,
+                "cols": 3,
                 "rows": 3
             },
-            "name": "testLevel"
-        },
-        {
-            "index": 2,
-            "mapChars": "aaaaaaaaaaaaaaa",
-            "mapSize": {
-                "cols": 5,
-                "rows": 3
-            },
-            "name": "level3"
-        },
-        {
-            "index": 3,
-            "mapChars": "aaaaaaaaaaaaaaa",
-            "mapSize": {
-                "cols": 5,
-                "rows": 3
-            },
-            "name": "level4"
+            "name": "testMatanelLevel"
         }
     ]
 }

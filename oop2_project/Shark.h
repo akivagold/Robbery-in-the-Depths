@@ -13,6 +13,8 @@ class Shark
 	: public NPC
 {
 public:
+	// char
+	static const char CHAR = 'k';
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
 	// event when direction changed

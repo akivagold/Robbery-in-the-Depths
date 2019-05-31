@@ -29,12 +29,18 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 	}
 }
 
+const sf::Vector2i& MovingObject::getMODefSize()
+{
+	static const sf::Vector2i MOVING_OBJ_SIZE(static_cast<int>(0.8f*float(getDefaultSize().x)), 
+		static_cast<int>(0.8f*float(getDefaultSize().y)));
+	return MOVING_OBJ_SIZE;
+}
+
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
 	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
 {
-	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
-	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
+	init();
 }
 
 void MovingObject::play()
@@ -65,8 +71,14 @@ void MovingObject::play()
 		// check collision effect
 		checkCollide(collideList);
 	}
+}
 
-	
+void MovingObject::init()
+{
+	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
+	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
+
+	setSize(getMODefSize());
 }
 
 void MovingObject::draw()

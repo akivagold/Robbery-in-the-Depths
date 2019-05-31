@@ -13,6 +13,8 @@ class Crab
 	: public NPC
 {
 public:
+	// char
+	static const char CHAR = 'c';
 	// constructor
 	explicit Crab(GameScreen& gameScreen, int numOfLife = 0);
 	// event when direction changed

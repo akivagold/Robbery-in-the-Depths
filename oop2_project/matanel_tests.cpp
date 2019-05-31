@@ -162,23 +162,6 @@ void testWorld() {
 
 	GameScreen gameScreen(window);
 
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
-	player->setPosition(0,0);
-	gameScreen.getWorld().getBODS().requestAddBO(player);
-	player->getBorder().setColor(sf::Color::Black);
-	player->getBorder().setSize(1.f);
-	player->addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
-		switch (keyCode)
-		{
-			case sf::Keyboard::Key::F: {
-				player->flipAnimation();
-			} break;
-			case sf::Keyboard::Key::G: {
-				// TODO player->rotateAnimation(10);
-			} break;
-		}
-	});
-
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
@@ -219,17 +202,15 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	
-	gameScreen.getWorld().getBODS().handleRequests();
-	gameScreen.getWorld().getBODS().prepareLevel();
 	// load level info
-	//LevelFileManager lfm;
-	//world.loadLevel(lfm.getLevel("testLevel"));
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
+	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
 
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
-	LevelInfo li;
-	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(li);
+	// run game
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();

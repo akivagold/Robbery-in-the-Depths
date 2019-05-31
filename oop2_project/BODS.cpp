@@ -16,6 +16,7 @@ void BODS::handleRequests()
 
 void BODS::prepareLevel()
 {
+	handleRequests();
 	connectPlayerMember();
 }
 /*

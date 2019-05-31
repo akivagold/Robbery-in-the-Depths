@@ -14,6 +14,8 @@ class Player :
 	public Character
 {
 public:
+	// char
+	static const char CHAR = 'p';
 	// constructor
 	explicit Player(GameScreen& gameScreen, int numOfLife = 0);
 	// add new tool

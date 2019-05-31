@@ -119,4 +119,8 @@ void BoardObject::init()
 {
 	setParent(getGameScreen().getWorld());
 	setSize(getDefaultSize());
+
+	// TODO remove this:
+	getBorder().setSize(1.f);
+	getBorder().setColor(sf::Color::Black);
 }
