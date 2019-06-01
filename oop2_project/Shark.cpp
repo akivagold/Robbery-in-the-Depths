@@ -7,6 +7,20 @@ Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	init();
 }
 
+void Shark::onDirectionChanged()
+{
+	if (getDirection() == Direction::LEFT || getDirection() == Direction::UP_LEFT || getDirection() == Direction::DOWN_LEFT) {
+		if (isFlipped()) {
+			flipAnimation(); // turn left
+		}
+	}
+	else if (getDirection() == Direction::RIGHT || getDirection() == Direction::UP_RIGHT || getDirection() == Direction::DOWN_RIGHT) {
+		if (!isFlipped()) {
+			flipAnimation(); // turn right
+		}
+	}
+}
+
 void Shark::draw()
 {
 	NPC::draw();
@@ -74,7 +88,8 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 
 void Shark::init()
 {
-	setAnimation("life"); // TODO change animation
+	setAnimation("shark_anim");
+	setAnimationFrequency(80);
 	m_radiusAttack = 1000;
 	setDirection(getRandomDirect());
 	m_inChase = false;

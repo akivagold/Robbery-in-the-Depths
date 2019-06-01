@@ -59,6 +59,20 @@
             "numOfRows": 4,
             "numOfCols": 6,
             "numOfImages": 24
+        },
+        {
+            "name": "diver_anim",
+            "path": "diver_sprite_sheet.png",
+            "numOfRows": 2,
+            "numOfCols": 4,
+            "numOfImages": 8
+        },
+        {
+            "name": "shark_anim",
+            "path": "shark_sprite_sheet.png",
+            "numOfRows": 3,
+            "numOfCols": 3,
+            "numOfImages": 9
         }
     ]
 }

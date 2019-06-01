@@ -31,7 +31,7 @@ public:
 	// set life
 	virtual void setNumOfLife(int numOfLife) override;
 	// event when direction changed
-	virtual void onDirectionChanged() override {}; // TODO: use this
+	virtual void onDirectionChanged() override;
 	// convert to string
 	virtual string toString() const override;
 protected:

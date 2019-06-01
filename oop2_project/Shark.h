@@ -18,7 +18,7 @@ public:
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
 	// event when direction changed
-	virtual void onDirectionChanged() override {}; // TODO: use this
+	virtual void onDirectionChanged() override;
 	// draw
 	virtual void draw() override;
 	// convert to string

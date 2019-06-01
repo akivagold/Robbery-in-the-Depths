@@ -84,8 +84,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testEditor();
-		//testWorld();
+		//testEditor();
+		testWorld();
 		//testBox2DLib();
 		//testBODS();
 		//testGameObjectView();
@@ -106,8 +106,6 @@ void matanel_main()
 void testEditor() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
-
-
 
 	// create editor
 	EditMapView emv(window);
@@ -204,11 +202,13 @@ void testWorld() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
 	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+
+	gameScreen.getWorld().getCamera().zoom(0.5f);
 
 	// run game
 	Timer frameTimer;
@@ -383,6 +383,18 @@ void testMatrix() {
 void testLevelFileManager() {
 	LevelFileManager lfm;
 	std::cout << lfm.toString() << std::endl;
+
+
+	// create level
+	LevelInfo li;
+	li.getLevelChars().resize(50, 100);
+	for (char& c : li.getLevelChars()) {
+		c = ' ';
+	}
+	li.setName("big map");
+	li.setIndex(1);
+	lfm.addLevel(li);
+
 	/*for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);
 		std::cout << levelInfo.toString() << std::endl;

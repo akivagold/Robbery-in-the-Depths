@@ -17,7 +17,7 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 {
 	const sf::Vector2i& defaultSize = BoardObject::getDefaultSize();
 	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
-	setSize(levelSize.x*defaultSize.y, levelSize.y*defaultSize.x);
+	setSize(levelSize.y*defaultSize.y, levelSize.x*defaultSize.x);
 
 	for (auto it = levelInfo.getLevelChars().cbegin(); it != levelInfo.getLevelChars().cend(); ++it) {
 		const Cell& cell = it.getCell();

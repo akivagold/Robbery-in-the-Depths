@@ -121,6 +121,6 @@ void BoardObject::init()
 	setSize(getDefaultSize());
 
 	// TODO remove this:
-	getBorder().setSize(1.f);
-	getBorder().setColor(sf::Color::Black);
+	//getBorder().setSize(1.f);
+	//getBorder().setColor(sf::Color::Black);
 }
