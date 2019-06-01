@@ -89,7 +89,8 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 void Shark::init()
 {
 	setAnimation("shark_anim");
-	setAnimationFrequency(80);
+	setAnimationFrequency(70);
+	setDrawPriority(DRAW_PRIORITY);
 	m_radiusAttack = 1000;
 	setDirection(getRandomDirect());
 	m_inChase = false;

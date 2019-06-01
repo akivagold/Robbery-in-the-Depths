@@ -40,6 +40,10 @@ protected:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 100;
+	// swim animation frequency
+	static const int SWIM_ANIM_FREQUENCY = 30;
+	// stand animation frequency
+	static const int STAND_ANIM_FREQUENCY = 100;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool

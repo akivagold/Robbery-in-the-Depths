@@ -72,10 +72,10 @@ string BODS::toString() const
 
 string BODS::buildBOStr() const
 {
-	string str = "BoardObjects: {";
+	string str = "BoardObjects: {\n";
 	for (auto& bo : m_boardObjects)
 		str += bo->toString() + "\n";
-	str += " }";
+	str += "}";
 	return str;
 }
 

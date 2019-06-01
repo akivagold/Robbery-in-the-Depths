@@ -27,6 +27,8 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
+	// draw priority
+	static const int DRAW_PRIORITY = 70;
 	// init
 	void init();
 	// radius attack

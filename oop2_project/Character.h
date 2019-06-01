@@ -18,7 +18,9 @@ public:
 	// get number of life
 	int getNumOfLife() const { return m_numOfLife; }
 	// check if has no life
-	bool hasNoLife() const { return (m_numOfLife == 0); }
+	bool isDie() const { return (m_numOfLife == 0); }
+	// event on die
+	// TODO virtual void onDie() = 0;
 	// convert to string
 	virtual string toString() const override;
 protected:

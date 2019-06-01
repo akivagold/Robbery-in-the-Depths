@@ -15,11 +15,11 @@ class MovingObject
 {
 public:
 	// direction of moving
-	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT , UP_LEFT, STANDING };
+	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT, STANDING };
 	// number of directions
 	static const int NUM_OF_DIRECTIONS = 8;
 	// convert to string
-	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
+	virtual string toString() const override { return "MovingObject: { " + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
 	// draw
 	virtual void draw() override;
 	// set direction

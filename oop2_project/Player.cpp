@@ -41,50 +41,61 @@ void Player::playChoice(Direction lastDirection, bool isCollided)
 
 string Player::toString() const
 {
-	return "Player: { " + Character::toString() + " }";
+	string str = "Player: { currentTool=";
+	if (!m_currTool)
+		str += "None";
+	else
+		str += m_currTool->toString();
+	str += ", numOfTools=" + std::to_string(m_tools.size());
+	str += ", score=" + std::to_string(m_score) + ", ";
+	str += Character::toString() + " }";
+	return str;
 }
 
 void Player::init()
 {
 	setAnimation("diver_anim");
 	setDrawPriority(DRAW_PRIORITY);
-	setAnimationFrequency(50);
+	setAnimationFrequency(STAND_ANIM_FREQUENCY);
+	
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
+		setAnimationFrequency(SWIM_ANIM_FREQUENCY);
 		float offset = 0.0025f;
 		switch (keyCode)
 		{
-		case sf::Keyboard::Key::Left: {
-			getInteralAcceleration().x = -offset;
-			setDirection(Direction::LEFT);
-		} break;
-		case sf::Keyboard::Key::Right: {
-			getInteralAcceleration().x = offset;
-			setDirection(Direction::RIGHT);
-		} break;
-		case sf::Keyboard::Key::Up: {
-			getInteralAcceleration().y = -offset;
-		} break;
-		case sf::Keyboard::Key::Down: {
-			getInteralAcceleration().y = offset;
-		} break;
+			case sf::Keyboard::Key::Left: {
+				getInteralAcceleration().x = -offset;
+				setDirection(Direction::LEFT);
+			} break;
+			case sf::Keyboard::Key::Right: {
+				getInteralAcceleration().x = offset;
+				setDirection(Direction::RIGHT);
+			} break;
+			case sf::Keyboard::Key::Up: {
+				getInteralAcceleration().y = -offset;
+			} break;
+			case sf::Keyboard::Key::Down: {
+				getInteralAcceleration().y = offset;
+			} break;
 		}
 	});
 	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
+		setAnimationFrequency(STAND_ANIM_FREQUENCY);
 		float offset = 0;
 		switch (keyCode)
 		{
-		case sf::Keyboard::Key::Left: {
-			getInteralAcceleration().x = -offset;
-		} break;
-		case sf::Keyboard::Key::Right: {
-			getInteralAcceleration().x = offset;
-		} break;
-		case sf::Keyboard::Key::Up: {
-			getInteralAcceleration().y = -offset;
-		} break;
-		case sf::Keyboard::Key::Down: {
-			getInteralAcceleration().y = offset;
-		} break;
+			case sf::Keyboard::Key::Left: {
+				getInteralAcceleration().x = -offset;
+			} break;
+			case sf::Keyboard::Key::Right: {
+				getInteralAcceleration().x = offset;
+			} break;
+			case sf::Keyboard::Key::Up: {
+				getInteralAcceleration().y = -offset;
+			} break;
+			case sf::Keyboard::Key::Down: {
+				getInteralAcceleration().y = offset;
+			} break;
 		}
 	});
 }
