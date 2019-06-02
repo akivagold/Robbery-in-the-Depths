@@ -148,10 +148,14 @@ void testWorld() {
 	//LevelFileManager lfm;
 	//world.loadLevel(lfm.getLevel("testLevel"));
 
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
 
-	LevelInfo li;
+	/*LevelInfo li;
 	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(li);
+	gameScreen.getWorld().loadLevel(gameScreen, li);*/
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();

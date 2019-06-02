@@ -1,7 +1,8 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include "BoardObject.h"
+#include "MovingObject.h"
+
 
 //---- using section --------
 using std::string;
@@ -17,7 +18,7 @@ public:
 	// check if can use tool
 	virtual bool canUsingTool() const = 0;
 	//get my owner
-	const std::shared_ptr<BoardObject>& getMyOwner() const { return m_owner; }
+	const std::shared_ptr<MovingObject>& getMyOwner() const { return m_owner; }
 	// get tool name
 	const string& getToolName() const { return m_toolName; }
 	// set tool name
@@ -26,10 +27,10 @@ public:
 	virtual string toString() const;
 protected:
 	// constructor
-	explicit Tool(std::shared_ptr<BoardObject>& object, string toolName = " ");
+	explicit Tool(std::shared_ptr<MovingObject>& object, string toolName = " ");
 private:
 	// owner of tool
-	std::shared_ptr<BoardObject> m_owner;
+	std::shared_ptr<MovingObject> m_owner;
 	// tool name
 	string m_toolName;
 };

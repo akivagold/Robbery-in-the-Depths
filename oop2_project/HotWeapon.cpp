@@ -21,6 +21,6 @@ string HotWeapon::toString() const
 	return "HotWeapon: { ammo=" + std::to_string(m_ammo) + ", " + Weapon::toString() + " }";
 }
 
-HotWeapon::HotWeapon(std::shared_ptr<BoardObject>& object)
+HotWeapon::HotWeapon(std::shared_ptr<MovingObject>& object)
 	: Weapon(object)
 {}
