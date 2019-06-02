@@ -30,11 +30,10 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 }
 
 MovingObject::MovingObject(GameScreen& gameScreen)
-	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
-	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
+	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)),
+	m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
 {
-	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
-	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
+	m_externalAcc = m_speed = m_interalAcceleration = sf::Vector2f(0.f, 0.f);
 }
 
 void MovingObject::play()
@@ -65,8 +64,6 @@ void MovingObject::play()
 		// check collision effect
 		checkCollide(collideList);
 	}
-
-	
 }
 
 void MovingObject::draw()
@@ -89,7 +86,7 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Vector2f friction = getFriction();
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
-	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime;
 	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
@@ -105,7 +102,7 @@ MovingObject::Direction MovingObject::getRandomDirect()
 
 MovingObject::Direction MovingObject::getRandomLeftRightDirect()
 {
-	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;	
+	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;
 }
 
 void MovingObject::suicide()
