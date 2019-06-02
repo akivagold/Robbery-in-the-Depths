@@ -38,7 +38,7 @@ const sf::Vector2i& MovingObject::getMODefSize()
 
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
-	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
+	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
 {
 	init();
 }
