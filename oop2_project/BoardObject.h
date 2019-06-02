@@ -57,6 +57,8 @@ public:
 	const std::shared_ptr<BoardObject>& getSelf() const;
 	// get default size of object
 	static const sf::Vector2i& getDefaultSize();
+	// check if object if above another object
+	bool isAbove(const std::shared_ptr<BoardObject>& other) const { return (getPosition().y + getSize().y < other->getPosition().y); }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) = 0;
 	virtual void onCollide(Player* player) = 0;

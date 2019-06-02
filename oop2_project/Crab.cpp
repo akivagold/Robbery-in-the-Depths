@@ -1,5 +1,6 @@
 #include "Crab.h"
 #include "Flow.h"
+#include "Wall.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*4.f;
@@ -16,6 +17,14 @@ void Crab::draw()
 	m_timer.checkTimer();
 }
 
+void Crab::onCollide(Wall* wall)
+{
+	if (isAbove(wall->getSelf())) {
+		getInteralAcceleration().y = 0.f;
+		setPosition(getPosition().x, wall->getPosition().y - getSize().y - 2);
+	}
+}
+
 void Crab::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
@@ -25,13 +34,24 @@ void Crab::playChoice(Direction lastDirection, bool isCollided)
 {
 	// check is collided
 	if (isCollided) {
-		Direction newDirection = (lastDirection == Direction::RIGHT) ? Direction::LEFT : Direction::RIGHT;
+		Direction newDirection = isRightDirections(lastDirection) ? Direction::LEFT : Direction::RIGHT;
 		setDirection(newDirection);
-		//getInteralAcceleration().y = 0.f;
+		getInteralAcceleration().y = 0.f;
 	}
 	else {
-		//getInteralAcceleration().y = 0.001f;
+		getInteralAcceleration().y = 0.00005f*getMODefSize().y;
 	}
+
+	if (getSpeed().y > 0.001f*getMODefSize().y) {
+		getInteralAcceleration().x = 0;
+	} else {
+		if (getDirection() == Direction::RIGHT) {
+			getInteralAcceleration().x = 0.00005f*getMODefSize().x;
+		}
+		else {
+			getInteralAcceleration().x = -0.00005f*getMODefSize().x;
+		}
+	}	
 
 	// check if user in my radius
 	if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
@@ -46,14 +66,6 @@ void Crab::playChoice(Direction lastDirection, bool isCollided)
 			m_isPlayerInRadius = false;
 		}	
 	}
-
-	// set speed
-	if (getDirection() == Direction::RIGHT) {
-		getInteralAcceleration().x = 0.0002f;
-	}
-	else {
-		getInteralAcceleration().x = -0.0002f;
-	}	
 }
 
 void Crab::init()
@@ -61,6 +73,8 @@ void Crab::init()
 	setAnimation("walking_crab");
 	setAnimationFrequency(30);
 	setDrawPriority(DRAW_PRIORITY);
+	setDirection(getRandomLeftRightDirect());
+
 	int changeDirectionTime = 2000 + rand() % 4000;
 	m_timer.start(changeDirectionTime, [this]() {
 		Direction direction = getRandomLeftRightDirect();

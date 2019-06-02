@@ -161,43 +161,54 @@ void testWorld() {
 
 	GameScreen gameScreen(window);
 
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.loadLevel(levelInfo);
+
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Q: {
-				gameScreen.getWorld().getCamera().zoom(0.95f);
-			} break;
-			case sf::Keyboard::Key::W: {
-				gameScreen.getWorld().getCamera().zoom(1.05f);
-			} break;
-			case sf::Keyboard::Key::P: {
-				std::cout << "-------------------------------------------------" << std::endl;
-				std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
-			} break;
-			case sf::Keyboard::Key::R: {
-				std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
-				wall->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(wall);
-			} break;
-			case sf::Keyboard::Key::C: {
-				std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
-				crab->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(crab);
-			} break;
-			case sf::Keyboard::Key::T: {
-				std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
-				chest->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(chest);
-			} break;
-			case sf::Keyboard::F: {
-				std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-				flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-				flow->setPosition(mousePos);
-				flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
-				gameScreen.getWorld().getBODS().requestAddBO(flow);
-			} break;
+		case sf::Keyboard::Key::K: {
+			//player->rotateAnimation(10);
+		} break;
+		case sf::Keyboard::Key::Q: {
+			gameScreen.getWorld().getCamera().zoom(0.95f);
+		} break;
+		case sf::Keyboard::Key::W: {
+			gameScreen.getWorld().getCamera().zoom(1.05f);
+		} break;
+		case sf::Keyboard::Key::P: {
+			std::cout << "-------------------------------------------------" << std::endl;
+			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
+		} break;
+		case sf::Keyboard::Key::R: {
+			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
+			wall->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(wall);
+		} break;
+		case sf::Keyboard::Key::C: {
+			std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
+			crab->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(crab);
+		} break;
+		case sf::Keyboard::Key::T: {
+			std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
+			chest->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(chest);
+		} break;
+		case sf::Keyboard::F: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
@@ -207,14 +218,6 @@ void testWorld() {
 		shark->setPosition(pos);
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
-
-	// load level info
-	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
-	gameScreen.loadLevel(levelInfo);
-
-	// get player
-	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
 	gameScreen.getWorld().getCamera().zoom(0.5f);
 
