@@ -17,19 +17,23 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 
 	// set speed
 	if (getDirection() == Direction::RIGHT) {
-		getInteralAcceleration().x = 0.0002f;
+		getInteralAcceleration().x = 0.0004f;
 	}
 	else {
-		getInteralAcceleration().x = -0.0002f;
+		getInteralAcceleration().x = -0.0004f;
 	}
+}
+
+void Bullet::onDirectionChanged()
+{
+	
 }
 
 void Bullet::init()
 {
-	if (getDirection() == Direction::RIGHT) {
-		setAnimation("bullet");
-	}
-	else {
-		setAnimation("bullet"); // TODO change direction
+	//m_lastDirection = getDirection();
+	setAnimation("bullet");
+	if (getDirection() == Direction::LEFT) {
+		flipAnimation();
 	}
 }

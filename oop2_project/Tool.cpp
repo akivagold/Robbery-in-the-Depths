@@ -1,7 +1,7 @@
 #include "Tool.h"
 
 
-Tool::Tool(std::shared_ptr<BoardObject>& object, string toolName)
+Tool::Tool(std::shared_ptr<MovingObject>& object, string toolName)
 	: m_owner(object)
 {}
 

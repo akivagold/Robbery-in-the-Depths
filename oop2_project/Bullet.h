@@ -3,6 +3,7 @@
 #include <string>
 #include "Projectile.h"
 
+
 //---- using section --------
 using std::string;
 
@@ -21,9 +22,11 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
-	virtual void onDirectionChanged() override {}; // TODO
+	virtual void onDirectionChanged() override; // TODO
 private:
 	// init
 	void init();
+	// last direction
+	//Direction m_lastDirection;
 };
 
