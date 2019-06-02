@@ -203,7 +203,7 @@ void testWorld() {
 	// load level info
 	LevelFileManager lfm;
 	const LevelInfo& levelInfo = lfm.getLevel("big map");
-	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
+	gameScreen.loadLevel(levelInfo);
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
