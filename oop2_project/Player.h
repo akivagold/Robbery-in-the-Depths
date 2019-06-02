@@ -14,6 +14,8 @@ class Player :
 	public Character
 {
 public:
+	// draw priority
+	static const int DRAW_PRIORITY = 100;
 	// char
 	static const char CHAR = 'p';
 	// constructor
@@ -40,8 +42,6 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
-	// draw priority
-	static const int DRAW_PRIORITY = 100;
 	// swim animation frequency
 	static const int SWIM_ANIM_FREQUENCY = 30;
 	// stand animation frequency

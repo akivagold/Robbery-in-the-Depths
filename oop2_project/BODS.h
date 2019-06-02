@@ -1,7 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include <set>
+#include <unordered_set>
 #include <queue>
 #include <Box2D/Box2D.h>
 #include "Player.h"
@@ -15,17 +15,9 @@ using std::string;
  */
 class BODS
 {
-public:
-	// custom compare board objects
-	struct BOCompare
-	{
-		bool operator()(const std::shared_ptr<BoardObject>& lhs, const std::shared_ptr<BoardObject>& rhs) const
-		{
-			return lhs->getDrawPriority() < rhs->getDrawPriority();
-		}
-	};	
+public:	
 	// board data structure
-	using BoardDS = std::multiset<std::shared_ptr<BoardObject>, BOCompare>;
+	using BoardDS = std::map<int, std::unordered_set<std::shared_ptr<BoardObject>>>;
 	// constructor
 	BODS() = default;
 	// request add board object

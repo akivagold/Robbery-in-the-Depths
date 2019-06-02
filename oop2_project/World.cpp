@@ -68,8 +68,9 @@ void World::draw()
 {
 	View::draw();
 	if (isShow()) {
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->draw();
+		for (auto& boSetPair : m_bods.getBOs()) {
+			for(auto& boardObject : boSetPair.second)
+				boardObject->draw();
 		}
 	}	
 }
@@ -93,9 +94,9 @@ bool World::handleClickEvent(float mouseX, float mouseY)
 {
 	bool clicked = View::handleClickEvent(mouseX, mouseY);
 	if (isEnable()) {		
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->handleClickEvent(mouseX, mouseY);
-		}
+		for (auto& boSetPair : m_bods.getBOs())
+			for (auto& boardObject : boSetPair.second)
+				boardObject->handleClickEvent(mouseX, mouseY);
 	}
 	return clicked;
 }
@@ -104,9 +105,9 @@ bool World::handleEnterEvent(float mouseX, float mouseY)
 {
 	bool entered = View::handleEnterEvent(mouseX, mouseY);
 	if (isEnable()) {
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->handleEnterEvent(mouseX, mouseY);
-		}
+		for (auto& boSetPair : m_bods.getBOs())
+			for (auto& boardObject : boSetPair.second)
+				boardObject->handleEnterEvent(mouseX, mouseY);
 	}
 	return entered;
 }
@@ -115,9 +116,9 @@ bool World::handleLeaveEvent(float mouseX, float mouseY)
 {
 	bool entered = View::handleLeaveEvent(mouseX, mouseY);
 	if (isEnable()) {
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->handleLeaveEvent(mouseX, mouseY);
-		}
+		for (auto& boSetPair : m_bods.getBOs())
+			for (auto& boardObject : boSetPair.second)
+				boardObject->handleLeaveEvent(mouseX, mouseY);
 	}
 	return entered;
 }
@@ -127,9 +128,9 @@ void World::handleKeyDownEvent(sf::Keyboard::Key keyCode)
 	View::handleKeyDownEvent(keyCode);
 
 	if (isEnable()) {
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->handleKeyDownEvent(keyCode);
-		}
+		for (auto& boSetPair : m_bods.getBOs())
+			for (auto& boardObject : boSetPair.second)
+				boardObject->handleKeyDownEvent(keyCode);
 	}
 }
 
@@ -138,9 +139,9 @@ void World::handleKeyReleasedEvent(sf::Keyboard::Key keyCode)
 	View::handleKeyReleasedEvent(keyCode);
 
 	if (isEnable()) {
-		for (auto& boardObject : m_bods.getBOs()) {
-			boardObject->handleKeyReleasedEvent(keyCode);
-		}
+		for (auto& boSetPair : m_bods.getBOs())
+			for (auto& boardObject : boSetPair.second)
+				boardObject->handleKeyReleasedEvent(keyCode);
 	}
 }
 

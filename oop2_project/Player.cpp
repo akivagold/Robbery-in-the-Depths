@@ -82,9 +82,11 @@ void Player::init()
 			} break;
 			case sf::Keyboard::Key::Up: {
 				getInteralAcceleration().y = -offset;
+				setDirection(Direction::UP);
 			} break;
 			case sf::Keyboard::Key::Down: {
 				getInteralAcceleration().y = offset;
+				setDirection(Direction::DOWN);
 			} break;
 		}
 	});
