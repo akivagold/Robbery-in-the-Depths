@@ -15,11 +15,11 @@ class MovingObject
 {
 public:
 	// direction of moving
-	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT , UP_LEFT, STANDING };
+	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT, STANDING };
 	// number of directions
 	static const int NUM_OF_DIRECTIONS = 8;
 	// convert to string
-	virtual string toString() const override { return "MovingObject: {" + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
+	virtual string toString() const override { return "MovingObject: { " + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
 	// draw
 	virtual void draw() override;
 	// set direction
@@ -46,6 +46,8 @@ public:
 	void setExternaAlcceleration(sf::Vector2f acceleration);
 	// check collide
 	void checkCollide(std::forward_list<BoardObject*> collideList);
+	// get default size of moving object
+	static const sf::Vector2i& getMODefSize();
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen);
@@ -56,23 +58,25 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) = 0;
 	// get friction
-	sf::Vector2f getFriction();
+	sf::Vector2f getFriction() const;
 private:
 	// last direction
 	Direction m_lastDirection;
 	// flag that check if collide last time
 	bool m_isCollided;
+	// time
+	sf::Clock m_clock;
+	// direction
+	Direction m_direction;
+	// speed, internal and external acceleration
+	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
 	// if can move to new position
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	// return where the object is trying to move
 	sf::Vector2f getNextPosition();
 	// play
 	void play();
-	// speed, internal land external acceleration
-	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
-	// time
-	sf::Clock m_clock;
-	// direction
-	Direction m_direction;
+	// init
+	void init();
 };
 

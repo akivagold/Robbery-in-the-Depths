@@ -4,6 +4,7 @@
 #include "View.h"
 #include "BODS.h"
 #include "LevelInfo.h"
+class GameScreen;
 
 //---- using section --------
 using std::string;
@@ -20,7 +21,7 @@ public:
 	BODS& getBODS() { return m_bods; }
 	const BODS& getBODS() const { return m_bods; }
 	// load level
-	void loadLevel(const LevelInfo& levelInfo);            // TODO not working yet
+	void loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo);
 	// draw
 	virtual void draw() override;
 	// convert to string
@@ -44,5 +45,7 @@ private:
 	BODS m_bods;
 	// init
 	void init();
+	// create board object by char
+	std::shared_ptr<BoardObject> createBO(GameScreen& gameScreen, char ch);
 };
 

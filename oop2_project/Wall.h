@@ -14,6 +14,8 @@ class Wall
 	: public UnInteractableObject
 {
 public:
+	// char
+	static const char CHAR = 'w';
 	// constructor
 	explicit Wall(GameScreen& gameScreen);
 	// check if this object is don't blocking movement

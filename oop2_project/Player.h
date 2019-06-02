@@ -14,6 +14,10 @@ class Player :
 	public Character
 {
 public:
+	// draw priority
+	static const int DRAW_PRIORITY = 100;
+	// char
+	static const char CHAR = 'p';
 	// constructor
 	explicit Player(GameScreen& gameScreen, int numOfLife = 0);
 	// add new tool
@@ -21,7 +25,9 @@ public:
 	// get number of tools
 	int getNumOfTool() const { return int(m_tools.size()) - 1; }
 	// get score
-	int getScore() const { return m_score; }
+	int getNumOfScore() const { return m_numOfScore; }
+	// set score
+	void setNumOfScore(int numOfScore);
 	// change tool
 	void changeTool(const std::shared_ptr<Tool>& tool);
 	// get current tool
@@ -29,21 +35,23 @@ public:
 	// set life
 	virtual void setNumOfLife(int numOfLife) override;
 	// event when direction changed
-	virtual void onDirectionChanged() override {}; // TODO: use this
+	virtual void onDirectionChanged() override;
 	// convert to string
 	virtual string toString() const override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
-	// draw priority
-	static const int DRAW_PRIORITY = 100;
+	// swim animation frequency
+	static const int SWIM_ANIM_FREQUENCY = 30;
+	// stand animation frequency
+	static const int STAND_ANIM_FREQUENCY = 100;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool
 	std::shared_ptr<Tool> m_currTool;
 	// score
-	int m_score;
+	int m_numOfScore;
 	// init
 	void init();
 };

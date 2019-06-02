@@ -29,7 +29,8 @@ void GameObjectsList::initComponents()
 	// add game object views
 	for (GameObjectInfo& goi : gois) {
 		// create GameObjectView
-		std::shared_ptr<GameObjectView> gov = std::make_shared<GameObjectView>(getWindow(), goi);
+		std::shared_ptr<GameObjectView> gov = std::make_shared<GameObjectView>(getWindow());
+		gov->setGOI(goi);
 		m_gameObjects.push_back(gov);
 		addView(gov);
 	}

@@ -7,6 +7,20 @@ Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	init();
 }
 
+void Shark::onDirectionChanged()
+{
+	if (getDirection() == Direction::LEFT || getDirection() == Direction::UP_LEFT || getDirection() == Direction::DOWN_LEFT) {
+		if (isFlipped()) {
+			flipAnimation(); // turn left
+		}
+	}
+	else if (getDirection() == Direction::RIGHT || getDirection() == Direction::UP_RIGHT || getDirection() == Direction::DOWN_RIGHT) {
+		if (!isFlipped()) {
+			flipAnimation(); // turn right
+		}
+	}
+}
+
 void Shark::draw()
 {
 	NPC::draw();
@@ -28,7 +42,7 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 	}
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getDistance(player);
-	if (distanceFromPlayer <= m_radiusAttak) {
+	if (distanceFromPlayer <= m_radiusAttack) {
 		m_inChase = true;
 		sf::Vector2f direction = getPosition() - player->getPosition();
 		getInteralAcceleration().x = -direction.x*0.0000025f;
@@ -74,8 +88,11 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 
 void Shark::init()
 {
-	setAnimation("life"); // TODO change animation
-	m_radiusAttak = 1000;
+	setAnimation("shark_anim");
+	setAnimationFrequency(70);
+	// TODO setDamage();
+	setDrawPriority(DRAW_PRIORITY);
+	m_radiusAttack = 1000;
 	setDirection(getRandomDirect());
 	m_inChase = false;
 	m_time.start(3000, [this] {
@@ -93,7 +110,4 @@ void Shark::init()
 			setDirection(getRandomDirect());
 		}
 	});
-	//setAnimationFrequency(?)
-	// TODO setDrawPriority()
-	// TODO setDamge();
 }

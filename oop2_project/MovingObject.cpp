@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 
-sf::Vector2f MovingObject::getFriction()
+sf::Vector2f MovingObject::getFriction() const
 {
 	sf::Vector2f friction;
 	//TODO add external acc(?)
@@ -29,11 +29,18 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 	}
 }
 
-MovingObject::MovingObject(GameScreen& gameScreen)
-	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)),
-	m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
+const sf::Vector2i& MovingObject::getMODefSize()
 {
-	m_externalAcc = m_speed = m_interalAcceleration = sf::Vector2f(0.f, 0.f);
+	static const sf::Vector2i MOVING_OBJ_SIZE(static_cast<int>(0.8f*float(getDefaultSize().x)), 
+		static_cast<int>(0.8f*float(getDefaultSize().y)));
+	return MOVING_OBJ_SIZE;
+}
+
+MovingObject::MovingObject(GameScreen& gameScreen)
+	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
+	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
+{
+	init();
 }
 
 void MovingObject::play()
@@ -66,6 +73,14 @@ void MovingObject::play()
 	}
 }
 
+void MovingObject::init()
+{
+	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
+	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
+
+	setSize(getMODefSize());
+}
+
 void MovingObject::draw()
 {
 	InteractableObject::draw();
@@ -86,7 +101,7 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Vector2f friction = getFriction();
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
-	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime;
+	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime; // TODO external acc
 	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
@@ -102,7 +117,7 @@ MovingObject::Direction MovingObject::getRandomDirect()
 
 MovingObject::Direction MovingObject::getRandomLeftRightDirect()
 {
-	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;
+	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;	
 }
 
 void MovingObject::suicide()

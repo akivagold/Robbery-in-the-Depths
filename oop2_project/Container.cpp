@@ -2,7 +2,9 @@
 
 Container::Container(GameScreen& gameScreen)
 	: StaticObject(gameScreen)
-{ }
+{
+	// TODO random the surprises
+}
 
 string Container::toString() const
 {

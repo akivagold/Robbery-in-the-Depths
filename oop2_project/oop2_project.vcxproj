@@ -162,6 +162,7 @@
     <ClCompile Include="BoardObject.cpp" />
     <ClCompile Include="BODS.cpp" />
     <ClCompile Include="Border.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Cop.cpp" />
     <ClCompile Include="Crab.cpp" />
+    <ClCompile Include="EditMapView.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Flow.cpp" />
@@ -192,12 +194,14 @@
     <ClCompile Include="LoadResourceException.cpp" />
     <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="main_tests.cpp" />
+    <ClCompile Include="MapCellView.cpp" />
     <ClCompile Include="matanel_tests.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="nahum_tests.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ParseGOIException.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RectUtils.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="Shark.cpp" />
@@ -226,6 +230,7 @@
     <ClInclude Include="BoardObject.h" />
     <ClInclude Include="BODS.h" />
     <ClInclude Include="Border.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
@@ -234,6 +239,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="Cop.h" />
     <ClInclude Include="Crab.h" />
+    <ClInclude Include="EditMapView.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Flow.h" />
@@ -257,8 +263,10 @@
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
+    <ClInclude Include="MapCellView.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ParseGOIException.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Surprise.h" />

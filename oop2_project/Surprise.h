@@ -11,9 +11,10 @@ using std::string;
 class Surprise
 {
 public:
-	// constructor
-	Surprise() = default;
 	// convert to string
 	virtual string toString() const { return "Surprise: { }"; }
+protected:
+	// constructor
+	Surprise() = default;
 };
 

@@ -16,6 +16,7 @@ void BODS::handleRequests()
 
 void BODS::prepareLevel()
 {
+	handleRequests();
 	connectPlayerMember();
 }
 /*
@@ -48,7 +49,7 @@ void BODS::handleRemoveRequestsQueue()
 
 void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 {
-	m_boardObjects.insert(boardObject);
+	m_boardObjects[boardObject->getDrawPriority()].insert(boardObject);
 	int32 proxyId = m_aabbTree.CreateProxy(boardObject->getAABB(), static_cast<void*>(boardObject.get()));
 	boardObject->setProxyId(proxyId);
 	boardObject->setInGame(boardObject);
@@ -56,10 +57,11 @@ void BODS::addBO(const std::shared_ptr<BoardObject>& boardObject)
 
 void BODS::removeBO(const std::shared_ptr<BoardObject>& boardObject)
 {
-	auto it = m_boardObjects.find(boardObject);
-	if (it != m_boardObjects.end()) {
+	auto& currSet = m_boardObjects[boardObject->getDrawPriority()];
+	auto it = currSet.find(boardObject);
+	if (it != currSet.end()) {
 		m_aabbTree.DestroyProxy(boardObject->getProxyId());
-		m_boardObjects.erase(it);
+		currSet.erase(it);
 	}	
 }
 
@@ -71,23 +73,26 @@ string BODS::toString() const
 
 string BODS::buildBOStr() const
 {
-	string str = "BoardObjects: {";
-	for (auto& bo : m_boardObjects)
-		str += bo->toString() + "\n";
-	str += " }";
+	string str = "BoardObjects: {\n";
+	for (const auto& pair : m_boardObjects)
+		for(const auto& bo : pair.second)
+			str += bo->toString() + "\n";
+	str += "}";
 	return str;
 }
 
 void BODS::connectPlayerMember()
 {
 	// find player
-	for (auto& boardObject : m_boardObjects) {
+	auto& playerSet = m_boardObjects[Player::DRAW_PRIORITY];
+	for (auto& boardObject : playerSet) {
 		// check if is player
 		if (std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(boardObject)) {
 			m_player = player;
 			break;
 		}
 	}
+	
 	// check if not found player
 	if (!m_player)
 		throw ParseLevelException("Cannot find player at game");
