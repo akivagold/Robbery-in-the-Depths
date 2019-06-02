@@ -1,5 +1,6 @@
 #include "Shark.h"
 #include "GameScreen.h"
+#include "Flow.h"
 
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife)
@@ -25,6 +26,11 @@ void Shark::draw()
 {
 	NPC::draw();
 	m_time.checkTimer();
+}
+
+void Shark::onCollide(Flow* flow)
+{
+	setExternaAlcceleration(flow->getFlowPower());
 }
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)

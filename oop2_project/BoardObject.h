@@ -2,14 +2,19 @@
 //---- include section ------
 #include <string>
 #include <Box2D/Box2D.h>
-#include "AnimationView.h"
-class GameScreen;
-class Flow;
-class MovingObject;
-class Player;
-class Chest;
 #include <cmath>
 #include <forward_list>
+#include "AnimationView.h"
+class GameScreen;
+class Player;
+class Shark;
+class Chest;
+class Crab;
+class Wall;
+class Cop;
+class Flow;
+class Bullet;
+class Chest;
 
 //---- using section --------
 using std::string;
@@ -53,10 +58,15 @@ public:
 	// get default size of object
 	static const sf::Vector2i& getDefaultSize();
 	// collide events (using with double dispatch)
-	virtual void onCollide(BoardObject* obj);
-	virtual void onCollide(MovingObject* obj) {} // TODO must be pure
-	virtual void onCollide(Player* player) {} // TODO must be pure
-	virtual void onCollide(Chest* chest) {} // TODO must be pure
+	virtual void onCollide(BoardObject* obj) = 0;
+	virtual void onCollide(Player* player) = 0;
+	virtual void onCollide(Shark* shark) = 0;
+	virtual void onCollide(Crab* crab) = 0;
+	virtual void onCollide(Cop* cop) = 0;
+	virtual void onCollide(Chest* chest) = 0;
+	virtual void onCollide(Wall* wall) = 0;
+	virtual void onCollide(Flow* flow) = 0;
+	virtual void onCollide(Bullet* bullet) = 0;
 protected:
 	// update components
 	virtual void updateComponents() override;

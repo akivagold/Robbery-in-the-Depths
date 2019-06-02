@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameScreen.h"
 #include "Chest.h"
+#include "Flow.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen)
@@ -43,6 +44,11 @@ void Player::onDirectionChanged()
 	}
 }
 
+void Player::onCollide(Flow* flow)
+{
+	setExternaAlcceleration(flow->getFlowPower());
+}
+
 void Player::playChoice(Direction lastDirection, bool isCollided)
 {
 	// TODO
@@ -59,11 +65,6 @@ string Player::toString() const
 	str += ", score=" + std::to_string(m_numOfScore) + ", ";
 	str += Character::toString() + " }";
 	return str;
-}
-
-void Player::onCollide(Chest* chest)
-{
-	setNumOfScore(getNumOfScore() + 1); // TODO
 }
 
 void Player::init()

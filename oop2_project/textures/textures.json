@@ -84,6 +84,14 @@
         {
             "name": "chest",
             "path": "chest.png"
+        },
+        {
+            "name": "bullet",
+            "path": "bullet.png"
+        },
+        {
+            "name": "wall",
+            "path": "wall.png"
         }
     ]
 }

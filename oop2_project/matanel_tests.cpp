@@ -28,6 +28,7 @@
 #include "Crab.h"
 #include "Chest.h"
 #include "EditMapView.h"
+#include "Flow.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -189,6 +190,13 @@ void testWorld() {
 				std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
 				chest->setPosition(mousePos);
 				gameScreen.getWorld().getBODS().requestAddBO(chest);
+			} break;
+			case sf::Keyboard::F: {
+				std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+				flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+				flow->setPosition(mousePos);
+				flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
+				gameScreen.getWorld().getBODS().requestAddBO(flow);
 			} break;
 		}
 	});

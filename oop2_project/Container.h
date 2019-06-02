@@ -16,6 +16,8 @@ class Container :
 public:
 	// get surprises
 	const std::vector<std::shared_ptr<Surprise>>& getSurprises() const { return m_surprises; }
+	// pickup
+	// TODO virtual void pickup(std::shared_ptr<Player>& owner);
 	// convert to string
 	virtual string toString() const override;
 protected:

@@ -12,11 +12,6 @@ string Chest::toString() const
 	return "Chest: { " + Container::toString() + " }";
 }
 
-void Chest::onCollide(Player* player)
-{
-	player->onCollide(this);
-}
-
 void Chest::init()
 {
 	setAnimation("chest");

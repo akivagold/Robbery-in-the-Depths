@@ -23,7 +23,7 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 {
 	setExternaAlcceleration(sf::Vector2f(0.f, 0.f));
 	// check all list
-	for (auto object : collideList) {
+	for (auto& object : collideList) {
 		object->onCollide(this);
 	}
 }

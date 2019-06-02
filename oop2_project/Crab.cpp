@@ -1,4 +1,5 @@
 #include "Crab.h"
+#include "Flow.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*4.f;
@@ -13,6 +14,11 @@ void Crab::draw()
 {
 	NPC::draw();
 	m_timer.checkTimer();
+}
+
+void Crab::onCollide(Flow* flow)
+{
+	setExternaAlcceleration(flow->getFlowPower());
 }
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)
