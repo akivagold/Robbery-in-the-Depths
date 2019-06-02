@@ -7,6 +7,13 @@ GameScreen::GameScreen(sf::RenderWindow& window)
 	init();
 }
 
+void GameScreen::loadLevel(const LevelInfo& levelInfo)
+{
+	// TODO need clear game menu
+
+	m_world->loadLevel(*this, levelInfo);
+}
+
 string GameScreen::toString() const
 {
 	return "GameScreen: { " + m_world->toString() + ", " + BaseClass::toString() + " }";

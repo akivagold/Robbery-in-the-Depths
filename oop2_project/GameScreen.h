@@ -24,6 +24,8 @@ public:
 	// get world
 	World& getWorld() { return *m_world; }
 	const World& getWorld() const { return *m_world; }
+	// load level
+	void loadLevel(const LevelInfo& levelInfo);
 	// get game screen
 	const std::shared_ptr<GameMenu>& getGameMenu() const { return m_gameMenu; }
 	// convert to string
