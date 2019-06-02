@@ -2,9 +2,17 @@
 #include "GameScreen.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen), m_score(0)
+	: Character(gameScreen)
 {
 	init();
+}
+
+void Player::setNumOfScore(int numOfScore)
+{
+	if (numOfScore < 0)
+		throw std::out_of_range("Number of score (=" + std::to_string(numOfScore) + ") must be bigger or equals to zero");
+	m_numOfScore = numOfScore;
+	getGameScreen().getGameMenu()->getCoinView()->setNumOfCoins(numOfScore);
 }
 
 void Player::changeTool(const std::shared_ptr<Tool>& tool)
@@ -22,12 +30,12 @@ void Player::setNumOfLife(int numOfLife)
 
 void Player::onDirectionChanged()
 {
-	if (getDirection() == Direction::LEFT || getDirection() == Direction::UP_LEFT || getDirection() == Direction::DOWN_LEFT) {
+	if (isLeftDirections(getDirection())) {
 		if (!isFlipped()) {
 			flipAnimation(); // turn left
 		}
 	}
-	else if (getDirection() == Direction::RIGHT || getDirection() == Direction::UP_RIGHT || getDirection() == Direction::DOWN_RIGHT) {
+	else if (isRightDirections(getDirection())) {
 		if (isFlipped()) {
 			flipAnimation(); // turn right
 		}
@@ -47,13 +55,14 @@ string Player::toString() const
 	else
 		str += m_currTool->toString();
 	str += ", numOfTools=" + std::to_string(m_tools.size());
-	str += ", score=" + std::to_string(m_score) + ", ";
+	str += ", score=" + std::to_string(m_numOfScore) + ", ";
 	str += Character::toString() + " }";
 	return str;
 }
 
 void Player::init()
 {
+	setNumOfScore(0);
 	setAnimation("diver_anim");
 	setDrawPriority(DRAW_PRIORITY);
 	setAnimationFrequency(STAND_ANIM_FREQUENCY);

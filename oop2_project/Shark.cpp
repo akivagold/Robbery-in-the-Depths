@@ -90,6 +90,7 @@ void Shark::init()
 {
 	setAnimation("shark_anim");
 	setAnimationFrequency(70);
+	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
 	m_radiusAttack = 1000;
 	setDirection(getRandomDirect());
@@ -109,7 +110,4 @@ void Shark::init()
 			setDirection(getRandomDirect());
 		}
 	});
-	//setAnimationFrequency(?)
-	// TODO setDrawPriority()
-	// TODO setDamge();
 }

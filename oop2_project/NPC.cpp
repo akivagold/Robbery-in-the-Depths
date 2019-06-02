@@ -37,26 +37,6 @@ MovingObject::Direction NPC::getRandomLeftDirections()
 	return direct;
 }
 
-bool NPC::isUpDirections(Direction direct)
-{
-	return ((direct == Direction::UP || direct == Direction::UP_LEFT) || direct == Direction::UP_RIGHT);
-}
-
-bool NPC::isRightDirections(Direction direct) 
-{
-	return(direct == Direction::RIGHT || direct == Direction::DOWN_RIGHT || direct == Direction::UP_RIGHT);;
-}
-
-bool NPC::isDownDirections(Direction direct)
-{
-	return (direct == Direction::DOWN || direct == Direction::DOWN_LEFT || direct == Direction::DOWN_RIGHT);
-}
-
-bool NPC::isLeftDirections(Direction direct)
-{
-	return (direct == Direction::LEFT || direct == Direction::DOWN_LEFT || direct == Direction::UP_LEFT);
-}
-
 float NPC::getRadiusFromPlayer() const
 {
 	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());

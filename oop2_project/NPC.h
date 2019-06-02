@@ -25,14 +25,6 @@ public:
 	static Direction getRandomDownDirections();
 	// get ranodm left directions
 	static Direction getRandomLeftDirections();
-	// check if is up directions
-	static bool isUpDirections(Direction direct);
-	// check if is right directions
-	static bool isRightDirections(Direction direct);
-	// check if is down directions
-	static bool isDownDirections(Direction direct);
-	// check if is left directions
-	static bool isLeftDirections(Direction direct);
 	// get radius from player
 	float getRadiusFromPlayer() const;
 };

@@ -23,7 +23,9 @@ public:
 	// get number of tools
 	int getNumOfTool() const { return int(m_tools.size()) - 1; }
 	// get score
-	int getScore() const { return m_score; }
+	int getNumOfScore() const { return m_numOfScore; }
+	// set score
+	void setNumOfScore(int numOfScore);
 	// change tool
 	void changeTool(const std::shared_ptr<Tool>& tool);
 	// get current tool
@@ -49,7 +51,7 @@ private:
 	// current tool
 	std::shared_ptr<Tool> m_currTool;
 	// score
-	int m_score;
+	int m_numOfScore;
 	// init
 	void init();
 };

@@ -23,6 +23,14 @@ public:
 	// TODO virtual void onDie() = 0;
 	// convert to string
 	virtual string toString() const override;
+	// check if is up directions
+	static bool isUpDirections(Direction direct);
+	// check if is right directions
+	static bool isRightDirections(Direction direct);
+	// check if is down directions
+	static bool isDownDirections(Direction direct);
+	// check if is left directions
+	static bool isLeftDirections(Direction direct);
 protected:
 	// constructor
 	explicit Character(GameScreen& gameScreen, int numOfLife = 0);

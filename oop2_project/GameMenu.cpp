@@ -12,7 +12,7 @@ GameMenu::GameMenu(sf::RenderWindow & window)
 
 string GameMenu::toString() const
 {
-	return "GameMenu: { " + HorizontalLayout::toString() + " } ";
+	return "GameMenu: { " + HorizontalLayout::toString() + " }";
 }
 
 void GameMenu::initComponents()
@@ -20,10 +20,13 @@ void GameMenu::initComponents()
 	getBackground().setColor(sf::Color(255, 240, 164));
 	getBorder().setSize(2);
 	getBorder().setColor(sf::Color::Black);
-	addView(m_coinView);
+	addView(m_coinView, 0.1f);
 	m_lifeView->setLife(3);
-	addView(m_lifeView);
+	addView(m_lifeView, 0.5f);
 	m_levelNumTV->setText("Level num 1");
-	addView(m_levelNumTV);
-	addView(m_toolView);
+	m_levelNumTV->setTextSize(30);
+	m_levelNumTV->setTextColor(sf::Color(27, 0, 87));
+	m_levelNumTV->setFont("ARLRDBD");
+	addView(m_levelNumTV, 0.3f);
+	addView(m_toolView, 0.1f);
 }
