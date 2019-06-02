@@ -17,12 +17,18 @@ public:
 	explicit Flow(GameScreen& gameScreen);
 	// convert to string
 	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
-	void init();
+	// collide event
 	virtual void onCollide(MovingObject* obj) override;
+	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
-	void setFlowPower(sf::Vector2f flow) { m_flowPower = flow; }
+	// set power of flow
+	void setFlowPower(const sf::Vector2f& flowPower) { m_flowPower = flowPower; }
+	// get flow power
+	const sf::Vector2f& getFlowPower() const { return m_flowPower; }
 private:
 	// angle & power
 	sf::Vector2f m_flowPower;
+	// init
+	void init();
 };
 

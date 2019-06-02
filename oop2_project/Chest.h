@@ -14,6 +14,8 @@ class Chest :
 	public Container
 {
 public:
+	// char
+	static const char CHAR = 'm';
 	// constructor
 	explicit Chest(GameScreen& gameScreen);
 	// check if this object is don't blocking movement

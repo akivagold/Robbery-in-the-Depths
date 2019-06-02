@@ -24,6 +24,7 @@ public:
 	// constructor
 	explicit TableLayout(sf::RenderWindow& window, const sf::Vector2i& size = { 0, 0 }) : BaseClass(window)  { resize(size); }
 	// resize table
+	void resize(int numOfRows, int numOfCols) { resize({ numOfRows, numOfCols }); }
 	void resize(const sf::Vector2i& size);
 	// clear table
 	void clear() { this->removeAllViews(); }

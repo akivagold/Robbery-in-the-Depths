@@ -27,6 +27,7 @@
 #include "Wall.h"
 #include "Crab.h"
 #include "Chest.h"
+#include "EditMapView.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -56,6 +57,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testEditor();
 void testBox2DLib();
 void testWorld();
 void testBODS();
@@ -82,8 +84,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		//testBox2DLib();
+		//testEditor();
 		testWorld();
+		//testBox2DLib();
 		//testBODS();
 		//testGameObjectView();
 		//testGameObjectInfo();
@@ -100,84 +103,62 @@ void matanel_main()
 		ErrorDialog::show(ex.what());
 	}
 }
+void testEditor() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
-void testBox2DLib() {
-	struct QueryHandler
-	{
-		bool QueryCallback(int32 proxyId) {
-			std::cout << "QueryCallback. prId=" << proxyId << std::endl;
-			return true; 
+	// create editor
+	EditMapView emv(window);
+
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
+	emv.importLevelInfo(levelInfo);
+
+	emv.setEditMode(EditMapView::EditMode::Add);
+	emv.setAddChar('p');
+
+	emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
+		switch (keyCode)
+		{
+			case sf::Keyboard::Key::A: {
+				emv.setEditMode(EditMapView::EditMode::Add);
+				emv.setAddChar('p');
+			} break;
+			case sf::Keyboard::Key::B: {
+				emv.setEditMode(EditMapView::EditMode::Remove);
+			} break;
+			case sf::Keyboard::Key::C: {
+				emv.setEditMode(EditMapView::EditMode::None);
+			} break;
 		}
-	};
+	});
 
-	struct Actor {
-		int id;
-		int32 m_proxyId;
-		b2AABB m_aabb;
-	};
+	//emv.getViewAt({ 0,0 })->setChar('p');
 
-	std::vector<std::shared_ptr<Actor>> actors;
-	b2DynamicTree tree;
-	QueryHandler queryHandler;
-	
-	// insert
-	for (int i = 0; i < 10; ++i) {
-		std::shared_ptr<Actor> actor = std::make_shared<Actor>();
-		actors.push_back(actor);
-		actor->id = i;
-		actor->m_aabb.lowerBound = b2Vec2(float(i), float(i));
-		actor->m_aabb.upperBound = b2Vec2(float(i+1), float(i+1));
-		actor->m_proxyId = tree.CreateProxy(actor->m_aabb, static_cast<void*>(actor.get()));
-	}
+	// run window
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			emv.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
 
-	auto lastAABB = actors[0]->m_aabb;
-	actors[0]->m_aabb = actors[1]->m_aabb;
-	b2Vec2 displacement = actors[0]->m_aabb.GetCenter() - lastAABB.GetCenter();
-	tree.MoveProxy(actors[0]->m_proxyId, actors[0]->m_aabb, displacement);
-
-
-	/*// move
-	for (auto& actor : actors) {
-		b2AABB aabb0 = actor->m_aabb;
-		b2Vec2 displacement = actor->m_aabb.GetCenter() - aabb0.GetCenter();
-		tree.MoveProxy(actor->m_proxyId, actor->m_aabb, displacement);
-	}*/
-	
-	
-	// query
-	for (auto& actor : actors) {
-		std::cout << "act=" << actor->m_proxyId << std::endl;
-		tree.Query(&queryHandler, actor->m_aabb);
-	}
-
-	// remove
-	for (auto& actor : actors) {
-		tree.DestroyProxy(actor->m_proxyId);
+		window.clear();
+		emv.draw();
+		window.display();
 	}
 }
+
 
 void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
 	GameScreen gameScreen(window);
-
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
-	player->setPosition(0,0);
-	gameScreen.getWorld().getBODS().requestAddBO(player);
-	player->getBorder().setColor(sf::Color::Black);
-	player->getBorder().setSize(1.f);
-	player->addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
-		switch (keyCode)
-		{
-			case sf::Keyboard::Key::F: {
-				player->flipAnimation();
-			} break;
-			case sf::Keyboard::Key::G: {
-				// TODO player->rotateAnimation(10);
-			} break;
-		}
-	});
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
@@ -219,17 +200,17 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	
-	gameScreen.getWorld().getBODS().handleRequests();
-	gameScreen.getWorld().getBODS().prepareLevel();
 	// load level info
-	//LevelFileManager lfm;
-	//world.loadLevel(lfm.getLevel("testLevel"));
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
 
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
-	LevelInfo li;
-	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(li);
+	gameScreen.getWorld().getCamera().zoom(0.5f);
+
+	// run game
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
@@ -276,6 +257,62 @@ void testBODS() {
 	//std::cout << bods.toString() << std::endl;
 }
 
+void testBox2DLib() {
+	struct QueryHandler
+	{
+		bool QueryCallback(int32 proxyId) {
+			std::cout << "QueryCallback. prId=" << proxyId << std::endl;
+			return true;
+		}
+	};
+
+	struct Actor {
+		int id;
+		int32 m_proxyId;
+		b2AABB m_aabb;
+	};
+
+	std::vector<std::shared_ptr<Actor>> actors;
+	b2DynamicTree tree;
+	QueryHandler queryHandler;
+
+	// insert
+	for (int i = 0; i < 10; ++i) {
+		std::shared_ptr<Actor> actor = std::make_shared<Actor>();
+		actors.push_back(actor);
+		actor->id = i;
+		actor->m_aabb.lowerBound = b2Vec2(float(i), float(i));
+		actor->m_aabb.upperBound = b2Vec2(float(i + 1), float(i + 1));
+		actor->m_proxyId = tree.CreateProxy(actor->m_aabb, static_cast<void*>(actor.get()));
+	}
+
+	auto lastAABB = actors[0]->m_aabb;
+	actors[0]->m_aabb = actors[1]->m_aabb;
+	b2Vec2 displacement = actors[0]->m_aabb.GetCenter() - lastAABB.GetCenter();
+	tree.MoveProxy(actors[0]->m_proxyId, actors[0]->m_aabb, displacement);
+
+
+	/*// move
+	for (auto& actor : actors) {
+		b2AABB aabb0 = actor->m_aabb;
+		b2Vec2 displacement = actor->m_aabb.GetCenter() - aabb0.GetCenter();
+		tree.MoveProxy(actor->m_proxyId, actor->m_aabb, displacement);
+	}*/
+
+
+	// query
+	for (auto& actor : actors) {
+		std::cout << "act=" << actor->m_proxyId << std::endl;
+		tree.Query(&queryHandler, actor->m_aabb);
+	}
+
+	// remove
+	for (auto& actor : actors) {
+		tree.DestroyProxy(actor->m_proxyId);
+	}
+}
+
+
 void testGameObjectView() {
 	
 
@@ -294,7 +331,7 @@ void testGameObjectView() {
 	mainLayout.addView(gol);
 
 	gol->addGOVClickListener([](const std::shared_ptr<GameObjectView>& gov) {
-		std::cout << gov->getGameObjectInfo().getName() << std::endl;
+		std::cout << gov->getGOI().getName() << std::endl;
 	});
 
 	std::cout << mainLayout.toString() << std::endl;
@@ -346,6 +383,18 @@ void testMatrix() {
 void testLevelFileManager() {
 	LevelFileManager lfm;
 	std::cout << lfm.toString() << std::endl;
+
+
+	// create level
+	LevelInfo li;
+	li.getLevelChars().resize(50, 100);
+	for (char& c : li.getLevelChars()) {
+		c = ' ';
+	}
+	li.setName("big map");
+	li.setIndex(1);
+	lfm.addLevel(li);
+
 	/*for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);
 		std::cout << levelInfo.toString() << std::endl;

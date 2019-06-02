@@ -1,9 +1,15 @@
 #include "GameObjectView.h"
 
-GameObjectView::GameObjectView(sf::RenderWindow& window, const GameObjectInfo& gameObjectInfo)
-	: ImageView(window), m_gameObjectInfo(gameObjectInfo)
+GameObjectView::GameObjectView(sf::RenderWindow& window)
+	: ImageView(window)
 {
 	initComponents();
+}
+
+void GameObjectView::setGOI(const GameObjectInfo& goi)
+{
+	m_gameObjectInfo = goi;
+	getImage().setTexture(m_gameObjectInfo.getName());
 }
 
 string GameObjectView::toString() const
@@ -14,6 +20,5 @@ string GameObjectView::toString() const
 void GameObjectView::initComponents()
 {
 	getBorder().setSize(2);
-	getBorder().setColor(sf::Color::Blue);
-	getImage().setTexture(m_gameObjectInfo.getName());
+	getBorder().setColor(sf::Color::Blue);	
 }

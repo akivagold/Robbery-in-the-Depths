@@ -18,7 +18,5 @@ public:
 protected:
 	// constructor
 	using BoardObject::BoardObject;
-private:
-
 };
 

@@ -50,6 +50,7 @@ public:
 	const std::shared_ptr<BoardObject>& getSelf() const;
 	// get default size of object
 	static const sf::Vector2i& getDefaultSize();
+	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj);
 	virtual void onCollide(MovingObject* obj) {}
 	//virtual void onCollide(const std::shared_ptr<Flow>& obj){}

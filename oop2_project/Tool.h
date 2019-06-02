@@ -15,13 +15,13 @@ public:
 	// use tool
 	virtual void useTool() = 0;
 	// check if can use tool
-	virtual bool canUsingTool() = 0;
+	virtual bool canUsingTool() const = 0;
 	//get my owner
-	const std::shared_ptr<BoardObject>& getMyowner() const { return m_owner; }
+	const std::shared_ptr<BoardObject>& getMyOwner() const { return m_owner; }
 	// get tool name
-	string getToolName() { return m_toolName; }
+	const string& getToolName() const { return m_toolName; }
 	// set tool name
-	void setToolName(string toolName) { m_toolName = toolName; }
+	void setToolName(const string& toolName) { m_toolName = toolName; }
 	//convert to string
 	virtual string toString() const;
 protected:
