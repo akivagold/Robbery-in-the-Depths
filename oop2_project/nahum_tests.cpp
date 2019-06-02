@@ -26,6 +26,7 @@
 #include "Shark.h"
 #include "GameMenu.h"
 #include "Wall.h"
+#include "AK47.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -93,7 +94,9 @@ void testWorld() {
 	player->setPosition(0, 0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
 
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+	std::shared_ptr<MovingObject> m = player;
+	AK47 ak(m);
+	gameScreen.getWorld().addKeyDownListener([&gameScreen, &ak](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		switch (keyCode)
 		{
@@ -118,6 +121,9 @@ void testWorld() {
 		case sf::Keyboard::Key::P: {
 			std::cout << "-------------------------------------------------" << std::endl;
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
+		} break;
+		case sf::Keyboard::Key::Z: {
+			ak.useTool();
 		} break;
 		case sf::Keyboard::Key::R: {
 			sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));

@@ -20,11 +20,11 @@ public:
 	// use tool
 	virtual void useTool() override;
 	// check if can use
-	virtual bool canUsingTool() override { return (m_ammo > 0); }
+	virtual bool canUsingTool() override { return m_ammo > 0; }
 	//convert to string
 	virtual string toString() const override;
 protected:
-	explicit HotWeapon(std::shared_ptr<BoardObject>& object);
+	explicit HotWeapon(std::shared_ptr<MovingObject>& object);
 	// fire bullet
 	virtual void fire() = 0; 
 private:

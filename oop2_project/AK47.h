@@ -1,5 +1,7 @@
 #pragma once
 #include "HotWeapon.h"
+#include "GameScreen.h"
+#include "Bullet.h"
 
 //---- using section --------
 using std::string;
@@ -12,7 +14,7 @@ class AK47 :
 {
 public:
 	// constructor
-	AK47(std::shared_ptr<BoardObject>& object);
+	AK47(std::shared_ptr<MovingObject>& object);
 	// convert to string
 	virtual string toString() const override;
 	// fire

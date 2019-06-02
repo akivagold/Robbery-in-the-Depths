@@ -31,7 +31,7 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
-	  m_isCollided(false), m_direction(STANDING), m_lastDirection(m_direction)	//TODO enum
+	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
 {
 	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
 	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
