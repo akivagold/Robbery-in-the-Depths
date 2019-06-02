@@ -38,6 +38,8 @@ public:
 	virtual void onDirectionChanged() override;
 	// convert to string
 	virtual string toString() const override;
+	// collide events
+	virtual void onCollide(Chest* chest) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;

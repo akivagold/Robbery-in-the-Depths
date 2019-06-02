@@ -22,6 +22,8 @@ public:
 	virtual bool canMoveThroughMe() const override { return true; }
 	// convert to string
 	virtual string toString() const override;
+	// collide event
+	virtual void onCollide(Player* player) override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 10;

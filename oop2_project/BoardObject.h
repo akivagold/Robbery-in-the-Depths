@@ -6,7 +6,9 @@
 class GameScreen;
 class Flow;
 class MovingObject;
-#include <math.h>
+class Player;
+class Chest;
+#include <cmath>
 #include <forward_list>
 
 //---- using section --------
@@ -52,8 +54,9 @@ public:
 	static const sf::Vector2i& getDefaultSize();
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj);
-	virtual void onCollide(MovingObject* obj) {}
-	//virtual void onCollide(const std::shared_ptr<Flow>& obj){}
+	virtual void onCollide(MovingObject* obj) {} // TODO must be pure
+	virtual void onCollide(Player* player) {} // TODO must be pure
+	virtual void onCollide(Chest* chest) {} // TODO must be pure
 protected:
 	// update components
 	virtual void updateComponents() override;

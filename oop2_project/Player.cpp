@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameScreen.h"
+#include "Chest.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen)
@@ -58,6 +59,11 @@ string Player::toString() const
 	str += ", score=" + std::to_string(m_numOfScore) + ", ";
 	str += Character::toString() + " }";
 	return str;
+}
+
+void Player::onCollide(Chest* chest)
+{
+	setNumOfScore(getNumOfScore() + 1); // TODO
 }
 
 void Player::init()

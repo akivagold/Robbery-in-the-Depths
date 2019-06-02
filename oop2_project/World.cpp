@@ -81,7 +81,7 @@ void World::init()
 {
 	makeRootView(true);
 	setPosition(0, 0);
-	getBackground().setColor(sf::Color::White);
+	getBackground().setColor(sf::Color(155, 236, 255));
 	getBorder().setColor(sf::Color::Blue);
 	getBorder().setSize(1);
 }

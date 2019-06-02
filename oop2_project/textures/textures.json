@@ -73,6 +73,17 @@
             "numOfRows": 3,
             "numOfCols": 3,
             "numOfImages": 9
+        },
+        {
+            "name": "open_chest_anim",
+            "path": "open_chest_sprite_sheet.png",
+            "numOfRows": 3,
+            "numOfCols": 5,
+            "numOfImages": 12
+        },
+        {
+            "name": "chest",
+            "path": "chest.png"
         }
     ]
 }

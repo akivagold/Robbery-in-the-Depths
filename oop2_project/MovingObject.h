@@ -44,8 +44,6 @@ public:
 	virtual bool canMoveThroughMe() const override { return true; }
 	// set external acceleration
 	void setExternaAlcceleration(sf::Vector2f acceleration);
-	// check collide
-	void checkCollide(std::forward_list<BoardObject*> collideList);
 	// get default size of moving object
 	static const sf::Vector2i& getMODefSize();
 protected:
@@ -78,5 +76,7 @@ private:
 	void play();
 	// init
 	void init();
+	// check collide
+	void checkCollide(std::forward_list<BoardObject*> collideList);
 };
 

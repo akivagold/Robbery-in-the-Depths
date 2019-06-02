@@ -1,5 +1,6 @@
 #include "BoardObject.h"
 #include "GameScreen.h"
+#include "MovingObject.h"
 
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
