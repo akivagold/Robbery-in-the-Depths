@@ -172,6 +172,8 @@
     <ClCompile Include="Cop.cpp" />
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="EditMapView.cpp" />
+    <ClCompile Include="EditMenu.cpp" />
+    <ClCompile Include="EditScreen.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Flow.cpp" />
@@ -242,6 +244,8 @@
     <ClInclude Include="Cop.h" />
     <ClInclude Include="Crab.h" />
     <ClInclude Include="EditMapView.h" />
+    <ClInclude Include="EditMenu.h" />
+    <ClInclude Include="EditScreen.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Flow.h" />

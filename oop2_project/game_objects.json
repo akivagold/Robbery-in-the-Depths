@@ -1,14 +1,14 @@
 {
     "gameObjects": [
         {
-            "isUnique": true,
-            "name": "life",
-            "specialChar": 119
+            "isUnique": false,
+            "name": "shark",
+            "specialChar": 107
         },
         {
-            "isUnique": false,
-            "name": "coin",
-            "specialChar": 120
+            "isUnique": true,
+            "name": "diver",
+            "specialChar": 112
         }
     ]
 }

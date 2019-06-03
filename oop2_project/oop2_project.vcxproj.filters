@@ -219,6 +219,12 @@
     <ClCompile Include="LifeGift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h">
@@ -441,6 +447,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LifeGift.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
