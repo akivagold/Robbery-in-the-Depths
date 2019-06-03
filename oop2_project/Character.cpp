@@ -35,5 +35,5 @@ bool Character::isLeftDirections(Direction direct)
 
 string Character::toString() const
 {
-	return "Character: { " + MovingObject::toString() + " } ";
+	return "Character: { numOfLife=" + std::to_string(m_numOfLife) + ", " + MovingObject::toString() + " }";
 }

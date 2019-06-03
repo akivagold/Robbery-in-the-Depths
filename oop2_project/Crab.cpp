@@ -19,9 +19,17 @@ void Crab::draw()
 
 void Crab::onCollide(Wall* wall)
 {
-	if (isAbove(wall->getSelf())) {
+	if (isAboveThen(wall->getSelf())) {
 		getInteralAcceleration().y = 0.f;
 		setPosition(getPosition().x, wall->getPosition().y - getSize().y - 2);
+	}
+	else if (isLeftThen(wall->getSelf())) {
+		getInteralAcceleration().x = 0.f;
+		setDirection(Direction::LEFT);
+	}
+	else if (isRightThen(wall->getSelf())) {
+		getInteralAcceleration().x = 0.f;
+		setDirection(Direction::RIGHT);
 	}
 }
 
@@ -32,13 +40,9 @@ void Crab::onCollide(Flow* flow)
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)
 {
-	// check is collided
 	if (isCollided) {
-		Direction newDirection = isRightDirections(lastDirection) ? Direction::LEFT : Direction::RIGHT;
-		setDirection(newDirection);
-		getInteralAcceleration().y = 0.f;
-	}
-	else {
+		getInteralAcceleration().y = 0;
+	} else {
 		getInteralAcceleration().y = 0.00005f*getMODefSize().y;
 	}
 
@@ -74,6 +78,7 @@ void Crab::init()
 	setAnimationFrequency(30);
 	setDrawPriority(DRAW_PRIORITY);
 	setDirection(getRandomLeftRightDirect());
+	setSize(getCrabSize());
 
 	int changeDirectionTime = 2000 + rand() % 4000;
 	m_timer.start(changeDirectionTime, [this]() {
@@ -81,4 +86,10 @@ void Crab::init()
 		setDirection(direction);
 		getInteralAcceleration().x = 0;
 	});
+}
+
+const sf::Vector2i& Crab::getCrabSize()
+{
+	static sf::Vector2i CRAB_SIZE(static_cast<int>(getDefaultSize().x*0.5f), static_cast<int>(getDefaultSize().y*0.5f));
+	return CRAB_SIZE;
 }

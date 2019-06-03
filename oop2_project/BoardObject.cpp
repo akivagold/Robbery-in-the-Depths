@@ -86,6 +86,11 @@ const sf::Vector2i& BoardObject::getDefaultSize()
 	return DEFAULT_SIZE;
 }
 
+void BoardObject::vanish()
+{
+	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
+}
+
 void BoardObject::updateComponents()
 {
 	AnimationView::updateComponents();

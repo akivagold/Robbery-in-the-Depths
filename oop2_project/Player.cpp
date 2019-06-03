@@ -6,6 +6,7 @@
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen)
 {
+	setNumOfLife(numOfLife);
 	init();
 }
 
@@ -41,6 +42,13 @@ void Player::onDirectionChanged()
 		if (isFlipped()) {
 			flipAnimation(); // turn right
 		}
+	}
+}
+
+void Player::onCollide(Chest* chest)
+{
+	if (!chest->isEmpty()) {
+		chest->pickup(this);
 	}
 }
 

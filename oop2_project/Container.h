@@ -14,10 +14,16 @@ class Container :
 	public StaticObject
 {
 public:
+	// surprises list
+	using SurprisesList = std::vector<std::shared_ptr<Surprise>>;
 	// get surprises
-	const std::vector<std::shared_ptr<Surprise>>& getSurprises() const { return m_surprises; }
+	const SurprisesList& getSurprises() const { return m_surprises; }
+	// check if container is empty
+	bool isEmpty() const { return m_surprises.empty(); }
 	// pickup
-	// TODO virtual void pickup(std::shared_ptr<Player>& owner);
+	virtual void pickup(Player* owner);
+	// clear all surprises
+	void clearSurprises() { m_surprises.clear(); }
 	// convert to string
 	virtual string toString() const override;
 protected:
@@ -25,6 +31,10 @@ protected:
 	explicit Container(GameScreen& gameScreen);
 private:
 	// surprises
-	std::vector<std::shared_ptr<Surprise>> m_surprises;
+	SurprisesList m_surprises;
+	// random surprises
+	static SurprisesList randSurprises();
+	// init
+	void init();
 };
 

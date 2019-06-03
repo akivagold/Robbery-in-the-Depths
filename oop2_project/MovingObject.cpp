@@ -116,12 +116,12 @@ MovingObject::Direction MovingObject::getRandomDirect()
 
 MovingObject::Direction MovingObject::getRandomLeftRightDirect()
 {
-	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;	
+	return (rand() % 2 == 0) ? Direction::LEFT : Direction::RIGHT;	
 }
 
 void MovingObject::suicide()
 {
-	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
+	vanish();
 }
 
 bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const

@@ -47,5 +47,7 @@ private:
 	Timer m_timer;
 	// init
 	void init();	
+	// get crab size
+	static const sf::Vector2i& getCrabSize();
 };
 

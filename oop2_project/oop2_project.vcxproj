@@ -181,6 +181,7 @@
     <ClCompile Include="GameObjectsList.cpp" />
     <ClCompile Include="GameObjectView.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="Gift.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="KeyValueFile.cpp" />
     <ClCompile Include="LevelFileManager.cpp" />
     <ClCompile Include="LevelInfo.cpp" />
+    <ClCompile Include="LifeGift.cpp" />
     <ClCompile Include="LifeView.cpp" />
     <ClCompile Include="LoadResourceException.cpp" />
     <ClCompile Include="MainScreen.cpp" />
@@ -249,6 +251,7 @@
     <ClInclude Include="GameObjectsList.h" />
     <ClInclude Include="GameObjectView.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="Gift.h" />
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="HotWeapon.h" />
@@ -260,6 +263,7 @@
     <ClInclude Include="KeyValueFile.h" />
     <ClInclude Include="LevelFileManager.h" />
     <ClInclude Include="LevelInfo.h" />
+    <ClInclude Include="LifeGift.h" />
     <ClInclude Include="LifeView.h" />
     <ClInclude Include="LoadResourceException.h" />
     <ClInclude Include="MainScreen.h" />
