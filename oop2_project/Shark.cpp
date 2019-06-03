@@ -25,7 +25,8 @@ void Shark::onDirectionChanged()
 void Shark::onDie()
 {
 	NPC::onDie();
-	// TODO change animation & play sound
+	// TODO play sound
+	setAnimation("die_shark");
 }
 
 void Shark::draw()
@@ -107,6 +108,7 @@ void Shark::init()
 {
 	setAnimation("shark_anim");
 	setAnimationFrequency(70);
+	setSize(getSharkSize());
 	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
 	m_radiusAttack = 1000;
@@ -127,4 +129,10 @@ void Shark::init()
 			setDirection(getRandomDirect());
 		}
 	});
+}
+
+const sf::Vector2i& Shark::getSharkSize()
+{
+	static sf::Vector2i SHARK_SIZE(static_cast<int>(getDefaultSize().x*0.95f), static_cast<int>(getDefaultSize().y*0.5f));
+	return SHARK_SIZE;
 }

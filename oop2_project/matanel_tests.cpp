@@ -85,8 +85,8 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		//testEditor();
-		testWorld();
+		testEditor();
+		//testWorld();
 		//testBox2DLib();
 		//testBODS();
 		//testGameObjectView();

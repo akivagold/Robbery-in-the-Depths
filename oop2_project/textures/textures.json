@@ -68,11 +68,23 @@
             "numOfImages": 8
         },
         {
+            "name": "diver",
+            "path": "diver.png"
+        },
+        {
             "name": "shark_anim",
             "path": "shark_sprite_sheet.png",
             "numOfRows": 3,
             "numOfCols": 3,
             "numOfImages": 9
+        },
+        {
+            "name": "shark",
+            "path": "shark.png"
+        },
+        {
+            "name": "die_shark",
+            "path": "die_shark.png"
         },
         {
             "name": "open_chest_anim",

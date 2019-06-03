@@ -24,6 +24,8 @@ public:
 	virtual void draw() override;
 	// event on die
 	virtual void onDie();
+	// die
+	void die() { setNumOfLife(0); }
 	// convert to string
 	virtual string toString() const override;
 	// check if is up directions
@@ -48,6 +50,8 @@ private:
 	bool m_isDie;
 	// vanish stopWatch
 	StopWatch m_vanishSW;
+
+	using MovingObject::suicide;
 };
 
 

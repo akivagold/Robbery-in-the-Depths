@@ -43,14 +43,14 @@ private:
 	static const int DRAW_PRIORITY = 70;
 	// default number of life
 	static const int DEFAULT_LIFE = 3;
-	// init
-	void init();
 	// radius attack
 	float m_radiusAttack;
 	Timer m_time;
 	bool m_inChase;
-	
-	
+	// init
+	void init();
+	// get shark size
+	static const sf::Vector2i& getSharkSize();	
 };
 
 

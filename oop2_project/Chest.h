@@ -42,9 +42,11 @@ private:
 	static const int DRAW_PRIORITY = 10;
 	// open chest animation time
 	static const int OPEN_CHEST_ANIM_TIME = 300;
-	// init
-	void init();
 	// open chest stopWatch
 	StopWatch m_openChestSW;
+	// init
+	void init();
+	// get chest size
+	static const sf::Vector2i& getChestSize();
 };
 
