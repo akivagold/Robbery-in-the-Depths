@@ -4,9 +4,8 @@
 #include "Flow.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen)
+	: Character(gameScreen, numOfLife)
 {
-	setNumOfLife(numOfLife);
 	init();
 }
 
@@ -59,7 +58,7 @@ void Player::onCollide(Flow* flow)
 
 void Player::playChoice(Direction lastDirection, bool isCollided)
 {
-	// TODO
+	Character::playChoice(lastDirection, isCollided);
 }
 
 string Player::toString() const

@@ -92,6 +92,14 @@
         {
             "name": "wall",
             "path": "wall.png"
+        },
+        {
+            "name": "crab",
+            "path": "crab.png"
+        },
+        {
+            "name": "die_crab",
+            "path": "die_crab.png"
         }
     ]
 }

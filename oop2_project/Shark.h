@@ -16,9 +16,11 @@ public:
 	// char
 	static const char CHAR = 'k';
 	// constructor
-	explicit Shark(GameScreen& gameScreen, int numOfLife = 0);
+	explicit Shark(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed
 	virtual void onDirectionChanged() override;
+	// event on die
+	virtual void onDie() override;
 	// draw
 	virtual void draw() override;
 	// convert to string
@@ -39,6 +41,8 @@ protected:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 70;
+	// default number of life
+	static const int DEFAULT_LIFE = 3;
 	// init
 	void init();
 	// radius attack

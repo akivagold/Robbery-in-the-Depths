@@ -17,6 +17,12 @@ void Crab::draw()
 	m_timer.checkTimer();
 }
 
+void Crab::onDie()
+{
+	NPC::onDie();
+	setAnimation("die_crab");
+}
+
 void Crab::onCollide(Wall* wall)
 {
 	if (isAboveThen(wall->getSelf())) {
@@ -40,36 +46,42 @@ void Crab::onCollide(Flow* flow)
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)
 {
-	if (isCollided) {
-		getInteralAcceleration().y = 0;
-	} else {
-		getInteralAcceleration().y = 0.00005f*getMODefSize().y;
-	}
+	NPC::playChoice(lastDirection, isCollided);
 
-	if (getSpeed().y > 0.001f*getMODefSize().y) {
-		getInteralAcceleration().x = 0;
-	} else {
-		if (getDirection() == Direction::RIGHT) {
-			getInteralAcceleration().x = 0.00005f*getMODefSize().x;
+	if (!isDie()) {
+		if (isCollided) {
+			getInteralAcceleration().y = 0;
 		}
 		else {
-			getInteralAcceleration().x = -0.00005f*getMODefSize().x;
+			getInteralAcceleration().y = 0.00005f*getMODefSize().y;
+		}
+
+		if (getSpeed().y > 0.001f*getMODefSize().y) {
+			getInteralAcceleration().x = 0;
+		}
+		else {
+			if (getDirection() == Direction::RIGHT) {
+				getInteralAcceleration().x = 0.00005f*getMODefSize().x;
+			}
+			else {
+				getInteralAcceleration().x = -0.00005f*getMODefSize().x;
+			}
+		}
+
+		// check if user in my radius
+		if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
+			if (!m_isPlayerInRadius) {
+				setAnimation("adhd_crab");
+				m_isPlayerInRadius = true;
+			}
+		}
+		else {
+			if (m_isPlayerInRadius) {
+				setAnimation("walking_crab");
+				m_isPlayerInRadius = false;
+			}
 		}
 	}	
-
-	// check if user in my radius
-	if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
-		if (!m_isPlayerInRadius) {
-			setAnimation("adhd_crab");
-			m_isPlayerInRadius = true;
-		}
-	}
-	else {
-		if (m_isPlayerInRadius) {
-			setAnimation("walking_crab");
-			m_isPlayerInRadius = false;
-		}	
-	}
 }
 
 void Crab::init()
@@ -86,6 +98,7 @@ void Crab::init()
 		setDirection(direction);
 		getInteralAcceleration().x = 0;
 	});
+
 }
 
 const sf::Vector2i& Crab::getCrabSize()

@@ -16,11 +16,13 @@ public:
 	// char
 	static const char CHAR = 'c';
 	// constructor
-	explicit Crab(GameScreen& gameScreen, int numOfLife = 0);
+	explicit Crab(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed
 	virtual void onDirectionChanged() override {}; // TODO: use this
 	// draw
 	virtual void draw() override;
+	// event on die
+	virtual void onDie() override;
 	// convert to string
 	virtual string toString() const override { return "Crab: { " + NPC::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -41,6 +43,8 @@ private:
 	static const int DRAW_PRIORITY = 20;
 	// minimum radius to see the player
 	static const float MIN_PLAYER_RADIUS;
+	// default number of life
+	static const int DEFAULT_LIFE = 3;
 	// flag that check if player in crab radius
 	bool m_isPlayerInRadius;
 	// timer
