@@ -18,13 +18,12 @@ void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)
 	m_externalAcc.x = acceleration.x;
 	m_externalAcc.y = acceleration.y;
 }
-#include <iostream>
+
 void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 {
 	setExternaAlcceleration(sf::Vector2f(0.f, 0.f));
 	// check all list
-	for (auto object : collideList) {
-		//std::cout<<object->toString();
+	for (auto& object : collideList) {
 		object->onCollide(this);
 	}
 }
@@ -117,12 +116,12 @@ MovingObject::Direction MovingObject::getRandomDirect()
 
 MovingObject::Direction MovingObject::getRandomLeftRightDirect()
 {
-	return (rand() % 2) ? Direction::LEFT : Direction::RIGHT;	
+	return (rand() % 2 == 0) ? Direction::LEFT : Direction::RIGHT;	
 }
 
 void MovingObject::suicide()
 {
-	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
+	vanish();
 }
 
 bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const

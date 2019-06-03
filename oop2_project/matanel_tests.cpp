@@ -28,6 +28,9 @@
 #include "Crab.h"
 #include "Chest.h"
 #include "EditMapView.h"
+#include "Flow.h"
+#include "EditMenu.h"
+#include "EditScreen.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -57,6 +60,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testEditMenu();
 void testEditor();
 void testBox2DLib();
 void testWorld();
@@ -84,8 +88,10 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		
 		//testEditor();
 		testWorld();
+		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
 		//testGameObjectView();
@@ -103,22 +109,32 @@ void matanel_main()
 		ErrorDialog::show(ex.what());
 	}
 }
+
+
+
 void testEditor() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
 	// create editor
-	EditMapView emv(window);
+	EditScreen editScreen(window);
 
 	// load level info
 	LevelFileManager lfm;
 	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
-	emv.importLevelInfo(levelInfo);
+	editScreen.getEditMapView()->importLevelInfo(levelInfo);
 
-	emv.setEditMode(EditMapView::EditMode::Add);
-	emv.setAddChar('p');
+	editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	});
+	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
+	});
 
-	emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
+	//emv.setEditMode(EditMapView::EditMode::Add);
+	//emv.setAddChar('p');
+
+	/*emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
 		switch (keyCode)
 		{
 			case sf::Keyboard::Key::A: {
@@ -132,25 +148,9 @@ void testEditor() {
 				emv.setEditMode(EditMapView::EditMode::None);
 			} break;
 		}
-	});
+	});*/
 
-	//emv.getViewAt({ 0,0 })->setChar('p');
-
-	// run window
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			emv.handleEvent(event);
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		window.clear();
-		emv.draw();
-		window.display();
-	}
+	editScreen.run();
 }
 
 
@@ -160,36 +160,54 @@ void testWorld() {
 
 	GameScreen gameScreen(window);
 
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.loadLevel(levelInfo);
+
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Q: {
-				gameScreen.getWorld().getCamera().zoom(0.95f);
-			} break;
-			case sf::Keyboard::Key::W: {
-				gameScreen.getWorld().getCamera().zoom(1.05f);
-			} break;
-			case sf::Keyboard::Key::P: {
-				std::cout << "-------------------------------------------------" << std::endl;
-				std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
-			} break;
-			case sf::Keyboard::Key::R: {
-				std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
-				wall->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(wall);
-			} break;
-			case sf::Keyboard::Key::C: {
-				std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
-				crab->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(crab);
-			} break;
-			case sf::Keyboard::Key::T: {
-				std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
-				chest->setPosition(mousePos);
-				gameScreen.getWorld().getBODS().requestAddBO(chest);
-			} break;
+		case sf::Keyboard::Key::K: {
+			//player->rotateAnimation(10);
+		} break;
+		case sf::Keyboard::Key::Q: {
+			gameScreen.getWorld().getCamera().zoom(0.95f);
+		} break;
+		case sf::Keyboard::Key::W: {
+			gameScreen.getWorld().getCamera().zoom(1.05f);
+		} break;
+		case sf::Keyboard::Key::P: {
+			std::cout << "-------------------------------------------------" << std::endl;
+			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
+		} break;
+		case sf::Keyboard::Key::R: {
+			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
+			wall->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(wall);
+		} break;
+		case sf::Keyboard::Key::C: {
+			std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
+			crab->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(crab);
+		} break;
+		case sf::Keyboard::Key::T: {
+			std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
+			chest->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(chest);
+		} break;
+		case sf::Keyboard::F: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
@@ -200,14 +218,6 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	// load level info
-	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
-	gameScreen.loadLevel(levelInfo);
-
-	// get player
-	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-
 	gameScreen.getWorld().getCamera().zoom(0.5f);
 
 	// run game
@@ -217,6 +227,37 @@ void testWorld() {
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 	gameScreen.run(frameTimer);
+}
+
+void testEditMenu() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+	// add edit menu
+	std::shared_ptr<EditMenu> em = std::make_shared<EditMenu>(window);
+	mainLayout.addView(em);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
+	}
 }
 
 void testBODS() {

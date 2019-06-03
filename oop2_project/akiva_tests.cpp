@@ -189,9 +189,9 @@ void testCleanScreen() {
 	//world.loadLevel(lfm.getLevel("testLevel"));
 
 
-	LevelInfo li;
-	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(li);
+	//LevelInfo li;
+	//li.getLevelChars().resize(100, 100);
+	//gameScreen.loadLevel(li);
 	Timer frameTimer;
 	frameTimer.start(10, [&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();

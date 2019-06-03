@@ -19,7 +19,7 @@ public:
 	// char
 	static const char CHAR = 'p';
 	// constructor
-	explicit Player(GameScreen& gameScreen, int numOfLife = 0);
+	explicit Player(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// add new tool
 	void addTool(std::shared_ptr<Tool> tool) { m_tools.push_back(tool); }
 	// get number of tools
@@ -38,6 +38,16 @@ public:
 	virtual void onDirectionChanged() override;
 	// convert to string
 	virtual string toString() const override;
+	// collide events (using with double dispatch)
+	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
+	virtual void onCollide(Player* player) override { }
+	virtual void onCollide(Shark* shark) override {} // TODO use this
+	virtual void onCollide(Crab* crab) override {} // TODO use this
+	virtual void onCollide(Cop* cop) override {} // TODO use this
+	virtual void onCollide(Chest* chest) override;
+	virtual void onCollide(Wall* wall) override {} // TODO use this
+	virtual void onCollide(Flow* flow) override;
+	virtual void onCollide(Bullet* bullet) override {} // TODO use this
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -46,6 +56,8 @@ private:
 	static const int SWIM_ANIM_FREQUENCY = 30;
 	// stand animation frequency
 	static const int STAND_ANIM_FREQUENCY = 100;
+	// default number of life
+	static const int DEFAULT_LIFE = 6;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool

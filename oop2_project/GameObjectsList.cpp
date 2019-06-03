@@ -23,6 +23,8 @@ string GameObjectsList::toString() const
 
 void GameObjectsList::initComponents()
 {
+	getBackground().setColor(sf::Color(235, 255, 247));
+
 	// read list of game object info from file
 	std::vector<GameObjectInfo> gois = GOIFileParser::parseGOIFile();
 

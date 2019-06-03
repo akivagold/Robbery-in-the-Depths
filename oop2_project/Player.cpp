@@ -1,8 +1,10 @@
 #include "Player.h"
 #include "GameScreen.h"
+#include "Chest.h"
+#include "Flow.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen)
+	: Character(gameScreen, numOfLife)
 {
 	init();
 }
@@ -42,9 +44,21 @@ void Player::onDirectionChanged()
 	}
 }
 
+void Player::onCollide(Chest* chest)
+{
+	if (!chest->isEmpty()) {
+		chest->pickup(this);
+	}
+}
+
+void Player::onCollide(Flow* flow)
+{
+	setExternaAlcceleration(flow->getFlowPower());
+}
+
 void Player::playChoice(Direction lastDirection, bool isCollided)
 {
-	// TODO
+	Character::playChoice(lastDirection, isCollided);
 }
 
 string Player::toString() const

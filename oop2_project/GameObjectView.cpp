@@ -20,5 +20,16 @@ string GameObjectView::toString() const
 void GameObjectView::initComponents()
 {
 	getBorder().setSize(2);
-	getBorder().setColor(sf::Color::Blue);	
+	getBorder().setColor(sf::Color::Blue);
+
+	sf::Color backColor(255, 182, 76), selectBackColor(175, 114, 25);
+	getBackground().setColor(backColor);
+
+
+	addEnterListener([selectBackColor](View& view) {
+		view.getBackground().setColor(selectBackColor);
+	});
+	addLeaveListener([backColor](View& view) {
+		view.getBackground().setColor(backColor);
+	});
 }

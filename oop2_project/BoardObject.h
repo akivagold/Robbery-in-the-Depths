@@ -2,12 +2,19 @@
 //---- include section ------
 #include <string>
 #include <Box2D/Box2D.h>
+#include <cmath>
+#include <forward_list>
 #include "AnimationView.h"
 class GameScreen;
+class Player;
+class Shark;
+class Chest;
+class Crab;
+class Wall;
+class Cop;
 class Flow;
-class MovingObject;
-#include <math.h>
-#include <forward_list>
+class Bullet;
+class Chest;
 
 //---- using section --------
 using std::string;
@@ -50,10 +57,24 @@ public:
 	const std::shared_ptr<BoardObject>& getSelf() const;
 	// get default size of object
 	static const sf::Vector2i& getDefaultSize();
+	// vanish from map
+	void vanish();
+	// check if object if above then another object
+	bool isAboveThen(const std::shared_ptr<BoardObject>& other) const { return (getPosition().y + getSize().y < other->getPosition().y); }
+	// check if object if left then another object
+	bool isLeftThen(const std::shared_ptr<BoardObject>& other) const { return (getPosition().x + getSize().x < other->getPosition().x); }
+	// check if object if right then another object
+	bool isRightThen(const std::shared_ptr<BoardObject>& other) const { return (other->getPosition().x + other->getSize().x < getPosition().x); }
 	// collide events (using with double dispatch)
-	virtual void onCollide(BoardObject* obj);
-	virtual void onCollide(MovingObject* obj) {}
-	//virtual void onCollide(const std::shared_ptr<Flow>& obj){}
+	virtual void onCollide(BoardObject* obj) = 0;
+	virtual void onCollide(Player* player) = 0;
+	virtual void onCollide(Shark* shark) = 0;
+	virtual void onCollide(Crab* crab) = 0;
+	virtual void onCollide(Cop* cop) = 0;
+	virtual void onCollide(Chest* chest) = 0;
+	virtual void onCollide(Wall* wall) = 0;
+	virtual void onCollide(Flow* flow) = 0;
+	virtual void onCollide(Bullet* bullet) = 0;
 protected:
 	// update components
 	virtual void updateComponents() override;

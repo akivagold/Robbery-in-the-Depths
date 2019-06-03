@@ -1,16 +1,12 @@
 #include "BoardObject.h"
 #include "GameScreen.h"
+#include "MovingObject.h"
 
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();
-}
-
-void BoardObject::onCollide(BoardObject* obj)
-{
-	obj->onCollide(this);
 }
 
 void BoardObject::setDrawPriority(int drawPriority)
@@ -90,6 +86,11 @@ const sf::Vector2i& BoardObject::getDefaultSize()
 	return DEFAULT_SIZE;
 }
 
+void BoardObject::vanish()
+{
+	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
+}
+
 void BoardObject::updateComponents()
 {
 	AnimationView::updateComponents();
@@ -121,6 +122,6 @@ void BoardObject::init()
 	setSize(getDefaultSize());
 
 	// TODO remove this:
-	//getBorder().setSize(1.f);
-	//getBorder().setColor(sf::Color::Black);
+	getBorder().setSize(1.f);
+	getBorder().setColor(sf::Color::Black);
 }

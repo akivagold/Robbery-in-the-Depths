@@ -13,8 +13,3 @@ void Flow::init()
 	setAnimationFrequency(ANIM_FREQUENCY);
 }
 
-void Flow::onCollide(MovingObject* obj)
-{
-	obj->setExternaAlcceleration(m_flowPower);
-}
-

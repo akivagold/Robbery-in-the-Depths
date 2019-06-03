@@ -25,7 +25,7 @@ public:
 	virtual string toString() const override;
 protected:
 	// constructor
-	explicit HotWeapon(std::shared_ptr<BoardObject>& object);
+	explicit HotWeapon(std::shared_ptr<MovingObject>& object);
 	// fire bullet
 	virtual void fire() = 0; 
 private:

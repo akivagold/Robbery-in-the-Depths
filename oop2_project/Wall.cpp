@@ -13,6 +13,7 @@ string Wall::toString() const
 
 void Wall::init()
 {
-	setAnimation("seaweed"); // TODO
-	//setDrawPriority()
+	
+	setAnimation("wall");
+	setDrawPriority(DRAW_PRIORITY);
 }

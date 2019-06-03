@@ -1,6 +1,8 @@
 #pragma once
 #include "HotWeapon.h"
 
+
+
 //---- using section --------
 using std::string;
 
@@ -12,7 +14,7 @@ class AK47 :
 {
 public:
 	// constructor
-	explicit AK47(std::shared_ptr<BoardObject>& owner);
+	explicit AK47(std::shared_ptr<MovingObject>& owner);
 	// convert to string
 	virtual string toString() const override;
 	// fire
