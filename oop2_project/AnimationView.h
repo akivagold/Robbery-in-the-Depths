@@ -38,6 +38,7 @@ public:
 	bool isFlipped() const { return m_isFlipped; }
 	// convert to string
 	virtual string toString() const override;
+	// rotate animation
 	void rotateAnimation(int degrees);
 protected:
 	// update components

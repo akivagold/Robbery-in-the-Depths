@@ -83,21 +83,22 @@ void GUI::AnimationView::rotateAnimation(int relative_degrees)
 {
 	double xSize = getSize().x;
 	double ySize = getSize().y;
-	double radius = std::sqrt(std::pow(xSize, 2) + std::pow(ySize, 2)) / 2;
-	double degreeFix = std::atan(xSize / ySize) * 180 / M_PI; //- std::pow(radius, 2)) / (getSize().x * getSize().y / 2));
+	// find radius
+	double radius = std::sqrt(std::pow(ySize, 2) + std::pow(xSize, 2)) / 2;
+	// find real degree rotation
+	double degreeFix = std::atan2(xSize , ySize) * 180 / M_PI;
+	// find original center
 	double position_x = std::cos((360 - (90 - degreeFix)) * M_PI / 180) * radius;
 	double position_y = std::sin((360 - (90 - degreeFix)) * M_PI / 180) * radius;
 	double degrees = relative_degrees - (90 - degreeFix);
-
+	// find current center
 	double x = std::cos(degrees * M_PI / 180) * radius;
 	double y = std::sin(degrees * M_PI / 180) * radius;
-	std::cout << xSize / ySize << std::endl;
-	std::cout << degrees << std::endl;
-	std::cout << std::cos(degrees * M_PI / 180) << std::endl;
-	std::cout << degreeFix << std::endl;
-	//std::cout << x - position_x << std::endl;
+	// fix after rotation
 	m_sprite.setOrigin((y - position_y), -(x - position_x));
+	// rotate anti clockwise
 	m_sprite.rotate(-relative_degrees);
+	
 }
 
 void GUI::AnimationView::updateComponents()

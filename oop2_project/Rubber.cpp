@@ -44,13 +44,23 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 		sf::Vector2f direction;
 		direction = getPosition() - player->getPosition();
 		if (getPosition().x < player->getPosition().x) {
-			direction.x = direction.x + (1.f/3.f)*(player->getPosition().x - getPosition().x);
+			direction.x = direction.x + (0.5f)*(player->getPosition().x - getPosition().x);
+			setDirection(Direction::RIGHT);
 		}
 		else {
-			direction.x = direction.x - (1.f/3.f)*(getPosition().x - player->getPosition().x );
+			direction.x = direction.x - (0.5f)*(getPosition().x - player->getPosition().x );
+			setDirection(Direction::LEFT);
 		}
 		getInteralAcceleration().x = -direction.x*0.0000025f;
 		getInteralAcceleration().y = -direction.y*0.0000025f;
+		if ((getPosition().y >= (player->getPosition().y - getSize().y/2)
+			&& getPosition().y <= (player->getPosition().y + getSize().y/2))
+			&& getRadiusFromPlayer() <= m_radiusShot) {
+			getSpeed().x = 0;
+			getSpeed().y = 0;
+			getInteralAcceleration().x = 0;
+			getInteralAcceleration().y = 0;
+		}
 	}
 	else {
 		//m_inChase = false;
@@ -102,7 +112,6 @@ void Rubber::init()
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	m_time.start(3000, [this, &player] {
 		if (getRadiusFromPlayer() <= m_radiusShot ) {
-			std::cout << "fire" << std::endl;
 			m_tool->useTool();
 		}
 	});
