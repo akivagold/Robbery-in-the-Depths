@@ -17,15 +17,17 @@ class Rubber :
 {
 public:
 	// char
-	static const char CHAR = 'r';
+	static const char CHAR = 's';
 	// constructor
-	explicit Rubber(GameScreen& gameScreen, int numOfLife = 0);
+	explicit Rubber(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed
 	virtual void onDirectionChanged() override;
 	// draw
 	virtual void draw() override;
 	// get gun
 	const std::shared_ptr<Tool>& getTool() const { return m_tool; }
+	// event on die
+	virtual void onDie() override;
 	// convert to string
 	virtual string toString() const override { return "Rubber: { " + NPC::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -44,6 +46,8 @@ protected:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 80;
+	// default number of life
+	static const int DEFAULT_LIFE = 6;
 	// init
 	void init();
 	// radius attak

@@ -4,7 +4,7 @@
 
 
 Rubber::Rubber(GameScreen& gameScreen, int numOfLife)
-	: NPC(gameScreen), m_tool(std::make_shared<AK47>(this))
+	: NPC(gameScreen, numOfLife), m_tool(std::make_shared<AK47>(this))
 {
 	init();
 }
@@ -19,6 +19,12 @@ void Rubber::draw()
 	m_time.checkTimer();
 }
 
+void Rubber::onDie()
+{
+	NPC::onDie();
+	//TODO setAnimation("die_crab");
+}
+
 void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
@@ -26,6 +32,11 @@ void Rubber::onCollide(Flow* flow)
 
 void Rubber::playChoice(Direction lastDirection, bool isCollided)
 {
+	NPC::playChoice(lastDirection, isCollided);
+
+	if (isDie())
+		return;
+
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getRadiusFromPlayer();
 	if (distanceFromPlayer <= m_radiusAttack) {
@@ -81,7 +92,7 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 #include <iostream>
 void Rubber::init()
 {
-	setAnimation("coin");
+	setAnimation("rubber");
 	setAnimationFrequency(70);
 	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
