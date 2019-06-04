@@ -206,13 +206,13 @@ void testWorld() {
 	GameScreen gameScreen(window);
 
 	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 8);
 	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
 	flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
 	gameScreen.getWorld().getBODS().requestAddBO(flow);
 	flow->getBorder().setSize(1);
 	flow->getBorder().setColor(sf::Color::Black);
-	flow->rotateAnimation(157);
+	flow->rotateAnimation(270);
 	
 
 	std::shared_ptr<Flow> flow1 = std::make_shared<Flow>(gameScreen);
