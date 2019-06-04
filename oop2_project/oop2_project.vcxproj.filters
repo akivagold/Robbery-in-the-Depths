@@ -150,9 +150,6 @@
     <ClCompile Include="BODS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -223,6 +220,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EditScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rubber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponGift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -380,9 +383,6 @@
     <ClInclude Include="BODS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Flow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -453,6 +453,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EditScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rubber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponGift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
