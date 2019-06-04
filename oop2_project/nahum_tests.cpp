@@ -27,6 +27,7 @@
 #include "GameMenu.h"
 #include "Wall.h"
 #include "AK47.h"
+#include "Rubber.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -94,9 +95,9 @@ void testWorld() {
 	player->setPosition(0, 0);
 	gameScreen.getWorld().getBODS().requestAddBO(player);
 
-	std::shared_ptr<MovingObject> m = player;
-	AK47 ak(m);
-	gameScreen.getWorld().addKeyDownListener([&gameScreen, &ak](sf::Keyboard::Key& keyCode) {
+	//std::shared_ptr<MovingObject> m = player;
+	//AK47 ak();
+	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		switch (keyCode)
 		{
@@ -123,7 +124,7 @@ void testWorld() {
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 		} break;
 		case sf::Keyboard::Key::Z: {
-			ak.useTool();
+			//ak.useTool();
 		} break;
 		case sf::Keyboard::Key::R: {
 			sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
@@ -135,10 +136,9 @@ void testWorld() {
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
 		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
-
-		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
-		shark->setPosition(pos);
-		gameScreen.getWorld().getBODS().requestAddBO(shark);
+		std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
+		rubber->setPosition(pos);
+		gameScreen.getWorld().getBODS().requestAddBO(rubber);
 	});
 
 

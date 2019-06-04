@@ -150,9 +150,6 @@
     <ClCompile Include="BODS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -205,6 +202,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MapCellView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rubber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,9 +368,6 @@
     <ClInclude Include="BODS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Flow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -417,6 +420,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MapCellView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rubber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,11 +2,12 @@
 #include "Bullet.h"
 #include "GameScreen.h"
 
-AK47::AK47(std::shared_ptr<MovingObject>& owner)
+AK47::AK47(Character* owner)
 	: HotWeapon(owner)
 {
 	init();
 }
+
 
 string AK47::toString() const
 {
