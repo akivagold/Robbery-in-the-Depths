@@ -24,8 +24,6 @@ public:
 	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
-	// set power of flow
-	void setFlowPower(const sf::Vector2f& flowPower) { m_flowPower = flowPower; }
 	// get flow power
 	const sf::Vector2f& getFlowPower() const { return m_flowPower; }
 	// collide events (using with double dispatch)
@@ -38,8 +36,10 @@ public:
 	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override {}
 	virtual void onCollide(Bullet* bullet) override {}
+	// set flow - power & angle
+	void setFlow(sf::Vector2f flow);
 private:
-	// angle & power
+	// flow power
 	sf::Vector2f m_flowPower;
 	// init
 	void init();
