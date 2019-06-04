@@ -174,7 +174,7 @@ void testWorld() {
 		switch (keyCode)
 		{
 		case sf::Keyboard::Key::K: {
-			//player->rotateAnimation(10);
+			player->rotateAnimation(10);
 		} break;
 		case sf::Keyboard::Key::Q: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);

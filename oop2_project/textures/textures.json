@@ -1,131 +1,142 @@
 {
-  "textures": [
-    {
-      "name": "lose",
-      "path": "cry.png"
-    },
-    {
-      "name": "win",
-      "path": "win.png"
-    },
-    {
-      "name": "life",
-      "path": "life.png"
-    },
-    {
-      "name": "coin",
-      "path": "coin.png"
-    },
-    {
-      "name": "ak47",
-      "path": "ak47.png"
-    },
-    {
-      "name": "main_background",
-      "path": "main_background.png"
-    },
-    {
-      "name": "load",
-      "path": "load.png",
-      "numOfRows": 8,
-      "numOfCols": 5,
-      "numOfImages": 36
-    },
-    {
-      "name": "flower",
-      "path": "flower.png",
-      "numOfRows": 5,
-      "numOfCols": 6,
-      "numOfImages": 27
-    },
-    {
-      "name": "sea_star",
-      "path": "sea_star.png"
-    },
-    {
-      "name": "seaweed",
-      "path": "seaweed.png"
-    },
-    {
-      "name": "rubber",
-      "path": "rubber_anim.png",
-      "numOfRows": 1,
-      "numOfCols": 8,
-      "numOfImages": 8
-    },
-    {
-      "name": "walking_crab",
-      "path": "walking_crab.png",
-      "numOfRows": 4,
-      "numOfCols": 6,
-      "numOfImages": 22
-    },
-    {
-      "name": "adhd_crab",
-      "path": "adhd_crab.png",
-      "numOfRows": 4,
-      "numOfCols": 6,
-      "numOfImages": 24
-    },
-    {
-      "name": "diver_anim",
-      "path": "diver_sprite_sheet.png",
-      "numOfRows": 2,
-      "numOfCols": 4,
-      "numOfImages": 8
-    },
-    {
-      "name": "diver",
-      "path": "diver.png"
-    },
-    {
-      "name": "shark_anim",
-      "path": "shark_sprite_sheet.png",
-      "numOfRows": 3,
-      "numOfCols": 3,
-      "numOfImages": 9
-    },
-    {
-      "name": "shark",
-      "path": "shark.png"
-    },
-    {
-      "name": "die_shark",
-      "path": "die_shark.png"
-    },
-    {
-      "name": "open_chest_anim",
-      "path": "open_chest_sprite_sheet.png",
-      "numOfRows": 3,
-      "numOfCols": 5,
-      "numOfImages": 12
-    },
-    {
-      "name": "chest",
-      "path": "chest.png"
-    },
-    {
-      "name": "bullet",
-      "path": "bullet.png"
-    },
-    {
-      "name": "wall",
-      "path": "wall.png"
-    },
-    {
-      "name": "crab",
-      "path": "crab.png"
-    },
-    {
-      "name": "die_crab",
-      "path": "die_crab.png"
-    },
-    {
-      "name": "flow",
-      "path": "flow.png",
-      "numOfRows": 2,
-      "numOfCols": 5,
-      "numOfImages": 10
-    }
-  ]
+    "textures": [
+        {
+            "name": "lose",
+            "path": "cry.png"
+        },
+        {
+            "name": "win",
+            "path": "win.png"
+        },
+        {
+            "name": "life",
+            "path": "life.png"
+        },
+        {
+            "name": "coin",
+            "path": "coin.png"
+        },
+        {
+            "name": "ak47",
+            "path": "ak47.png"
+        },
+        {
+            "name": "main_background",
+            "path": "main_background.png"
+        },
+        {
+            "name": "load",
+            "path": "load.png",
+            "numOfRows": 8,
+            "numOfCols": 5,
+            "numOfImages": 36
+        },
+        {
+            "name": "flower",
+            "path": "flower.png",
+            "numOfRows": 5,
+            "numOfCols": 6,
+            "numOfImages": 27
+        },
+        {
+            "name": "sea_star",
+            "path": "sea_star.png"
+        },
+        {
+            "name": "seaweed",
+            "path": "seaweed.png"
+        },
+        {
+            "name": "rubber_fire",
+            "path": "rubber_fire_anim.png",
+            "numOfRows": 1,
+            "numOfCols": 8,
+            "numOfImages": 8
+        },
+        {
+            "name": "rubber_swim",
+            "path": "rubber_swim_anim.png",
+            "numOfRows": 2,
+            "numOfCols": 9,
+            "numOfImages": 10
+        },
+        {
+            "name": "rubber_die",
+            "path": "rubber_die.png"
+        },
+        {
+            "name": "walking_crab",
+            "path": "walking_crab.png",
+            "numOfRows": 4,
+            "numOfCols": 6,
+            "numOfImages": 22
+        },
+        {
+            "name": "adhd_crab",
+            "path": "adhd_crab.png",
+            "numOfRows": 4,
+            "numOfCols": 6,
+            "numOfImages": 24
+        },
+        {
+            "name": "diver_anim",
+            "path": "diver_sprite_sheet.png",
+            "numOfRows": 2,
+            "numOfCols": 4,
+            "numOfImages": 8
+        },
+        {
+            "name": "diver",
+            "path": "diver.png"
+        },
+        {
+            "name": "shark_anim",
+            "path": "shark_sprite_sheet.png",
+            "numOfRows": 3,
+            "numOfCols": 3,
+            "numOfImages": 9
+        },
+        {
+            "name": "shark",
+            "path": "shark.png"
+        },
+        {
+            "name": "die_shark",
+            "path": "die_shark.png"
+        },
+        {
+            "name": "open_chest_anim",
+            "path": "open_chest_sprite_sheet.png",
+            "numOfRows": 3,
+            "numOfCols": 5,
+            "numOfImages": 12
+        },
+        {
+            "name": "chest",
+            "path": "chest.png"
+        },
+        {
+            "name": "bullet",
+            "path": "bullet.png"
+        },
+        {
+            "name": "wall",
+            "path": "wall.png"
+        },
+        {
+            "name": "crab",
+            "path": "crab.png"
+        },
+        {
+            "name": "die_crab",
+            "path": "die_crab.png"
+        },
+        {
+            "name": "flow",
+            "path": "flow.png",
+            "numOfRows": 2,
+            "numOfCols": 5,
+            "numOfImages": 10
+        }
+    ]
 }

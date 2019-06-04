@@ -24,11 +24,6 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 	}
 }
 
-void Bullet::onDirectionChanged()
-{
-	
-}
-
 void Bullet::init()
 {
 	//m_lastDirection = getDirection();

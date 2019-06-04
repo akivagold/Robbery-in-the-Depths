@@ -21,7 +21,7 @@ public:
 	virtual void useTool() override;
 	// check if can use
 	virtual bool canUsingTool() const override { return (m_ammo > 0); }
-	//convert to string
+	// convert to string
 	virtual string toString() const override;
 protected:
 	// constructor
