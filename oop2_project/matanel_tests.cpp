@@ -218,8 +218,6 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	gameScreen.getWorld().getCamera().zoom(0.5f);
-
 	// run game
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
