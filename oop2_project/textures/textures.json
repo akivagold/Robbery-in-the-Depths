@@ -47,6 +47,13 @@
       "path": "seaweed.png"
     },
     {
+      "name": "rubber",
+      "path": "rubber_anim.png",
+      "numOfRows": 1,
+      "numOfCols": 8,
+      "numOfImages": 8
+    },
+    {
       "name": "walking_crab",
       "path": "walking_crab.png",
       "numOfRows": 4,

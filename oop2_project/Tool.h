@@ -1,7 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include "MovingObject.h"
+#include "Character.h"
 
 
 //---- using section --------
@@ -18,7 +18,7 @@ public:
 	// check if can use tool
 	virtual bool canUsingTool() const = 0;
 	//get my owner
-	const std::shared_ptr<MovingObject>& getMyOwner() const { return m_owner; }
+	Character* getMyOwner() { return m_owner; }
 	// get tool name
 	const string& getToolName() const { return m_toolName; }
 	// set tool name
@@ -27,10 +27,10 @@ public:
 	virtual string toString() const;
 protected:
 	// constructor
-	explicit Tool(std::shared_ptr<MovingObject>& object, string toolName = " ");
+	explicit Tool(Character* object, string toolName = " ");
 private:
 	// owner of tool
-	std::shared_ptr<MovingObject> m_owner;
+	Character* m_owner;
 	// tool name
 	string m_toolName;
 };

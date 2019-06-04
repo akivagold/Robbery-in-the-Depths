@@ -169,7 +169,6 @@
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="CoinView.cpp" />
     <ClCompile Include="Container.cpp" />
-    <ClCompile Include="Cop.cpp" />
     <ClCompile Include="Crab.cpp" />
     <ClCompile Include="EditMapView.cpp" />
     <ClCompile Include="EditMenu.cpp" />
@@ -208,6 +207,7 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RectUtils.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
+    <ClCompile Include="Rubber.cpp" />
     <ClCompile Include="Shark.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StaticObject.cpp" />
@@ -241,7 +241,6 @@
     <ClInclude Include="Chest.h" />
     <ClInclude Include="CoinView.h" />
     <ClInclude Include="Container.h" />
-    <ClInclude Include="Cop.h" />
     <ClInclude Include="Crab.h" />
     <ClInclude Include="EditMapView.h" />
     <ClInclude Include="EditMenu.h" />
@@ -275,6 +274,7 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ParseGOIException.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Rubber.h" />
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Surprise.h" />
