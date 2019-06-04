@@ -11,6 +11,7 @@ void GameScreen::loadLevel(const LevelInfo& levelInfo)
 {
 	// TODO need clear game menu
 
+	getGameMenu()->getLevelNumTV()->setText(levelInfo.getName());
 	m_world->loadLevel(*this, levelInfo);
 }
 

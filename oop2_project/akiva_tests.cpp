@@ -24,6 +24,9 @@
 #include "World.h"
 #include "Shark.h"
 #include"Flow.h"
+#include "Wall.h"
+#include "Crab.h"
+#include "Chest.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -107,7 +110,7 @@ void testCleanScreen() {
 }
 
 
-void testWorld() {
+/*void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
 
@@ -192,6 +195,99 @@ void testWorld() {
 	Timer frameTimer;
 	frameTimer.start(10, [&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();
+	});
+	gameScreen.run(frameTimer);
+}
+*/
+void testWorld() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
+
+	GameScreen gameScreen(window);
+
+	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
+	flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow);
+	flow->getBorder().setSize(1);
+	flow->getBorder().setColor(sf::Color::Black);
+	flow->rotateAnimation(157);
+	
+
+	std::shared_ptr<Flow> flow1 = std::make_shared<Flow>(gameScreen);
+	flow1->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow1->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 4.f);
+	flow1->setFlowPower(sf::Vector2f(0.f, 0.0025f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow1);
+
+	std::shared_ptr<Flow> flow2 = std::make_shared<Flow>(gameScreen);
+	flow2->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow2->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 12.f);
+	flow2->setFlowPower(sf::Vector2f(0.f, -0.0025f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow2);
+
+	std::shared_ptr<Flow> flow3 = std::make_shared<Flow>(gameScreen);
+	flow3->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
+	flow3->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 12.f);
+	flow3->setFlowPower(sf::Vector2f(-0.0025f, 0.f));
+	gameScreen.getWorld().getBODS().requestAddBO(flow3);
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+		float offset = 10.f;
+		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+		switch (keyCode)
+		{
+		case sf::Keyboard::Key::Q: {
+			gameScreen.getWorld().getCamera().zoom(0.95f);
+		} break;
+		case sf::Keyboard::Key::W: {
+			gameScreen.getWorld().getCamera().zoom(1.05f);
+		} break;
+		case sf::Keyboard::Key::P: {
+			std::cout << "-------------------------------------------------" << std::endl;
+			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
+		} break;
+		case sf::Keyboard::Key::R: {
+			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
+			wall->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(wall);
+		} break;
+		case sf::Keyboard::Key::C: {
+			std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
+			crab->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(crab);
+		} break;
+		case sf::Keyboard::Key::T: {
+			std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
+			chest->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(chest);
+		} break;
+		}
+	});
+	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
+		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
+
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
+		shark->setPosition(pos);
+		gameScreen.getWorld().getBODS().requestAddBO(shark);
+	});
+
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.loadLevel(levelInfo);
+
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+
+	gameScreen.getWorld().getCamera().zoom(0.5f);
+
+	// run game
+	Timer frameTimer;
+	frameTimer.start(1, [&gameScreen, &player]() {
+		gameScreen.getWorld().getBODS().handleRequests();
+		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 	gameScreen.run(frameTimer);
 }

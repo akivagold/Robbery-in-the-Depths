@@ -50,6 +50,8 @@ void GUI::ImageTexture::setTexture(const sf::Texture& texture)
 		m_spriteTexture = std::make_unique<sf::Sprite>();
 	// set texture
 	m_spriteTexture->setTexture(texture);
+	sf::Vector2u textureSize = m_spriteTexture->getTexture()->getSize();
+	m_spriteTexture->setTextureRect(sf::IntRect(0, 0, textureSize.x, textureSize.y));
 	updateBounds(m_bounds);
 }
 

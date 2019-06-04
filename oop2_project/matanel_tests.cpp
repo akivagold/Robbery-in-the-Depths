@@ -29,6 +29,8 @@
 #include "Chest.h"
 #include "EditMapView.h"
 #include "Flow.h"
+#include "EditMenu.h"
+#include "EditScreen.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -58,6 +60,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testEditMenu();
 void testEditor();
 void testBox2DLib();
 void testWorld();
@@ -85,8 +88,10 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		
 		//testEditor();
 		testWorld();
+		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
 		//testGameObjectView();
@@ -104,22 +109,32 @@ void matanel_main()
 		ErrorDialog::show(ex.what());
 	}
 }
+
+
+
 void testEditor() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
 	// create editor
-	EditMapView emv(window);
+	EditScreen editScreen(window);
 
 	// load level info
 	LevelFileManager lfm;
 	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
-	emv.importLevelInfo(levelInfo);
+	editScreen.getEditMapView()->importLevelInfo(levelInfo);
 
-	emv.setEditMode(EditMapView::EditMode::Add);
-	emv.setAddChar('p');
+	editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	});
+	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
+	});
 
-	emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
+	//emv.setEditMode(EditMapView::EditMode::Add);
+	//emv.setAddChar('p');
+
+	/*emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
 		switch (keyCode)
 		{
 			case sf::Keyboard::Key::A: {
@@ -133,25 +148,9 @@ void testEditor() {
 				emv.setEditMode(EditMapView::EditMode::None);
 			} break;
 		}
-	});
+	});*/
 
-	//emv.getViewAt({ 0,0 })->setChar('p');
-
-	// run window
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			emv.handleEvent(event);
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		window.clear();
-		emv.draw();
-		window.display();
-	}
+	editScreen.run();
 }
 
 
@@ -219,8 +218,6 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	gameScreen.getWorld().getCamera().zoom(0.5f);
-
 	// run game
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
@@ -228,6 +225,37 @@ void testWorld() {
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 	gameScreen.run(frameTimer);
+}
+
+void testEditMenu() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+	// add edit menu
+	std::shared_ptr<EditMenu> em = std::make_shared<EditMenu>(window);
+	mainLayout.addView(em);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
+	}
 }
 
 void testBODS() {

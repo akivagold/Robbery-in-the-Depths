@@ -3,6 +3,8 @@
 #include "View.h"
 #include "Timer.h"
 #include "TextureInfo.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 namespace GUI {
 /*
@@ -36,6 +38,7 @@ public:
 	bool isFlipped() const { return m_isFlipped; }
 	// convert to string
 	virtual string toString() const override;
+	void rotateAnimation(int degrees);
 protected:
 	// update components
 	virtual void updateComponents();

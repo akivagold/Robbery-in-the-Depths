@@ -2,6 +2,7 @@
 //---- include section ------
 #include <string>
 #include "MovingObject.h"
+#include "StopWatch.h"
 
 //---- using section --------
 using std::string;
@@ -18,9 +19,13 @@ public:
 	// get number of life
 	int getNumOfLife() const { return m_numOfLife; }
 	// check if has no life
-	bool isDie() const { return (m_numOfLife == 0); }
+	bool isDie() const { return m_isDie; }
+	// draw
+	virtual void draw() override;
 	// event on die
-	// TODO virtual void onDie() = 0;
+	virtual void onDie();
+	// die
+	void die() { setNumOfLife(0); }
 	// convert to string
 	virtual string toString() const override;
 	// check if is up directions
@@ -34,9 +39,19 @@ public:
 protected:
 	// constructor
 	explicit Character(GameScreen& gameScreen, int numOfLife = 0);
+	// the object choose where to go
+	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
+	// time before vanish when die
+	static const int DIE_VANISH_TIME = 10000;
 	// number of life
 	int m_numOfLife;
+	// die flag
+	bool m_isDie;
+	// vanish stopWatch
+	StopWatch m_vanishSW;
+
+	using MovingObject::suicide;
 };
 
 

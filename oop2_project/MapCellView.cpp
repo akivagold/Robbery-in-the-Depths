@@ -32,22 +32,22 @@ void MapCellView::updateImage(char ch)
 			getImage().setColor(sf::Color::Transparent);
 		} break;
 		case Player::CHAR: {
-			getImage().setTexture("coin"); // TODO change
+			getImage().setTexture("diver");
 		} break;
 		case Crab::CHAR: {
-			getImage().setTexture("walking_crab");
+			getImage().setTexture("crab");
 		} break;
 		case Wall::CHAR: {
-			getImage().setTexture("seaweed"); // TODO change
+			getImage().setTexture("wall");
 		} break;
 		case Chest::CHAR: {
-			getImage().setTexture("lose"); // TODO change
+			getImage().setTexture("chest");
 		} break;
 	/*	case Rubber::CHAR: {
 			getImage().setTexture("coin"); // TODO change
 		} break;*/
 		case Shark::CHAR: {
-			getImage().setTexture("life"); // TODO change
+			getImage().setTexture("shark");
 		} break;
 		default:
 			throw ParseLevelException("Cannot parse board object with char=" + string(1, ch));

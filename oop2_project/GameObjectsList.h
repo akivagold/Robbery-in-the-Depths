@@ -1,7 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include "VerticalLayout.h"
+#include "HorizontalLayout.h"
 #include "GameObjectView.h"
 
 //---- using section --------
@@ -11,11 +11,11 @@ using std::string;
  * GameObjectsList class
  */
 class GameObjectsList
-	: public GUI::VerticalLayout<GameObjectView>
+	: public GUI::HorizontalLayout<GameObjectView>
 {
 public:
 	// base class
-	using BaseClass = GUI::VerticalLayout<GameObjectView>;
+	using BaseClass = GUI::HorizontalLayout<GameObjectView>;
 	// constructor
 	explicit GameObjectsList(sf::RenderWindow& window);
 	// add game object view click listener
