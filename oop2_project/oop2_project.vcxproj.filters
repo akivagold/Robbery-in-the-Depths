@@ -225,7 +225,7 @@
     <ClCompile Include="Rubber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WeaponGift.cpp">
+    <ClCompile Include="ToolGift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -458,7 +458,7 @@
     <ClInclude Include="Rubber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeaponGift.h">
+    <ClInclude Include="ToolGift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

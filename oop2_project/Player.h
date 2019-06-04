@@ -21,13 +21,20 @@ public:
 	// constructor
 	explicit Player(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// add new tool
-	void addTool(std::shared_ptr<Tool> tool) { m_tools.push_back(tool); }
+	void addTool(std::shared_ptr<Tool> tool);
+	// check if the player without tools
+	bool isWithoutTools() const { return (m_tools.size() == 0); }
+	// check if the player without tools
+	bool haveCurrTool() const { return bool(m_currTool); }
 	// get number of tools
 	int getNumOfTool() const { return int(m_tools.size()) - 1; }
 	// get score
 	int getNumOfScore() const { return m_numOfScore; }
 	// set score
 	void setNumOfScore(int numOfScore);
+	// check if player have tool
+	bool haveTool(Tool::ToolType toolType) const;
+	bool haveTool(Tool* tool) const;
 	// change tool
 	void changeTool(const std::shared_ptr<Tool>& tool);
 	// get current tool

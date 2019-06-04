@@ -9,6 +9,13 @@ Player::Player(GameScreen& gameScreen, int numOfLife)
 	init();
 }
 
+void Player::addTool(std::shared_ptr<Tool> tool)
+{
+	if (isWithoutTools())
+		changeTool(tool);
+	m_tools.push_back(tool);
+}
+
 void Player::setNumOfScore(int numOfScore)
 {
 	if (numOfScore < 0)
@@ -17,9 +24,23 @@ void Player::setNumOfScore(int numOfScore)
 	getGameScreen().getGameMenu()->getCoinView()->setNumOfCoins(numOfScore);
 }
 
+bool Player::haveTool(Tool::ToolType toolType) const
+{
+	auto it = std::find_if(m_tools.cbegin(), m_tools.cend(), [toolType](const std::shared_ptr<Tool>& currTool) {
+		return (currTool->getToolType() == toolType);
+	});
+	return (it != m_tools.cend());
+}
+
+bool Player::haveTool(Tool* tool) const
+{
+	return haveTool(tool->getToolType());
+}
+
 void Player::changeTool(const std::shared_ptr<Tool>& tool)
 {
-	//TODO
+	m_currTool = tool;
+	getGameScreen().getGameMenu()->getToolView()->setCurrTool(tool);
 }
 
 void Player::setNumOfLife(int numOfLife)
@@ -64,7 +85,7 @@ void Player::playChoice(Direction lastDirection, bool isCollided)
 string Player::toString() const
 {
 	string str = "Player: { currentTool=";
-	if (!m_currTool)
+	if (!haveCurrTool())
 		str += "None";
 	else
 		str += m_currTool->toString();
@@ -101,6 +122,14 @@ void Player::init()
 			case sf::Keyboard::Key::Down: {
 				getInteralAcceleration().y = offset;
 				setDirection(Direction::DOWN);
+			} break;
+			case sf::Keyboard::Key::Space: {
+				if (haveCurrTool()) {
+					if (m_currTool->canUsingTool()) {
+						m_currTool->useTool();
+						// TODO update ammo in menu
+					}
+				}
 			} break;
 		}
 	});

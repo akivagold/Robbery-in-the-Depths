@@ -223,7 +223,7 @@
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="WeaponGift.cpp" />
+    <ClCompile Include="ToolGift.cpp" />
     <ClCompile Include="WorkingTool.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -281,7 +281,7 @@
     <ClInclude Include="Surprise.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Weapon.h" />
-    <ClInclude Include="WeaponGift.h" />
+    <ClInclude Include="ToolGift.h" />
     <ClInclude Include="WorkingTool.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="~main_tests.h" />
