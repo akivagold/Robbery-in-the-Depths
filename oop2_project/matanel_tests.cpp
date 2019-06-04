@@ -174,7 +174,7 @@ void testWorld() {
 		switch (keyCode)
 		{
 		case sf::Keyboard::Key::K: {
-			//player->rotateAnimation(10);
+			player->rotateAnimation(10);
 		} break;
 		case sf::Keyboard::Key::Q: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
@@ -217,8 +217,6 @@ void testWorld() {
 		shark->setPosition(pos);
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
-
-	gameScreen.getWorld().getCamera().zoom(0.5f);
 
 	// run game
 	Timer frameTimer;

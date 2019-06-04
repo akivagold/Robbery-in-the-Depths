@@ -11,7 +11,7 @@ class Shark;
 class Chest;
 class Crab;
 class Wall;
-class Cop;
+class Rubber;
 class Flow;
 class Bullet;
 class Chest;
@@ -70,7 +70,7 @@ public:
 	virtual void onCollide(Player* player) = 0;
 	virtual void onCollide(Shark* shark) = 0;
 	virtual void onCollide(Crab* crab) = 0;
-	virtual void onCollide(Cop* cop) = 0;
+	virtual void onCollide(Rubber* rubber) = 0;
 	virtual void onCollide(Chest* chest) = 0;
 	virtual void onCollide(Wall* wall) = 0;
 	virtual void onCollide(Flow* flow) = 0;

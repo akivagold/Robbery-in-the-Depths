@@ -23,7 +23,7 @@ public:
 	virtual void onCollide(Player* player) override {} // TODO use this
 	virtual void onCollide(Shark* shark) override {} // TODO use this
 	virtual void onCollide(Crab* crab) override {} // TODO use this
-	virtual void onCollide(Cop* cop) override {} // TODO use this
+	virtual void onCollide(Rubber* rubber) override {} // TODO use this
 	virtual void onCollide(Chest* chest) override {} // TODO use this
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
@@ -32,11 +32,9 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
-	virtual void onDirectionChanged() override; // TODO
+	virtual void onDirectionChanged() override { }
 private:
 	// init
 	void init();
-	// last direction
-	//Direction m_lastDirection;
 };
 

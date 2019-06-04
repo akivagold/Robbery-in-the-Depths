@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Shark.h"
 #include "Crab.h"
-#include "Cop.h"
+
 
 //---- using section --------
 using std::string;
@@ -33,7 +33,7 @@ public:
 	virtual void onCollide(Player* player) override {}
 	virtual void onCollide(Shark* shark) override {}
 	virtual void onCollide(Crab* crab) override {}
-	virtual void onCollide(Cop* cop) override {}
+	virtual void onCollide(Rubber* rubber) override {}
 	virtual void onCollide(Chest* chest) override {}
 	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override {}

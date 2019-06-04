@@ -2,29 +2,34 @@
 //---- include section ------
 #include <string>
 #include "NPC.h"
+#include "AK47.h"
+#include "Tool.h"
+#include "Timer.h"
 
 //---- using section --------
 using std::string;
 
 /*
- * Shark class
+ * Rubber class
  */
-class Shark
-	: public NPC
+class Rubber :
+	public NPC
 {
 public:
 	// char
-	static const char CHAR = 'k';
+	static const char CHAR = 's';
 	// constructor
-	explicit Shark(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
+	explicit Rubber(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed
 	virtual void onDirectionChanged() override;
-	// event on die
-	virtual void onDie() override;
 	// draw
 	virtual void draw() override;
+	// get gun
+	const std::shared_ptr<Tool>& getTool() const { return m_tool; }
+	// event on die
+	virtual void onDie() override;
 	// convert to string
-	virtual string toString() const override { return "Shark: { " + NPC::toString() + " }"; }
+	virtual string toString() const override { return "Rubber: { " + NPC::toString() + " }"; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {} // TODO use this
@@ -40,17 +45,18 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// draw priority
-	static const int DRAW_PRIORITY = 70;
+	static const int DRAW_PRIORITY = 80;
 	// default number of life
-	static const int DEFAULT_LIFE = 3;
-	// radius attack
-	float m_radiusAttack;
-	Timer m_time;
-	bool m_inChase;
+	static const int DEFAULT_LIFE = 6;
 	// init
 	void init();
-	// get shark size
-	static const sf::Vector2i& getSharkSize();	
+	// radius attak
+	float m_radiusAttack;
+	// radius shot
+	float m_radiusShot;
+	// gun
+	std::shared_ptr<Tool> m_tool;
+	// time
+	Timer m_time;
 };
-
 

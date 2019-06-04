@@ -3,7 +3,7 @@
 #include "Wall.h"
 
 // init
-const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*4.f;
+const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;
 
 Crab::Crab(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife), m_isPlayerInRadius(false)

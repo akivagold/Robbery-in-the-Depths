@@ -3,7 +3,6 @@
 #include "Wall.h"
 #include "Chest.h"
 #include "Shark.h"
-#include "Cop.h"
 #include "Crab.h"
 #include "ParseLevelException.h"
 
@@ -54,9 +53,9 @@ std::shared_ptr<BoardObject> World::createBO(GameScreen& gameScreen, char ch)
 		case Chest::CHAR: {
 			boardObj = std::make_shared<Chest>(gameScreen);
 		} break;
-		case Cop::CHAR: {
+		/*case Cop::CHAR: {
 			// TODO boardObj = std::make_shared<Cop>(gameScreen);
-		} break;
+		} break;*/
 		case Shark::CHAR: {
 			boardObj = std::make_shared<Shark>(gameScreen);
 		} break;
@@ -84,6 +83,7 @@ void World::init()
 	getBackground().setColor(sf::Color(155, 236, 255));
 	getBorder().setColor(sf::Color::Blue);
 	getBorder().setSize(1);
+	getCamera().zoom(0.3f);
 }
 
 

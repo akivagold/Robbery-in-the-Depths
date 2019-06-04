@@ -1,9 +1,10 @@
 #include "Tool.h"
 
 
-Tool::Tool(std::shared_ptr<MovingObject>& object, string toolName)
+Tool::Tool(Character* object, string toolName)
 	: m_owner(object)
 {}
+
 
 string Tool::toString() const
 {
