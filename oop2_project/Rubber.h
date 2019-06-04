@@ -39,7 +39,9 @@ public:
 	virtual void onCollide(Chest* chest) override {} // TODO use this
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override;
-	virtual void onCollide(Bullet* bullet) override {} // TODO use this
+	virtual void onCollide(Bullet* bullet) override; // TODO use this
+	// get radius shot
+	float getRadiusShot() { return RADIUS_SHOT; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -47,13 +49,14 @@ private:
 	// draw priority
 	static const int DRAW_PRIORITY = 80;
 	// default number of life
-	static const int DEFAULT_LIFE = 6;
+	static const int DEFAULT_LIFE = 3;
 	// init
 	void init();
+	
 	// radius attak
-	float m_radiusAttack;
+	static const float RADIUS_ATTACK;
 	// radius shot
-	float m_radiusShot;
+	static const float RADIUS_SHOT;
 	// gun
 	std::shared_ptr<Tool> m_tool;
 	// time

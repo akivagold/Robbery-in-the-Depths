@@ -1,7 +1,7 @@
 #include "Projectile.h"
 
-Projectile::Projectile(GameScreen& gameScreen, Direction direction)
-	: MovingObject(gameScreen)
+Projectile::Projectile(GameScreen& gameScreen, Character* owner,  Direction direction)
+	: MovingObject(gameScreen), m_owner(owner)
 {
 	init(direction);
 }
