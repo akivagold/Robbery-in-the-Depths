@@ -1,6 +1,8 @@
 //---- include section ------
 #include "AnimationView.h"
 #include "TextureManager.h"
+#include "BoardObject.h"
+#include <iostream>
 
 GUI::AnimationView::AnimationView(sf::RenderWindow& window)
 	: View(window), m_currentImageIndex(0), m_textureInfo(nullptr), m_isFlipped(false)
@@ -45,7 +47,7 @@ void GUI::AnimationView::setAnimationFrequency(int frameMillis)
 			else {
 				this->setCurrentImage(this->m_currentImageIndex + 1);
 			}
-		}		
+		}
 	});
 }
 
@@ -53,7 +55,7 @@ void GUI::AnimationView::draw()
 {
 	View::draw();
 
-	if (isShow()&&isHaveAnimation()&&(m_textureInfo->getNumOfImages() > 0)) {
+	if (isShow() && isHaveAnimation() && (m_textureInfo->getNumOfImages() > 0)) {
 		// check timer before get current image
 		m_timer.checkTimer();
 		// draw current image
@@ -77,6 +79,27 @@ string GUI::AnimationView::toString() const
 	return str;
 }
 
+void GUI::AnimationView::rotateAnimation(int relative_degrees)
+{
+	double xSize = getSize().x;
+	double ySize = getSize().y;
+	double radius = std::sqrt(std::pow(xSize, 2) + std::pow(ySize, 2)) / 2;
+	double degreeFix = std::atan(xSize / ySize) * 180 / M_PI; //- std::pow(radius, 2)) / (getSize().x * getSize().y / 2));
+	double position_x = std::cos((360 - (90 - degreeFix)) * M_PI / 180) * radius;
+	double position_y = std::sin((360 - (90 - degreeFix)) * M_PI / 180) * radius;
+	double degrees = relative_degrees - (90 - degreeFix);
+
+	double x = std::cos(degrees * M_PI / 180) * radius;
+	double y = std::sin(degrees * M_PI / 180) * radius;
+	std::cout << xSize / ySize << std::endl;
+	std::cout << degrees << std::endl;
+	std::cout << std::cos(degrees * M_PI / 180) << std::endl;
+	std::cout << degreeFix << std::endl;
+	//std::cout << x - position_x << std::endl;
+	m_sprite.setOrigin((y - position_y), -(x - position_x));
+	m_sprite.rotate(-relative_degrees);
+}
+
 void GUI::AnimationView::updateComponents()
 {
 	View::updateComponents();
@@ -95,7 +118,7 @@ void GUI::AnimationView::updateSprite()
 		// calculate area
 		int numOfRow = m_currentImageIndex / m_textureInfo->getNumOfCols();
 		int numOfCol = m_currentImageIndex % m_textureInfo->getNumOfCols();
-		
+
 		float pixelsPerRow = (float)m_textureInfo->getTexture().getSize().y / (float)m_textureInfo->getNumOfRows();
 		float pixelsPerCol = (float)m_textureInfo->getTexture().getSize().x / (float)m_textureInfo->getNumOfCols();
 		sf::IntRect imageBounds((int)pixelsPerCol*numOfCol, (int)pixelsPerRow*numOfRow, (int)pixelsPerCol, (int)pixelsPerRow);
@@ -110,5 +133,5 @@ void GUI::AnimationView::updateSprite()
 			m_sprite.setPosition(getPosition().x + getSize().x, getPosition().y);
 		}
 		m_sprite.setScale(scaleX, scaleY);
-	}	
+	}
 }

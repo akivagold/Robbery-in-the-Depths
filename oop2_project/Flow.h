@@ -43,5 +43,6 @@ private:
 	sf::Vector2f m_flowPower;
 	// init
 	void init();
+	static const int ANIM_FREQUENCY = 100;
 };
 

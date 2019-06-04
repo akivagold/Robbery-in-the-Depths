@@ -9,6 +9,7 @@ Flow::Flow(GameScreen& gameScreen)
 
 void Flow::init()
 {
-	setAnimation("sea_star");
+	setAnimation("flow");
+	setAnimationFrequency(ANIM_FREQUENCY);
 }
 
