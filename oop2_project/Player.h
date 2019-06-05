@@ -65,6 +65,8 @@ private:
 	static const int SWIM_ANIM_FREQUENCY = 30;
 	// stand animation frequency
 	static const int STAND_ANIM_FREQUENCY = 100;
+	// players default accelration
+	static const float PLAYER_ACCELRATION;
 	// default number of life
 	static const int DEFAULT_LIFE = 6;
 	// my tools
