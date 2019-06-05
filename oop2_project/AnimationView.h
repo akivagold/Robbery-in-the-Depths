@@ -41,7 +41,7 @@ public:
 	// set transparency (number from 0 to 255)
 	void setTransparency(sf::Uint32 transparency);
 	// get transparency
-	sf::Uint32 getTransparency() const { m_sprite.getColor().a; }
+	sf::Uint32 getTransparency() const { return m_sprite.getColor().a; }
 	// rotate animation
 	void rotateAnimation(float degrees);
 protected:
