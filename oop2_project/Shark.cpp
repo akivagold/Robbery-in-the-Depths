@@ -41,6 +41,7 @@ void Shark::onCollide(Flow* flow)
 	setExternaAlcceleration(flow->getFlowPower());
 }
 
+
 void Shark::onCollide(Bullet* bullet)
 {
 	if (!isDie()) {
@@ -58,14 +59,6 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 
 	if (isCollided) {
 		setDirection(getRandomDirect());
-	/*	if(isUpDirections(lastDirection))
-			setDirection(getRandomDownDirections());
-		if (isDownDirections(lastDirection))
-			setDirection(getRandomUPDirections());
-		if (isRightDirections(lastDirection))
-			setDirection(getRandomLeftDirections());
-		if (isLeftDirections(lastDirection))
-			setDirection(getRandomRightDirections());*/
 	}
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getDistance(player);
@@ -74,6 +67,11 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 		sf::Vector2f direction = getPosition() - player->getPosition();
 		getInteralAcceleration().x = -direction.x*0.0000025f;
 		getInteralAcceleration().y = -direction.y*0.0000025f;
+		if (getPosition().x < player->getPosition().x) {
+			setDirection(Direction::RIGHT);
+		}
+		else
+			setDirection(Direction::LEFT);
 	}
 	else{
 		m_inChase = false;

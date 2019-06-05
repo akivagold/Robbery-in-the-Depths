@@ -2,7 +2,7 @@
 #include "GameScreen.h"
 
 
-const sf::Vector2f MovingObject::MAX_SPEED_DEFAULT = sf::Vector2f(getDefaultSize().x * 10, getDefaultSize().y * 10);
+const sf::Vector2f MovingObject::MAX_SPEED_DEFAULT = sf::Vector2f(getDefaultSize().x * 10.f, getDefaultSize().y * 10.f);
 
 sf::Vector2f MovingObject::getFriction() const
 {

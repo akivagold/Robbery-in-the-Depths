@@ -3,6 +3,7 @@
 #include <string>
 #include "MovingObject.h"
 #include "StopWatch.h"
+class Tool;
 
 //---- using section --------
 using std::string;
@@ -30,6 +31,8 @@ public:
 	void die() { setNumOfLife(0); }
 	// convert to string
 	virtual string toString() const override;
+	// event on update tool
+	virtual void onToolUpdated(Tool* tool) {}
 	// check if is up directions
 	static bool isUpDirections(Direction direct);
 	// check if is right directions
@@ -45,7 +48,7 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// time before vanish when die
-	static const int DIE_VANISH_TIME = 10000;
+	static const int DIE_VANISH_TIME = 5000;
 	// number of life
 	int m_numOfLife;
 	// die flag

@@ -24,6 +24,16 @@ void Player::setNumOfScore(int numOfScore)
 	getGameScreen().getGameMenu()->getCoinView()->setNumOfCoins(numOfScore);
 }
 
+const std::shared_ptr<Tool>& Player::getTool(Tool::ToolType toolType) const
+{
+	auto it = std::find_if(m_tools.cbegin(), m_tools.cend(), [toolType](const std::shared_ptr<Tool>& currTool) {
+		return (currTool->getToolType() == toolType);
+	});
+	if (it == m_tools.cend())
+		throw std::out_of_range("Cannot find the tool type " + std::to_string(toolType));
+	return *it;
+}
+
 bool Player::haveTool(Tool::ToolType toolType) const
 {
 	auto it = std::find_if(m_tools.cbegin(), m_tools.cend(), [toolType](const std::shared_ptr<Tool>& currTool) {
@@ -70,9 +80,14 @@ void Player::useCurrTool()
 	if (haveCurrTool()) {
 		if (m_currTool->canUsingTool()) {
 			m_currTool->useTool();
-			getGameScreen().getGameMenu()->getToolView()->updateUseLimit();
 		}
 	}
+}
+
+void Player::onToolUpdated(Tool* tool)
+{
+	if(tool == m_currTool.get())
+		getGameScreen().getGameMenu()->getToolView()->updateUseLimit();
 }
 
 void Player::onCollide(Chest* chest)

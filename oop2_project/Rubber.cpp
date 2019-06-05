@@ -4,7 +4,7 @@
 #include "Bullet.h"
 
 // init
-const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*15.f;
+const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*10.f;
 const float Rubber::RADIUS_SHOT = static_cast<float>(BoardObject::getDefaultSize().x)*5.f;
 
 Rubber::Rubber(GameScreen& gameScreen, int numOfLife)
@@ -43,8 +43,9 @@ void Rubber::onDie()
 void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+	m_isInRadiusShot = true;
 }
-#include <iostream>
+
 void Rubber::onCollide(Bullet* bullet)
 {
 
@@ -52,8 +53,7 @@ void Rubber::onCollide(Bullet* bullet)
 		return;
 
 	if (bullet->getMyOwner() != this) {
-		std::cout << "life--" << std::endl;
-		setNumOfLife(getNumOfLife() - 1);
+		decreaseLife(bullet->getDamage());
 		bullet->suicide();
 	}
 	
@@ -66,41 +66,11 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 
 	if (isDie())
 		return;
-
+	
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getRadiusFromPlayer();
 	if (distanceFromPlayer <= RADIUS_ATTACK) {
-		m_isInRadiusfromPlayer = true;
-		sf::Vector2f direction;
-		direction = getPosition() - player->getPosition();
-		if (getPosition().x < player->getPosition().x) {
-			direction.x = direction.x + (0.5f)*(player->getPosition().x - getPosition().x);
-			setDirection(Direction::RIGHT);
-		}
-		else {
-			direction.x = direction.x - (0.5f)*(getPosition().x - player->getPosition().x );
-			setDirection(Direction::LEFT);
-		}
-		getInteralAcceleration().x = -direction.x*0.0000025f;
-		getInteralAcceleration().y = -direction.y*0.0000025f;
-		
-		// prepare to shot
-		if ((getPosition().y >= (player->getPosition().y - getSize().y/2)
-			&& getPosition().y <= (player->getPosition().y + getSize().y/2))
-			&& getRadiusFromPlayer() <= RADIUS_SHOT) {
-			setAnimation("rubber_fire");
-			m_isInRadiusShot = true;
-			getSpeed().x = 0;
-			getSpeed().y = 0;
-			getInteralAcceleration().x = 0;
-			getInteralAcceleration().y = 0;
-		}
-		else {
-			if (m_isInRadiusShot) {
-				setAnimation("rubber_swim");
-				m_isInRadiusShot = false;
-			}
-		}
+		inRadiusFromPlayer();
 	}
 	else {
 		m_isInRadiusfromPlayer = false;
@@ -145,12 +115,14 @@ void Rubber::init()
 	setAnimation("rubber_swim");
 	setAnimationFrequency(70);
 	getTool()->setInfLimit();
-	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
-	//setDirection(getRandomDirect());
-	
+	setDirection(getRandomDirect());
+
 	int changeDirectionTime = 2000 + rand() % 4000;
 	m_time.start(changeDirectionTime, [this] {
+		if (isDie())
+			return;
+
 		// rand direction
 		if (!m_isInRadiusfromPlayer)
 			setDirection(getRandomDirect());
@@ -161,4 +133,42 @@ void Rubber::init()
 		}
 	});
 
+}
+
+void Rubber::inRadiusFromPlayer()
+{
+	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
+	m_isInRadiusfromPlayer = true;
+	sf::Vector2f direction;
+	direction = getPosition() - player->getPosition();
+	if (getPosition().x < player->getPosition().x) {
+		direction.x = direction.x + (0.5f)*(player->getPosition().x - getPosition().x);
+		setDirection(Direction::RIGHT);
+	}
+	else {
+		direction.x = direction.x - (0.5f)*(getPosition().x - player->getPosition().x);
+		setDirection(Direction::LEFT);
+	}
+	getInteralAcceleration().x = -direction.x*0.0000025f;
+	getInteralAcceleration().y = -direction.y*0.0000025f;
+
+	// prepare to shot
+	if ((getPosition().y >= (player->getPosition().y - getSize().y / 2)
+		&& getPosition().y <= (player->getPosition().y + getSize().y / 2))
+		&& getRadiusFromPlayer() <= RADIUS_SHOT) {
+		if (!m_isInRadiusShot) {
+			setAnimation("rubber_fire");
+			m_isInRadiusShot = true;
+			getSpeed().x = 0;
+		    getSpeed().y = 0;
+		}
+		getInteralAcceleration().x = 0;
+		getInteralAcceleration().y = 0;
+	}
+	else {
+		if (m_isInRadiusShot) {
+			setAnimation("rubber_swim");
+			m_isInRadiusShot = false;
+		}
+	}
 }
