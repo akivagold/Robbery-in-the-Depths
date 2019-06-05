@@ -8,7 +8,8 @@ const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSi
 const float Rubber::RADIUS_SHOT = static_cast<float>(BoardObject::getDefaultSize().x)*5.f;
 
 Rubber::Rubber(GameScreen& gameScreen, int numOfLife)
-	: NPC(gameScreen, numOfLife), m_tool(std::make_shared<AK47>(this))
+	: NPC(gameScreen, numOfLife), m_tool(std::make_shared<AK47>(this)),
+	m_isInRadiusShot(false), m_isInRadiusfromPlayer(false)
 {
 	init();
 }
@@ -46,11 +47,16 @@ void Rubber::onCollide(Flow* flow)
 #include <iostream>
 void Rubber::onCollide(Bullet* bullet)
 {
+
+	if (isDie())
+		return;
+
 	if (bullet->getMyOwner() != this) {
 		std::cout << "life--" << std::endl;
 		setNumOfLife(getNumOfLife() - 1);
+		bullet->suicide();
 	}
-	bullet->suicide();
+	
 	
 }
 
@@ -64,6 +70,7 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getRadiusFromPlayer();
 	if (distanceFromPlayer <= RADIUS_ATTACK) {
+		m_isInRadiusfromPlayer = true;
 		sf::Vector2f direction;
 		direction = getPosition() - player->getPosition();
 		if (getPosition().x < player->getPosition().x) {
@@ -82,19 +89,21 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 			&& getPosition().y <= (player->getPosition().y + getSize().y/2))
 			&& getRadiusFromPlayer() <= RADIUS_SHOT) {
 			setAnimation("rubber_fire");
-			//setAnimationFrequency(70);
+			m_isInRadiusShot = true;
 			getSpeed().x = 0;
 			getSpeed().y = 0;
 			getInteralAcceleration().x = 0;
 			getInteralAcceleration().y = 0;
 		}
 		else {
-			setAnimation("rubber_swim");
-			//setAnimationFrequency(70);
+			if (m_isInRadiusShot) {
+				setAnimation("rubber_swim");
+				m_isInRadiusShot = false;
+			}
 		}
 	}
 	else {
-		//m_inChase = false;
+		m_isInRadiusfromPlayer = false;
 		float offset = 0.00025f;
 		Direction direct = getDirection();
 		switch (direct)
@@ -135,12 +144,19 @@ void Rubber::init()
 {
 	setAnimation("rubber_swim");
 	setAnimationFrequency(70);
+	getTool()->setInfLimit();
 	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
-	setDirection(getRandomDirect());
-	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
-	m_time.start(3000, [this] {
-		if (getRadiusFromPlayer() <= getRadiusShot()) {
+	//setDirection(getRandomDirect());
+	
+	int changeDirectionTime = 2000 + rand() % 4000;
+	m_time.start(changeDirectionTime, [this] {
+		// rand direction
+		if (!m_isInRadiusfromPlayer)
+			setDirection(getRandomDirect());
+		
+		// fire
+		if (m_isInRadiusShot) {
 			m_tool->useTool();
 		}
 	});

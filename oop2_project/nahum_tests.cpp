@@ -235,7 +235,7 @@ void testWorld() {
 	});
 	gameScreen.run(frameTimer);*/
 }
-
+/*
 void testLifeView() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
@@ -288,7 +288,7 @@ void testLifeView() {
 		window.display();
 	}
 }
-
+*/
 void testCleanScreen() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
