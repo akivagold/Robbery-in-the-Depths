@@ -34,7 +34,7 @@ public:
 	virtual void onCollide(Chest* chest) override {} // TODO use this
 	virtual void onCollide(Wall* wall) override;
 	virtual void onCollide(Flow* flow) override;
-	virtual void onCollide(Bullet* bullet) override {} // TODO use this
+	virtual void onCollide(Bullet* bullet) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -44,7 +44,7 @@ private:
 	// minimum radius to see the player
 	static const float MIN_PLAYER_RADIUS;
 	// default number of life
-	static const int DEFAULT_LIFE = 3;
+	static const int DEFAULT_LIFE = 1;
 	// flag that check if player in crab radius
 	bool m_isPlayerInRadius;
 	// timer

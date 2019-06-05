@@ -1,6 +1,7 @@
 #include "Crab.h"
 #include "Flow.h"
 #include "Wall.h"
+#include "Bullet.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;
@@ -25,6 +26,9 @@ void Crab::onDie()
 
 void Crab::onCollide(Wall* wall)
 {
+	if (isDie())
+		return;
+
 	if (isAboveThen(wall->getSelf())) {
 		getInteralAcceleration().y = 0.f;
 		setPosition(getPosition().x, wall->getPosition().y - getSize().y - 2);
@@ -44,44 +48,53 @@ void Crab::onCollide(Flow* flow)
 	setExternaAlcceleration(flow->getFlowPower());
 }
 
+void Crab::onCollide(Bullet* bullet)
+{
+	if (!isDie()) {
+		decreaseLife(bullet->getDamage());
+		bullet->suicide();
+	}
+}
+
 void Crab::playChoice(Direction lastDirection, bool isCollided)
 {
 	NPC::playChoice(lastDirection, isCollided);
 
-	if (!isDie()) {
-		if (isCollided) {
-			getInteralAcceleration().y = 0;
-		}
-		else {
-			getInteralAcceleration().y = 0.00005f*getMODefSize().y;
-		}
+	if (isDie())
+		return;
 
-		if (getSpeed().y > 0.001f*getMODefSize().y) {
-			getInteralAcceleration().x = 0;
-		}
-		else {
-			if (getDirection() == Direction::RIGHT) {
-				getInteralAcceleration().x = 0.00005f*getMODefSize().x;
-			}
-			else {
-				getInteralAcceleration().x = -0.00005f*getMODefSize().x;
-			}
-		}
+	if (isCollided) {
+		getInteralAcceleration().y = 0;
+	}
+	else {
+		getInteralAcceleration().y = 0.00005f*getMODefSize().y;
+	}
 
-		// check if user in my radius
-		if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
-			if (!m_isPlayerInRadius) {
-				setAnimation("adhd_crab");
-				m_isPlayerInRadius = true;
-			}
+	if (getSpeed().y > 0.001f*getMODefSize().y) {
+		getInteralAcceleration().x = 0;
+	}
+	else {
+		if (getDirection() == Direction::RIGHT) {
+			getInteralAcceleration().x = 0.00005f*getMODefSize().x;
 		}
 		else {
-			if (m_isPlayerInRadius) {
-				setAnimation("walking_crab");
-				m_isPlayerInRadius = false;
-			}
+			getInteralAcceleration().x = -0.00005f*getMODefSize().x;
 		}
-	}	
+	}
+
+	// check if user in my radius
+	if (getRadiusFromPlayer() <= MIN_PLAYER_RADIUS) {
+		if (!m_isPlayerInRadius) {
+			setAnimation("adhd_crab");
+			m_isPlayerInRadius = true;
+		}
+	}
+	else {
+		if (m_isPlayerInRadius) {
+			setAnimation("walking_crab");
+			m_isPlayerInRadius = false;
+		}
+	}
 }
 
 void Crab::init()
