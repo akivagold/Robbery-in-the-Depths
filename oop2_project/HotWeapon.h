@@ -16,11 +16,9 @@ public:
 	// set ammo
 	void setAmmo(int ammo);
 	// get ammo
-	int getAmmo() const { return m_ammo; }
+	int getAmmo() const { return getUseLimit(); }
 	// use tool
 	virtual void useTool() override;
-	// check if can use
-	virtual bool canUsingTool() const override { return (m_ammo > 0); }
 	// convert to string
 	virtual string toString() const override;
 protected:
@@ -28,9 +26,5 @@ protected:
 	explicit HotWeapon(Character* object);
 	// fire bullet
 	virtual void fire() = 0; 
-private:
-	// ammo quantity
-	int m_ammo;
-
 };
 

@@ -16,11 +16,10 @@ string AK47::toString() const
 
 void AK47::fire()
 {
-	// crate bullet
+	// create bullet
 	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(getMyOwner()->getGameScreen(), getMyOwner()->getDirection());
 	bullet->getGameScreen().getWorld().getBODS().requestAddBO(bullet);
 	bullet->setPosition(getMyOwner()->getPosition());
-	setAmmo(getAmmo() - 1);
 }
 
 void AK47::init()

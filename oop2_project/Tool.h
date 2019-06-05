@@ -20,9 +20,9 @@ public:
 	// random tool type
 	static ToolType randToolType();
 	// use tool
-	virtual void useTool() = 0;
+	virtual void useTool();
 	// check if can use tool
-	virtual bool canUsingTool() const = 0;
+	virtual bool canUsingTool() const { return (isUseInfLimit() || m_useLimit > 0); }
 	// get tool type
 	virtual ToolType getToolType() const = 0;
 	// get my owner
@@ -33,6 +33,14 @@ public:
 	void setToolName(const string& toolName) { m_toolName = toolName; }
 	// create new tool by tool type
 	static std::shared_ptr<Tool> createTool(ToolType toolType, Character* owner);
+	// set use limit
+	void setUseLimit(int useLimitCount);
+	// get use limit
+	int getUseLimit() const;
+	// set infinity limit
+	void setInfLimit();
+	// check if using infinity limit
+	bool isUseInfLimit() const { return m_withInfLlimit; }
 	// convert to string
 	virtual string toString() const;
 protected:
@@ -43,6 +51,8 @@ private:
 	Character* m_owner;
 	// tool name
 	string m_toolName;
+	// using limit count
+	int m_useLimit;
+	// flag for infinity limit
+	bool m_withInfLlimit;
 };
-
-

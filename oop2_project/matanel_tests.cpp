@@ -205,7 +205,7 @@ void testWorld() {
 			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
-			flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
+			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		}
