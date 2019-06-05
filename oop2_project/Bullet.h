@@ -2,6 +2,8 @@
 //---- include section ------
 #include <string>
 #include "Projectile.h"
+#include "AK47.h"
+#include "Tool.h"
 
 
 //---- using section --------
@@ -15,7 +17,7 @@ class Bullet :
 {
 public:
 	// constructor
-	explicit Bullet(GameScreen& gameScreen, Direction Direction);
+	explicit Bullet(GameScreen& gameScreen, Character* owner, Direction Direction);
 	// convert to string
 	virtual string toString() const override { return "Bullet { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)

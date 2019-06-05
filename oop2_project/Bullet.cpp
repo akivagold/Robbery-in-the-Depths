@@ -1,8 +1,8 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet(GameScreen& gameScreen, Direction direction)
-	: Projectile(gameScreen, direction)
+Bullet::Bullet(GameScreen& gameScreen, Character* owner, Direction direction)
+	: Projectile(gameScreen, owner, direction)
 {
 	setDirection(direction);
 	init();
