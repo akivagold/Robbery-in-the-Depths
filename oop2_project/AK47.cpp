@@ -2,8 +2,8 @@
 #include "Bullet.h"
 #include "GameScreen.h"
 
-AK47::AK47(Character* owner)
-	: HotWeapon(owner)
+AK47::AK47(Character* owner, int ammo)
+	: HotWeapon(owner, ammo)
 {
 	init();
 }
@@ -27,6 +27,4 @@ void AK47::fire()
 }
 
 void AK47::init()
-{
-	setAmmo(20); // TODO remove this
-}
+{ }

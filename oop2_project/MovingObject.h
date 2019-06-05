@@ -57,6 +57,10 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) = 0;
 	// get friction
 	sf::Vector2f getFriction() const;
+	// set maximum speed
+	void setMaxSpeed(const sf::Vector2f& maxSpeed) { m_maxSpeed = maxSpeed; }
+	// get maximum speed
+	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
 private:
 	// direction and last direction
 	Direction m_direction, m_lastDirection;

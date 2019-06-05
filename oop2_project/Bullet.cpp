@@ -28,6 +28,7 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 void Bullet::init()
 {
 	setAnimation("bullet");
+	setDamage(DAMAGE);
 	if (getDirection() == Direction::LEFT) {
 		flipAnimation();
 	}

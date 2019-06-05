@@ -111,10 +111,12 @@ void Player::init()
 	setAnimation("diver_anim");
 	setDrawPriority(DRAW_PRIORITY);
 	setAnimationFrequency(STAND_ANIM_FREQUENCY);
+	setDirection(Direction::RIGHT);
+	setMaxSpeed(sf::Vector2f(6.f*getSize().x, 6.f*getSize().y));
 	
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		setAnimationFrequency(SWIM_ANIM_FREQUENCY);
-		float offset = 0.0025f;
+		float offset = 0.00005f*float(getSize().x);
 		switch (keyCode)
 		{
 			case sf::Keyboard::Key::Left: {
@@ -127,11 +129,11 @@ void Player::init()
 			} break;
 			case sf::Keyboard::Key::Up: {
 				getInteralAcceleration().y = -offset;
-				setDirection(Direction::UP);
+				//setDirection(Direction::UP);
 			} break;
 			case sf::Keyboard::Key::Down: {
 				getInteralAcceleration().y = offset;
-				setDirection(Direction::DOWN);
+				//setDirection(Direction::DOWN);
 			} break;
 			case sf::Keyboard::Key::Space: {
 				useCurrTool();

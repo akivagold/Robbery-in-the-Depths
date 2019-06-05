@@ -1,6 +1,7 @@
 #include "Shark.h"
 #include "GameScreen.h"
 #include "Flow.h"
+#include "Bullet.h"
 
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife)
@@ -38,6 +39,14 @@ void Shark::draw()
 void Shark::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+}
+
+void Shark::onCollide(Bullet* bullet)
+{
+	if (!isDie()) {
+		decreaseLife(bullet->getDamage());
+		bullet->suicide();
+	}
 }
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)

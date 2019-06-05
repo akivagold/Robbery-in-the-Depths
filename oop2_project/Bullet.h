@@ -38,6 +38,8 @@ protected:
 private:
 	// bullet acceleration
 	static const float ACCELERATION;
+	// damage
+	static const int DAMAGE = 1;
 	// init
 	void init();
 };
