@@ -36,6 +36,8 @@ protected:
 	// event when direction changed
 	virtual void onDirectionChanged() override { }
 private:
+	// bullet acceleration
+	static const float ACCELERATION;
 	// init
 	void init();
 };

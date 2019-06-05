@@ -16,10 +16,14 @@ string AK47::toString() const
 
 void AK47::fire()
 {
-	// crate bullet
+	// create bullet
 	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(getMyOwner()->getGameScreen(), getMyOwner(), getMyOwner()->getDirection());
 	bullet->getGameScreen().getWorld().getBODS().requestAddBO(bullet);
-	bullet->setPosition(getMyOwner()->getPosition());
+
+	if (Player::isLeftDirections(getMyOwner()->getDirection()))
+		bullet->setPosition(getMyOwner()->getPosition().x - bullet->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
+	else
+		bullet->setPosition(getMyOwner()->getPosition().x + getMyOwner()->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
 }
 
 void AK47::init()

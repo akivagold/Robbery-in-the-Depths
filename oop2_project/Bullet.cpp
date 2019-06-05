@@ -1,5 +1,6 @@
 #include "Bullet.h"
 
+const float Bullet::ACCELERATION = 0.0001f*Bullet::getMODefSize().x;
 
 Bullet::Bullet(GameScreen& gameScreen, Character* owner, Direction direction)
 	: Projectile(gameScreen, owner, direction)
@@ -17,16 +18,15 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 
 	// set speed
 	if (getDirection() == Direction::RIGHT) {
-		getInteralAcceleration().x = 0.0004f;
+		getInteralAcceleration().x = ACCELERATION;
 	}
 	else {
-		getInteralAcceleration().x = -0.0004f;
+		getInteralAcceleration().x = -ACCELERATION;
 	}
 }
 
 void Bullet::init()
 {
-	//m_lastDirection = getDirection();
 	setAnimation("bullet");
 	if (getDirection() == Direction::LEFT) {
 		flipAnimation();

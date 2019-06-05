@@ -8,8 +8,7 @@ Projectile::Projectile(GameScreen& gameScreen, Character* owner,  Direction dire
 
 void Projectile::init(Direction direction)
 {
-	setSize(static_cast<int>(BoardObject::getDefaultSize().x * 0.5), static_cast<int>(BoardObject::getDefaultSize().y * 0.5));
+	setSize(static_cast<int>(BoardObject::getDefaultSize().x*0.3f), static_cast<int>(BoardObject::getDefaultSize().y*0.3f));
 	setDrawPriority(DRAW_PRIORITY);
-	//setDirection(direction);
 }
 
