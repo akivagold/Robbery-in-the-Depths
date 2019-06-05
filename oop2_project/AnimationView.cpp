@@ -79,7 +79,7 @@ string GUI::AnimationView::toString() const
 	return str;
 }
 
-void GUI::AnimationView::rotateAnimation(int relative_degrees)
+void GUI::AnimationView::rotateAnimation(float relative_degrees)
 {
 	double xSize = getSize().x;
 	double ySize = getSize().y;
@@ -95,7 +95,7 @@ void GUI::AnimationView::rotateAnimation(int relative_degrees)
 	double x = std::cos(degrees * M_PI / 180) * radius;
 	double y = std::sin(degrees * M_PI / 180) * radius;
 	// fix after rotation
-	m_sprite.setOrigin((y - position_y), -(x - position_x));
+	m_sprite.setOrigin(float(y - position_y), -float(x - position_x));
 	// rotate anti clockwise
 	m_sprite.rotate(-relative_degrees);
 	

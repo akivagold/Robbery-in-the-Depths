@@ -24,7 +24,7 @@ public:
 	virtual void draw() override;
 	// event on die
 	virtual void onDie();
-	// die
+	// die (vanish after some time)
 	void die() { setNumOfLife(0); }
 	// convert to string
 	virtual string toString() const override;
@@ -50,7 +50,7 @@ private:
 	bool m_isDie;
 	// vanish stopWatch
 	StopWatch m_vanishSW;
-
+	// disable using suicide. use die instead
 	using MovingObject::suicide;
 };
 

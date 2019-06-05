@@ -21,7 +21,7 @@ public:
 	explicit Chest(GameScreen& gameScreen);
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
-	// pickup
+	// pickup content
 	virtual void pickup(Player* owner) override;
 	// draw
 	virtual void draw() override;

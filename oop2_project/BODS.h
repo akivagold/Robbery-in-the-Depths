@@ -16,7 +16,7 @@ using std::string;
 class BODS
 {
 public:	
-	// board data structure
+	// boardobjects data structure
 	using BoardDS = std::map<int, std::unordered_set<std::shared_ptr<BoardObject>>>;
 	// constructor
 	BODS() = default;

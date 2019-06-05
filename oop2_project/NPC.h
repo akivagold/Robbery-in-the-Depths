@@ -28,5 +28,3 @@ public:
 	// get radius from player
 	float getRadiusFromPlayer() const;
 };
-
-

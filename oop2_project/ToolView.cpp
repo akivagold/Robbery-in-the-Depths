@@ -1,28 +1,39 @@
 #include "ToolView.h"
 
 ToolView::ToolView(sf::RenderWindow& window)
-	: ImageButton(window)
+	: ImageButton(window), m_currTool(nullptr)
 {
 	init();
 }
 
-void ToolView::setAmmo(int ammoQuntity)
+void ToolView::setTool(const std::shared_ptr<Tool>& currTool)
 {
-	if (ammoQuntity < 0)
-		throw std::out_of_range("Ammo Quntity " + std::to_string(ammoQuntity) + " is iilegel");
-	m_ammo = ammoQuntity;
-	setText(std::to_string(m_ammo));
+	m_currTool = currTool;
+	getImage().setTexture(currTool->getToolName());
+	updateUseLimit();
 }
 
-string ToolView::toString() const 
+void ToolView::updateUseLimit()
+{
+	if (m_currTool->isUseInfLimit())
+		setText("");
+	else
+		setText(std::to_string(m_currTool->getUseLimit()));
+}
+
+void ToolView::clearTool()
+{
+	getImage().clear();
+	setText("");
+}
+
+string ToolView::toString() const
 {
 	return "ToolView: { " + ImageButton::toString() + " } ";
 }
 
 void ToolView::init()
 {
-	getImage().setTexture("ak47");
-	setAmmo(100);
 	setTextHAligment(GUI::TextView::TextHAlignment::CENTER);
 	setTextSize(30);
 	getBorder().setSize(1);

@@ -58,14 +58,12 @@ protected:
 	// get friction
 	sf::Vector2f getFriction() const;
 private:
-	// last direction
-	Direction m_lastDirection;
+	// direction and last direction
+	Direction m_direction, m_lastDirection;
 	// flag that check if collide last time
 	bool m_isCollided;
 	// time
 	sf::Clock m_clock;
-	// direction
-	Direction m_direction;
 	// speed, internal and external acceleration
 	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
 	// if can move to new position
@@ -79,4 +77,3 @@ private:
 	// check collide
 	void checkCollide(std::forward_list<BoardObject*> collideList);
 };
-

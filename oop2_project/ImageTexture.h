@@ -33,6 +33,8 @@ public:
 	void setColor(const sf::Color& color);
 	// update bounds
 	void updateBounds(const sf::FloatRect& bounds);
+	// clear
+	void clear() { setColor(sf::Color::Transparent); }
 	// draw
 	void draw(sf::RenderWindow& window);
 	// convert to string

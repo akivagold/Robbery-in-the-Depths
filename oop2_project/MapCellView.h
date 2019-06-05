@@ -27,4 +27,3 @@ private:
 	// update image by char
 	void updateImage(char ch);
 };
-

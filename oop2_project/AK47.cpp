@@ -28,6 +28,5 @@ void AK47::fire()
 
 void AK47::init()
 {
-	setToolName("AK47");
 	setAmmo(20); // TODO remove this
 }

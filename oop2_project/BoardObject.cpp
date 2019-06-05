@@ -12,7 +12,7 @@ BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 void BoardObject::setDrawPriority(int drawPriority)
 {
 	if (drawPriority < 0)
-		throw std::out_of_range("Draw priority " + std::to_string(drawPriority) + " is illegal");
+		throw std::out_of_range("Draw priority " + std::to_string(drawPriority) + " must be bigger or equals to zero");
 	m_drawPriority = drawPriority;
 }
 
@@ -39,6 +39,7 @@ void BoardObject::setInGame(const std::shared_ptr<BoardObject>& self)
 
 std::forward_list<BoardObject*> BoardObject::getCollidesList()
 {
+	// collide query handler
 	struct QueryHandler
 	{
 		QueryHandler(GameScreen& gameScreen, BoardObject* self) 
@@ -68,6 +69,7 @@ std::forward_list<BoardObject*> BoardObject::getCollidesList()
 		}
 	};
 
+	// build collide list
 	QueryHandler quaryHandler(m_gameScreen, this);
 	return quaryHandler.quaryCollides();
 }
@@ -122,6 +124,6 @@ void BoardObject::init()
 	setSize(getDefaultSize());
 
 	// TODO remove this:
-	getBorder().setSize(1.f);
-	getBorder().setColor(sf::Color::Black);
+	//getBorder().setSize(1.f);
+	//getBorder().setColor(sf::Color::Black);
 }

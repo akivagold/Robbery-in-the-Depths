@@ -21,7 +21,7 @@ public:
 	// constructor
 	explicit Flow(GameScreen& gameScreen);
 	// convert to string
-	virtual string toString() const override { return "Flow: { " + StaticObject::toString() + " }"; }
+	virtual string toString() const override { return "Flow: { flowPower: { power=" + std::to_string(m_flowPower.x) + ", angle=" + std::to_string(m_flowPower.y) + " }, " + StaticObject::toString() + " }"; }
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
 	// get flow power
@@ -37,12 +37,13 @@ public:
 	virtual void onCollide(Flow* flow) override {}
 	virtual void onCollide(Bullet* bullet) override {}
 	// set flow - power & angle
-	void setFlow(sf::Vector2f flow);
+	void setFlow(const sf::Vector2f& flow);
 private:
 	// flow power
 	sf::Vector2f m_flowPower;
 	// init
 	void init();
+	// animation frequency
 	static const int ANIM_FREQUENCY = 100;
 };
 

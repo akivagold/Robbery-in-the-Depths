@@ -45,7 +45,9 @@ private:
 	static const int DEFAULT_LIFE = 3;
 	// radius attack
 	float m_radiusAttack;
+	// timer
 	Timer m_time;
+	// flag that check if shark in chase
 	bool m_inChase;
 	// init
 	void init();

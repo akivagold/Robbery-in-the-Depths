@@ -31,4 +31,3 @@ private:
 	// init
 	void init();
 };
-

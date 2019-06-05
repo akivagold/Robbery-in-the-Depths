@@ -39,7 +39,7 @@ public:
 	// convert to string
 	virtual string toString() const override;
 	// rotate animation
-	void rotateAnimation(int degrees);
+	void rotateAnimation(float degrees);
 protected:
 	// update components
 	virtual void updateComponents();

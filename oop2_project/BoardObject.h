@@ -51,7 +51,7 @@ public:
 	int32 getProxyId() const { return m_proxyId; }
 	// set proxy id
 	void setProxyId(int32 proxyId) { m_proxyId = proxyId; }
-	// get collides list
+	// get collides list - log(n) complexity
 	std::forward_list<BoardObject*> getCollidesList();
 	// get self
 	const std::shared_ptr<BoardObject>& getSelf() const;
@@ -98,4 +98,3 @@ private:
 	// init
 	void init();
 };
-

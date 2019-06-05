@@ -34,4 +34,3 @@ inline string LifeGift::toString() const
 {
 	return "LifeGift: { numOfLife=" + std::to_string(m_numOfLife) + ", " + Gift::toString() + " }";
 }
-

@@ -17,23 +17,19 @@ class ToolView :
 public:
 	// constructor
 	explicit ToolView(sf::RenderWindow& window);
-	// set ammo
-	void setAmmo(int ammQuntity);
-	// set cuurent tool
-	void setCurrTool(const std::shared_ptr<Tool>& currTool) { m_currTool = currTool; }
-	// get cuurent tool
-	const std::shared_ptr<Tool>& getCurrTool() const { return m_currTool; }
-	// get ammo
-	int getAmmo() const { return m_ammo; }
+	// set tool
+	void setTool(const std::shared_ptr<Tool>& currTool);
+	// check if have tool
+	bool haveTool() const { return bool(m_currTool); }
+	// update use limit
+	void updateUseLimit();
+	// clear tool
+	void clearTool();
 	// convert to string
 	virtual string toString() const override; 
 private:
 	// current tool
 	std::shared_ptr<Tool> m_currTool;
-	// num Of ammo if have
-	int m_ammo;
 	// init
 	void init();	
 };
-
-

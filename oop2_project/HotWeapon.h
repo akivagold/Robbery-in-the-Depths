@@ -27,4 +27,3 @@ protected:
 	// fire bullet
 	virtual void fire() = 0; 
 };
-

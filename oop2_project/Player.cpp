@@ -9,7 +9,7 @@ Player::Player(GameScreen& gameScreen, int numOfLife)
 	init();
 }
 
-void Player::addTool(std::shared_ptr<Tool> tool)
+void Player::addTool(const std::shared_ptr<Tool>& tool)
 {
 	if (isWithoutTools())
 		changeTool(tool);
@@ -40,7 +40,7 @@ bool Player::haveTool(Tool* tool) const
 void Player::changeTool(const std::shared_ptr<Tool>& tool)
 {
 	m_currTool = tool;
-	getGameScreen().getGameMenu()->getToolView()->setCurrTool(tool);
+	getGameScreen().getGameMenu()->getToolView()->setTool(tool);
 }
 
 void Player::setNumOfLife(int numOfLife)
@@ -61,6 +61,16 @@ void Player::onDirectionChanged()
 	else if (isRightDirections(getDirection())) {
 		if (isFlipped()) {
 			flipAnimation(); // turn right
+		}
+	}
+}
+
+void Player::useCurrTool()
+{
+	if (haveCurrTool()) {
+		if (m_currTool->canUsingTool()) {
+			m_currTool->useTool();
+			getGameScreen().getGameMenu()->getToolView()->updateUseLimit();
 		}
 	}
 }
@@ -124,12 +134,7 @@ void Player::init()
 				setDirection(Direction::DOWN);
 			} break;
 			case sf::Keyboard::Key::Space: {
-				if (haveCurrTool()) {
-					if (m_currTool->canUsingTool()) {
-						m_currTool->useTool();
-						// TODO update ammo in menu
-					}
-				}
+				useCurrTool();
 			} break;
 		}
 	});

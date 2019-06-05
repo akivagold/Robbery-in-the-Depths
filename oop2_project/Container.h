@@ -20,7 +20,7 @@ public:
 	const SurprisesList& getSurprises() const { return m_surprises; }
 	// check if container is empty
 	bool isEmpty() const { return m_surprises.empty(); }
-	// pickup
+	// pickup content
 	virtual void pickup(Player* owner);
 	// clear all surprises
 	void clearSurprises() { m_surprises.clear(); }

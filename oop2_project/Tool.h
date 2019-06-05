@@ -28,9 +28,7 @@ public:
 	// get my owner
 	Character* getMyOwner() { return m_owner; }
 	// get tool name
-	const string& getToolName() const { return m_toolName; }
-	// set tool name
-	void setToolName(const string& toolName) { m_toolName = toolName; }
+	virtual string getToolName() const = 0;
 	// create new tool by tool type
 	static std::shared_ptr<Tool> createTool(ToolType toolType, Character* owner);
 	// set use limit
@@ -49,8 +47,6 @@ protected:
 private:
 	// owner of tool
 	Character* m_owner;
-	// tool name
-	string m_toolName;
 	// using limit count
 	int m_useLimit;
 	// flag for infinity limit

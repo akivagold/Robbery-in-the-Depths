@@ -28,4 +28,3 @@ private:
 	// tool type
 	Tool::ToolType m_toolType;
 };
-
