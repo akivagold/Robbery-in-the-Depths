@@ -6,7 +6,7 @@
 
 GUI::AnimationView::AnimationView(sf::RenderWindow& window)
 	: View(window), m_currentImageIndex(0), m_textureInfo(nullptr), m_isFlipped(false)
-{}
+{ }
 
 GUI::AnimationView::AnimationView(const AnimationView& anotherAnimView)
 	: View(anotherAnimView) // copy the view part of another animation view
@@ -77,6 +77,13 @@ string GUI::AnimationView::toString() const
 	}
 	str += m_timer.toString() + ", " + View::toString() + " }";
 	return str;
+}
+
+void GUI::AnimationView::setTransparency(sf::Uint32 transparency)
+{
+	sf::Color newColor = m_sprite.getColor();
+	newColor.a = transparency;
+	m_sprite.setColor(newColor);
 }
 
 void GUI::AnimationView::rotateAnimation(float relative_degrees)

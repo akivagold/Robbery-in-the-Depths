@@ -27,6 +27,14 @@ void Character::setNumOfLife(int numOfLife)
 	}
 }
 
+void Character::decreaseLife(int numOfLife)
+{
+	int newLife = m_numOfLife - numOfLife;
+	if (newLife < 0)
+		newLife = 0;
+	setNumOfLife(newLife);
+}
+
 bool Character::isUpDirections(Direction direct)
 {
 	return ((direct == Direction::UP || direct == Direction::UP_LEFT) || direct == Direction::UP_RIGHT);

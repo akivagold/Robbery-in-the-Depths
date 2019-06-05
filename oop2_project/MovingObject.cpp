@@ -53,23 +53,21 @@ void MovingObject::play()
 	// get next position
 	sf::Vector2f nextPos = getNextPosition();
 
-	if (nextPos != prePos) {
-		// move to next position
-		setPosition(nextPos);
+	// move to next position
+	setPosition(nextPos);
 
-		std::forward_list<BoardObject*> collideList = getCollidesList();
-		// check if can move to new position
-		if (!canMove(collideList)) {
-			m_isCollided = true;
-			setPosition(prePos);
-			m_speed = sf::Vector2f(0, 0);
-		}
-		else {
-			m_isCollided = false;
-		}
-		// check collision effect
-		checkCollide(collideList);
+	std::forward_list<BoardObject*> collideList = getCollidesList();
+	// check if can move to new position
+	if (!canMove(collideList)) {
+		m_isCollided = true;
+		setPosition(prePos);
+		m_speed = sf::Vector2f(0, 0);
 	}
+	else {
+		m_isCollided = false;
+	}
+	// check collision effect
+	checkCollide(collideList);
 }
 
 void MovingObject::init()

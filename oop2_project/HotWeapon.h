@@ -23,7 +23,7 @@ public:
 	virtual string toString() const override;
 protected:
 	// constructor
-	explicit HotWeapon(Character* object);
+	explicit HotWeapon(Character* object, int ammo = 0);
 	// fire bullet
 	virtual void fire() = 0; 
 };

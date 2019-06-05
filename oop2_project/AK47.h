@@ -12,7 +12,7 @@ class AK47 :
 {
 public:
 	// constructor
-	explicit AK47(Character* owner);
+	explicit AK47(Character* owner, int ammo = 0);
 	// get tool type
 	virtual ToolType getToolType() const override { return ToolType::TT_AK47; }
 	// get tool name

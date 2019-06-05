@@ -31,6 +31,7 @@
 #include "Flow.h"
 #include "EditMenu.h"
 #include "EditScreen.h"
+#include "AK47.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -167,6 +168,7 @@ void testWorld() {
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+	player->addTool(std::make_shared<AK47>(player.get(), 200));
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;

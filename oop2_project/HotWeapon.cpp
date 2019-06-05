@@ -19,6 +19,8 @@ string HotWeapon::toString() const
 	return "HotWeapon: { " + Weapon::toString() + " }";
 }
 
-HotWeapon::HotWeapon(Character* object)
+HotWeapon::HotWeapon(Character* object, int ammo)
 	: Weapon(object)
-{}
+{
+	setAmmo(ammo);
+}
