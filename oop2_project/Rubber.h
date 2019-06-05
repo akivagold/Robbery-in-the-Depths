@@ -65,5 +65,7 @@ private:
 	bool m_isInRadiusShot;
 	// flag that check if he is in radius from player
 	bool m_isInRadiusfromPlayer;
+	// play when inside radius from player
+	void inRadiusFromPlayer();
 };
 
