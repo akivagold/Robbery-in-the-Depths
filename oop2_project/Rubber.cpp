@@ -44,7 +44,7 @@ void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
 }
-#include <iostream>
+
 void Rubber::onCollide(Bullet* bullet)
 {
 
@@ -52,7 +52,6 @@ void Rubber::onCollide(Bullet* bullet)
 		return;
 
 	if (bullet->getMyOwner() != this) {
-		std::cout << "life--" << std::endl;
 		setNumOfLife(getNumOfLife() - 1);
 		bullet->suicide();
 	}
@@ -88,8 +87,11 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 		if ((getPosition().y >= (player->getPosition().y - getSize().y/2)
 			&& getPosition().y <= (player->getPosition().y + getSize().y/2))
 			&& getRadiusFromPlayer() <= RADIUS_SHOT) {
-			setAnimation("rubber_fire");
-			m_isInRadiusShot = true;
+			if (!m_isInRadiusShot) {
+				setAnimation("rubber_fire");
+				m_isInRadiusShot = true;
+			}
+			
 			getSpeed().x = 0;
 			getSpeed().y = 0;
 			getInteralAcceleration().x = 0;
@@ -151,6 +153,9 @@ void Rubber::init()
 	
 	int changeDirectionTime = 2000 + rand() % 4000;
 	m_time.start(changeDirectionTime, [this] {
+		if (isDie())
+			return;
+
 		// rand direction
 		if (!m_isInRadiusfromPlayer)
 			setDirection(getRandomDirect());

@@ -28,6 +28,9 @@
 #include "Wall.h"
 #include "AK47.h"
 #include "Rubber.h"
+#include "Crab.h"
+#include "Chest.h"
+#include "Flow.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -87,32 +90,28 @@ void nahum_main()
 }
 
 void testWorld() {
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
 
 	GameScreen gameScreen(window);
 
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
-	player->setPosition(0, 0);
-	gameScreen.getWorld().getBODS().requestAddBO(player);
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	gameScreen.loadLevel(levelInfo);
 
-	//std::shared_ptr<MovingObject> m = player;
-	//AK47 ak();
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+	player->addTool(std::make_shared<AK47>(player.get(), 200));
+
+	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
+		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
-			/*case sf::Keyboard::Key::Left: {
-				gameScreen.getWorld().getCamera().move(-offset, 0);
-			} break;
-			case sf::Keyboard::Key::Right: {
-				gameScreen.getWorld().getCamera().move(offset, 0);
-			} break;
-			case sf::Keyboard::Key::Up: {
-				gameScreen.getWorld().getCamera().move(0, -offset);
-			} break;
-			case sf::Keyboard::Key::Down: {
-				gameScreen.getWorld().getCamera().move(0, offset);
-			} break;*/
+		case sf::Keyboard::Key::K: {
+			player->rotateAnimation(10);
+		} break;
 		case sf::Keyboard::Key::Q: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
 		} break;
@@ -123,14 +122,27 @@ void testWorld() {
 			std::cout << "-------------------------------------------------" << std::endl;
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 		} break;
-		case sf::Keyboard::Key::Z: {
-			//ak.useTool();
-		} break;
 		case sf::Keyboard::Key::R: {
-			sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
-			wall->setPosition(pos);
+			wall->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(wall);
+		} break;
+		case sf::Keyboard::Key::C: {
+			std::shared_ptr<Crab> crab = std::make_shared<Crab>(gameScreen);
+			crab->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(crab);
+		} break;
+		case sf::Keyboard::Key::T: {
+			std::shared_ptr<Chest> chest = std::make_shared<Chest>(gameScreen);
+			chest->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(chest);
+		} break;
+		case sf::Keyboard::F: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		}
 	});
@@ -141,21 +153,7 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(rubber);
 	});
 
-
-	gameScreen.getWorld().getBODS().handleRequests();
-	gameScreen.getWorld().getBODS().prepareLevel();
-	// load level info
-	//LevelFileManager lfm;
-	//world.loadLevel(lfm.getLevel("testLevel"));
-
-	// load level info
-	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
-	gameScreen.getWorld().loadLevel(gameScreen, levelInfo);
-
-	/*LevelInfo li;
-	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(gameScreen, li);*/
+	// run game
 	Timer frameTimer;
 	frameTimer.start(1, [&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
@@ -163,77 +161,6 @@ void testWorld() {
 	});
 	gameScreen.run(frameTimer);
 
-	/*// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
-
-	GameScreen gameScreen(window);
-
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
-	player->setPosition(0, 0);
-	gameScreen.getWorld().getBODS().requestAddBO(player);
-
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
-		float offset = 10.f;
-		switch (keyCode)
-		{
-		case sf::Keyboard::Key::Left: {
-			gameScreen.getWorld().getCamera().move(-offset, 0);
-		} break;
-		case sf::Keyboard::Key::Right: {
-			gameScreen.getWorld().getCamera().move(offset, 0);
-		} break;
-		case sf::Keyboard::Key::Up: {
-			gameScreen.getWorld().getCamera().move(0, -offset);
-		} break;
-		case sf::Keyboard::Key::Down: {
-			gameScreen.getWorld().getCamera().move(0, offset);
-		} break;
-		case sf::Keyboard::Key::Q: {
-			gameScreen.getWorld().getCamera().zoom(0.95f);
-		} break;
-		case sf::Keyboard::Key::W: {
-			gameScreen.getWorld().getCamera().zoom(1.05f);
-		} break;
-		}
-	});
-	gameScreen.getWorld().getBODS().handleRequests();
-	std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
-	shark->setPosition(0.07f, 0.01f);
-	gameScreen.getWorld().getBODS().requestAddBO(shark);
-	/*float distanceFromPlayer = shark->getDistance(player);
-	if (distanceFromPlayer <= 2000.f) {
-		sf::Vector2f direction = shark->getPosition() - player->getPosition();
-		shark->getSpeed().x = direction.x*0.5f;
-		shark->getSpeed().y = direction.y*0.5f;
-	}
-	gameScreen.getWorld().getBODS().prepareLevel();
-	gameScreen.getWorld().addClickListener([&gameScreen, player](View& view) {
-		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
-		
-		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
-		shark->setPosition(pos);
-		shark->addClickListener([&gameScreen, shark, player](View& v) {
-			//std::cout << shark->getDistance(player);
-		
-		});
-		gameScreen.getWorld().getBODS().requestAddBO(shark);
-	});
-
-	
-
-	// load level info
-	//LevelFileManager lfm;
-	//world.loadLevel(lfm.getLevel("testLevel"));
-
-
-	LevelInfo li;
-	li.getLevelChars().resize(100, 100);
-	gameScreen.getWorld().loadLevel(li);
-	Timer frameTimer;
-	frameTimer.start(10, [&gameScreen]() {
-		gameScreen.getWorld().getBODS().handleRequests();
-	});
-	gameScreen.run(frameTimer);*/
 }
 /*
 void testLifeView() {
