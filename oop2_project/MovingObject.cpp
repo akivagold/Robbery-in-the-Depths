@@ -2,6 +2,8 @@
 #include "GameScreen.h"
 
 
+const sf::Vector2f MovingObject::MAX_SPEED_DEFAULT = sf::Vector2f(getDefaultSize().x * 10, getDefaultSize().y * 10);
+
 sf::Vector2f MovingObject::getFriction() const
 {
 	sf::Vector2f friction;
@@ -36,7 +38,7 @@ const sf::Vector2i& MovingObject::getMODefSize()
 }
 
 MovingObject::MovingObject(GameScreen& gameScreen)
-	: InteractableObject(gameScreen), m_maxSpeed(sf::Vector2f(500, 500)), 
+	: InteractableObject(gameScreen), m_maxSpeed(MAX_SPEED_DEFAULT),
 	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
 {
 	init();
