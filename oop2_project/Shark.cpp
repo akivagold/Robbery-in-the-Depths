@@ -118,7 +118,7 @@ void Shark::init()
 	setSize(getSharkSize());
 	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
-	m_radiusAttack = 1000;
+	m_radiusAttack = 5.f*getSize().x;
 	setDirection(getRandomDirect());
 	m_inChase = false;
 	m_time.start(3000, [this] {

@@ -17,7 +17,7 @@ class Rubber :
 {
 public:
 	// char
-	static const char CHAR = 's';
+	static const char CHAR = 'r';
 	// constructor
 	explicit Rubber(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed

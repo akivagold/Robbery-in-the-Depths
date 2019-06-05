@@ -14,7 +14,7 @@ class Shark
 {
 public:
 	// char
-	static const char CHAR = 'k';
+	static const char CHAR = 's';
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// event when direction changed

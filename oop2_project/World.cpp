@@ -4,6 +4,7 @@
 #include "Chest.h"
 #include "Shark.h"
 #include "Crab.h"
+#include "Rubber.h"
 #include "ParseLevelException.h"
 
 World::World(sf::RenderWindow& window)
@@ -53,9 +54,9 @@ std::shared_ptr<BoardObject> World::createBO(GameScreen& gameScreen, char ch)
 		case Chest::CHAR: {
 			boardObj = std::make_shared<Chest>(gameScreen);
 		} break;
-		/*case Cop::CHAR: {
-			// TODO boardObj = std::make_shared<Cop>(gameScreen);
-		} break;*/
+		case Rubber::CHAR: {
+			boardObj = std::make_shared<Rubber>(gameScreen);
+		} break;
 		case Shark::CHAR: {
 			boardObj = std::make_shared<Shark>(gameScreen);
 		} break;

@@ -31,7 +31,7 @@ public:
 	// set add char
 	char getAddChar(char ch) const { return m_addChar; }
 	// export level info
-	// TODO LevelInfo exportLevelInfo();
+	const LevelInfo& exportLevelInfo();
 	// draw
 	virtual void draw() override;
 	// convert to string
@@ -47,6 +47,8 @@ private:
 	static const float MOVE_CAM_ANIM;
 	// camera action of editor
 	enum CameraAction { RIGHT, LEFT, UP, DOWN, ZOOM_IN, ZOOM_OUT, NONE };
+	// current level info
+	LevelInfo m_levelInfo;
 	// camera movement timer
 	Timer m_cameraMoveTimer;
 	// current camera action
