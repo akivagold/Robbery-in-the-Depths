@@ -3,6 +3,8 @@
 #include "Chest.h"
 #include "Flow.h"
 
+const float Player::PLAYER_ACCELRATION = 0.0025f;
+
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)
 {
@@ -114,7 +116,7 @@ void Player::init()
 	
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		setAnimationFrequency(SWIM_ANIM_FREQUENCY);
-		float offset = 0.0025f;
+		float offset = PLAYER_ACCELRATION;
 		switch (keyCode)
 		{
 			case sf::Keyboard::Key::Left: {
