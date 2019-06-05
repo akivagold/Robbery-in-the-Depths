@@ -61,5 +61,9 @@ private:
 	std::shared_ptr<Tool> m_tool;
 	// time
 	Timer m_time;
+	// flag that check if he is in radius shot
+	bool m_isInRadiusShot;
+	// flag that check if he is in radius from player
+	bool m_isInRadiusfromPlayer;
 };
 
