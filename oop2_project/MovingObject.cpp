@@ -14,6 +14,24 @@ sf::Vector2f MovingObject::getFriction() const
 	return friction;
 }
 
+void MovingObject::floatEffect()
+{
+	sf::Int32 elapsedTime = m_floatEffectClock.getElapsedTime().asMilliseconds();
+
+	if (elapsedTime - m_lastFloatEffectClock > 1000) {
+		upLastFloatEffect = !upLastFloatEffect;
+		m_lastFloatEffectClock = elapsedTime;
+		if (upLastFloatEffect) {
+			m_floatAcc.y = 0.0000003f*float(getSize().x) + (((rand() % 3) + 1) * 0.000001f);
+		}
+		else {
+			m_floatAcc.y = -0.0000003f*float(getSize().x) - (((rand() % 3) + 1) * 0.000001f);
+		}
+
+	}
+
+}
+
 void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)
 {
 	// need m_externalMaxSpeed?
@@ -32,14 +50,14 @@ void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
 
 const sf::Vector2i& MovingObject::getMODefSize()
 {
-	static const sf::Vector2i MOVING_OBJ_SIZE(static_cast<int>(0.8f*float(getDefaultSize().x)), 
+	static const sf::Vector2i MOVING_OBJ_SIZE(static_cast<int>(0.8f*float(getDefaultSize().x)),
 		static_cast<int>(0.8f*float(getDefaultSize().y)));
 	return MOVING_OBJ_SIZE;
 }
 
 MovingObject::MovingObject(GameScreen& gameScreen)
 	: InteractableObject(gameScreen), m_maxSpeed(MAX_SPEED_DEFAULT),
-	  m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
+	m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
 {
 	init();
 }
@@ -77,6 +95,9 @@ void MovingObject::init()
 	m_externalAcc.x = m_speed.x = m_interalAcceleration.x = 0;
 	m_externalAcc.y = m_speed.y = m_interalAcceleration.y = 0;
 
+	upLastFloatEffect = true;
+	upLastFloatEffect = 0;
+
 	setSize(getMODefSize());
 }
 
@@ -100,8 +121,9 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Vector2f friction = getFriction();
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
-	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x - friction.x) * elapsedTime; // TODO external acc
-	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y - friction.y) * elapsedTime;
+	floatEffect();
+	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x + m_floatAcc.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y + m_floatAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
 	return sf::Vector2f(x_pos, y_pos);
@@ -116,7 +138,7 @@ MovingObject::Direction MovingObject::getRandomDirect()
 
 MovingObject::Direction MovingObject::getRandomLeftRightDirect()
 {
-	return (rand() % 2 == 0) ? Direction::LEFT : Direction::RIGHT;	
+	return (rand() % 2 == 0) ? Direction::LEFT : Direction::RIGHT;
 }
 
 void MovingObject::suicide()

@@ -61,13 +61,18 @@ protected:
 	void setMaxSpeed(const sf::Vector2f& maxSpeed) { m_maxSpeed = maxSpeed; }
 	// get maximum speed
 	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
+	virtual void floatEffect();
 private:
 	// direction and last direction
 	Direction m_direction, m_lastDirection;
 	// flag that check if collide last time
 	bool m_isCollided;
-	// time
-	sf::Clock m_clock;
+	// time clock & float effect clock
+	sf::Clock m_clock, m_floatEffectClock;
+	sf::Vector2f m_floatAcc;
+	sf::Int32 m_lastFloatEffectClock;
+	// last float direction
+	bool upLastFloatEffect;
 	// speed, internal and external acceleration
 	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
 	// max speed default
