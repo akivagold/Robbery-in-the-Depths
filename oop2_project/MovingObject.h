@@ -70,6 +70,8 @@ private:
 	sf::Clock m_clock;
 	// speed, internal and external acceleration
 	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
+	// max speed default
+	static const sf::Vector2f MAX_SPEED_DEFAULT;
 	// if can move to new position
 	bool canMove(std::forward_list<BoardObject*> collideList) const;
 	// return where the object is trying to move

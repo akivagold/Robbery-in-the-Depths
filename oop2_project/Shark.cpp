@@ -41,6 +41,7 @@ void Shark::onCollide(Flow* flow)
 	setExternaAlcceleration(flow->getFlowPower());
 }
 
+
 void Shark::onCollide(Bullet* bullet)
 {
 	if (!isDie()) {

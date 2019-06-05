@@ -32,6 +32,7 @@
 #include "EditMenu.h"
 #include "EditScreen.h"
 #include "AK47.h"
+#include "Rubber.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -169,26 +170,29 @@ void testWorld() {
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 	player->addTool(std::make_shared<AK47>(player.get(), 200));
-
+	
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
+		case sf::Keyboard::Key::U: {
+			player->setTransparency(player->getTransparency() - 10);
+		} break;
 		case sf::Keyboard::Key::K: {
 			player->rotateAnimation(10);
 		} break;
-		case sf::Keyboard::Key::Q: {
+		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
 		} break;
-		case sf::Keyboard::Key::W: {
+		case sf::Keyboard::Key::Num1: {
 			gameScreen.getWorld().getCamera().zoom(1.05f);
 		} break;
 		case sf::Keyboard::Key::P: {
 			std::cout << "-------------------------------------------------" << std::endl;
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 		} break;
-		case sf::Keyboard::Key::R: {
+		case sf::Keyboard::Key::W: {
 			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
 			wall->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(wall);
@@ -209,6 +213,11 @@ void testWorld() {
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::R: {
+			std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
+			rubber->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(rubber);
 		} break;
 		}
 	});

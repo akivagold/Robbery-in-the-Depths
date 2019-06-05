@@ -45,7 +45,7 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 private:
 	// time before vanish when die
-	static const int DIE_VANISH_TIME = 10000;
+	static const int DIE_VANISH_TIME = 5000;
 	// number of life
 	int m_numOfLife;
 	// die flag

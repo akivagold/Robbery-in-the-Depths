@@ -17,7 +17,7 @@ void Character::playChoice(Direction lastDirection, bool isCollided)
 void Character::setNumOfLife(int numOfLife)
 {
 	if (numOfLife < 0)
-		throw std::out_of_range("num of life " + std::to_string(numOfLife) + " is illegal");
+		throw std::out_of_range("Num of life " + std::to_string(numOfLife) + " is illegal");
 	if (isDie())
 		throw std::logic_error("The " + toString() + " already die. only god able to resurrection");
 	m_numOfLife = numOfLife;
@@ -29,7 +29,7 @@ void Character::setNumOfLife(int numOfLife)
 
 void Character::decreaseLife(int numOfLife)
 {
-	int newLife = m_numOfLife - numOfLife;
+	int newLife = getNumOfLife() - numOfLife;	
 	if (newLife < 0)
 		newLife = 0;
 	setNumOfLife(newLife);
@@ -63,6 +63,11 @@ void Character::draw()
 
 void Character::onDie()
 {
+	setTransparency(255);
+	int tickTime = int(DIE_VANISH_TIME / 255.f);
+	m_vanishSW.setTickListener(tickTime, [this] {
+		setTransparency(getTransparency() - 1);
+	});
 	m_vanishSW.start(DIE_VANISH_TIME, [this] {
 		suicide();
 	});
