@@ -20,7 +20,7 @@ public:
 protected:
 	// constructor
 	explicit InteractableObject(GameScreen& gameScreen);
-	// set damge
+	// set damage
 	void setDamage(int damage) { m_damage = damage; }
 private:
 	// object damge

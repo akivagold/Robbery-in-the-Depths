@@ -23,10 +23,8 @@ namespace GUI {
 		void open() { m_closeFlag = false; }
 		// check if screen is closed
 		bool isClosed() const { return m_closeFlag; }
-		// run the screen
-		void run();
 		// run the screen and listen to updates with timer
-		void run(Timer& timer);
+		void run(std::function<void()> onScreenUpdated = nullptr);
 		// destructor
 		virtual ~BaseScreen() = default;
 		// add backgroud root view
@@ -40,21 +38,7 @@ namespace GUI {
 		std::vector<std::shared_ptr<GUI::View>> m_backRootViews;
 		// constructor
 		explicit BaseScreen(sf::RenderWindow& window);
-		// run the screen and listen to updates with timer
-		void run(Timer* timer);
 	};
-
-	template<class ViewType>
-	void BaseScreen<ViewType>::run()
-	{
-		run(nullptr); // run without timer
-	}
-
-	template<class ViewType>
-	void BaseScreen<ViewType>::run(Timer& timer)
-	{
-		run(&timer);
-	}
 
 	template<class ViewType>
 	BaseScreen<ViewType>::BaseScreen(sf::RenderWindow& window)
@@ -70,7 +54,7 @@ namespace GUI {
 		});
 	}
 	template<class ViewType>
-	void BaseScreen<ViewType>::run(Timer* timer)
+	void BaseScreen<ViewType>::run(std::function<void()> onScreenUpdated)
 	{
 		while (ViewType::getWindow().isOpen() && !isClosed())
 		{
@@ -91,8 +75,8 @@ namespace GUI {
 			ViewType::getWindow().display();
 
 			// update timer if needed
-			if (timer != nullptr)
-				timer->checkTimer();
+			if (onScreenUpdated != nullptr)
+				onScreenUpdated();
 		}
 	}
 }

@@ -43,6 +43,7 @@ void Rubber::onDie()
 void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+	m_isInRadiusShot = false;
 }
 
 void Rubber::onCollide(Bullet* bullet)
@@ -52,7 +53,7 @@ void Rubber::onCollide(Bullet* bullet)
 		return;
 
 	if (bullet->getMyOwner() != this) {
-		setNumOfLife(getNumOfLife() - 1);
+		decreaseLife(bullet->getDamage());
 		bullet->suicide();
 	}
 	
@@ -90,12 +91,13 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 			if (!m_isInRadiusShot) {
 				setAnimation("rubber_fire");
 				m_isInRadiusShot = true;
+				getSpeed().x = 0;
+				getSpeed().y = 0;
+				getInteralAcceleration().x = 0;
+				getInteralAcceleration().y = 0;
 			}
 			
-			getSpeed().x = 0;
-			getSpeed().y = 0;
-			getInteralAcceleration().x = 0;
-			getInteralAcceleration().y = 0;
+	
 		}
 		else {
 			if (m_isInRadiusShot) {
