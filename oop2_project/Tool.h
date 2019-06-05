@@ -31,12 +31,16 @@ public:
 	virtual string getToolName() const = 0;
 	// create new tool by tool type
 	static std::shared_ptr<Tool> createTool(ToolType toolType, Character* owner);
+	// append use limit
+	void appendUseLimit(int useLimitCount) { setUseLimit(getUseLimit() + useLimitCount); }
 	// set use limit
 	void setUseLimit(int useLimitCount);
 	// get use limit
 	int getUseLimit() const;
 	// set infinity limit
 	void setInfLimit();
+	// get default use limit
+	virtual int getDefUseLimit() = 0;
 	// check if using infinity limit
 	bool isUseInfLimit() const { return m_withInfLlimit; }
 	// convert to string
@@ -51,4 +55,6 @@ private:
 	int m_useLimit;
 	// flag for infinity limit
 	bool m_withInfLlimit;
+	// update change to owner
+	void updateOwner();
 };

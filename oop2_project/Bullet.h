@@ -5,7 +5,6 @@
 #include "AK47.h"
 #include "Tool.h"
 
-
 //---- using section --------
 using std::string;
 

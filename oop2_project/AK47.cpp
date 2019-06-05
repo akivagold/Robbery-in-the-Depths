@@ -14,6 +14,11 @@ string AK47::toString() const
 	return "AK47: { " + HotWeapon::toString() + " }";
 }
 
+int AK47::getDefUseLimit()
+{
+	return DEFAULT_AMMO;
+}
+
 void AK47::fire()
 {
 	// create bullet
@@ -27,4 +32,4 @@ void AK47::fire()
 }
 
 void AK47::init()
-{ }
+{}

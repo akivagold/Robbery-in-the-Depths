@@ -22,6 +22,8 @@ public:
 	explicit Player(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// add new tool
 	void addTool(const std::shared_ptr<Tool>& tool);
+	// get tool
+	const std::shared_ptr<Tool>& getTool(Tool::ToolType toolType) const;
 	// check if the player without tools
 	bool isWithoutTools() const { return (m_tools.size() == 0); }
 	// check if the player without tools
@@ -45,6 +47,8 @@ public:
 	virtual void onDirectionChanged() override;
 	// use current tool if can
 	void useCurrTool();
+	// event on update tool
+	virtual void onToolUpdated(Tool* tool) override;
 	// convert to string
 	virtual string toString() const override;
 	// collide events (using with double dispatch)

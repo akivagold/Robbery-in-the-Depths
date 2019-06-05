@@ -137,6 +137,13 @@
             "numOfRows": 2,
             "numOfCols": 5,
             "numOfImages": 10
+        },
+        {
+            "name": "explosion",
+            "path": "explosion.png",
+            "numOfRows": 9,
+            "numOfCols": 9,
+            "numOfImages": 72
         }
     ]
 }

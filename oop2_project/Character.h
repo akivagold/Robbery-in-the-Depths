@@ -3,6 +3,7 @@
 #include <string>
 #include "MovingObject.h"
 #include "StopWatch.h"
+class Tool;
 
 //---- using section --------
 using std::string;
@@ -30,6 +31,8 @@ public:
 	void die() { setNumOfLife(0); }
 	// convert to string
 	virtual string toString() const override;
+	// event on update tool
+	virtual void onToolUpdated(Tool* tool) {}
 	// check if is up directions
 	static bool isUpDirections(Direction direct);
 	// check if is right directions

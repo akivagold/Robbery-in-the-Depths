@@ -12,16 +12,20 @@ class AK47 :
 {
 public:
 	// constructor
-	explicit AK47(Character* owner, int ammo = 0);
+	explicit AK47(Character* owner, int ammo = DEFAULT_AMMO);
 	// get tool type
 	virtual ToolType getToolType() const override { return ToolType::TT_AK47; }
 	// get tool name
 	virtual string getToolName() const { return "ak47"; }
 	// convert to string
 	virtual string toString() const override;
+	// get default use limit
+	virtual int getDefUseLimit() override;
 	// fire
 	virtual void fire() override;
 private:
+	// defualt ammo
+	static const int DEFAULT_AMMO = 20;
 	// init
 	void init();
 };

@@ -14,10 +14,14 @@ void ToolGift::setToolType(Tool::ToolType toolType)
 
 void ToolGift::takeSurprise(Player* owner)
 {
-	if (!owner->haveTool(m_toolType))
+	if (owner->haveTool(m_toolType)) {
+		auto& tool = owner->getTool(m_toolType);
+		if (!tool->isUseInfLimit())
+			tool->appendUseLimit(tool->getDefUseLimit());
+	}
+	else {
 		owner->addTool(Tool::createTool(m_toolType, owner));
-
-	// TODO need add ammo if have
+	}
 }
 
 string ToolGift::toString() const
