@@ -13,6 +13,12 @@ using json = nlohmann::json;
 class LevelInfo
 {
 public:
+	// flow info
+	struct FlowInfo
+	{
+		Cell m_startCell, m_endCell;
+		sf::Vector2f flowPower;
+	};
 	// constructor
 	LevelInfo();
 	// get level map characters
@@ -24,6 +30,10 @@ public:
 	int getIndex() const { return m_index; }
 	// set name
 	void setName(const string& name) { m_name = name; }
+	// set flows
+	void setFlows(const std::vector<FlowInfo>& flows) { m_flows = flows; }
+	// get flows
+	const std::vector<FlowInfo>& getFlows() const { return m_flows; }
 	// get name
 	const string& getName() const { return m_name; }
 	// convert to JSON
@@ -41,11 +51,21 @@ private:
 	string m_name;
 	// level map characters
 	Matrix<char> m_levelChars;
+	// flows
+	std::vector<FlowInfo> m_flows;
 	// check if level have legal index
 	bool isLegalIndex(int index) const { return (index >= 0); }
 	// convert level characters to string
 	static string convertLevelCharsToStr(const Matrix<char>& levelChars);
 	// put string in level characters
 	static void putStrInLevelChars(const string& charsStr, Matrix<char>& levelChars);
+	// parse flows
+	static std::vector<FlowInfo> parseFlows(const json& flowsJson);
+	// parse flow
+	static FlowInfo parseFlow(const json& flowJson);
+	// build JSON of flows
+	static json buildFlowsJSON(const std::vector<FlowInfo>& flows);
+	// build JSON of flow
+	static json buildFlowJSON(const FlowInfo& flow);
 };
 

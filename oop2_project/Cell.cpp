@@ -42,3 +42,7 @@ string GUI::Cell::toString() const
 {
 	return "Cell: { rowNum=" + std::to_string(m_rowNum) + ", colNum=" + std::to_string(m_colNum) + " }";
 }
+
+GUI::Cell operator-(const GUI::Cell& cell1, const GUI::Cell& cell2) {
+	return GUI::Cell(cell1.getRowNum() - cell2.getRowNum(), cell1.getColNum() - cell2.getColNum());
+}

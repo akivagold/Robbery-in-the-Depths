@@ -91,8 +91,8 @@ void matanel_main()
 	try
 	{
 		
-		testEditor();
-		//testWorld();
+		//testEditor();
+		testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -123,7 +123,7 @@ void testEditor() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	const LevelInfo& levelInfo = lfm.getLevel("matanel map");
 	editScreen.getEditMapView()->importLevelInfo(levelInfo);
 
 	editScreen.getEditMenu()->getExitButton()->addClickListener([&editScreen](View& v) {
@@ -162,7 +162,7 @@ void testWorld() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	const LevelInfo& levelInfo = lfm.getLevel("matanel map");
 	gameScreen.loadLevel(levelInfo);
 
 	// get player
@@ -449,23 +449,25 @@ void testMatrix() {
 
 void testLevelFileManager() {
 	LevelFileManager lfm;
-	std::cout << lfm.toString() << std::endl;
+	//std::cout << lfm.toString() << std::endl;
 
 
-	// create level
+	/*// create level
 	LevelInfo li;
 	li.getLevelChars().resize(50, 100);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
-	li.setName("big map");
+	li.setName("matanel map");
 	li.setIndex(1);
-	lfm.addLevel(li);
+	lfm.addLevel(li);*/
 
-	/*for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
+	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);
 		std::cout << levelInfo.toString() << std::endl;
-	}	*/
+		std::cout << levelInfo.toJSON() << std::endl;
+		std::cout << "-------------------------------------------------------" << std::endl;
+	}
 	//LevelInfo levelInfo = lfm.getLevel(0);
 	//levelInfo.getLevelChars().resize(0, 0);
 	//lfm.editLevel(levelInfo);

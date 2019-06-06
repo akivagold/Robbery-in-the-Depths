@@ -49,3 +49,8 @@ private:
 	int m_colNum;
 };
 }
+
+// overloading - operator
+GUI::Cell operator-(const GUI::Cell& cell1, const GUI::Cell& cell2);
+
+

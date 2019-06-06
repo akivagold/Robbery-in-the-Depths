@@ -10,7 +10,7 @@ Flow::Flow(GameScreen& gameScreen)
 void Flow::setFlow(const sf::Vector2f& flow)
 {
 	m_flowPower = flow;
-	rotateAnimation(float(std::atan2(-flow.x , -flow.y) * 180.f / M_PI));
+	// TODO fix this:    rotateAnimation(float(std::atan2(-flow.x , -flow.y) * 180.f / M_PI));
 }
 
 void Flow::init()

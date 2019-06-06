@@ -5,6 +5,7 @@
 #include "Shark.h"
 #include "Crab.h"
 #include "Rubber.h"
+#include "Flow.h"
 #include "ParseLevelException.h"
 
 World::World(sf::RenderWindow& window)
@@ -32,7 +33,17 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 		}	
 	}
 
-	// TODO load flows, etc.
+	// load flows
+	for (auto& flowInfo : levelInfo.getFlows()) {
+		sf::Vector2f position(static_cast<float>(defaultSize.x*flowInfo.m_startCell.getColNum()), static_cast<float>(defaultSize.y*flowInfo.m_startCell.getRowNum()));
+		Cell dCell = flowInfo.m_endCell - flowInfo.m_startCell;
+		sf::Vector2i size(defaultSize.x*dCell.getRowNum(), defaultSize.y*dCell.getColNum());
+		std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+		flow->setPosition(position);
+		flow->setSize(size);
+		flow->setFlow(flowInfo.flowPower);
+		m_bods.requestAddBO(flow);
+	}
 
 	m_bods.prepareLevel();
 }
