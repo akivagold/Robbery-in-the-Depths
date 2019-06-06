@@ -307,6 +307,7 @@
     <ClInclude Include="~example_class.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="fonts\fonts.json" />
     <None Include="game_objects.json" />
     <None Include="levels.json" />

@@ -2,7 +2,7 @@
 
 // init
 const float EditMapView::ZOOM_CAM_ANIM = 0.02f;
-const float EditMapView::MOVE_CAM_ANIM = 2.f;
+const float EditMapView::MOVE_CAM_ANIM = 4.f;
 
 EditMapView::EditMapView(sf::RenderWindow& window)
 	: BaseClass(window), m_cameraAct(CameraAction::NONE), m_editMode(EditMode::None), m_addChar(' ')
@@ -119,10 +119,10 @@ void EditMapView::initComponents()
 			case sf::Keyboard::Key::Right: {
 				m_cameraAct = CameraAction::RIGHT;
 			} break;
-			case sf::Keyboard::Key::Q: {
+			case sf::Keyboard::Key::Num1: {
 				m_cameraAct = CameraAction::ZOOM_IN;
 			} break;
-			case sf::Keyboard::Key::W: {
+			case sf::Keyboard::Key::Num2: {
 				m_cameraAct = CameraAction::ZOOM_OUT;
 			} break;
 			default:
@@ -135,8 +135,8 @@ void EditMapView::initComponents()
 		case sf::Keyboard::Key::Down:
 		case sf::Keyboard::Key::Left:
 		case sf::Keyboard::Key::Right:
-		case sf::Keyboard::Key::Q:
-		case sf::Keyboard::Key::W: {
+		case sf::Keyboard::Key::Num1:
+		case sf::Keyboard::Key::Num2: {
 			m_cameraAct = CameraAction::NONE; // stop camera animation
 		} break;
 		}

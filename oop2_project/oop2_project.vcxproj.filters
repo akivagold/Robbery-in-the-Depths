@@ -469,5 +469,6 @@
     <None Include="sounds\sounds.json" />
     <None Include="textures\textures.json" />
     <None Include="game_objects.json" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -22,13 +22,6 @@ void EditMenu::initComponents()
 	getBorder().setSize(1);
 	getBorder().setColor(sf::Color(75, 69, 49));
 
-	// init add button
-	m_addButton = std::make_shared<GUI::Button>(getWindow(), "Add");
-	m_addButton->setButtonColor(sf::Color(44, 125, 0));
-	m_addButton->setSelectedButtonColor(sf::Color(28, 80, 0));
-	m_addButton->setTextSize(25);
-	addView(m_addButton);
-
 	// init delete button
 	m_deleteBt = std::make_shared<GUI::Button>(getWindow(), "Delete");
 	m_deleteBt->setButtonColor(sf::Color(204, 11, 63));

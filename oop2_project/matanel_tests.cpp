@@ -91,8 +91,8 @@ void matanel_main()
 	try
 	{
 		
-		//testEditor();
-		testWorld();
+		testEditor();
+		//testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -211,6 +211,27 @@ void testWorld() {
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::G: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(-0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::H: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, 0.0025f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::J: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, -0.0025f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		case sf::Keyboard::R: {
