@@ -24,6 +24,11 @@ void Player::setNumOfScore(int numOfScore)
 	getGameScreen().getGameMenu()->getCoinView()->setNumOfCoins(numOfScore);
 }
 
+void Player::appendScore(int numOfScore)
+{
+	setNumOfScore(getNumOfScore() + numOfScore);
+}
+
 const std::shared_ptr<Tool>& Player::getTool(Tool::ToolType toolType) const
 {
 	auto it = std::find_if(m_tools.cbegin(), m_tools.cend(), [toolType](const std::shared_ptr<Tool>& currTool) {

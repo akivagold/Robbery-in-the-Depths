@@ -1,6 +1,7 @@
 #include "Container.h"
 #include "LifeGift.h"
 #include "ToolGift.h"
+#include "CoinGift.h"
 
 Container::Container(GameScreen& gameScreen)
 	: StaticObject(gameScreen)
@@ -8,11 +9,14 @@ Container::Container(GameScreen& gameScreen)
 	init();
 }
 
-Container::SurprisesList Container::randSurprises()  // TODO must be random!!!!!!!!!!
+Container::SurprisesList Container::randSurprises()
 {
 	SurprisesList surprisesList;
-	//surprisesList.push_back(std::make_shared<LifeGift>(1));
-	surprisesList.push_back(std::make_shared<ToolGift>(Tool::randToolType()));
+	surprisesList.push_back(CoinGift::randCoinGift()); // always have coins
+	if(rand()%2 == 0)
+		surprisesList.push_back(LifeGift::randLifeGift());
+	if(rand()%2 == 0)
+		surprisesList.push_back(ToolGift::randToolGift());
 	return surprisesList;
 }
 
