@@ -3,12 +3,32 @@
         {
             "isUnique": false,
             "name": "shark",
-            "specialChar": 107
+            "specialChar": 115
         },
         {
             "isUnique": true,
             "name": "diver",
             "specialChar": 112
+        },
+        {
+            "isUnique": false,
+            "name": "rubber",
+            "specialChar": 114
+        },
+        {
+            "isUnique": false,
+            "name": "crab",
+            "specialChar": 99
+        },
+        {
+            "isUnique": false,
+            "name": "wall",
+            "specialChar": 119
+        },
+        {
+            "isUnique": false,
+            "name": "chest",
+            "specialChar": 109
         }
     ]
 }

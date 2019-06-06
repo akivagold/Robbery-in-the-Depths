@@ -12,6 +12,8 @@ EditMapView::EditMapView(sf::RenderWindow& window)
 
 void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 {
+	m_levelInfo = levelInfo;
+
 	// load level
 	resize(levelInfo.getLevelChars().getSize());
 	for (auto it = levelInfo.getLevelChars().cbegin(); it != levelInfo.getLevelChars().cend(); ++it) {
@@ -42,6 +44,15 @@ void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 			}
 		});
 	});
+}
+
+const LevelInfo& EditMapView::exportLevelInfo()
+{
+	// update matrix
+	forEach([this](const Cell& cell, const std::shared_ptr<MapCellView>& mapCellView) {
+		m_levelInfo.getLevelChars()[cell] = mapCellView->getChar();
+	});
+	return m_levelInfo;
 }
 
 void EditMapView::draw()

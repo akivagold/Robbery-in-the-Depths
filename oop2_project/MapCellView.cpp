@@ -43,9 +43,9 @@ void MapCellView::updateImage(char ch)
 		case Chest::CHAR: {
 			getImage().setTexture("chest");
 		} break;
-	/*	case Rubber::CHAR: {
-			getImage().setTexture("coin"); // TODO change
-		} break;*/
+		case Rubber::CHAR: {
+			getImage().setTexture("rubber");
+		} break;
 		case Shark::CHAR: {
 			getImage().setTexture("shark");
 		} break;

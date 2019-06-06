@@ -54,6 +54,10 @@
             "numOfImages": 8
         },
         {
+            "name": "rubber",
+            "path": "rubber.png"
+        },
+        {
             "name": "rubber_swim",
             "path": "rubber_swim_anim.png",
             "numOfRows": 2,

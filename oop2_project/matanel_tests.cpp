@@ -123,34 +123,32 @@ void testEditor() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("testMatanelLevel");
+	const LevelInfo& levelInfo = lfm.getLevel("big map");
 	editScreen.getEditMapView()->importLevelInfo(levelInfo);
 
-	editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
-		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	editScreen.getEditMenu()->getExitButton()->addClickListener([&editScreen](View& v) {
+		editScreen.close();
 	});
+	editScreen.getEditMenu()->getSaveButton()->addClickListener([&editScreen, &lfm](View& v) {
+		const LevelInfo& levelInfo = editScreen.getEditMapView()->exportLevelInfo();
+		lfm.editLevel(levelInfo);
+		AlertDialog::show("Level saved!", "The level saved successfuly!", "OK");
+	});
+	editScreen.getEditMapView()->forEach([&editScreen](const Cell& cell, const std::shared_ptr<MapCellView>& mapCellView) {
+		mapCellView->addEnterListener([&editScreen, cell](View& v){
+			editScreen.getEditMenu()->setCurrentCell(cell);
+		});
+	});
+	editScreen.getGameObjs()->addGOVClickListener([&editScreen](const std::shared_ptr<GameObjectView>& gov) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+		editScreen.getEditMapView()->setAddChar(gov->getGOI().getSpecialChar());
+	});
+	/*editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	});*/
 	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
 		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
 	});
-
-	//emv.setEditMode(EditMapView::EditMode::Add);
-	//emv.setAddChar('p');
-
-	/*emv.addKeyDownListener([&emv](sf::Keyboard::Key& keyCode) {
-		switch (keyCode)
-		{
-			case sf::Keyboard::Key::A: {
-				emv.setEditMode(EditMapView::EditMode::Add);
-				emv.setAddChar('p');
-			} break;
-			case sf::Keyboard::Key::B: {
-				emv.setEditMode(EditMapView::EditMode::Remove);
-			} break;
-			case sf::Keyboard::Key::C: {
-				emv.setEditMode(EditMapView::EditMode::None);
-			} break;
-		}
-	});*/
 
 	editScreen.run();
 }
@@ -169,8 +167,8 @@ void testWorld() {
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-	player->addTool(std::make_shared<AK47>(player.get()));
-	player->getCurrTool()->setInfLimit();
+	//player->addTool(std::make_shared<AK47>(player.get()));
+	//player->getCurrTool()->setInfLimit();
 	
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
