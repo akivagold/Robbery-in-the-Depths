@@ -154,13 +154,10 @@ void testWorld() {
 	});
 
 	// run game
-	Timer frameTimer;
-	frameTimer.start(1, [&gameScreen, &player]() {
+	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
-	gameScreen.run(frameTimer);
-
 }
 /*
 void testLifeView() {
