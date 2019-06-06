@@ -15,6 +15,7 @@ class Rubber;
 class Flow;
 class Bullet;
 class Chest;
+class MachineGun;
 
 //---- using section --------
 using std::string;
@@ -75,6 +76,7 @@ public:
 	virtual void onCollide(Wall* wall) = 0;
 	virtual void onCollide(Flow* flow) = 0;
 	virtual void onCollide(Bullet* bullet) = 0;
+	virtual void onCollide(MachineGun* machineGun) = 0;
 protected:
 	// update components
 	virtual void updateComponents() override;

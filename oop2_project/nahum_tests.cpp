@@ -31,6 +31,10 @@
 #include "Crab.h"
 #include "Chest.h"
 #include "Flow.h"
+#include "EditMapView.h"
+#include "EditMenu.h"
+#include "EditScreen.h"
+#include "MachineGun.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -63,6 +67,7 @@ using namespace GUI; // for tests only
 void testCleanScreen();
 void testLifeView();
 void testWorld();
+void testEditor();
 #pragma endregion
 
 // -------------- globals & constants -----------
@@ -89,6 +94,46 @@ void nahum_main()
 	}
 }
 
+void testEditor() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
+
+	// create editor
+	EditScreen editScreen(window);
+
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("matanel map");
+	editScreen.getEditMapView()->importLevelInfo(levelInfo);
+
+	editScreen.getEditMenu()->getExitButton()->addClickListener([&editScreen](View& v) {
+		editScreen.close();
+	});
+	editScreen.getEditMenu()->getSaveButton()->addClickListener([&editScreen, &lfm](View& v) {
+		const LevelInfo& levelInfo = editScreen.getEditMapView()->exportLevelInfo();
+		lfm.editLevel(levelInfo);
+		AlertDialog::show("Level saved!", "The level saved successfuly!", "OK");
+	});
+	editScreen.getEditMapView()->forEach([&editScreen](const Cell& cell, const std::shared_ptr<MapCellView>& mapCellView) {
+		mapCellView->addEnterListener([&editScreen, cell](View& v) {
+			editScreen.getEditMenu()->setCurrentCell(cell);
+		});
+	});
+	editScreen.getGameObjs()->addGOVClickListener([&editScreen](const std::shared_ptr<GameObjectView>& gov) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+		editScreen.getEditMapView()->setAddChar(gov->getGOI().getSpecialChar());
+	});
+	/*editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	});*/
+	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
+	});
+
+	editScreen.run();
+}
+
+
 void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
@@ -97,32 +142,36 @@ void testWorld() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
+	const LevelInfo& levelInfo = lfm.getLevel("nahum map");
 	gameScreen.loadLevel(levelInfo);
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-	player->addTool(std::make_shared<AK47>(player.get(), 200));
+	//player->addTool(std::make_shared<AK47>(player.get()));
+	//player->getCurrTool()->setInfLimit();
 
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
+		case sf::Keyboard::Key::U: {
+			player->setTransparency(player->getTransparency() - 10);
+		} break;
 		case sf::Keyboard::Key::K: {
 			player->rotateAnimation(10);
 		} break;
-		case sf::Keyboard::Key::Q: {
+		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
 		} break;
-		case sf::Keyboard::Key::W: {
+		case sf::Keyboard::Key::Num1: {
 			gameScreen.getWorld().getCamera().zoom(1.05f);
 		} break;
 		case sf::Keyboard::Key::P: {
 			std::cout << "-------------------------------------------------" << std::endl;
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 		} break;
-		case sf::Keyboard::Key::R: {
+		case sf::Keyboard::Key::W: {
 			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
 			wall->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(wall);
@@ -144,16 +193,58 @@ void testWorld() {
 			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
+		case sf::Keyboard::G: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(-0.0025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::H: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, 0.0025f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::J: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, -0.0025f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::R: {
+			std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
+			rubber->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(rubber);
+		} break;
+		case sf::Keyboard::B: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::UP);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
+		case sf::Keyboard::N: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::RIGHT);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
 		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
-		std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
-		rubber->setPosition(pos);
-		gameScreen.getWorld().getBODS().requestAddBO(rubber);
+
+		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
+		shark->setPosition(pos);
+		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	// run game
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());

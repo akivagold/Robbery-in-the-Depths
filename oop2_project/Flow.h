@@ -36,6 +36,7 @@ public:
 	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override {}
 	virtual void onCollide(Bullet* bullet) override {}
+	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
 	// set flow - power & angle
 	void setFlow(const sf::Vector2f& flow);
 private:
