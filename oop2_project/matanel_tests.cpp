@@ -33,6 +33,7 @@
 #include "EditScreen.h"
 #include "AK47.h"
 #include "Rubber.h"
+#include "GameController.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -62,6 +63,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testGameController();
 void testEditMenu();
 void testEditor();
 void testBox2DLib();
@@ -90,9 +92,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		
+		testGameController();
 		//testEditor();
-		testWorld();
+		//testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -112,7 +114,10 @@ void matanel_main()
 	}
 }
 
-
+void testGameController() {
+	GameController gameController;
+	gameController.run();
+}
 
 void testEditor() {
 	// create window
@@ -143,9 +148,6 @@ void testEditor() {
 		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
 		editScreen.getEditMapView()->setAddChar(gov->getGOI().getSpecialChar());
 	});
-	/*editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
-		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
-	});*/
 	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
 		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
 	});

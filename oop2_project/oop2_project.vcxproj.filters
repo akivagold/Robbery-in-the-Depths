@@ -228,10 +228,10 @@
     <ClCompile Include="ToolGift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Trap.cpp">
+    <ClCompile Include="GameController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MachineGun.cpp">
+    <ClCompile Include="CoinGift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -467,10 +467,10 @@
     <ClInclude Include="ToolGift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Trap.h">
+    <ClInclude Include="GameController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MachineGun.h">
+    <ClInclude Include="CoinGift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

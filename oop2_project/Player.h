@@ -34,6 +34,7 @@ public:
 	int getNumOfScore() const { return m_numOfScore; }
 	// set score
 	void setNumOfScore(int numOfScore);
+	void appendScore(int numOfScore);
 	// check if player have tool
 	bool haveTool(Tool::ToolType toolType) const;
 	bool haveTool(Tool* tool) const;
