@@ -68,5 +68,6 @@ private:
 	bool m_isInRadiusfromPlayer;
 	// play when inside radius from player
 	void inRadiusFromPlayer();
+	bool m_isInShot;
 };
 

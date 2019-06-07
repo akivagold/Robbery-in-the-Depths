@@ -37,7 +37,7 @@ protected:
 	virtual void onDirectionChanged() override { }
 private:
 	// bullet acceleration
-	static const float ACCELERATION;
+	static const sf::Vector2f ACCELERATION;
 	// damage
 	static const int DAMAGE = 1;
 	// init

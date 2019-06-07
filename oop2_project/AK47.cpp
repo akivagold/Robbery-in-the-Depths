@@ -27,8 +27,12 @@ void AK47::fire()
 
 	if (Player::isLeftDirections(getMyOwner()->getDirection()))
 		bullet->setPosition(getMyOwner()->getPosition().x - bullet->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
-	else
+	else if(Player::isRightDirections(getMyOwner()->getDirection()))
 		bullet->setPosition(getMyOwner()->getPosition().x + getMyOwner()->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
+	else if (Player::isUpDirections(getMyOwner()->getDirection()))
+		bullet->setPosition(getMyOwner()->getCenter().x - bullet->getSize().x / 2.f, getMyOwner()->getPosition().y - bullet->getSize().y / 2.f);
+	else
+		bullet->setPosition(getMyOwner()->getCenter().x - bullet->getSize().x / 2.f, getMyOwner()->getPosition().y + getMyOwner()->getSize().y);
 }
 
 void AK47::init()
