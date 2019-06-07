@@ -15,6 +15,7 @@ void Flow::setFlow(const sf::Vector2f& flow)
 
 void Flow::init()
 {
+	setDrawPriority(DRAW_PRIORITY);
 	setAnimation("flow");
 	setAnimationFrequency(ANIM_FREQUENCY);
 }

@@ -1,28 +1,29 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include "Projectile.h"
-#include "AK47.h"
-#include "Tool.h"
+#include "InteractableObject.h"
+#include "StopWatch.h"
 
 //---- using section --------
 using std::string;
 
 /*
- * Bullet class
+ * Explosion class
  */
-class Bullet :
-	public Projectile
+class Explosion 
+	: public InteractableObject
 {
 public:
 	// constructor
-	explicit Bullet(GameScreen& gameScreen, Character* owner, Direction Direction);
+	explicit Explosion(GameScreen& gameScreen);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
-	// explode
-	void explode();
+	// check if this object is don't blocking movement
+	virtual bool canMoveThroughMe() const override { return true; }
+	// draw
+	virtual void draw() override;
 	// convert to string
-	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
+	virtual string toString() const override { return "Explosion: { " + InteractableObject::toString() + " }"; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {} // TODO use this
@@ -33,19 +34,20 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
-	virtual void onCollide(Grenade* grenade) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
+	virtual void onCollide(Grenade* grenade) override {}; // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
-protected:
-	// the object choose where to go
-	virtual void playChoice(Direction lastDirection, bool isCollided) override;
-	// event when direction changed
-	virtual void onDirectionChanged() override { }
 private:
-	// bullet acceleration
-	static const sf::Vector2f ACCELERATION;
+	// draw priority
+	static const int DRAW_PRIORITY = 150;
 	// damage
-	static const int DAMAGE = 1;
+	static const int DAMAGE = 0;
+	// animation frequency
+	static const int ANIM_FREQUENCY = 15;
+	// time to show
+	static const int SHOW_TIME = 1000;
+	// vanish stopWatch
+	StopWatch m_vanishSW;
 	// init
 	void init();
 };

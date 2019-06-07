@@ -8,7 +8,7 @@ class WorkingTool :
 	public Tool
 {
 protected:
+	// constructor
 	using Tool::Tool;
-
 };
 

@@ -35,6 +35,10 @@
         {
             "name": "open_chest",
             "path": "open_chest.ogg"
+        },
+        {
+            "name": "explosion",
+            "path": "explosion.ogg"
         }
     ]
 }

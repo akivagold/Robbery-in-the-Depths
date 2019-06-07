@@ -40,7 +40,7 @@ public:
 	// set infinity limit
 	void setInfLimit();
 	// get default use limit
-	virtual int getDefUseLimit() = 0;
+	virtual int getDefUseLimit() const = 0;
 	// check if using infinity limit
 	bool isUseInfLimit() const { return m_withInfLlimit; }
 	// convert to string

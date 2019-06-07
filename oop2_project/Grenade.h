@@ -9,20 +9,20 @@
 using std::string;
 
 /*
- * Bullet class
+ * Grenade class
  */
-class Bullet :
+class Grenade :
 	public Projectile
 {
 public:
 	// constructor
-	explicit Bullet(GameScreen& gameScreen, Character* owner, Direction Direction);
+	explicit Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude = 0.5f, Direction Direction = Direction::LEFT);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// explode
 	void explode();
 	// convert to string
-	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
+	virtual string toString() const override { return "Grenade: { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {} // TODO use this
@@ -33,8 +33,8 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
-	virtual void onCollide(Grenade* grenade) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
+	virtual void onCollide(Grenade* grenade) override {}; // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 protected:
 	// the object choose where to go
@@ -42,11 +42,13 @@ protected:
 	// event when direction changed
 	virtual void onDirectionChanged() override { }
 private:
-	// bullet acceleration
+	// acceleration
 	static const sf::Vector2f ACCELERATION;
 	// damage
-	static const int DAMAGE = 1;
+	static const int DAMAGE = 5;
 	// init
 	void init();
+	// update acceleration
+	void updateAcc();
 };
 

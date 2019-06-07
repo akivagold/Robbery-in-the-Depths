@@ -34,6 +34,7 @@
 #include "AK47.h"
 #include "Rubber.h"
 #include "GameController.h"
+#include "Grenade.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -215,13 +216,6 @@ void testWorld() {
 			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
-		case sf::Keyboard::G: {
-			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-			flow->setPosition(mousePos);
-			flow->setFlow(sf::Vector2f(-0.0025f, 0.f));
-			gameScreen.getWorld().getBODS().requestAddBO(flow);
-		} break;
 		case sf::Keyboard::H: {
 			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
@@ -240,6 +234,11 @@ void testWorld() {
 			std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
 			rubber->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(rubber);
+		} break;
+		case sf::Keyboard::G: {
+			std::shared_ptr<Grenade> grenade = std::make_shared<Grenade>(gameScreen, player.get());
+			grenade->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(grenade);
 		} break;
 		}
 	});

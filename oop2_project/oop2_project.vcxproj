@@ -176,6 +176,7 @@
     <ClCompile Include="EditScreen.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Flow.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Gift.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
+    <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
@@ -253,6 +255,7 @@
     <ClInclude Include="EditScreen.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Flow.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameController.h" />
@@ -263,6 +266,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Gift.h" />
     <ClInclude Include="GOIFileParser.h" />
+    <ClInclude Include="Grenade.h" />
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="HotWeapon.h" />
