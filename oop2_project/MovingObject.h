@@ -61,7 +61,6 @@ protected:
 	void setMaxSpeed(const sf::Vector2f& maxSpeed) { m_maxSpeed = maxSpeed; }
 	// get maximum speed
 	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
-	virtual void floatEffect();
 private:
 	// direction and last direction
 	Direction m_direction, m_lastDirection;
@@ -87,4 +86,6 @@ private:
 	void init();
 	// check collide
 	void checkCollide(std::forward_list<BoardObject*> collideList);
+	// make float effect
+	virtual void floatEffect();
 };

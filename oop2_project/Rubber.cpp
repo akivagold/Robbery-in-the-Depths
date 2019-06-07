@@ -43,7 +43,7 @@ void Rubber::onDie()
 void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
-	m_isInRadiusShot = true;
+	m_isInRadiusShot = false;
 }
 
 void Rubber::onCollide(Bullet* bullet)

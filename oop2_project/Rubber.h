@@ -42,7 +42,7 @@ public:
 	virtual void onCollide(Bullet* bullet) override; // TODO use this
 	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
 	// get radius shot
-	float getRadiusShot() { return RADIUS_SHOT; }
+	static float getRadiusShot() { return RADIUS_SHOT; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -50,10 +50,7 @@ private:
 	// draw priority
 	static const int DRAW_PRIORITY = 80;
 	// default number of life
-	static const int DEFAULT_LIFE = 3;
-	// init
-	void init();
-	
+	static const int DEFAULT_LIFE = 3;	
 	// radius attak
 	static const float RADIUS_ATTACK;
 	// radius shot
@@ -62,12 +59,14 @@ private:
 	std::shared_ptr<Tool> m_tool;
 	// time
 	Timer m_time;
+	bool m_isInShot;
 	// flag that check if he is in radius shot
 	bool m_isInRadiusShot;
 	// flag that check if he is in radius from player
 	bool m_isInRadiusfromPlayer;
 	// play when inside radius from player
 	void inRadiusFromPlayer();
-	bool m_isInShot;
+	// init
+	void init();
 };
 

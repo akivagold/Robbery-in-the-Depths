@@ -1,5 +1,5 @@
 #include "Bullet.h"
-
+#include "SoundManager.h"
 
 const sf::Vector2f Bullet::ACCELERATION = sf::Vector2f(0.0001f*Bullet::getMODefSize().x, 0.0001f*Bullet::getMODefSize().y);
 
@@ -10,10 +10,20 @@ Bullet::Bullet(GameScreen& gameScreen, Character* owner, Direction direction)
 	init();
 }
 
+void Bullet::onJoinedGame()
+{
+	GUI::SoundManager::getInterface().playSound("bullet_fire");
+}
+
+void Bullet::explode()
+{
+	suicide();
+}
+
 void Bullet::playChoice(Direction lastDirection, bool isCollided)
 {
 	if (isCollided) {
-		suicide();
+		explode();
 		return;
 	}
 

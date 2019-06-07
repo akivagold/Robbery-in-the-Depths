@@ -159,7 +159,7 @@ void testWorld() {
 			player->setTransparency(player->getTransparency() - 10);
 		} break;
 		case sf::Keyboard::Key::K: {
-			player->rotateAnimation(10);
+			//player->rotateAnimation(10);
 		} break;
 		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);

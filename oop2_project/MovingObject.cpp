@@ -29,7 +29,6 @@ void MovingObject::floatEffect()
 		}
 
 	}
-
 }
 
 void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)

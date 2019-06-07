@@ -2,6 +2,7 @@
 #include "GameScreen.h"
 #include "Chest.h"
 #include "Flow.h"
+#include "SoundManager.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)
@@ -85,6 +86,9 @@ void Player::useCurrTool()
 	if (haveCurrTool()) {
 		if (m_currTool->canUsingTool()) {
 			m_currTool->useTool();
+		}
+		else {
+			GUI::SoundManager::getInterface().playSound("no_ammo");
 		}
 	}
 }

@@ -23,6 +23,18 @@
         {
             "name": "lose",
             "path": "lose.ogg"
+        },
+        {
+            "name": "bullet_fire",
+            "path": "bullet_fire.ogg"
+        },
+        {
+            "name": "no_ammo",
+            "path": "no_ammo.wav"
+        },
+        {
+            "name": "open_chest",
+            "path": "open_chest.ogg"
         }
     ]
 }

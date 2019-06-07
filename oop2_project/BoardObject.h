@@ -38,10 +38,8 @@ public:
 	int getDrawPriority() const { return m_drawPriority; }
 	// check if collide with another
 	bool isCollideWith(const BoardObject& other) const { return getBound().intersects(other.getBound()); }
-	// get distance from another object
+	// get distance from another board object
 	float getDistance(const std::shared_ptr<BoardObject>& other) const;
-	// convert to string
-	virtual string toString() const override;
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const = 0;
 	// change flag that object in game
@@ -58,6 +56,8 @@ public:
 	const std::shared_ptr<BoardObject>& getSelf() const;
 	// get default size of object
 	static const sf::Vector2i& getDefaultSize();
+	// event when object joined to game
+	virtual void onJoinedGame() { };
 	// vanish from map
 	void vanish();
 	// check if object if above then another object
@@ -77,6 +77,8 @@ public:
 	virtual void onCollide(Flow* flow) = 0;
 	virtual void onCollide(Bullet* bullet) = 0;
 	virtual void onCollide(MachineGun* machineGun) = 0;
+	// convert to string
+	virtual string toString() const override;
 protected:
 	// update components
 	virtual void updateComponents() override;

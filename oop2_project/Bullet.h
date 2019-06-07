@@ -17,6 +17,10 @@ class Bullet :
 public:
 	// constructor
 	explicit Bullet(GameScreen& gameScreen, Character* owner, Direction Direction);
+	// event when object joined to game
+	virtual void onJoinedGame() override;
+	// explode
+	void explode();
 	// convert to string
 	virtual string toString() const override { return "Bullet { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)

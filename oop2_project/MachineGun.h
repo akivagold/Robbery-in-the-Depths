@@ -11,16 +11,18 @@
 using std::string;
 
 /*
- * Trap class
+ * MachineGun class
  */
 class MachineGun :
 	public NPC
 {
 public:
+	// char
+	static const char CHAR = 'g';
 	// constructor
 	explicit MachineGun(GameScreen& gameScreen, MovingObject::Direction directoin);
 	// convert to string
-	virtual string toString() const override { return "GunTrap { " + InteractableObject::toString() + " }"; }
+	virtual string toString() const override { return "MachineGun: { " + InteractableObject::toString() + " }"; }
 	// get gun
 	const std::shared_ptr<HotWeapon>& getGun() const { return m_gun; }
 	// check if this object is don't blocking movement
@@ -28,7 +30,7 @@ public:
 	// draw
 	virtual void draw() override;
 	// set weapon
-	void setWeapon(std::shared_ptr<HotWeapon>& weapon) { m_gun = weapon; }
+	void setWeapon(const std::shared_ptr<HotWeapon>& weapon) { m_gun = weapon; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override {};
 	virtual void onCollide(Player* player) override {};
