@@ -44,8 +44,6 @@ public:
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
 	// set life
 	virtual void setNumOfLife(int numOfLife) override;
-	// event when direction changed
-	virtual void onDirectionChanged() override;
 	// use current tool if can
 	void useCurrTool();
 	// event on update tool
@@ -68,6 +66,8 @@ public:
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
+	// event when direction changed
+	virtual void onDirectionChanged() override;
 private:
 	// swim animation frequency
 	static const int SWIM_ANIM_FREQUENCY = 30;
@@ -85,4 +85,8 @@ private:
 	int m_numOfScore;
 	// init
 	void init();
+	// switch current tool to next tool at list
+	void switchToNextTool();
+	// find tool index
+	int findToolIndex(const std::shared_ptr<Tool>& tool);
 };

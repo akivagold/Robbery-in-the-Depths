@@ -39,6 +39,10 @@
         {
             "name": "explosion",
             "path": "explosion.ogg"
+        },
+        {
+            "name": "gl_fire",
+            "path": "grenade_launcher_fire.wav"
         }
     ]
 }

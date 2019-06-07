@@ -2,6 +2,7 @@
 #include "Flow.h"
 #include "Wall.h"
 #include "Bullet.h"
+#include "Grenade.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;
@@ -52,7 +53,15 @@ void Crab::onCollide(Bullet* bullet)
 {
 	if (!isDie()) {
 		decreaseLife(bullet->getDamage());
-		bullet->suicide();
+		bullet->explode();
+	}
+}
+
+void Crab::onCollide(Grenade* grenade)
+{
+	if (!isDie()) {
+		decreaseLife(grenade->getDamage());
+		grenade->explode();
 	}
 }
 

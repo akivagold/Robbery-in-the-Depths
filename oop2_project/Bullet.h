@@ -20,7 +20,7 @@ public:
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// explode
-	void explode();
+	virtual void explode() override;
 	// convert to string
 	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)

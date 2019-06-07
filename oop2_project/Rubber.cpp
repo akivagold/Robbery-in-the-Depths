@@ -2,6 +2,7 @@
 #include "Flow.h"
 #include "GameScreen.h"
 #include "Bullet.h"
+#include "Grenade.h"
 
 // init
 const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*10.f;
@@ -48,16 +49,21 @@ void Rubber::onCollide(Flow* flow)
 
 void Rubber::onCollide(Bullet* bullet)
 {
-
 	if (isDie())
 		return;
 
 	if (bullet->getMyOwner() != this) {
 		decreaseLife(bullet->getDamage());
-		bullet->suicide();
+		bullet->explode();
 	}
-	
-	
+}
+
+void Rubber::onCollide(Grenade* grenade)
+{
+	if (!isDie()) {
+		decreaseLife(grenade->getDamage());
+		grenade->explode();
+	}
 }
 
 void Rubber::playChoice(Direction lastDirection, bool isCollided)

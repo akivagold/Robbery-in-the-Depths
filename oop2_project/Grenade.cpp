@@ -3,7 +3,7 @@
 #include "GameScreen.h"
 
 // init
-const sf::Vector2f Grenade::ACCELERATION(0.00007f, 0.00005f);
+const sf::Vector2f Grenade::ACCELERATION(0.0002f, 0.0001f);
 
 Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude, Direction direction)
 	: Projectile(gameScreen, owner, direction)
@@ -14,18 +14,18 @@ Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude, Di
 
 void Grenade::onJoinedGame()
 {
-	// TODO play sound GUI::SoundManager::getInterface().playSound("?");
+	GUI::SoundManager::getInterface().playSound("gl_fire");
 }
 
 void Grenade::explode()
 {
+	Projectile::explode();
+
 	// create explosion
 	std::shared_ptr<Explosion> explosion = std::make_shared<Explosion>(getGameScreen());
 	sf::Vector2f myCenter = getCenter();
 	explosion->setPosition(myCenter.x - explosion->getSize().x/2.f, myCenter.y - explosion->getSize().y / 2.f);
 	getGameScreen().getWorld().getBODS().requestAddBO(explosion);
-
-	suicide();
 }
 
 void Grenade::playChoice(Direction lastDirection, bool isCollided)
@@ -48,9 +48,9 @@ void Grenade::init()
 
 void Grenade::updateAcc()
 {
-	if (getDirection() == Direction::LEFT)
-		getInteralAcceleration().x = ACCELERATION.x*getSize().x;
-	else
+	if (Character::isLeftDirections(getDirection()))
 		getInteralAcceleration().x = -ACCELERATION.x*getSize().x;
+	else
+		getInteralAcceleration().x = ACCELERATION.x*getSize().x;
 	getInteralAcceleration().y = ACCELERATION.y*getSize().y;
 }

@@ -188,6 +188,7 @@
     <ClCompile Include="Gift.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
     <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="GrenadeLauncher.cpp" />
     <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="Gift.h" />
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="Grenade.h" />
+    <ClInclude Include="GrenadeLauncher.h" />
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="HotWeapon.h" />

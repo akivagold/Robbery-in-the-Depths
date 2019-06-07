@@ -20,8 +20,6 @@ public:
 	static const char CHAR = 'r';
 	// constructor
 	explicit Rubber(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
-	// event when direction changed
-	virtual void onDirectionChanged() override;
 	// draw
 	virtual void draw() override;
 	// get gun
@@ -41,13 +39,15 @@ public:
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override; // TODO use this
 	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
-	virtual void onCollide(Grenade* grenade) override {} // TODO use this
+	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 	// get radius shot
 	static float getRadiusShot() { return RADIUS_SHOT; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
+	// event when direction changed
+	virtual void onDirectionChanged() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 80;

@@ -1,12 +1,17 @@
 #include "Projectile.h"
 
-Projectile::Projectile(GameScreen& gameScreen, Character* owner,  Direction direction)
-	: MovingObject(gameScreen), m_owner(owner)
+void Projectile::explode()
 {
-	init(direction);
+	suicide();
 }
 
-void Projectile::init(Direction direction)
+Projectile::Projectile(GameScreen& gameScreen, Character* owner,  Direction direction)
+	: MovingObject(gameScreen, direction), m_owner(owner)
+{
+	init();
+}
+
+void Projectile::init()
 {
 	setSize(static_cast<int>(BoardObject::getDefaultSize().x*0.3f), static_cast<int>(BoardObject::getDefaultSize().y*0.3f));
 	setDrawPriority(DRAW_PRIORITY);

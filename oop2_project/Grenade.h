@@ -16,11 +16,11 @@ class Grenade :
 {
 public:
 	// constructor
-	explicit Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude = 0.5f, Direction Direction = Direction::LEFT);
+	explicit Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude = 0.4f, Direction Direction = Direction::RIGHT);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// explode
-	void explode();
+	virtual void explode() override;
 	// convert to string
 	virtual string toString() const override { return "Grenade: { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)

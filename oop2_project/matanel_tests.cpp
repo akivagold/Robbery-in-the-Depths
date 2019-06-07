@@ -35,6 +35,7 @@
 #include "Rubber.h"
 #include "GameController.h"
 #include "Grenade.h"
+#include "GrenadeLauncher.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -170,6 +171,7 @@ void testWorld() {
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+	//player->addTool(std::make_shared<GrenadeLauncher>(player.get()));
 	//player->addTool(std::make_shared<AK47>(player.get()));
 	//player->getCurrTool()->setInfLimit();
 	
@@ -250,6 +252,7 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
+	gameScreen.getWorld().getCamera().zoom(1.5f);
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());

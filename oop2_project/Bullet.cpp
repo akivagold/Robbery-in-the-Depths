@@ -17,7 +17,7 @@ void Bullet::onJoinedGame()
 
 void Bullet::explode()
 {
-	suicide();
+	Projectile::explode();
 }
 
 void Bullet::playChoice(Direction lastDirection, bool isCollided)

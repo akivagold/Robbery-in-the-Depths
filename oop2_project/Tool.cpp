@@ -1,5 +1,6 @@
 #include "Tool.h"
 #include "AK47.h"
+#include "GrenadeLauncher.h"
 
 Tool::Tool(Character* object, string toolName)
 	: m_owner(object), m_withInfLlimit(false), m_useLimit(0)
@@ -34,6 +35,9 @@ std::shared_ptr<Tool> Tool::createTool(ToolType toolType, Character* owner)
 	{
 		case ToolType::TT_AK47: {
 			tool = std::make_shared<AK47>(owner);
+		} break;
+		case ToolType::TT_GRENADE_LAUNCHER: {
+			tool = std::make_shared<GrenadeLauncher>(owner);
 		} break;
 		default:
 			throw std::out_of_range("Cannot find the tool type=" + std::to_string(toolType));
