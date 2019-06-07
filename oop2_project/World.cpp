@@ -32,8 +32,7 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 				// fix position
 				position.y += (defaultSize.y - boardObj->getSize().y)*0.6f;
 			}
-			
-			//position.x += (defaultSize.x - boardObj->getSize().x)/2.f;
+			// TODO fix x:    position.x += (defaultSize.x - boardObj->getSize().x);
 			boardObj->setPosition(position);
 			m_bods.requestAddBO(boardObj);
 		}	

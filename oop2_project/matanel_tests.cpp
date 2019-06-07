@@ -92,9 +92,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		testGameController();
+		//testGameController();
 		//testEditor();
-		//testWorld();
+		testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -181,7 +181,7 @@ void testWorld() {
 			player->setTransparency(player->getTransparency() - 10);
 		} break;
 		case sf::Keyboard::Key::K: {
-			player->rotateAnimation(10);
+			//player->rotateAnimation(10);
 		} break;
 		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);

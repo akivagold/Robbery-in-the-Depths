@@ -31,7 +31,7 @@ void Crab::onCollide(Wall* wall)
 
 	if (isAboveThen(wall->getSelf())) {
 		getInteralAcceleration().y = 0.f;
-		setPosition(getPosition().x, wall->getPosition().y - getSize().y - 2);
+		setPosition(getPosition().x, getPosition().y - 2);
 	}
 	else if (isLeftThen(wall->getSelf())) {
 		getInteralAcceleration().x = 0.f;

@@ -6,7 +6,7 @@ void GameController::run()
 	// TODO play background music
 
 	// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Robbery in the Depths"); // TODO make a full screen
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Robbery in the Depths", sf::Style::Fullscreen);
 
 	// TODO set game icon at window
 
