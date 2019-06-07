@@ -186,6 +186,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Gift.cpp" />
     <ClCompile Include="GOIFileParser.cpp" />
+    <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ToolView.cpp" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -261,6 +263,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Gift.h" />
     <ClInclude Include="GOIFileParser.h" />
+    <ClInclude Include="MachineGun.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="HotWeapon.h" />
     <ClInclude Include="IHandler.h" />
@@ -283,6 +286,7 @@
     <ClInclude Include="Shark.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Surprise.h" />
+    <ClInclude Include="Trap.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="ToolGift.h" />

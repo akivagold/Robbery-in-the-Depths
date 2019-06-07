@@ -29,6 +29,7 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -36,7 +37,7 @@ protected:
 	virtual void onDirectionChanged() override { }
 private:
 	// bullet acceleration
-	static const float ACCELERATION;
+	static const sf::Vector2f ACCELERATION;
 	// damage
 	static const int DAMAGE = 1;
 	// init
