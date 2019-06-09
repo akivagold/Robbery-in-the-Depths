@@ -11,8 +11,7 @@ GrenadeLauncher::GrenadeLauncher(Character* owner, int ammo)
 void GrenadeLauncher::fire()
 {
 	float upAmplitude = 0.01f*getMyOwner()->getSize().x;
-	std::shared_ptr<Grenade> grenade = std::make_shared<Grenade>(getMyOwner()->getGameScreen(), getMyOwner(), upAmplitude, getMyOwner()->getDirection());
-	grenade->setPosition(getMyOwner()->getCenter().x, getMyOwner()->getPosition().y);
+	std::shared_ptr<Grenade> grenade = std::make_shared<Grenade>(getMyOwner()->getGameScreen(), getMyOwner(), upAmplitude);
 	getMyOwner()->getGameScreen().getWorld().getBODS().requestAddBO(grenade);
 }
 

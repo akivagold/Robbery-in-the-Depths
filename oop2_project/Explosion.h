@@ -15,13 +15,17 @@ class Explosion
 {
 public:
 	// constructor
-	explicit Explosion(GameScreen& gameScreen);
+	explicit Explosion(GameScreen& gameScreen, float power = DEFAULT_POWER);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
 	// draw
 	virtual void draw() override;
+	// set power
+	void setPower(float power) { m_power = power; }
+	// get power
+	float getPower() const { return m_power; }
 	// convert to string
 	virtual string toString() const override { return "Explosion: { " + InteractableObject::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -46,6 +50,10 @@ private:
 	static const int ANIM_FREQUENCY = 15;
 	// time to show
 	static const int SHOW_TIME = 1000;
+	// default power
+	static const float DEFAULT_POWER;
+	// power of explosion
+	float m_power;
 	// vanish stopWatch
 	StopWatch m_vanishSW;
 	// init

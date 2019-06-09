@@ -3,6 +3,7 @@
 #include "Chest.h"
 #include "Flow.h"
 #include "SoundManager.h"
+#include "Explosion.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)
@@ -64,6 +65,7 @@ void Player::switchToNextTool()
 			nextToolIndex = currentToolIndex + 1;
 		auto& nextTool = m_tools[nextToolIndex];
 		changeTool(nextTool);
+		GUI::SoundManager::getInterface().playSound("change_tool");
 	}
 }
 
@@ -123,6 +125,15 @@ void Player::onCollide(Chest* chest)
 void Player::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+}
+
+void Player::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Player::playChoice(Direction lastDirection, bool isCollided)

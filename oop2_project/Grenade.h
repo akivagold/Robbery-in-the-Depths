@@ -16,7 +16,7 @@ class Grenade :
 {
 public:
 	// constructor
-	explicit Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude = 0.4f, Direction Direction = Direction::RIGHT);
+	explicit Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude = 0.4f);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// explode

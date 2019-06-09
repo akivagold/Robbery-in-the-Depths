@@ -100,7 +100,7 @@ void World::init()
 	getBackground().setColor(sf::Color(155, 236, 255));
 	getBorder().setColor(sf::Color::Blue);
 	getBorder().setSize(1);
-	getCamera().zoom(0.3f);
+	getCamera().zoom(0.6f);
 }
 
 

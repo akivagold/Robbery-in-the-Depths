@@ -5,8 +5,8 @@
 // init
 const sf::Vector2f Grenade::ACCELERATION(0.0002f, 0.0001f);
 
-Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude, Direction direction)
-	: Projectile(gameScreen, owner, direction)
+Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude)
+	: Projectile(gameScreen, owner)
 {
 	getSpeed().y = -upAmplitude;
 	init();

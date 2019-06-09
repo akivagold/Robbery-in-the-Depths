@@ -3,10 +3,9 @@
 
 const sf::Vector2f Bullet::ACCELERATION = sf::Vector2f(0.0001f*Bullet::getMODefSize().x, 0.0001f*Bullet::getMODefSize().y);
 
-Bullet::Bullet(GameScreen& gameScreen, Character* owner, Direction direction)
-	: Projectile(gameScreen, owner, direction)
+Bullet::Bullet(GameScreen& gameScreen, Character* owner)
+	: Projectile(gameScreen, owner)
 {
-	setDirection(direction);
 	init();
 }
 

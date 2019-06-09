@@ -40,7 +40,7 @@ public:
 	virtual void onCollide(Bullet* bullet) override; // TODO use this
 	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
 	virtual void onCollide(Grenade* grenade) override;
-	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
+	virtual void onCollide(Explosion* explosion) override;
 	// get radius shot
 	static float getRadiusShot() { return RADIUS_SHOT; }
 protected:

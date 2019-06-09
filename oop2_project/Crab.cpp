@@ -3,6 +3,7 @@
 #include "Wall.h"
 #include "Bullet.h"
 #include "Grenade.h"
+#include "Explosion.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;
@@ -63,6 +64,15 @@ void Crab::onCollide(Grenade* grenade)
 		decreaseLife(grenade->getDamage());
 		grenade->explode();
 	}
+}
+
+void Crab::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)

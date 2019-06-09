@@ -16,7 +16,7 @@ class Bullet :
 {
 public:
 	// constructor
-	explicit Bullet(GameScreen& gameScreen, Character* owner, Direction Direction);
+	explicit Bullet(GameScreen& gameScreen, Character* owner);
 	// event when object joined to game
 	virtual void onJoinedGame() override;
 	// explode

@@ -24,6 +24,8 @@ public:
 	virtual void draw() override;
 	// set direction
 	void setDirection(Direction direct);
+	// get speed (const access)
+	const sf::Vector2f& getSpeed() const { return m_speed; }
 	// get direction
 	Direction getDirection() const { return m_direction; }
 	// get last direction
@@ -37,7 +39,7 @@ public:
 	// suicide
 	void suicide();
 	// get speed (const access)
-	const sf::Vector2f& getSpeed() const { return m_speed; }
+	const sf::Vector2f& cGetSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
 	// check if this object is don't blocking movement

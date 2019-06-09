@@ -63,7 +63,10 @@ void Shark::onCollide(Grenade* grenade)
 void Shark::onCollide(Explosion* explosion)
 {
 	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
-	setExternaAlcceleration({ 0.01f*moveDir.x, 0.01f*moveDir.y });
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)

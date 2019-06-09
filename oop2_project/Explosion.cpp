@@ -1,9 +1,13 @@
 #include "Explosion.h"
 #include "SoundManager.h"
 
-Explosion::Explosion(GameScreen& gameScreen)
+// init
+const float Explosion::DEFAULT_POWER = 0.01f;
+
+Explosion::Explosion(GameScreen& gameScreen, float power)
 	: InteractableObject(gameScreen)
 {
+	setPower(power);
 	init();
 }
 

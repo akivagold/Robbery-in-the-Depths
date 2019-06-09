@@ -94,9 +94,9 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
-		//testGameController();
+		testGameController();
 		//testEditor();
-		testWorld();
+		//testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -157,7 +157,6 @@ void testEditor() {
 	editScreen.run();
 }
 
-
 void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
@@ -171,9 +170,12 @@ void testWorld() {
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-	//player->addTool(std::make_shared<GrenadeLauncher>(player.get()));
-	//player->addTool(std::make_shared<AK47>(player.get()));
-	//player->getCurrTool()->setInfLimit();
+	auto gl = std::make_shared<GrenadeLauncher>(player.get());
+	gl->setInfLimit();
+	auto ak47 = std::make_shared<AK47>(player.get());
+	ak47->setInfLimit();
+	player->addTool(gl);
+	player->addTool(ak47);
 	
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;

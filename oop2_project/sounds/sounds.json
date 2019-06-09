@@ -43,6 +43,14 @@
         {
             "name": "gl_fire",
             "path": "grenade_launcher_fire.wav"
+        },
+        {
+            "name": "rubber_die",
+            "path": "rubber_die.ogg"
+        },
+        {
+            "name": "change_tool",
+            "path": "change_tool.ogg"
         }
     ]
 }

@@ -22,7 +22,9 @@ public:
 	Character* getMyOwner() { return m_owner; }
 protected:
 	// constructor
-	explicit Projectile(GameScreen& gameScreen, Character* owner, Direction direction = Direction::RIGHT);
+	explicit Projectile(GameScreen& gameScreen, Character* owner);
+	// event when direction changed
+	virtual void onDirectionChanged() override { }
 	using MovingObject::suicide;
 private:
 	// draw priority
