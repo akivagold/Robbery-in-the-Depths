@@ -78,6 +78,7 @@ void testLevelFileManager();
 void testLevelInfo();
 void testMainScreen();
 void testGUI();
+void testGradientColor();
 void testCleanScreen();
 #pragma endregion
 
@@ -94,6 +95,7 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		//testGradientColor();
 		testGameController();
 		//testEditor();
 		//testWorld();
@@ -541,6 +543,39 @@ void testGUI() {
 
 		window.clear();
 		mainLayout.draw();
+		window.display();
+	}
+}
+
+void testGradientColor() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+
+	
+	sf::Color fromColor(76, 226, 255), toColor(15, 0, 80);
+	sf::Vertex rectangle[] =
+	{
+		sf::Vertex({0,0}, fromColor),
+		sf::Vertex({float(window.getSize().x), 0}, fromColor),
+		sf::Vertex({float(window.getSize().x), float(window.getSize().y)}, toColor),
+		sf::Vertex({0, float(window.getSize().y)}, toColor)
+	};
+
+	
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			//mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(rectangle, 4, sf::Quads);
 		window.display();
 	}
 }

@@ -167,6 +167,7 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Chest.cpp" />
+    <ClCompile Include="ChooseLevelScreen.cpp" />
     <ClCompile Include="CoinGift.cpp" />
     <ClCompile Include="CoinView.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Chest.h" />
+    <ClInclude Include="ChooseLevelScreen.h" />
     <ClInclude Include="CoinGift.h" />
     <ClInclude Include="CoinView.h" />
     <ClInclude Include="Container.h" />
