@@ -7,6 +7,7 @@
 #include "Rubber.h"
 #include "Flow.h"
 #include "ParseLevelException.h"
+#include "BOFactory.h"
 
 World::World(sf::RenderWindow& window)
 	: GUI::View(window)
@@ -27,7 +28,7 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 		char ch = *it;
 		if (ch != ' ') {
 			sf::Vector2f position(static_cast<float>(defaultSize.x*cell.getColNum()), static_cast<float>(defaultSize.y*cell.getRowNum()));
-			std::shared_ptr<BoardObject> boardObj = createBO(gameScreen, ch);
+			std::shared_ptr<BoardObject> boardObj = BOFactory::getInterface().create(ch, gameScreen);
 			if (getSize().y != defaultSize.y) {
 				// fix position
 				position.y += (defaultSize.y - boardObj->getSize().y)*0.6f;
@@ -51,35 +52,6 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 	}
 
 	m_bods.prepareLevel();
-}
-
-std::shared_ptr<BoardObject> World::createBO(GameScreen& gameScreen, char ch)
-{
-	std::shared_ptr<BoardObject> boardObj;
-	switch (ch)
-	{
-		case Player::CHAR: {
-			boardObj = std::make_shared<Player>(gameScreen);
-		} break;
-		case Crab::CHAR: {
-			boardObj = std::make_shared<Crab>(gameScreen);
-		} break;
-		case Wall::CHAR: {
-			boardObj = std::make_shared<Wall>(gameScreen);
-		} break;
-		case Chest::CHAR: {
-			boardObj = std::make_shared<Chest>(gameScreen);
-		} break;
-		case Rubber::CHAR: {
-			boardObj = std::make_shared<Rubber>(gameScreen);
-		} break;
-		case Shark::CHAR: {
-			boardObj = std::make_shared<Shark>(gameScreen);
-		} break;
-		default:
-			throw ParseLevelException("Cannot parse board object with char=" + string(1, ch));
-	}
-	return boardObj;
 }
 
 void World::draw()

@@ -45,7 +45,5 @@ private:
 	BODS m_bods;
 	// init
 	void init();
-	// create board object by char
-	std::shared_ptr<BoardObject> createBO(GameScreen& gameScreen, char ch);
 };
 

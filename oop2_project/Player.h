@@ -89,4 +89,6 @@ private:
 	void switchToNextTool();
 	// find tool index
 	int findToolIndex(const std::shared_ptr<Tool>& tool);
+	// register flag in BOFactory
+	static bool isRegistered;
 };

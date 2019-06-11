@@ -57,6 +57,8 @@ private:
 	static const float RADIUS_ATTACK;
 	// radius shot
 	static const float RADIUS_SHOT;
+	// register flag in BOFactory
+	static bool isRegistered;
 	// gun
 	std::shared_ptr<Tool> m_tool;
 	// time

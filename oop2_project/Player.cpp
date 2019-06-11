@@ -4,6 +4,10 @@
 #include "Flow.h"
 #include "SoundManager.h"
 #include "Explosion.h"
+#include "BOFactory.h"
+
+// register
+bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Player>(gameScreen); });
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)

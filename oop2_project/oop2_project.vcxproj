@@ -161,6 +161,7 @@
     <ClCompile Include="AnimationView.cpp" />
     <ClCompile Include="BoardObject.cpp" />
     <ClCompile Include="BODS.cpp" />
+    <ClCompile Include="BOFactory.cpp" />
     <ClCompile Include="Border.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -242,6 +243,7 @@
     <ClInclude Include="BaseScreen.h" />
     <ClInclude Include="BoardObject.h" />
     <ClInclude Include="BODS.h" />
+    <ClInclude Include="BOFactory.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />

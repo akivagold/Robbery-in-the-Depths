@@ -56,5 +56,7 @@ private:
 	void init();	
 	// get crab size
 	static const sf::Vector2i& getCrabSize();
+	// register flag in BOFactory
+	static bool isRegistered;
 };
 

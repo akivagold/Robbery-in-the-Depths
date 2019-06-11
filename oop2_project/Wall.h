@@ -38,6 +38,8 @@ public:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 5;
+	// register flag in BOFactory
+	static bool isRegistered;
 	// init
 	void init();
 };

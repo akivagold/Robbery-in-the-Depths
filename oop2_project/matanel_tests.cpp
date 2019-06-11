@@ -36,6 +36,8 @@
 #include "GameController.h"
 #include "Grenade.h"
 #include "GrenadeLauncher.h"
+#include "BOFactory.h"
+#include "Utilities.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -65,6 +67,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testBOFactory();
 void testGameController();
 void testEditMenu();
 void testEditor();
@@ -95,6 +98,7 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		//testBOFactory();
 		//testGradientColor();
 		testGameController();
 		//testEditor();
@@ -121,6 +125,32 @@ void matanel_main()
 void testGameController() {
 	GameController gameController;
 	gameController.run();
+}
+
+void testBOFactory() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
+	window.close();
+	GameScreen gameScreen(window);
+
+
+	BOFactory& boFactory = BOFactory::getInterface();
+	
+
+	// create BOs
+	std::vector<std::shared_ptr<BoardObject>> bos;
+	for (int i = 0; i < 10; ++i) {
+		char c = (i % 2 == 0) ? Player::CHAR : Shark::CHAR;
+		auto bo = boFactory.create(c, gameScreen);
+		bos.push_back(bo);
+	}
+
+	std::cout << boFactory.getInterface().toString() << std::endl;
+
+	std::cout << "BOs:" << std::endl;
+	for (auto& bo : bos) {
+		std::cout << bo->toString() << std::endl;
+	}
 }
 
 void testEditor() {
@@ -460,14 +490,14 @@ void testLevelFileManager() {
 	//std::cout << lfm.toString() << std::endl;
 
 
-	/*// create level
-	LevelInfo li;
-	li.getLevelChars().resize(50, 100);
+	// create level
+	/*LevelInfo li;
+	li.getLevelChars().resize(40, 50);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
-	li.setName("matanel map");
-	li.setIndex(1);
+	li.setName("small map");
+	li.setIndex(4);
 	lfm.addLevel(li);*/
 
 	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
