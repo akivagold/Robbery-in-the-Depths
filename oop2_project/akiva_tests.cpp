@@ -10,8 +10,9 @@
 #include <iostream>
 #include "VerticalLayout.h"
 #include "ErrorDialog.h"
-#include "Button.h"
-#include "MainScreen.h"
+#include "LifeView.h"
+#include "CoinView.h"
+#include "ToolView.h"
 #include "LevelInfo.h"
 #include "LevelFileManager.h"
 #include "Matrix.h"
@@ -23,10 +24,17 @@
 #include "GameScreen.h"
 #include "World.h"
 #include "Shark.h"
-#include"Flow.h"
+#include "GameMenu.h"
 #include "Wall.h"
+#include "AK47.h"
+#include "Rubber.h"
 #include "Crab.h"
 #include "Chest.h"
+#include "Flow.h"
+#include "EditMapView.h"
+#include "EditMenu.h"
+#include "EditScreen.h"
+#include "MachineGun.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -180,7 +188,7 @@ void testCleanScreen() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	
+
 
 	gameScreen.getWorld().getBODS().handleRequests();
 	gameScreen.getWorld().getBODS().prepareLevel();
@@ -205,49 +213,38 @@ void testWorld() {
 
 	GameScreen gameScreen(window);
 
-	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
-	gameScreen.getWorld().getBODS().requestAddBO(flow);
-	flow->getBorder().setSize(1);
-	flow->getBorder().setColor(sf::Color::Black);
-	flow->setFlow(sf::Vector2f(0.0025f, 0.f));
-	
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("akiva map");
+	gameScreen.loadLevel(levelInfo);
 
-	std::shared_ptr<Flow> flow1 = std::make_shared<Flow>(gameScreen);
-	flow1->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-	flow1->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 4.f);
-	flow1->setFlow(sf::Vector2f(0.f, 0.0025f));
-	gameScreen.getWorld().getBODS().requestAddBO(flow1);
+	// get player
+	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+	//player->addTool(std::make_shared<AK47>(player.get()));
+	//player->getCurrTool()->setInfLimit();
 
-	std::shared_ptr<Flow> flow2 = std::make_shared<Flow>(gameScreen);
-	flow2->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-	flow2->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 12.f);
-	flow2->setFlow(sf::Vector2f(0.f, -0.0025f));
-	gameScreen.getWorld().getBODS().requestAddBO(flow2);
-
-	std::shared_ptr<Flow> flow3 = std::make_shared<Flow>(gameScreen);
-	flow3->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-	flow3->setPosition(BoardObject::getDefaultSize().x * 12.f, BoardObject::getDefaultSize().y * 12.f);
-	flow3->setFlow(sf::Vector2f(-0.0025f, 0.f));
-	gameScreen.getWorld().getBODS().requestAddBO(flow3);
-
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
+	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
 		sf::Vector2f mousePos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
 		switch (keyCode)
 		{
-		case sf::Keyboard::Key::Q: {
+		case sf::Keyboard::Key::U: {
+			player->setTransparency(player->getTransparency() - 10);
+		} break;
+		case sf::Keyboard::Key::K: {
+			player->rotateAnimation(10);
+		} break;
+		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
 		} break;
-		case sf::Keyboard::Key::W: {
+		case sf::Keyboard::Key::Num1: {
 			gameScreen.getWorld().getCamera().zoom(1.05f);
 		} break;
 		case sf::Keyboard::Key::P: {
 			std::cout << "-------------------------------------------------" << std::endl;
 			std::cout << gameScreen.getWorld().getBODS().toString() << std::endl;
 		} break;
-		case sf::Keyboard::Key::R: {
+		case sf::Keyboard::Key::W: {
 			std::shared_ptr<Wall> wall = std::make_shared<Wall>(gameScreen);
 			wall->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(wall);
@@ -262,6 +259,55 @@ void testWorld() {
 			chest->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(chest);
 		} break;
+		case sf::Keyboard::F: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.00025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::G: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(-0.00025f, 0.f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::H: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, 0.00025f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::J: {
+			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
+			flow->setPosition(mousePos);
+			flow->setFlow(sf::Vector2f(0.f, -0.00025f));
+			gameScreen.getWorld().getBODS().requestAddBO(flow);
+		} break;
+		case sf::Keyboard::R: {
+			std::shared_ptr<Rubber> rubber = std::make_shared<Rubber>(gameScreen);
+			rubber->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(rubber);
+		} break;
+		case sf::Keyboard::B: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::UP);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
+		case sf::Keyboard::N: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::RIGHT);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
@@ -272,22 +318,20 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
-	// load level info
-	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("big map");
-	gameScreen.loadLevel(levelInfo);
-
-	// get player
-	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-
-	gameScreen.getWorld().getCamera().zoom(0.5f);
-
-	// run game
-	Timer frameTimer;
-	frameTimer.start(1, [&gameScreen, &player]() {
+	sf::Clock m_clock;
+	gameScreen.run([&gameScreen, &player, &m_clock]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
+		int elapsedTime = m_clock.getElapsedTime().asSeconds() * 100;
+		m_clock.restart();
+		sf::Vector2f cameraPos = gameScreen.getWorld().getCamera().getCenter();
+		sf::Vector2f playerPos = player->getPosition();
+		//float distance = sqrt(pow(cameraPos.x - playerPos.x, 2) + pow(cameraPos.y - playerPos.y, 2));
+		if (abs(playerPos.x - cameraPos.x) > BoardObject::getDefaultSize().x * 5) {
+			gameScreen.getWorld().getCamera().move(sf::Vector2f((playerPos.x - cameraPos.x) / 50, 0.f));
+		}
+		if (abs(playerPos.y - cameraPos.y) > BoardObject::getDefaultSize().y * 2.5) {
+			gameScreen.getWorld().getCamera().move(sf::Vector2f(0.f, (playerPos.y - cameraPos.y)/25));
+		}
 	});
-	gameScreen.run(frameTimer);
 }
 #endif // AKIVA_TESTS
