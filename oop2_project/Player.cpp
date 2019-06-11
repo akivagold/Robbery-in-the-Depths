@@ -5,12 +5,15 @@
 #include "SoundManager.h"
 #include "Explosion.h"
 #include "BOFactory.h"
+#include "Bullet.h"
+#include "Shark.h"
+#include "Crab.h"
 
 // register
 bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Player>(gameScreen); });
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen, numOfLife)
+	: Character(gameScreen, numOfLife), m_isRecover(false)
 {
 	init();
 }
@@ -119,6 +122,29 @@ void Player::onToolUpdated(Tool* tool)
 		getGameScreen().getGameMenu()->getToolView()->updateUseLimit();
 }
 
+void Player::decreaseLife(int numOfLife)
+{
+	Character::decreaseLife(numOfLife);
+	if (numOfLife > 0)
+		recover();
+}
+
+void Player::onCollide(Shark* shark)
+{
+	if (!isDie()) {
+		if(!isRecover())
+			decreaseLife(shark->getDamage());
+	}
+}
+
+void Player::onCollide(Crab* crab)
+{
+	if (!isDie()) {
+		if (!isRecover())
+			decreaseLife(crab->getDamage());
+	}
+}
+
 void Player::onCollide(Chest* chest)
 {
 	if (!chest->isEmpty()) {
@@ -129,6 +155,17 @@ void Player::onCollide(Chest* chest)
 void Player::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+}
+
+void Player::onCollide(Bullet* bullet)
+{
+	if (bullet->getMyOwner() != this) {
+		if (!isDie()) {
+			if(!isRecover())
+				decreaseLife(bullet->getDamage());
+			bullet->explode();
+		}
+	}	
 }
 
 void Player::onCollide(Explosion* explosion)
@@ -143,6 +180,7 @@ void Player::onCollide(Explosion* explosion)
 void Player::playChoice(Direction lastDirection, bool isCollided)
 {
 	Character::playChoice(lastDirection, isCollided);
+	m_recoveSW.checkStopWatch();
 }
 
 string Player::toString() const
@@ -161,6 +199,7 @@ string Player::toString() const
 void Player::init()
 {
 	setNumOfScore(0);
+	setNumOfLife(getNumOfLife()); // update number of life in menu
 	setAnimation("diver_anim");
 	setDrawPriority(DRAW_PRIORITY);
 	setAnimationFrequency(STAND_ANIM_FREQUENCY);
@@ -224,4 +263,12 @@ int Player::findToolIndex(const std::shared_ptr<Tool>& tool)
 			return i;
 	}
 	throw std::out_of_range("Cannot find the tool " + tool->toString());
+}
+
+void Player::recover()
+{
+	m_isRecover = true;
+	m_recoveSW.start(RECOVERY_TIME, [this]() {
+		m_isRecover = false;
+	});
 }

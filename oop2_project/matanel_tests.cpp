@@ -100,9 +100,9 @@ void matanel_main()
 	{
 		//testBOFactory();
 		//testGradientColor();
-		testGameController();
+		//testGameController();
 		//testEditor();
-		//testWorld();
+		testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();

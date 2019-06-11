@@ -3,6 +3,7 @@
 #include <string>
 #include "Character.h"
 #include "Tool.h"
+#include "StopWatch.h"
 
 //---- using section --------
 using std::string;
@@ -48,18 +49,20 @@ public:
 	void useCurrTool();
 	// event on update tool
 	virtual void onToolUpdated(Tool* tool) override;
+	// decrease life
+	virtual void decreaseLife(int numOfLife);
 	// convert to string
 	virtual string toString() const override;
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {}
-	virtual void onCollide(Shark* shark) override {} // TODO use this
-	virtual void onCollide(Crab* crab) override {} // TODO use this
+	virtual void onCollide(Shark* shark) override;
+	virtual void onCollide(Crab* crab) override;
 	virtual void onCollide(Rubber* rubber) override {} // TODO use this
 	virtual void onCollide(Chest* chest) override; 
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override;
-	virtual void onCollide(Bullet* bullet) override {} // TODO use this
+	virtual void onCollide(Bullet* bullet) override;
 	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
 	virtual void onCollide(Grenade* grenade) override {} // TODO use this
 	virtual void onCollide(Explosion* explosion) override;
@@ -76,19 +79,29 @@ private:
 	// players default accelration
 	static const float PLAYER_ACCELRATION;
 	// default number of life
-	static const int DEFAULT_LIFE = 6;
+	static const int DEFAULT_LIFE = 20;
+	// time to recover
+	static const int RECOVERY_TIME = 1000;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool
 	std::shared_ptr<Tool> m_currTool;
 	// score
 	int m_numOfScore;
+	// recover stopWatch
+	StopWatch m_recoveSW;
+	// recover flag
+	bool m_isRecover;
 	// init
 	void init();
+	// check if player is recover
+	bool isRecover() const { return m_isRecover; }
 	// switch current tool to next tool at list
 	void switchToNextTool();
 	// find tool index
 	int findToolIndex(const std::shared_ptr<Tool>& tool);
+	// start recover
+	void recover();
 	// register flag in BOFactory
 	static bool isRegistered;
 };

@@ -46,6 +46,8 @@ private:
 	static const int DRAW_PRIORITY = 70;
 	// default number of life
 	static const int DEFAULT_LIFE = 3;
+	// damage
+	static const int DAMAGE = 2;
 	// register flag in BOFactory
 	static bool isRegistered;
 	// radius attack

@@ -125,6 +125,7 @@ void Crab::init()
 	setAnimation("walking_crab");
 	setAnimationFrequency(30);
 	setDrawPriority(DRAW_PRIORITY);
+	setDamage(DAMAGE);
 	setDirection(getRandomLeftRightDirect());
 	setSize(getCrabSize());
 

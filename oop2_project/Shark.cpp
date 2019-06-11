@@ -138,9 +138,10 @@ void Shark::init()
 {
 	setAnimation("shark_anim");
 	setAnimationFrequency(70);
+	setDamage(DAMAGE);
 	setSize(getSharkSize());
-	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
+
 	m_radiusAttack = 5.f*getSize().x;
 	setDirection(getRandomDirect());
 	m_inChase = false;
