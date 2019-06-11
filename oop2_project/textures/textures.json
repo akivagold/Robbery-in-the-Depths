@@ -120,8 +120,16 @@
             "path": "chest.png"
         },
         {
-            "name": "bullet",
-            "path": "bullet.png"
+            "name": "bullet_horizontal",
+            "path": "bullet_horizontal.png"
+        },
+        {
+            "name": "bullet_up",
+            "path": "bullet_up.png"
+        },
+        {
+            "name": "bullet_down",
+            "path": "bullet_down.png"
         },
         {
             "name": "wall",
@@ -148,6 +156,14 @@
             "numOfRows": 9,
             "numOfCols": 9,
             "numOfImages": 72
+        },
+        {
+            "name": "grenade",
+            "path": "grenade.png"
+        },
+        {
+            "name": "grenade_launcher",
+            "path": "grenade_launcher.png"
         }
     ]
 }

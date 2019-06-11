@@ -29,7 +29,6 @@ void MovingObject::floatEffect()
 		}
 
 	}
-
 }
 
 void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)
@@ -55,9 +54,9 @@ const sf::Vector2i& MovingObject::getMODefSize()
 	return MOVING_OBJ_SIZE;
 }
 
-MovingObject::MovingObject(GameScreen& gameScreen)
+MovingObject::MovingObject(GameScreen& gameScreen, Direction direction)
 	: InteractableObject(gameScreen), m_maxSpeed(MAX_SPEED_DEFAULT),
-	m_isCollided(false), m_direction(STANDING), m_lastDirection(STANDING)	//TODO enum
+	m_isCollided(false), m_direction(direction), m_lastDirection(STANDING)
 {
 	init();
 }

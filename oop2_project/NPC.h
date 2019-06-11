@@ -13,8 +13,6 @@ class NPC
 	: public Character
 {
 public:
-	// constructor
-	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
 	// convert to string
 	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; }
 	// get ranodm up directions
@@ -27,4 +25,7 @@ public:
 	static Direction getRandomLeftDirections();
 	// get radius from player
 	float getRadiusFromPlayer() const;
+protected:
+	// constructor
+	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
 };

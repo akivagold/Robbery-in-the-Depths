@@ -17,8 +17,6 @@ public:
 	static const char CHAR = 's';
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
-	// event when direction changed
-	virtual void onDirectionChanged() override;
 	// event on die
 	virtual void onDie() override;
 	// draw
@@ -35,10 +33,14 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override;
-	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
+	virtual void onCollide(Grenade* grenade) override;
+	virtual void onCollide(Explosion* explosion) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
+	// event when direction changed
+	virtual void onDirectionChanged() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 70;

@@ -32,8 +32,7 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 				// fix position
 				position.y += (defaultSize.y - boardObj->getSize().y)*0.6f;
 			}
-			
-			//position.x += (defaultSize.x - boardObj->getSize().x)/2.f;
+			// TODO fix x:    position.x += (defaultSize.x - boardObj->getSize().x);
 			boardObj->setPosition(position);
 			m_bods.requestAddBO(boardObj);
 		}	
@@ -101,7 +100,7 @@ void World::init()
 	getBackground().setColor(sf::Color(155, 236, 255));
 	getBorder().setColor(sf::Color::Blue);
 	getBorder().setSize(1);
-	getCamera().zoom(0.3f);
+	getCamera().zoom(0.6f);
 }
 
 

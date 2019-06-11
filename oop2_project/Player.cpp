@@ -2,6 +2,8 @@
 #include "GameScreen.h"
 #include "Chest.h"
 #include "Flow.h"
+#include "SoundManager.h"
+#include "Explosion.h"
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife)
@@ -52,6 +54,21 @@ bool Player::haveTool(Tool* tool) const
 	return haveTool(tool->getToolType());
 }
 
+void Player::switchToNextTool()
+{
+	if (haveCurrTool()) {
+		int currentToolIndex = findToolIndex(m_currTool);
+		int nextToolIndex;
+		if (currentToolIndex + 1 == m_tools.size())
+			nextToolIndex = 0;
+		else
+			nextToolIndex = currentToolIndex + 1;
+		auto& nextTool = m_tools[nextToolIndex];
+		changeTool(nextTool);
+		GUI::SoundManager::getInterface().playSound("change_tool");
+	}
+}
+
 void Player::changeTool(const std::shared_ptr<Tool>& tool)
 {
 	m_currTool = tool;
@@ -86,6 +103,9 @@ void Player::useCurrTool()
 		if (m_currTool->canUsingTool()) {
 			m_currTool->useTool();
 		}
+		else {
+			GUI::SoundManager::getInterface().playSound("no_ammo");
+		}
 	}
 }
 
@@ -105,6 +125,15 @@ void Player::onCollide(Chest* chest)
 void Player::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
+}
+
+void Player::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Player::playChoice(Direction lastDirection, bool isCollided)
@@ -158,6 +187,9 @@ void Player::init()
 			case sf::Keyboard::Key::Space: {
 				useCurrTool();
 			} break;
+			case sf::Keyboard::Key::LShift: {
+				switchToNextTool();
+			} break;
 		}
 	});
 	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
@@ -179,4 +211,13 @@ void Player::init()
 			} break;
 		}
 	});
+}
+
+int Player::findToolIndex(const std::shared_ptr<Tool>& tool)
+{
+	for (int i = 0; i < m_tools.size(); ++i) {
+		if (m_tools[i] == tool)
+			return i;
+	}
+	throw std::out_of_range("Cannot find the tool " + tool->toString());
 }

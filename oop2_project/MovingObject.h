@@ -24,6 +24,8 @@ public:
 	virtual void draw() override;
 	// set direction
 	void setDirection(Direction direct);
+	// get speed (const access)
+	const sf::Vector2f& getSpeed() const { return m_speed; }
 	// get direction
 	Direction getDirection() const { return m_direction; }
 	// get last direction
@@ -32,12 +34,12 @@ public:
 	static Direction getRandomDirect();
 	// get ranodm direction
 	static Direction getRandomLeftRightDirect();
-	// event when direction changed
-	virtual void onDirectionChanged() = 0;
+	// get angle
+	float getAngle() const { return atan2(m_speed.y, m_speed.x); }
 	// suicide
 	void suicide();
 	// get speed (const access)
-	const sf::Vector2f& getSpeed() const { return m_speed; }
+	const sf::Vector2f& cGetSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
 	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
 	// check if this object is don't blocking movement
@@ -48,7 +50,7 @@ public:
 	static const sf::Vector2i& getMODefSize();
 protected:
 	// constructor
-	explicit MovingObject(GameScreen& gameScreen);
+	explicit MovingObject(GameScreen& gameScreen, Direction direction = Direction::STANDING);
 	// get speed (can change)
 	sf::Vector2f& getSpeed() { return m_speed; }
 	// get interalAcceleration (can change)
@@ -61,7 +63,8 @@ protected:
 	void setMaxSpeed(const sf::Vector2f& maxSpeed) { m_maxSpeed = maxSpeed; }
 	// get maximum speed
 	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
-	virtual void floatEffect();
+	// event when direction changed
+	virtual void onDirectionChanged() = 0;
 private:
 	// direction and last direction
 	Direction m_direction, m_lastDirection;
@@ -87,4 +90,6 @@ private:
 	void init();
 	// check collide
 	void checkCollide(std::forward_list<BoardObject*> collideList);
+	// make float effect
+	virtual void floatEffect();
 };

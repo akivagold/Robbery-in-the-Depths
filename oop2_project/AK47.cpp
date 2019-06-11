@@ -14,21 +14,11 @@ string AK47::toString() const
 	return "AK47: { " + HotWeapon::toString() + " }";
 }
 
-int AK47::getDefUseLimit()
-{
-	return DEFAULT_AMMO;
-}
-
 void AK47::fire()
 {
 	// create bullet
-	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(getMyOwner()->getGameScreen(), getMyOwner(), getMyOwner()->getDirection());
+	std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(getMyOwner()->getGameScreen(), getMyOwner());
 	bullet->getGameScreen().getWorld().getBODS().requestAddBO(bullet);
-
-	if (Player::isLeftDirections(getMyOwner()->getDirection()))
-		bullet->setPosition(getMyOwner()->getPosition().x - bullet->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
-	else
-		bullet->setPosition(getMyOwner()->getPosition().x + getMyOwner()->getSize().x, getMyOwner()->getCenter().y - bullet->getSize().y/2.f);
 }
 
 void AK47::init()

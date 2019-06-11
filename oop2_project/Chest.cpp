@@ -1,5 +1,6 @@
 #include "Chest.h"
 #include "Player.h"
+#include "SoundManager.h"
 
 Chest::Chest(GameScreen& gameScreen)
 	: Container(gameScreen)
@@ -11,7 +12,7 @@ void Chest::pickup(Player* owner)
 {
 	Container::pickup(owner);
 
-	// TODO add sound
+	GUI::SoundManager::getInterface().playSound("open_chest");
 
 	setAnimation("open_chest_anim");
 	setAnimationFrequency(50);

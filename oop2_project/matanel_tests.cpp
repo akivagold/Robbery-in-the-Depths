@@ -34,6 +34,8 @@
 #include "AK47.h"
 #include "Rubber.h"
 #include "GameController.h"
+#include "Grenade.h"
+#include "GrenadeLauncher.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -76,6 +78,7 @@ void testLevelFileManager();
 void testLevelInfo();
 void testMainScreen();
 void testGUI();
+void testGradientColor();
 void testCleanScreen();
 #pragma endregion
 
@@ -92,6 +95,7 @@ void matanel_main()
 	srand(unsigned (time(NULL)));
 	try
 	{
+		//testGradientColor();
 		testGameController();
 		//testEditor();
 		//testWorld();
@@ -155,7 +159,6 @@ void testEditor() {
 	editScreen.run();
 }
 
-
 void testWorld() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
@@ -169,8 +172,12 @@ void testWorld() {
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
-	//player->addTool(std::make_shared<AK47>(player.get()));
-	//player->getCurrTool()->setInfLimit();
+	auto gl = std::make_shared<GrenadeLauncher>(player.get());
+	gl->setInfLimit();
+	auto ak47 = std::make_shared<AK47>(player.get());
+	ak47->setInfLimit();
+	player->addTool(gl);
+	player->addTool(ak47);
 	
 	gameScreen.getWorld().addKeyDownListener([&gameScreen, &player](sf::Keyboard::Key& keyCode) {
 		float offset = 10.f;
@@ -181,7 +188,7 @@ void testWorld() {
 			player->setTransparency(player->getTransparency() - 10);
 		} break;
 		case sf::Keyboard::Key::K: {
-			player->rotateAnimation(10);
+			//player->rotateAnimation(10);
 		} break;
 		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
@@ -215,13 +222,6 @@ void testWorld() {
 			flow->setFlow(sf::Vector2f(0.0025f, 0.f));
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
-		case sf::Keyboard::G: {
-			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
-			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
-			flow->setPosition(mousePos);
-			flow->setFlow(sf::Vector2f(-0.0025f, 0.f));
-			gameScreen.getWorld().getBODS().requestAddBO(flow);
-		} break;
 		case sf::Keyboard::H: {
 			std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
@@ -241,6 +241,11 @@ void testWorld() {
 			rubber->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(rubber);
 		} break;
+		case sf::Keyboard::G: {
+			std::shared_ptr<Grenade> grenade = std::make_shared<Grenade>(gameScreen, player.get());
+			grenade->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(grenade);
+		} break;
 		}
 	});
 	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
@@ -251,6 +256,7 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
 
+	gameScreen.getWorld().getCamera().zoom(1.5f);
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
@@ -537,6 +543,39 @@ void testGUI() {
 
 		window.clear();
 		mainLayout.draw();
+		window.display();
+	}
+}
+
+void testGradientColor() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+
+	
+	sf::Color fromColor(76, 226, 255), toColor(15, 0, 80);
+	sf::Vertex rectangle[] =
+	{
+		sf::Vertex({0,0}, fromColor),
+		sf::Vertex({float(window.getSize().x), 0}, fromColor),
+		sf::Vertex({float(window.getSize().x), float(window.getSize().y)}, toColor),
+		sf::Vertex({0, float(window.getSize().y)}, toColor)
+	};
+
+	
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			//mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(rectangle, 4, sf::Quads);
 		window.display();
 	}
 }

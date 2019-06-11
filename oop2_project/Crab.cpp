@@ -2,6 +2,8 @@
 #include "Flow.h"
 #include "Wall.h"
 #include "Bullet.h"
+#include "Grenade.h"
+#include "Explosion.h"
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;
@@ -31,7 +33,7 @@ void Crab::onCollide(Wall* wall)
 
 	if (isAboveThen(wall->getSelf())) {
 		getInteralAcceleration().y = 0.f;
-		setPosition(getPosition().x, wall->getPosition().y - getSize().y - 2);
+		setPosition(getPosition().x, getPosition().y - 2);
 	}
 	else if (isLeftThen(wall->getSelf())) {
 		getInteralAcceleration().x = 0.f;
@@ -52,8 +54,25 @@ void Crab::onCollide(Bullet* bullet)
 {
 	if (!isDie()) {
 		decreaseLife(bullet->getDamage());
-		bullet->suicide();
+		bullet->explode();
 	}
+}
+
+void Crab::onCollide(Grenade* grenade)
+{
+	if (!isDie()) {
+		decreaseLife(grenade->getDamage());
+		grenade->explode();
+	}
+}
+
+void Crab::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Crab::playChoice(Direction lastDirection, bool isCollided)

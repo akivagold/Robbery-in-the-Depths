@@ -2,6 +2,8 @@
 #include "GameScreen.h"
 #include "Flow.h"
 #include "Bullet.h"
+#include "Grenade.h"
+#include "Explosion.h"
 
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife)
@@ -46,8 +48,25 @@ void Shark::onCollide(Bullet* bullet)
 {
 	if (!isDie()) {
 		decreaseLife(bullet->getDamage());
-		bullet->suicide();
+		bullet->explode();
 	}
+}
+
+void Shark::onCollide(Grenade* grenade)
+{
+	if (!isDie()) {
+		decreaseLife(grenade->getDamage());
+		grenade->explode();
+	}
+}
+
+void Shark::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)

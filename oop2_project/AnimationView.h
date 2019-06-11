@@ -30,8 +30,6 @@ public:
 	void stopAnimation() { m_timer.stop(); }
 	// draw
 	virtual void draw() override;
-	// rotate
-	// TODO void rotateAnimation(float angle);
 	// flip
 	void flipAnimation();
 	// check if animation is flipped
@@ -43,7 +41,7 @@ public:
 	// get transparency
 	sf::Uint32 getTransparency() const { return m_sprite.getColor().a; }
 	// rotate animation
-	void rotateAnimation(float degrees);
+	// TODO fix:   void rotateAnimation(float degrees);
 protected:
 	// update components
 	virtual void updateComponents();

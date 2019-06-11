@@ -1,32 +1,33 @@
 #pragma once
 //---- include section ------
-#include "Container.h"
-#include "Surprise.h"
 #include <string>
+#include "InteractableObject.h"
 #include "StopWatch.h"
 
 //---- using section --------
 using std::string;
 
 /*
- * Chest class
+ * Explosion class
  */
-class Chest :
-	public Container
+class Explosion 
+	: public InteractableObject
 {
 public:
-	// char
-	static const char CHAR = 'm';
 	// constructor
-	explicit Chest(GameScreen& gameScreen);
+	explicit Explosion(GameScreen& gameScreen, float power = DEFAULT_POWER);
+	// event when object joined to game
+	virtual void onJoinedGame() override;
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
-	// pickup content
-	virtual void pickup(Player* owner) override;
 	// draw
 	virtual void draw() override;
+	// set power
+	void setPower(float power) { m_power = power; }
+	// get power
+	float getPower() const { return m_power; }
 	// convert to string
-	virtual string toString() const override;
+	virtual string toString() const override { return "Explosion: { " + InteractableObject::toString() + " }"; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {} // TODO use this
@@ -37,19 +38,25 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
-	virtual void onCollide(Grenade* grenade) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
+	virtual void onCollide(Grenade* grenade) override {}; // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 private:
 	// draw priority
-	static const int DRAW_PRIORITY = 10;
-	// open chest animation time
-	static const int OPEN_CHEST_ANIM_TIME = 300;
-	// open chest stopWatch
-	StopWatch m_openChestSW;
+	static const int DRAW_PRIORITY = 150;
+	// damage
+	static const int DAMAGE = 0;
+	// animation frequency
+	static const int ANIM_FREQUENCY = 15;
+	// time to show
+	static const int SHOW_TIME = 1000;
+	// default power
+	static const float DEFAULT_POWER;
+	// power of explosion
+	float m_power;
+	// vanish stopWatch
+	StopWatch m_vanishSW;
 	// init
 	void init();
-	// get chest size
-	static const sf::Vector2i& getChestSize();
 };
 

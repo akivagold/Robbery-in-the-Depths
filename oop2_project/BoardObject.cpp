@@ -35,6 +35,7 @@ void BoardObject::setInGame(const std::shared_ptr<BoardObject>& self)
 {
 	m_inGame = true;
 	m_self = self;
+	onJoinedGame(); // call event
 }
 
 std::forward_list<BoardObject*> BoardObject::getCollidesList()
@@ -124,6 +125,6 @@ void BoardObject::init()
 	setSize(getDefaultSize());
 
 	// TODO remove this:
-	getBorder().setSize(1.f);
-	getBorder().setColor(sf::Color::Black);
+	//getBorder().setSize(1.f);
+	//getBorder().setColor(sf::Color::Black);
 }

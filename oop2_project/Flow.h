@@ -36,10 +36,14 @@ public:
 	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override {}
 	virtual void onCollide(Bullet* bullet) override {}
-	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}
+	virtual void onCollide(Grenade* grenade) override {}
+	virtual void onCollide(Explosion* explosion) override {}
 	// set flow - power & angle
 	void setFlow(const sf::Vector2f& flow);
 private:
+	// draw priority
+	static const int DRAW_PRIORITY = 0;
 	// flow power
 	sf::Vector2f m_flowPower;
 	// init

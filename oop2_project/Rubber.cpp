@@ -2,6 +2,9 @@
 #include "Flow.h"
 #include "GameScreen.h"
 #include "Bullet.h"
+#include "Grenade.h"
+#include "Explosion.h"
+#include "SoundManager.h"
 
 // init
 const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*10.f;
@@ -38,26 +41,41 @@ void Rubber::onDie()
 {
 	NPC::onDie();
 	setAnimation("rubber_die");
+	GUI::SoundManager::getInterface().playSound("rubber_die");
 }
 
 void Rubber::onCollide(Flow* flow)
 {
 	setExternaAlcceleration(flow->getFlowPower());
-	m_isInRadiusShot = true;
+	m_isInRadiusShot = false;
 }
 
 void Rubber::onCollide(Bullet* bullet)
 {
-
 	if (isDie())
 		return;
 
 	if (bullet->getMyOwner() != this) {
 		decreaseLife(bullet->getDamage());
-		bullet->suicide();
+		bullet->explode();
 	}
-	
-	
+}
+
+void Rubber::onCollide(Grenade* grenade)
+{
+	if (!isDie()) {
+		decreaseLife(grenade->getDamage());
+		grenade->explode();
+	}
+}
+
+void Rubber::onCollide(Explosion* explosion)
+{
+	sf::Vector2f moveDir = getCenter() - explosion->getCenter();
+	sf::Vector2f exAcc = explosion->getPower()*moveDir;
+	exAcc.x /= float(getSize().x);
+	exAcc.y /= float(getSize().y);
+	setExternaAlcceleration(exAcc);
 }
 
 void Rubber::playChoice(Direction lastDirection, bool isCollided)

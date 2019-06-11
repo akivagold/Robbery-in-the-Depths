@@ -14,9 +14,9 @@ class Tool
 {
 public:
 	// number of tools
-	static const int NUM_OF_TOOLS = 1;
+	static const int NUM_OF_TOOLS = 2;
 	// weapon type
-	enum ToolType { TT_AK47 }; // TODO add more tools to here
+	enum ToolType { TT_AK47, TT_GRENADE_LAUNCHER };
 	// random tool type
 	static ToolType randToolType();
 	// use tool
@@ -40,7 +40,7 @@ public:
 	// set infinity limit
 	void setInfLimit();
 	// get default use limit
-	virtual int getDefUseLimit() = 0;
+	virtual int getDefUseLimit() const = 0;
 	// check if using infinity limit
 	bool isUseInfLimit() const { return m_withInfLlimit; }
 	// convert to string

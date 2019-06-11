@@ -86,6 +86,7 @@ void GUI::AnimationView::setTransparency(sf::Uint32 transparency)
 	m_sprite.setColor(newColor);
 }
 
+/* TODO fix
 void GUI::AnimationView::rotateAnimation(float relative_degrees)
 {
 	double xSize = getSize().x;
@@ -106,7 +107,7 @@ void GUI::AnimationView::rotateAnimation(float relative_degrees)
 	// rotate anti clockwise
 	m_sprite.rotate(-relative_degrees);
 	
-}
+}*/
 
 void GUI::AnimationView::updateComponents()
 {

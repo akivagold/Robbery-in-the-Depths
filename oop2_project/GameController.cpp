@@ -6,7 +6,7 @@ void GameController::run()
 	// TODO play background music
 
 	// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Robbery in the Depths"); // TODO make a full screen
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Robbery in the Depths", sf::Style::Fullscreen);
 
 	// TODO set game icon at window
 
@@ -20,15 +20,17 @@ string GameController::toString() const
 
 void GameController::runMainScreen(sf::RenderWindow& window)
 {
+	// read levels
+	LevelFileManager lfm;
+
 	MainScreen mainScreen(window);
 	mainScreen.getExitBt()->addClickListener([&mainScreen](GUI::View& v) {
 		mainScreen.close();
 	});
-	mainScreen.getEditBt()->addClickListener([this](GUI::View& v) {
-		// TODO open choose level screen
-		LevelFileManager lfm;
-		const LevelInfo& levelInfo = lfm.getLevel("matanel map");
-		runEditScreen(v.getWindow(), lfm, levelInfo);
+	mainScreen.getEditBt()->addClickListener([this, &lfm](GUI::View& v) {
+		runChooseLevelScreen(v.getWindow(), lfm, [&v, this, &lfm](const LevelInfo& levelInfo) {
+			runEditScreen(v.getWindow(), lfm, levelInfo);
+		});
 	});
 	mainScreen.getStartBt()->addClickListener([this](GUI::View& v) {
 
@@ -39,6 +41,18 @@ void GameController::runMainScreen(sf::RenderWindow& window)
 		runGameScreen(v.getWindow(), levelInfo);
 	});
 	mainScreen.run();
+}
+
+void GameController::runChooseLevelScreen(sf::RenderWindow& window, LevelFileManager& lfm, std::function<void(const LevelInfo&)> onLevelChoosed)
+{
+	ChooseLevelScreen chooseLevelScreen(window, lfm);
+	chooseLevelScreen.addLevelBtClickListener([onLevelChoosed, &lfm, &chooseLevelScreen](const std::shared_ptr<GUI::Button>& levelBt) {
+		string levelName = levelBt->getText();
+		const LevelInfo& levelInfo = lfm.getLevel(levelName);
+		onLevelChoosed(levelInfo);
+		chooseLevelScreen.close();
+	});
+	chooseLevelScreen.run();
 }
 
 void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& levelInfo)

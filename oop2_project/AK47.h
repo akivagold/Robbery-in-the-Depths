@@ -1,4 +1,5 @@
 #pragma once
+//---- include section ------
 #include "HotWeapon.h"
 
 //---- using section --------
@@ -16,11 +17,11 @@ public:
 	// get tool type
 	virtual ToolType getToolType() const override { return ToolType::TT_AK47; }
 	// get tool name
-	virtual string getToolName() const { return "ak47"; }
+	virtual string getToolName() const override { return "ak47"; }
 	// convert to string
 	virtual string toString() const override;
 	// get default use limit
-	virtual int getDefUseLimit() override;
+	virtual int getDefUseLimit() const override { return DEFAULT_AMMO; }
 	// fire
 	virtual void fire() override;
 private:
