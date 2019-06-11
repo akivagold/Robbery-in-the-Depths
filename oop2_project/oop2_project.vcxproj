@@ -191,6 +191,7 @@
     <ClCompile Include="GOIFileParser.cpp" />
     <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="GrenadeLauncher.cpp" />
+    <ClCompile Include="LoseScreen.cpp" />
     <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
     <ClCompile Include="ImageButton.cpp" />
@@ -233,6 +234,7 @@
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="ToolGift.cpp" />
+    <ClCompile Include="WinScreen.cpp" />
     <ClCompile Include="WorkingTool.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -273,6 +275,7 @@
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="Grenade.h" />
     <ClInclude Include="GrenadeLauncher.h" />
+    <ClInclude Include="LoseScreen.h" />
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="HorizontalLayout.h" />
     <ClInclude Include="HotWeapon.h" />
@@ -300,6 +303,7 @@
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="ToolGift.h" />
+    <ClInclude Include="WinScreen.h" />
     <ClInclude Include="WorkingTool.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="~main_tests.h" />
