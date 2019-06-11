@@ -19,6 +19,12 @@ void Bullet::explode()
 	Projectile::explode();
 }
 
+void Bullet::draw()
+{
+	Projectile::draw();
+	m_time.checkTimer();
+}
+
 void Bullet::playChoice(Direction lastDirection, bool isCollided)
 {
 	if (isCollided) {
@@ -53,4 +59,8 @@ void Bullet::init()
 		flipAnimation();
 	}
 	setDamage(DAMAGE);
+
+	m_time.start(900, [this] {
+		explode();
+	});
 }

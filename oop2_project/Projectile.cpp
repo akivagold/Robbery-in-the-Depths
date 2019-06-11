@@ -19,7 +19,7 @@ void Projectile::init()
 	else if (Character::isRightDirections(getMyOwner()->getDirection()))
 		setPosition(getMyOwner()->getPosition().x + getMyOwner()->getSize().x, getMyOwner()->getCenter().y - getSize().y / 2.f);
 	else if (Character::isUpDirections(getMyOwner()->getDirection()))
-		setPosition(getMyOwner()->getCenter().x - getSize().x / 2.f, getMyOwner()->getPosition().y - getSize().y / 2.f);
+		setPosition(getMyOwner()->getCenter().x - getSize().x / 2.f, getMyOwner()->getPosition().y - getSize().y);
 	else
 		setPosition(getMyOwner()->getCenter().x - getSize().x / 2.f, getMyOwner()->getPosition().y + getMyOwner()->getSize().y);
 

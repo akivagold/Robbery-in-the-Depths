@@ -255,6 +255,12 @@
     <ClCompile Include="BOFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WinScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h">
@@ -513,6 +519,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BOFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
