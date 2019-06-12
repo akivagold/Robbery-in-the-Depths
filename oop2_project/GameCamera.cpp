@@ -41,6 +41,4 @@ void GameCamera::updateCamera()
 		cameraCenter = m_world->getCamera().getCenter();
 		cameraPos = cameraCenter - (cameraSize / 2.f);
 	}
-	std::cout << m_player->getPosition().y;
-	std::cout << m_world->getCamera().getCenter().x << std::endl;
 }
