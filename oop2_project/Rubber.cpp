@@ -8,7 +8,7 @@
 #include "BOFactory.h"
 
 // register
-bool Rubber::isRegistered = BOFactory::getInterface().registerIn(Rubber::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Rubber>(gameScreen); });
+bool Rubber::isRegistered = BOFactory::getInterface().registerIn(Rubber::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Rubber>(gameScreen); });
 
 // init
 const float Rubber::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*10.f;

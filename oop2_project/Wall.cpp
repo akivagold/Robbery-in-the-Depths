@@ -2,7 +2,7 @@
 #include "BOFactory.h"
 
 // register
-bool Wall::isRegistered = BOFactory::getInterface().registerIn(Wall::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Wall>(gameScreen); });
+bool Wall::isRegistered = BOFactory::getInterface().registerIn(Wall::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Wall>(gameScreen); });
 
 Wall::Wall(GameScreen& gameScreen)
 	: UnInteractableObject(gameScreen)

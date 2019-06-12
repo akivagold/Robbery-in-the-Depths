@@ -7,7 +7,7 @@
 #include "BOFactory.h"
 
 // register
-bool Shark::isRegistered = BOFactory::getInterface().registerIn(Shark::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Shark>(gameScreen); });
+bool Shark::isRegistered = BOFactory::getInterface().registerIn(Shark::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Shark>(gameScreen); });
 
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife)

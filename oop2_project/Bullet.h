@@ -35,7 +35,7 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}
 	virtual void onCollide(Grenade* grenade) override {} // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 protected:

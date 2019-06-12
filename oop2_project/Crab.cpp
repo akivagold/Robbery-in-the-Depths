@@ -7,7 +7,7 @@
 #include "BOFactory.h"
 
 // register
-bool Crab::isRegistered = BOFactory::getInterface().registerIn(Crab::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Crab>(gameScreen); });
+bool Crab::isRegistered = BOFactory::getInterface().registerIn(Crab::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Crab>(gameScreen); });
 
 // init
 const float Crab::MIN_PLAYER_RADIUS = static_cast<float>(BoardObject::getDefaultSize().x)*2.f;

@@ -8,9 +8,10 @@
 #include "Bullet.h"
 #include "Shark.h"
 #include "Crab.h"
+#include "Grenade.h"
 
 // register
-bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_unique<Player>(gameScreen); });
+bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Player>(gameScreen); });
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
 	: Character(gameScreen, numOfLife), m_isRecover(false)
@@ -125,23 +126,23 @@ void Player::onToolUpdated(Tool* tool)
 void Player::decreaseLife(int numOfLife)
 {
 	Character::decreaseLife(numOfLife);
-	if (numOfLife > 0)
+	if (numOfLife > 0) {
+		// TODO play sound
 		recover();
+	}
 }
 
 void Player::onCollide(Shark* shark)
 {
-	if (!isDie()) {
-		if(!isRecover())
-			decreaseLife(shark->getDamage());
+	if (!isDie() && !isRecover() && !shark->isDie()) {
+		decreaseLife(shark->getDamage());
 	}
 }
 
 void Player::onCollide(Crab* crab)
 {
-	if (!isDie()) {
-		if (!isRecover())
-			decreaseLife(crab->getDamage());
+	if (!isDie() && !isRecover() && !crab->isDie()) {
+		decreaseLife(crab->getDamage());
 	}
 }
 
@@ -166,6 +167,17 @@ void Player::onCollide(Bullet* bullet)
 			bullet->explode();
 		}
 	}	
+}
+
+void Player::onCollide(Grenade* grenade)
+{
+	if (grenade->getMyOwner() != this) {
+		if (!isDie()) {
+			if (!isRecover())
+				decreaseLife(grenade->getDamage());
+			grenade->explode();
+		}
+	}
 }
 
 void Player::onCollide(Explosion* explosion)

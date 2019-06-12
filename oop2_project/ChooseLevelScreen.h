@@ -26,6 +26,7 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
+	// layout of levels buttons
 	using LevelsLayout = std::shared_ptr<GUI::VerticalLayout<GUI::Button>>;
 	// title
 	std::shared_ptr<GUI::TextView> m_title;
