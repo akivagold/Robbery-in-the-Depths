@@ -76,7 +76,6 @@ void World::init()
 	getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));
 	getCamera().setCenter(sf::Vector2f(getCenter()));
 	sf::Clock clock;
-	GameCamera gameCamera(this, getBODS().getPlayer(), clock);
 }
 
 
