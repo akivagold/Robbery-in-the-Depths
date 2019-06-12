@@ -14,8 +14,6 @@ class LifeView
 public:
 	// constructor
 	explicit LifeView(sf::RenderWindow& window, int numOfLife = 0);
-	// set life
-	void setLife(int numOflife);
 	// set num of life
 	void setNumOfLife(int numOfLife);
 	// get num of life
@@ -23,6 +21,8 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
+	// set life
+	void setLife(int numOflife);
 	// num of life
 	int m_numOfLife;
 	// create life image

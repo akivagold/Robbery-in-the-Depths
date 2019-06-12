@@ -88,7 +88,7 @@ void Player::setNumOfLife(int numOfLife)
 	Character::setNumOfLife(numOfLife);
 
 	// update game menu
-	getGameScreen().getGameMenu()->getLifeView()->setLife(numOfLife);
+	getGameScreen().getGameMenu()->getLifeView()->setNumOfLife(numOfLife);
 }
 
 void Player::onDirectionChanged()
