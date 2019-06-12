@@ -3,6 +3,7 @@
 #include "View.h"
 #include "HorizontalLayout.h"
 #include "ImageView.h"
+#include "Character.h"
 
 /*
  * LifeView class
@@ -26,8 +27,10 @@ private:
 	int m_numOfLife;
 	// create life image
 	std::shared_ptr<GUI::ImageView> createLifeImage();
+	std::shared_ptr<GUI::ImageView> createLifeImage2();
 	// check if num  of life is legal
 	void checkLegalLife(int numOfLife) const;
 	// init
 	void init();
+	std::shared_ptr<GUI::ImageView> m_barFullPart, m_barEmptyPart;
 };

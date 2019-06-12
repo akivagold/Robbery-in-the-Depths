@@ -18,7 +18,7 @@ void MovingObject::floatEffect()
 {
 	sf::Int32 elapsedTime = m_floatEffectClock.getElapsedTime().asMilliseconds();
 
-	if (elapsedTime - m_lastFloatEffectClock > 1000) {
+	if (elapsedTime - m_lastFloatEffectClock > 2500) {
 		upLastFloatEffect = !upLastFloatEffect;
 		m_lastFloatEffectClock = elapsedTime;
 		if (upLastFloatEffect) {

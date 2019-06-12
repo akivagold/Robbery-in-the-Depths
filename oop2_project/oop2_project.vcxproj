@@ -193,6 +193,7 @@
     <ClCompile Include="GOIFileParser.cpp" />
     <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="GrenadeLauncher.cpp" />
+    <ClCompile Include="HealthView.cpp" />
     <ClCompile Include="LoseScreen.cpp" />
     <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="HotWeapon.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="GOIFileParser.h" />
     <ClInclude Include="Grenade.h" />
     <ClInclude Include="GrenadeLauncher.h" />
+    <ClInclude Include="HealthView.h" />
     <ClInclude Include="LoseScreen.h" />
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="HorizontalLayout.h" />

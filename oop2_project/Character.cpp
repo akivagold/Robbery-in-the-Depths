@@ -20,7 +20,9 @@ void Character::setNumOfLife(int numOfLife)
 		throw std::out_of_range("Num of life " + std::to_string(numOfLife) + " is illegal");
 	if (isDie())
 		throw std::logic_error("The " + toString() + " already die. only god able to resurrection");
-	m_numOfLife = numOfLife;
+	if (!(numOfLife > MAX_LIFE)) {
+		m_numOfLife = numOfLife;
+	}
 	if (numOfLife == 0) {
 		m_isDie = true;
 		onDie();

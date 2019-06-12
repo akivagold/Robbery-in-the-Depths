@@ -25,6 +25,7 @@ namespace GUI {
 		virtual void removeView(int index) override;
 		// convert to string
 		virtual string toString() const override;
+		void setRelativeWidth(int index,float width);
 	protected:
 		// update components
 		virtual void updateComponents() override;
@@ -88,6 +89,16 @@ template <class ViewType>
 string GUI::HorizontalLayout<ViewType>::toString() const
 {
 	return "HorizontalLayout: { view=" + ViewGroup<ViewType>::toString() + " }";
+}
+
+template<class ViewType>
+inline void GUI::HorizontalLayout<ViewType>::setRelativeWidth(int index, float width)
+{
+	if (!ViewGroup<ViewType>::haveViewAt(index)) {
+		throw(std::out_of_range("Cannot find view at " + index));
+	}
+	m_relativeWidths[index] = width;
+	updateComponents();
 }
 
 template <class ViewType>
