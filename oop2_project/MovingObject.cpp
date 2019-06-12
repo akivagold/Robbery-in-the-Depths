@@ -9,8 +9,8 @@ sf::Vector2f MovingObject::getFriction() const
 	sf::Vector2f friction;
 	//TODO add external acc(?)
 
-	friction.x = m_speed.x / (m_maxSpeed.x);// + m_externalMaxSpeed.x);
-	friction.y = m_speed.y / (m_maxSpeed.y);// + m_externalMaxSpeed.y);
+	friction.x = m_speed.x / (m_maxSpeed.x);
+	friction.y = m_speed.y / (m_maxSpeed.y);
 	return friction;
 }
 

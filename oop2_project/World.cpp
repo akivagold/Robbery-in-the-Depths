@@ -58,7 +58,6 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 
 void World::draw()
 {
-	std::cout << getCamera().getCenter().x<<std::endl;
 	if (m_gameCamera) {
 		m_gameCamera->updateCamera();
 	}

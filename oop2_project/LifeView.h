@@ -25,9 +25,6 @@ private:
 	void setLife(int numOflife);
 	// num of life
 	int m_numOfLife;
-	// create life image
-	std::shared_ptr<GUI::ImageView> createLifeImage();
-	std::shared_ptr<GUI::ImageView> createLifeImage2();
 	// check if num  of life is legal
 	void checkLegalLife(int numOfLife) const;
 	// init

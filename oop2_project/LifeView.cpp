@@ -12,18 +12,9 @@ LifeView::LifeView(sf::RenderWindow& window, int numOfLife)
 
 void LifeView::setLife(int numOfLife)
 {
-	//removeAllViews();
-	for (int i = 0; i < numOfLife; ++i) {
-		//std::shared_ptr<GUI::ImageView> lifeImage = createLifeImage();
-		//addView(lifeImage);
-	}
 	float numOfLife2 = numOfLife;
 	this->setRelativeWidth(0, numOfLife2 / Character::getMaxLife());
 	this->setRelativeWidth(1, (Character::getMaxLife() - numOfLife2) / Character::getMaxLife());
-	for (int i = numOfLife; i < Character::getMaxLife(); ++i) {
-		//std::shared_ptr<GUI::ImageView> lifeImage = createLifeImage2();
-		//addView(lifeImage);
-	}
 }
 
 void LifeView::setNumOfLife(int numOfLife)
@@ -38,21 +29,6 @@ void LifeView::setNumOfLife(int numOfLife)
 string LifeView::toString() const
 {
 	return "LifeView: { " + HorizontalLayout::toString() + " }";
-}
-
-std::shared_ptr<GUI::ImageView> LifeView::createLifeImage()
-{
-	std::shared_ptr<GUI::ImageView> lifeImage = std::make_shared<GUI::ImageView>(getWindow());
-	//lifeImage->getImage().setTexture("life");
-	lifeImage->getBackground().setColor(sf::Color::Red);
-	return lifeImage;
-}
-std::shared_ptr<GUI::ImageView> LifeView::createLifeImage2()
-{
-	std::shared_ptr<GUI::ImageView> lifeImage = std::make_shared<GUI::ImageView>(getWindow());
-	//lifeImage->getImage().setTexture("life");
-	lifeImage->getBackground().setColor(sf::Color::Blue);
-	return lifeImage;
 }
 
 void LifeView::checkLegalLife(int numOfLife) const
