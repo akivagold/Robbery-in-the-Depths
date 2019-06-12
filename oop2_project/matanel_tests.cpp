@@ -102,9 +102,9 @@ void matanel_main()
 	{
 		//testBOFactory();
 		//testGradientColor();
-		testGameController();
+		//testGameController();
 		//testEditor();
-		//testWorld();
+		testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -280,9 +280,9 @@ void testWorld() {
 		} break;
 		case sf::Keyboard::M: {
 			std::shared_ptr<MachineGun> mg = std::make_shared<MachineGun>(gameScreen, MachineGun::Direction::RIGHT);
-			//auto gl = std::make_shared<GrenadeLauncher>(mg.get());
-			//gl->setInfLimit();
-			//mg->setWeapon(gl);
+			auto gl = std::make_shared<GrenadeLauncher>(mg.get());
+			gl->setInfLimit();
+			mg->setWeapon(gl);
 			mg->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(mg);
 		} break;

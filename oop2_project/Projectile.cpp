@@ -1,12 +1,25 @@
 #include "Projectile.h"
 
+void Projectile::onJoinedGame()
+{
+	m_inShotSW.start(SHOT_TIME, [this] {
+		m_inShot = false;
+	});
+}
+
+void Projectile::draw()
+{
+	MovingObject::draw();
+	m_inShotSW.checkStopWatch();
+}
+
 void Projectile::explode()
 {
 	suicide();
 }
 
 Projectile::Projectile(GameScreen& gameScreen, Character* owner)
-	: MovingObject(gameScreen), m_owner(owner)
+	: MovingObject(gameScreen), m_owner(owner), m_inShot(true)
 {
 	init();
 }
