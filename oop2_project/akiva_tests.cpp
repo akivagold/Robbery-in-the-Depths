@@ -35,6 +35,7 @@
 #include "EditMenu.h"
 #include "EditScreen.h"
 #include "MachineGun.h"
+#include "GameCamera.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -231,9 +232,6 @@ void testWorld() {
 		case sf::Keyboard::Key::U: {
 			player->setTransparency(player->getTransparency() - 10);
 		} break;
-		case sf::Keyboard::Key::K: {
-			player->rotateAnimation(10);
-		} break;
 		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
 		} break;
@@ -317,21 +315,15 @@ void testWorld() {
 		shark->setPosition(pos);
 		gameScreen.getWorld().getBODS().requestAddBO(shark);
 	});
-
-	sf::Clock m_clock;
-	gameScreen.run([&gameScreen, &player, &m_clock]() {
+	/*
+	gameScreen.getWorld().getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));
+	gameScreen.getWorld().getCamera().setCenter(sf::Vector2f(gameScreen.getWorld().getCenter()));
+	sf::Clock clock;
+	GameCamera gameCamera( gameScreen, player, clock);
+	*/
+	gameScreen.run([&gameScreen]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-		int elapsedTime = m_clock.getElapsedTime().asSeconds() * 100;
-		m_clock.restart();
-		sf::Vector2f cameraPos = gameScreen.getWorld().getCamera().getCenter();
-		sf::Vector2f playerPos = player->getPosition();
-		//float distance = sqrt(pow(cameraPos.x - playerPos.x, 2) + pow(cameraPos.y - playerPos.y, 2));
-		if (abs(playerPos.x - cameraPos.x) > BoardObject::getDefaultSize().x * 5) {
-			gameScreen.getWorld().getCamera().move(sf::Vector2f((playerPos.x - cameraPos.x) / 50, 0.f));
-		}
-		if (abs(playerPos.y - cameraPos.y) > BoardObject::getDefaultSize().y * 2.5) {
-			gameScreen.getWorld().getCamera().move(sf::Vector2f(0.f, (playerPos.y - cameraPos.y)/25));
-		}
+		//gameCamera.updateCamera();
 	});
 }
 #endif // AKIVA_TESTS

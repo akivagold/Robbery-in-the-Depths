@@ -101,6 +101,10 @@ void World::init()
 	getBorder().setColor(sf::Color::Blue);
 	getBorder().setSize(1);
 	getCamera().zoom(0.6f);
+	getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));
+	getCamera().setCenter(sf::Vector2f(getCenter()));
+	sf::Clock clock;
+	GameCamera gameCamera(this, getBODS().getPlayer(), clock);
 }
 
 
