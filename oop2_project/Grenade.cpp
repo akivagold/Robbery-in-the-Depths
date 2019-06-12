@@ -15,6 +15,7 @@ Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude)
 
 void Grenade::onJoinedGame()
 {
+	Projectile::onJoinedGame();
 	GUI::SoundManager::getInterface().playSound("gl_fire");
 }
 

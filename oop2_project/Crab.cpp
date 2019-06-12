@@ -68,7 +68,7 @@ void Crab::onCollide(Flow* flow)
 
 void Crab::onCollide(Bullet* bullet)
 {
-	if (!isDie()) {
+	if (!isDie() && !bullet->isInShotTime()) {
 		decreaseLife(bullet->getDamage());
 		bullet->explode();
 	}
@@ -76,7 +76,7 @@ void Crab::onCollide(Bullet* bullet)
 
 void Crab::onCollide(Grenade* grenade)
 {
-	if (!isDie()) {
+	if (!isDie() && !grenade->isInShotTime()) {
 		decreaseLife(grenade->getDamage());
 		grenade->explode();
 	}
