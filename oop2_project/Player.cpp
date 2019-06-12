@@ -219,6 +219,9 @@ void Player::init()
 	setMaxSpeed(sf::Vector2f(6.f*getSize().x, 6.f*getSize().y));
 	
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
+		if (isDie())
+			return;
+
 		setAnimationFrequency(SWIM_ANIM_FREQUENCY);
 		float offset = 0.00005f*float(getSize().x);
 		switch (keyCode)
@@ -248,6 +251,9 @@ void Player::init()
 		}
 	});
 	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
+		if (isDie())
+			return;
+
 		setAnimationFrequency(STAND_ANIM_FREQUENCY);
 		float offset = 0;
 		switch (keyCode)

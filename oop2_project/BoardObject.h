@@ -18,6 +18,7 @@ class Chest;
 class MachineGun;
 class Grenade;
 class Explosion;
+class Box;
 
 //---- using section --------
 using std::string;
@@ -81,6 +82,7 @@ public:
 	virtual void onCollide(MachineGun* machineGun) = 0;
 	virtual void onCollide(Grenade* grenade) = 0;
 	virtual void onCollide(Explosion* explosion) = 0;
+	virtual void onCollide(Box* box) = 0;
 	// convert to string
 	virtual string toString() const override;
 protected:

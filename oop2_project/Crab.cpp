@@ -1,6 +1,7 @@
 #include "Crab.h"
 #include "Flow.h"
 #include "Wall.h"
+#include "Box.h"
 #include "Bullet.h"
 #include "Grenade.h"
 #include "Explosion.h"
@@ -30,23 +31,34 @@ void Crab::onDie()
 	setAnimation("die_crab");
 }
 
-void Crab::onCollide(Wall* wall)
+// on collide on solid
+void Crab::onCollideSoild(BoardObject* bo) 
 {
 	if (isDie())
 		return;
 
-	if (isAboveThen(wall->getSelf())) {
+	if (isAboveThen(bo->getSelf())) {
 		getInteralAcceleration().y = 0.f;
 		setPosition(getPosition().x, getPosition().y - 2);
 	}
-	else if (isLeftThen(wall->getSelf())) {
+	else if (isLeftThen(bo->getSelf())) {
 		getInteralAcceleration().x = 0.f;
 		setDirection(Direction::LEFT);
 	}
-	else if (isRightThen(wall->getSelf())) {
+	else if (isRightThen(bo->getSelf())) {
 		getInteralAcceleration().x = 0.f;
 		setDirection(Direction::RIGHT);
 	}
+}
+
+void Crab::onCollide(Wall* wall)
+{
+	onCollideSoild(wall);
+}
+
+void Crab::onCollide(Box* box)
+{
+	onCollideSoild(box);
 }
 
 void Crab::onCollide(Flow* flow)
@@ -143,3 +155,5 @@ const sf::Vector2i& Crab::getCrabSize()
 	static sf::Vector2i CRAB_SIZE(static_cast<int>(getDefaultSize().x*0.5f), static_cast<int>(getDefaultSize().y*0.5f));
 	return CRAB_SIZE;
 }
+
+

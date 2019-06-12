@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "SoundManager.h"
+#include "Box.h"
 
 const sf::Vector2f Bullet::ACCELERATION = sf::Vector2f(0.0001f*Bullet::getMODefSize().x, 0.0001f*Bullet::getMODefSize().y);
 
@@ -23,6 +24,12 @@ void Bullet::draw()
 {
 	Projectile::draw();
 	m_time.checkTimer();
+}
+
+void Bullet::onCollide(Box* box)
+{
+	box->decreaseDurabilityState(getDamage());
+	explode();
 }
 
 void Bullet::playChoice(Direction lastDirection, bool isCollided)
