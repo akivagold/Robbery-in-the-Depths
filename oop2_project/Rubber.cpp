@@ -16,7 +16,7 @@ const float Rubber::RADIUS_SHOT = static_cast<float>(BoardObject::getDefaultSize
 
 Rubber::Rubber(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife), m_tool(std::make_shared<AK47>(this)),
-	m_isInRadiusShot(false), m_isInRadiusfromPlayer(false)
+	m_isInRadiusShot(false), m_isInRadiusfromPlayer(false), m_isInthinking(false), m_isInShot(false)
 {
 	init();
 }
@@ -39,6 +39,7 @@ void Rubber::draw()
 {
 	NPC::draw();
 	m_time.checkTimer();
+	m_thinkingTime.checkTimer();
 }
 
 void Rubber::onDie()
@@ -86,12 +87,25 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 {
 	NPC::playChoice(lastDirection, isCollided);
 
-	if (isDie())
+	if (isDie() || m_isInShot)
 		return;
+
+	if (isCollided) {
+		m_isInthinking = true;
+		if (isUpDirections(lastDirection))
+			setDirection(getRandomDownDirections());
+		else if (isDownDirections(lastDirection))
+			setDirection(getRandomUPDirections());
+		else if (isRightDirections(lastDirection))
+			setDirection(getRandomLeftDirections());
+		else
+			setDirection(getRandomRightDirections());
+	}
+	
 	
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getRadiusFromPlayer();
-	if (distanceFromPlayer <= RADIUS_ATTACK) {
+	if (distanceFromPlayer <= RADIUS_ATTACK && !m_isInthinking) {
 		inRadiusFromPlayer();
 	}
 	else {
@@ -140,19 +154,24 @@ void Rubber::init()
 	setDrawPriority(DRAW_PRIORITY);
 	setDirection(getRandomDirect());
 
-	int changeDirectionTime = 2000 + rand() % 4000;
+	int changeDirectionTime = 1000 + rand() % 2000;
 	m_time.start(changeDirectionTime, [this] {
 		if (isDie())
 			return;
 
 		// rand direction
-		if (!m_isInRadiusfromPlayer)
-			setDirection(getRandomDirect());
+		//if (!m_isInRadiusfromPlayer)
+		//	setDirection(getRandomDirect());
 		
 		// fire
-		if (m_isInRadiusShot) {
+		if (m_isInShot) {
 			m_tool->useTool();
+			m_isInShot = false;
 		}
+	});
+	m_thinkingTime.start(3000, [this] {
+		if (m_isInthinking)
+			m_isInthinking = false;
 	});
 
 }
@@ -173,13 +192,13 @@ void Rubber::inRadiusFromPlayer()
 	}
 	getInteralAcceleration().x = -direction.x*0.0000025f;
 	getInteralAcceleration().y = -direction.y*0.0000025f;
-
 	// prepare to shot
 	if ((getPosition().y >= (player->getPosition().y - getSize().y / 2)
 		&& getPosition().y <= (player->getPosition().y + getSize().y / 2))
 		&& getRadiusFromPlayer() <= RADIUS_SHOT) {
 		if (!m_isInRadiusShot) {
 			setAnimation("rubber_fire");
+			m_isInShot = true;
 			m_isInRadiusShot = true;
 			getSpeed().x = 0;
 		    getSpeed().y = 0;
@@ -188,7 +207,7 @@ void Rubber::inRadiusFromPlayer()
 		getInteralAcceleration().y = 0;
 	}
 	else {
-		if (m_isInRadiusShot) {
+		if (m_isInRadiusShot && !m_isInShot) {
 			setAnimation("rubber_swim");
 			m_isInRadiusShot = false;
 		}

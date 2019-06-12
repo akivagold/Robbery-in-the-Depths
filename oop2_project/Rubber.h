@@ -63,6 +63,11 @@ private:
 	std::shared_ptr<Tool> m_tool;
 	// time
 	Timer m_time;
+	// recover time
+	Timer m_thinkingTime;
+	// flag that check if he is in thinking state
+	bool m_isInthinking;
+	// flag that check if he is in shot state
 	bool m_isInShot;
 	// flag that check if he is in radius shot
 	bool m_isInRadiusShot;
