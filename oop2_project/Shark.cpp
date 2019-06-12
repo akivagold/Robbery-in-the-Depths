@@ -81,7 +81,14 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 		return;
 
 	if (isCollided) {
-		setDirection(getRandomDirect());
+		if (isUpDirections(lastDirection))
+			setDirection(getRandomDownDirections());
+		else if (isDownDirections(lastDirection))
+			setDirection(getRandomUPDirections());
+		else if (isRightDirections(lastDirection))
+			setDirection(getRandomLeftDirections());
+		else
+			setDirection(getRandomRightDirections());
 	}
 	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getDistance(player);
@@ -147,16 +154,6 @@ void Shark::init()
 	m_inChase = false;
 	m_time.start(3000, [this] {
 		if (!m_inChase) {
-			/*Direction direct;
-			if (isUpDirections(getLastDirection()))
-				direct = getRandomDownDirections();
-			else if (isDownDirections(getLastDirection()))
-				direct = getRandomUPDirections();
-			else if (isRightDirections(getLastDirection()))
-				direct = getRandomLeftDirections();
-			else 
-				direct = getRandomRightDirections();*/
-
 			setDirection(getRandomDirect());
 		}
 	});

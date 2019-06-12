@@ -89,8 +89,8 @@ void nahum_main()
 	{
 		//testCleanScreen();
 		//testLifeView();
-		//testWorld();
-		testGameController();
+		testWorld();
+		//testGameController();
 	}
 	catch (const std::exception& ex)
 	{
