@@ -62,7 +62,7 @@ void World::draw()
 	if (m_gameCamera) {
 		m_gameCamera->updateCamera();
 	}
-	std::cout << getCamera().getCenter().x << std::endl;
+	
 	View::draw();
 	if (isShow()) {
 		for (auto& boSetPair : m_bods.getBOs()) {
