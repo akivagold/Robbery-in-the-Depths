@@ -54,6 +54,6 @@ void LifeView::init()
 	m_barFullPart->getBackground().setColor(sf::Color::Green);
 	addView(m_barFullPart);
 	m_barEmptyPart = std::make_shared<GUI::ImageView>(getWindow());
-	m_barEmptyPart->getBackground().setColor(sf::Color::Blue);
+	m_barEmptyPart->getBackground().setColor(sf::Color(100,100,100));
 	addView(m_barEmptyPart);
 }
