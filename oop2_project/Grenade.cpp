@@ -1,6 +1,7 @@
 #include "Grenade.h"
 #include "Explosion.h"
 #include "GameScreen.h"
+#include "Box.h"
 
 // init
 const sf::Vector2f Grenade::ACCELERATION(0.0002f, 0.0001f);
@@ -26,6 +27,12 @@ void Grenade::explode()
 	sf::Vector2f myCenter = getCenter();
 	explosion->setPosition(myCenter.x - explosion->getSize().x/2.f, myCenter.y - explosion->getSize().y / 2.f);
 	getGameScreen().getWorld().getBODS().requestAddBO(explosion);
+}
+
+void Grenade::onCollide(Box* box)
+{
+	box->decreaseDurabilityState(getDamage());
+	explode();
 }
 
 void Grenade::playChoice(Direction lastDirection, bool isCollided)

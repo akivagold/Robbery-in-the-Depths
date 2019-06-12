@@ -39,6 +39,7 @@ public:
 	virtual void onCollide(MachineGun* machineGun) override {}
 	virtual void onCollide(Grenade* grenade) override {}
 	virtual void onCollide(Explosion* explosion) override {}
+	virtual void onCollide(Box* box) override {}
 	// set flow - power & angle
 	void setFlow(const sf::Vector2f& flow);
 private:

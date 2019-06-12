@@ -180,6 +180,10 @@
         {
             "name": "grenade_launcher",
             "path": "grenade_launcher.png"
+        },
+        {
+            "name": "box",
+            "path": "box.png"
         }
     ]
 }

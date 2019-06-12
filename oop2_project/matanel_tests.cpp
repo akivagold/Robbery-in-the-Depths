@@ -39,6 +39,7 @@
 #include "BOFactory.h"
 #include "Utilities.h"
 #include "MachineGun.h"
+#include "Box.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -101,9 +102,9 @@ void matanel_main()
 	{
 		//testBOFactory();
 		//testGradientColor();
-		testGameController();
+		//testGameController();
 		//testEditor();
-		//testWorld();
+		testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -284,6 +285,11 @@ void testWorld() {
 			//mg->setWeapon(gl);
 			mg->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(mg);
+		} break;
+		case sf::Keyboard::B: {
+			std::shared_ptr<Box> box = std::make_shared<Box>(gameScreen);
+			box->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(box);
 		} break;
 		}
 	});
