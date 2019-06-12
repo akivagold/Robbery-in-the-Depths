@@ -29,6 +29,26 @@
             "isUnique": false,
             "name": "chest",
             "specialChar": 109
+        },
+        {
+            "isUnique": false,
+            "name": "machine_gun_right",
+            "specialChar": 50
+        },
+        {
+            "isUnique": false,
+            "name": "machine_gun_left",
+            "specialChar": 49
+        },
+        {
+            "isUnique": false,
+            "name": "machine_gun_up",
+            "specialChar": 51
+        },
+        {
+            "isUnique": false,
+            "name": "machine_gun_down",
+            "specialChar": 52
         }
     ]
 }

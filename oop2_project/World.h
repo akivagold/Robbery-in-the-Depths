@@ -4,6 +4,7 @@
 #include "View.h"
 #include "BODS.h"
 #include "LevelInfo.h"
+#include "GameCamera.h"
 class GameScreen;
 
 //---- using section --------

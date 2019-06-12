@@ -38,6 +38,7 @@
 #include "GrenadeLauncher.h"
 #include "BOFactory.h"
 #include "Utilities.h"
+#include "MachineGun.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -100,9 +101,9 @@ void matanel_main()
 	{
 		//testBOFactory();
 		//testGradientColor();
-		//testGameController();
+		testGameController();
 		//testEditor();
-		testWorld();
+		//testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -275,6 +276,14 @@ void testWorld() {
 			std::shared_ptr<Grenade> grenade = std::make_shared<Grenade>(gameScreen, player.get());
 			grenade->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(grenade);
+		} break;
+		case sf::Keyboard::M: {
+			std::shared_ptr<MachineGun> mg = std::make_shared<MachineGun>(gameScreen, MachineGun::Direction::RIGHT);
+			//auto gl = std::make_shared<GrenadeLauncher>(mg.get());
+			//gl->setInfLimit();
+			//mg->setWeapon(gl);
+			mg->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(mg);
 		} break;
 		}
 	});
