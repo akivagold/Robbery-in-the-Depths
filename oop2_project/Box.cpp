@@ -2,6 +2,11 @@
 #include "Projectile.h"
 #include "Bullet.h"
 #include "Grenade.h"
+#include "BOFactory.h"
+
+// register
+bool Box::isRegistered = BOFactory::getInterface().registerIn(Box::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Box>(gameScreen); });
+
 
 Box::Box(GameScreen& gameScreen, int durabilityState)
 	: StaticObject(gameScreen)
