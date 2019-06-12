@@ -12,9 +12,19 @@ LifeView::LifeView(sf::RenderWindow& window, int numOfLife)
 
 void LifeView::setLife(int numOfLife)
 {
-	float numOfLife2 = numOfLife;
-	this->setRelativeWidth(0, numOfLife2 / Character::getMaxLife());
-	this->setRelativeWidth(1, (Character::getMaxLife() - numOfLife2) / Character::getMaxLife());
+	float lifeMissingPrecent, lifeLeftPrecent;
+	lifeMissingPrecent = lifeLeftPrecent = numOfLife;
+	lifeLeftPrecent /= Character::getMaxLife();
+	lifeMissingPrecent = (Character::getMaxLife() - lifeMissingPrecent) / Character::getMaxLife();
+	this->setRelativeWidth(0, lifeLeftPrecent);
+	this->setRelativeWidth(1, lifeMissingPrecent);
+	if (lifeLeftPrecent > lifeMissingPrecent) {
+		m_barFullPart->getBackground().setColor(sf::Color(255 * lifeMissingPrecent * 2, 255, 0.f));
+	}
+	else {
+		m_barFullPart->getBackground().setColor(sf::Color(255, 255 * lifeLeftPrecent * 2, 0.f));
+
+	}
 }
 
 void LifeView::setNumOfLife(int numOfLife)
@@ -41,7 +51,7 @@ void LifeView::init()
 {
 	getBorder().setColor(sf::Color::Black);
 	m_barFullPart = std::make_shared<GUI::ImageView>(getWindow());
-	m_barFullPart->getBackground().setColor(sf::Color::Red);
+	m_barFullPart->getBackground().setColor(sf::Color::Green);
 	addView(m_barFullPart);
 	m_barEmptyPart = std::make_shared<GUI::ImageView>(getWindow());
 	m_barEmptyPart->getBackground().setColor(sf::Color::Blue);

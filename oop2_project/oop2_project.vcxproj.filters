@@ -267,9 +267,6 @@
     <ClCompile Include="GameCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HealthView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h">
@@ -540,9 +537,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
