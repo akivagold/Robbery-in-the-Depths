@@ -1,5 +1,5 @@
 #include "GameCamera.h"
-
+#include "World.h"
 
 GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player, sf::Clock & clock)
 	:m_world(world), m_player(player), m_clock(clock)

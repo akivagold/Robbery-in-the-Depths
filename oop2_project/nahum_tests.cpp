@@ -37,6 +37,7 @@
 #include "MachineGun.h"
 #include "WinScreen.h"
 #include "LoseScreen.h"
+#include "GameController.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -70,6 +71,7 @@ void testCleanScreen();
 void testLifeView();
 void testWorld();
 void testEditor();
+void testGameController();
 #pragma endregion
 
 // -------------- globals & constants -----------
@@ -87,13 +89,19 @@ void nahum_main()
 	{
 		//testCleanScreen();
 		//testLifeView();
-		testWorld();
+		//testWorld();
+		testGameController();
 	}
 	catch (const std::exception& ex)
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
 	}
+}
+
+void testGameController() {
+	GameController gameController;
+	gameController.run();
 }
 
 void testEditor() {

@@ -1,7 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
-#include "World.h"
+class World;
 #include "Player.h"
 
 //---- using section --------
