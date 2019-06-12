@@ -49,6 +49,11 @@
             "isUnique": false,
             "name": "machine_gun_down",
             "specialChar": 52
+        },
+        {
+            "isUnique": false,
+            "name": "box",
+            "specialChar": 98
         }
     ]
 }

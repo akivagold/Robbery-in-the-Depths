@@ -102,9 +102,9 @@ void matanel_main()
 	{
 		//testBOFactory();
 		//testGradientColor();
-		//testGameController();
+		testGameController();
 		//testEditor();
-		testWorld();
+		//testWorld();
 		//testEditMenu();
 		//testBox2DLib();
 		//testBODS();
@@ -304,7 +304,6 @@ void testWorld() {
 	gameScreen.getWorld().getCamera().zoom(1.5f);
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 }
 
