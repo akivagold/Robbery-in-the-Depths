@@ -1,8 +1,9 @@
 #include "GameCamera.h"
+#include "World.h"
 
 
-GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player, sf::Clock & clock)
-	:m_world(world), m_player(player), m_clock(clock)
+GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player)
+	:m_world(world), m_player(player)
 {
 }
 
@@ -40,4 +41,6 @@ void GameCamera::updateCamera()
 		cameraCenter = m_world->getCamera().getCenter();
 		cameraPos = cameraCenter - (cameraSize / 2.f);
 	}
+	std::cout << m_player->getPosition().y;
+	std::cout << m_world->getCamera().getCenter().x << std::endl;
 }
