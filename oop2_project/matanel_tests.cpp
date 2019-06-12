@@ -433,7 +433,7 @@ void testBox2DLib() {
 
 
 void testGameObjectView() {
-	
+	/*
 
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
@@ -469,7 +469,7 @@ void testGameObjectView() {
 		window.clear();
 		mainLayout.draw();
 		window.display();
-	}
+	}*/
 }
 
 void testGameObjectInfo() {

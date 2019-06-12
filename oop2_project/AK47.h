@@ -26,7 +26,7 @@ public:
 	virtual void fire() override;
 private:
 	// defualt ammo
-	static const int DEFAULT_AMMO = 20;
+	static const int DEFAULT_AMMO = 30;
 	// init
 	void init();
 };
