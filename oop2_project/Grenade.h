@@ -36,6 +36,7 @@ public:
 	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
 	virtual void onCollide(Grenade* grenade) override {}; // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
+	virtual void onCollide(Box* box) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;

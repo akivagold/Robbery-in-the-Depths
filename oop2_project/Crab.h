@@ -36,6 +36,7 @@ public:
 	virtual void onCollide(MachineGun* machineGun) override {}; // TODO use this
 	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override;
+	virtual void onCollide(Box* box) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -60,5 +61,7 @@ private:
 	static const sf::Vector2i& getCrabSize();
 	// register flag in BOFactory
 	static bool isRegistered;
+	// on collide on solid
+	void onCollideSoild(BoardObject* bo);
 };
 
