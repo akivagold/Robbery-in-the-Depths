@@ -52,10 +52,17 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 	}
 
 	m_bods.prepareLevel();
+
+	m_gameCamera = std::make_unique<GameCamera>(this, getBODS().getPlayer());
 }
 
 void World::draw()
 {
+	std::cout << getCamera().getCenter().x<<std::endl;
+	if (m_gameCamera) {
+		m_gameCamera->updateCamera();
+	}
+	std::cout << getCamera().getCenter().x << std::endl;
 	View::draw();
 	if (isShow()) {
 		for (auto& boSetPair : m_bods.getBOs()) {
@@ -63,6 +70,7 @@ void World::draw()
 				boardObject->draw();
 		}
 	}	
+	
 }
 
 void World::init()
@@ -75,8 +83,6 @@ void World::init()
 	getCamera().zoom(0.6f);
 	getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));
 	getCamera().setCenter(sf::Vector2f(getCenter()));
-	sf::Clock clock;
-	GameCamera gameCamera(this, getBODS().getPlayer(), clock);
 }
 
 
