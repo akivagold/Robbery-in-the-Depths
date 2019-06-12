@@ -7,6 +7,7 @@
 #include "Rubber.h"
 #include "MachineGun.h"
 #include "ParseLevelException.h"
+#include "Box.h"
 
 MapCellView::MapCellView(sf::RenderWindow& window, char ch)
 	: GUI::ImageView(window)
@@ -61,6 +62,9 @@ void MapCellView::updateImage(char ch)
 		} break;
 		case MachineGun::CHAR_UP_MG: {
 			getImage().setTexture("machine_gun_up");
+		} break;
+		case Box::CHAR: {
+			getImage().setTexture("box");
 		} break;
 		default:
 			throw ParseLevelException("Cannot parse board object with char=" + string(1, ch));

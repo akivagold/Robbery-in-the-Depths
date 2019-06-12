@@ -65,7 +65,6 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	// run
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 }
 
