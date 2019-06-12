@@ -35,6 +35,8 @@ private:
 	// edit menu
 	std::shared_ptr<EditMenu> m_editMenu;
 	// game objects list
+	std::vector<GameObjectInfo> m_gois;
+	// game objects list
 	std::shared_ptr<GameObjectsList> m_gameObjs;
 	// init components
 	void initComponents();

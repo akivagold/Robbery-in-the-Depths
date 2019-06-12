@@ -4,8 +4,8 @@
 const float EditMapView::ZOOM_CAM_ANIM = 0.02f;
 const float EditMapView::MOVE_CAM_ANIM = 4.f;
 
-EditMapView::EditMapView(sf::RenderWindow& window)
-	: BaseClass(window), m_cameraAct(CameraAction::NONE), m_editMode(EditMode::None), m_addChar(' ')
+EditMapView::EditMapView(sf::RenderWindow& window, const std::vector<GameObjectInfo>& gois)
+	: BaseClass(window), m_cameraAct(CameraAction::NONE), m_editMode(EditMode::None), m_addChar(' '), m_gois(gois)
 {
 	initComponents();
 }
@@ -19,7 +19,7 @@ void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 	for (auto it = levelInfo.getLevelChars().cbegin(); it != levelInfo.getLevelChars().cend(); ++it) {
 		const Cell& cell = it.getCell();
 		char ch = *it;
-		getViewAt(cell)->setChar(ch);
+		getViewAt(cell)->setChar(m_gois, ch);
 	}
 
 	// init cells
@@ -37,10 +37,10 @@ void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 		});
 		view->addClickListener([this, &view](View& v) {
 			if (m_editMode == EditMode::Add) {
-				view->setChar(m_addChar);
+				view->setChar(m_gois, m_addChar);
 			}
 			else if (m_editMode == EditMode::Remove) {
-				view->setChar(' ');
+				view->setChar(m_gois, ' ');
 			}
 		});
 	});
