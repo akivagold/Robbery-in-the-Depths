@@ -18,7 +18,7 @@ public:
 	// set life
 	virtual void setNumOfLife(int numOfLife);
 	// decrease life
-	void decreaseLife(int numOfLife);
+	virtual void decreaseLife(int numOfLife);
 	// get number of life
 	int getNumOfLife() const { return m_numOfLife; }
 	// check if has no life

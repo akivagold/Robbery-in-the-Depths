@@ -1,6 +1,10 @@
 #include "Chest.h"
 #include "Player.h"
 #include "SoundManager.h"
+#include "BOFactory.h"
+
+// register
+bool Chest::isRegistered = BOFactory::getInterface().registerIn(Chest::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Chest>(gameScreen); });
 
 Chest::Chest(GameScreen& gameScreen)
 	: Container(gameScreen)

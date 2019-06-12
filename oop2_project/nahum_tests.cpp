@@ -35,6 +35,8 @@
 #include "EditMenu.h"
 #include "EditScreen.h"
 #include "MachineGun.h"
+#include "WinScreen.h"
+#include "LoseScreen.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -227,6 +229,22 @@ void testWorld() {
 			gunTrap->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
 		} break;
+		case sf::Keyboard::M: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::DOWN);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
+		case sf::Keyboard::V: {
+			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::LEFT);
+			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
+			ak->setInfLimit();
+			gunTrap->setWeapon(ak);
+			gunTrap->setPosition(mousePos);
+			gameScreen.getWorld().getBODS().requestAddBO(gunTrap);
+		} break;
 		case sf::Keyboard::N: {
 			std::shared_ptr<MachineGun> gunTrap = std::make_shared<MachineGun>(gameScreen, MovingObject::Direction::RIGHT);
 			std::shared_ptr<HotWeapon> ak = std::make_shared<AK47>(gunTrap.get());
@@ -250,7 +268,7 @@ void testWorld() {
 		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 }
-/*
+
 void testLifeView() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
@@ -262,6 +280,11 @@ void testLifeView() {
 	mainLayout.getBorder().setColor(sf::Color::Blue);
 	mainLayout.getBorder().setSize(1.f);
 
+	//WinScreen ws(window, 200);
+	//ws.run();
+	LoseScreen ls(window);
+	ls.run();
+	/*
 	std::shared_ptr<LifeView> lf = std::make_shared<LifeView>(window, 3);
 	mainLayout.addView(lf);
 	lf->addClickListener([&lf](GUI::View& view) {
@@ -286,7 +309,7 @@ void testLifeView() {
 		int ammo = tv->getAmmo();
 		ammo--;
 		tv->setAmmo(ammo);
-	});
+	});*/
 
 	while (window.isOpen())
 	{
@@ -303,7 +326,7 @@ void testLifeView() {
 		window.display();
 	}
 }
-*/
+
 void testCleanScreen() {
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");

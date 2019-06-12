@@ -32,13 +32,10 @@ void GameController::runMainScreen(sf::RenderWindow& window)
 			runEditScreen(v.getWindow(), lfm, levelInfo);
 		});
 	});
-	mainScreen.getStartBt()->addClickListener([this](GUI::View& v) {
-
-		// TODO load level of player from file
-		
-		LevelFileManager lfm;
-		const LevelInfo& levelInfo = lfm.getLevel("matanel map");
-		runGameScreen(v.getWindow(), levelInfo);
+	mainScreen.getStartBt()->addClickListener([this, &lfm](GUI::View& v) {
+		runChooseLevelScreen(v.getWindow(), lfm, [&v, this](const LevelInfo& levelInfo) {
+			runGameScreen(v.getWindow(), levelInfo);
+		});	
 	});
 	mainScreen.run();
 }

@@ -94,6 +94,22 @@
             "path": "diver.png"
         },
         {
+            "name": "machine_gun_right",
+            "path": "machine_gun_right.png"
+        },
+        {
+            "name": "machine_gun_left",
+            "path": "machine_gun_left.png"
+        },
+        {
+            "name": "machine_gun_down",
+            "path": "machine_gun_down.png"
+        },
+        {
+            "name": "machine_gun_up",
+            "path": "machine_gun_up.png"
+        },
+        {
             "name": "shark_anim",
             "path": "shark_sprite_sheet.png",
             "numOfRows": 3,

@@ -4,6 +4,10 @@
 #include "Bullet.h"
 #include "Grenade.h"
 #include "Explosion.h"
+#include "BOFactory.h"
+
+// register
+bool Shark::isRegistered = BOFactory::getInterface().registerIn(Shark::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Shark>(gameScreen); });
 
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
 	: NPC(gameScreen, numOfLife)
@@ -134,9 +138,10 @@ void Shark::init()
 {
 	setAnimation("shark_anim");
 	setAnimationFrequency(70);
+	setDamage(DAMAGE);
 	setSize(getSharkSize());
-	// TODO setDamage();
 	setDrawPriority(DRAW_PRIORITY);
+
 	m_radiusAttack = 5.f*getSize().x;
 	setDirection(getRandomDirect());
 	m_inChase = false;

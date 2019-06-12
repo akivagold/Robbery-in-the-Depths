@@ -17,8 +17,11 @@ class MachineGun :
 	public NPC
 {
 public:
-	// char
-	static const char CHAR = 'g';
+	// chars
+	static const char CHAR_LEFT_MG = '1';
+	static const char CHAR_RIGHT_MG = '2';
+	static const char CHAR_UP_MG = '3';
+	static const char CHAR_DOWN_MG = '4';
 	// constructor
 	explicit MachineGun(GameScreen& gameScreen, MovingObject::Direction directoin);
 	// convert to string
@@ -54,11 +57,15 @@ private:
 	static const int DRAW_PRIORITY = 7;
 	// default number of life
 	static const int DEFAULT_LIFE = INT_MAX;
+	// radius shot
+	static const float RADIUS_SHOT;
 	// gun
 	std::shared_ptr<HotWeapon> m_gun;
 	// timer
 	Timer m_time;
 	// init
 	void init();
+	// register flags in BOFactory
+	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
 };
 

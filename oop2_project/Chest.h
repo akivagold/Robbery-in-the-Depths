@@ -51,5 +51,7 @@ private:
 	void init();
 	// get chest size
 	static const sf::Vector2i& getChestSize();
+	// register flag in BOFactory
+	static bool isRegistered;
 };
 

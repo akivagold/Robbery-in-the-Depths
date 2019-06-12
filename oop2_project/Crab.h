@@ -48,6 +48,8 @@ private:
 	static const float MIN_PLAYER_RADIUS;
 	// default number of life
 	static const int DEFAULT_LIFE = 1;
+	// damage
+	static const int DAMAGE = 1;
 	// flag that check if player in crab radius
 	bool m_isPlayerInRadius;
 	// timer
@@ -56,5 +58,7 @@ private:
 	void init();	
 	// get crab size
 	static const sf::Vector2i& getCrabSize();
+	// register flag in BOFactory
+	static bool isRegistered;
 };
 

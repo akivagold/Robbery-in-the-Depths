@@ -5,6 +5,7 @@
 #include "Shark.h"
 #include "Crab.h"
 #include "Rubber.h"
+#include "MachineGun.h"
 #include "ParseLevelException.h"
 
 MapCellView::MapCellView(sf::RenderWindow& window, char ch)
@@ -48,6 +49,18 @@ void MapCellView::updateImage(char ch)
 		} break;
 		case Shark::CHAR: {
 			getImage().setTexture("shark");
+		} break;
+		case MachineGun::CHAR_DOWN_MG: {
+			getImage().setTexture("machine_gun_down");
+		} break;
+		case MachineGun::CHAR_LEFT_MG: {
+			getImage().setTexture("machine_gun_left");
+		} break;
+		case MachineGun::CHAR_RIGHT_MG: {
+			getImage().setTexture("machine_gun_right");
+		} break;
+		case MachineGun::CHAR_UP_MG: {
+			getImage().setTexture("machine_gun_up");
 		} break;
 		default:
 			throw ParseLevelException("Cannot parse board object with char=" + string(1, ch));

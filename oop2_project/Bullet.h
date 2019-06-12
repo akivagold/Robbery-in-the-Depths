@@ -21,6 +21,8 @@ public:
 	virtual void onJoinedGame() override;
 	// explode
 	virtual void explode() override;
+	// draw
+	virtual void draw() override;
 	// convert to string
 	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -33,7 +35,7 @@ public:
 	virtual void onCollide(Wall* wall) override {} // TODO use this
 	virtual void onCollide(Flow* flow) override {} // TODO use this
 	virtual void onCollide(Bullet* bullet) override {} // TODO use this
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}
 	virtual void onCollide(Grenade* grenade) override {} // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 protected:
@@ -44,6 +46,8 @@ protected:
 private:
 	// bullet acceleration
 	static const sf::Vector2f ACCELERATION;
+	// time
+	Timer m_time;
 	// damage
 	static const int DAMAGE = 1;
 	// init
