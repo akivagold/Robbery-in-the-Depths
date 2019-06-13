@@ -56,11 +56,11 @@ private:
 	// timer
 	Timer m_timer;
 	// init
-	void init();	
-	// get crab size
-	static const sf::Vector2i& getCrabSize();
+	void init();
 	// register flag in BOFactory
 	static bool isRegistered;
+	// get crab size
+	static const sf::Vector2i& getCrabSize();	
 	// on collide on solid
 	void onCollideSoild(BoardObject* bo);
 };
