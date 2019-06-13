@@ -59,6 +59,10 @@
     {
       "name": "player_hurt",
       "path": "player_hurt.ogg"
+    },
+    {
+      "name": "machine_gun",
+      "path": "machine_gun.ogg"
     }
   ]
 }
