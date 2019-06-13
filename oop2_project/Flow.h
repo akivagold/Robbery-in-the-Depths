@@ -19,7 +19,7 @@ class Flow
 {
 public:
 	// constructor
-	explicit Flow(GameScreen& gameScreen);
+	explicit Flow(GameScreen& gameScreen, const sf::Vector2f& flowPower = DEFAULT_POWER);
 	// convert to string
 	virtual string toString() const override { return "Flow: { flowPower: { power=" + std::to_string(m_flowPower.x) + ", angle=" + std::to_string(m_flowPower.y) + " }, " + StaticObject::toString() + " }"; }
 	// check if this object is don't blocking movement
@@ -43,13 +43,24 @@ public:
 	// set flow - power & angle
 	void setFlow(const sf::Vector2f& flow);
 private:
+	// register flags in BOFactory
+	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
+	// chars
+	static const char LEFT_CHAR = '9';
+	static const char RIGHT_CHAR = '8';
+	static const char UP_CHAR = '7';
+	static const char DOWN_CHAR = '6';
 	// draw priority
 	static const int DRAW_PRIORITY = 0;
+	// default power to x/y
+	static const float XY_DEFAULT_POWER;
+	// default power
+	static const sf::Vector2f DEFAULT_POWER;
+	// animation frequency
+	static const int ANIM_FREQUENCY = 100;
 	// flow power
 	sf::Vector2f m_flowPower;
 	// init
 	void init();
-	// animation frequency
-	static const int ANIM_FREQUENCY = 100;
 };
 

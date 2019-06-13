@@ -36,8 +36,3 @@ MovingObject::Direction NPC::getRandomLeftDirections()
 	Direction direct = static_cast<Direction>(num);
 	return direct;
 }
-
-float NPC::getRadiusFromPlayer() const
-{
-	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());
-}

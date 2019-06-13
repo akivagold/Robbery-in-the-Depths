@@ -54,6 +54,26 @@
             "isUnique": false,
             "name": "box",
             "specialChar": 98
+        },
+        {
+            "isUnique": false,
+            "name": "flow_right",
+            "specialChar": 56
+        },
+        {
+            "isUnique": false,
+            "name": "flow_left",
+            "specialChar": 57
+        },
+        {
+            "isUnique": false,
+            "name": "flow_up",
+            "specialChar": 55
+        },
+        {
+            "isUnique": false,
+            "name": "flow_down",
+            "specialChar": 54
         }
     ]
 }

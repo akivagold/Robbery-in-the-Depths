@@ -1,12 +1,28 @@
 #include "BoardObject.h"
 #include "GameScreen.h"
 #include "MovingObject.h"
+#include "SoundManager.h"
 
 BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	: AnimationView(gameScreen.getWindow()), m_gameScreen(gameScreen), m_inGame(false)
 {
 	setDrawPriority(drawPriority);
 	init();
+}
+
+void BoardObject::playSound(const string& name, float pitch)
+{
+	static float maxHearPixels = static_cast<float>(MAX_HEAR_SOUND_CELLS * getDefaultSize().x);
+	float diffP = maxHearPixels - getRadiusFromPlayer();
+	if (diffP > 0.f) {
+		float volume = (100.f*diffP)/maxHearPixels;
+		GUI::SoundManager::getInterface().playSound(name, volume, pitch);
+	}	
+}
+
+float BoardObject::getRadiusFromPlayer() const
+{
+	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());
 }
 
 void BoardObject::setDrawPriority(int drawPriority)
