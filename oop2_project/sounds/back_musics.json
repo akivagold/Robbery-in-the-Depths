@@ -7,6 +7,10 @@
         {
             "name": "santorini",
             "path": "santorini.ogg"
+        },
+        {
+            "name": "got_horror",
+            "path": "Game Of Thrones S8 - 12.ogg"
         }
     ]
 }
