@@ -51,6 +51,10 @@ public:
 	virtual void onToolUpdated(Tool* tool) override;
 	// decrease life
 	virtual void decreaseLife(int numOfLife);
+	// event on die
+	virtual void onDie() override;
+	// set on die listener
+	void setOnDieListener(std::function<void()> dieListener) { m_dieHandler = dieListener; }
 	// convert to string
 	virtual string toString() const override;
 	// collide events (using with double dispatch)
@@ -93,6 +97,8 @@ private:
 	StopWatch m_recoveSW;
 	// recover flag
 	bool m_isRecover;
+	// die event handler
+	std::function<void()> m_dieHandler;
 	// init
 	void init();
 	// check if player is recover

@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include "AlertDialog.h"
+#include "LoseScreen.h"
 
 void GameController::run()
 {
@@ -61,6 +62,11 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+
+	player->setOnDieListener([&gameScreen] {
+		// TODO open lose screen
+		gameScreen.close();
+	});
 
 	// run
 	gameScreen.run([&gameScreen, &player]() {
