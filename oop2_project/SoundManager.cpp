@@ -14,7 +14,7 @@ GUI::SoundManager& GUI::SoundManager::getInterface()
 	return soundManager;
 }
 
-void GUI::SoundManager::playSound(const string& name, float pitch)
+void GUI::SoundManager::playSound(const string& name, float volume, float pitch)
 {
 	// check if have this sound
 	auto it = m_soundsBuffers.find(name);
@@ -23,6 +23,7 @@ void GUI::SoundManager::playSound(const string& name, float pitch)
 	// load sound
 	sf::Sound& mediaPlayer = findFreeMediaPlayer();
 	mediaPlayer.setPitch(pitch);
+	mediaPlayer.setVolume(volume);
 	mediaPlayer.setBuffer(it->second);
 	// play sound
 	mediaPlayer.play();

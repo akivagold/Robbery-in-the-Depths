@@ -73,7 +73,7 @@ void Player::switchToNextTool()
 			nextToolIndex = currentToolIndex + 1;
 		auto& nextTool = m_tools[nextToolIndex];
 		changeTool(nextTool);
-		GUI::SoundManager::getInterface().playSound("change_tool");
+		playSound("change_tool");
 	}
 }
 
@@ -112,7 +112,7 @@ void Player::useCurrTool()
 			m_currTool->useTool();
 		}
 		else {
-			GUI::SoundManager::getInterface().playSound("no_ammo");
+			playSound("no_ammo");
 		}
 	}
 }

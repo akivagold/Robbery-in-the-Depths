@@ -13,7 +13,7 @@ Bullet::Bullet(GameScreen& gameScreen, Character* owner)
 void Bullet::onJoinedGame()
 {
 	Projectile::onJoinedGame();
-	GUI::SoundManager::getInterface().playSound("bullet_fire");
+	playSound("bullet_fire");
 }
 
 void Bullet::explode()

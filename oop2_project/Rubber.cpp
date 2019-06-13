@@ -46,7 +46,7 @@ void Rubber::onDie()
 {
 	NPC::onDie();
 	setAnimation("rubber_die");
-	GUI::SoundManager::getInterface().playSound("rubber_die");
+	playSound("rubber_die");
 }
 
 void Rubber::onCollide(Flow* flow)

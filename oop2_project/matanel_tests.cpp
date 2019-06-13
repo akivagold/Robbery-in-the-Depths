@@ -98,11 +98,12 @@ void matanel_main()
     std::cout << "Hello Matanel World!\n";
 	// initialize random seed
 	srand(unsigned (time(NULL)));
+	GUI::SoundManager::getInterface();
 	try
 	{
 		//testBOFactory();
 		//testGradientColor();
-		testGameController();
+		//testGameController();
 		//testEditor();
 		//testWorld();
 		//testEditMenu();

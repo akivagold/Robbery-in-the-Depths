@@ -20,7 +20,7 @@ public:
 	// get interface
     static SoundManager& getInterface();
 	// play sound (from memory)
-	void playSound(const string& name, float pitch = 1.f);
+	void playSound(const string& name, float volume = 100.f, float pitch = 1.f);
 	// play background music (from stream)
 	void playBackgroundMusic(const string& name);
 	// stop background music

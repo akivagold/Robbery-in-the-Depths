@@ -17,7 +17,7 @@ void Explosion::onJoinedGame()
 		vanish();
 	});
 
-	GUI::SoundManager::getInterface().playSound("explosion");
+	playSound("explosion");
 }
 
 void Explosion::draw()

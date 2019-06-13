@@ -23,8 +23,6 @@ public:
 	static Direction getRandomDownDirections();
 	// get ranodm left directions
 	static Direction getRandomLeftDirections();
-	// get radius from player
-	float getRadiusFromPlayer() const;
 protected:
 	// constructor
 	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
