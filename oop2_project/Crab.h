@@ -19,8 +19,6 @@ public:
 	explicit Crab(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// draw
 	virtual void draw() override;
-	// event on die
-	virtual void onDie() override;
 	// convert to string
 	virtual string toString() const override { return "Crab: { " + NPC::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -42,6 +40,8 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
 	virtual void onDirectionChanged() override {}; // TODO: use this
+		// event on die
+	virtual void onDie() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 20;

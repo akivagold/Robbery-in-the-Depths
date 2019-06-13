@@ -64,7 +64,10 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
 	player->setOnDieListener([&gameScreen] {
-		// TODO open lose screen
+		// TODO
+	});
+	player->setOnVanishListener([this, &gameScreen, &levelInfo] {
+		runLoseScreen(gameScreen.getWindow(), levelInfo);
 		gameScreen.close();
 	});
 
@@ -72,6 +75,19 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 	});
+}
+
+void GameController::runLoseScreen(sf::RenderWindow& window, const LevelInfo& fromLevelInfo)
+{
+	LoseScreen loseScreen(window);
+	loseScreen.getBackToMenuBT()->addClickListener([&loseScreen](GUI::View& v) {
+		loseScreen.close();
+	});
+	loseScreen.getRestartBT()->addClickListener([this, &fromLevelInfo, &loseScreen](GUI::View& v) {
+		runGameScreen(v.getWindow(), fromLevelInfo);
+		loseScreen.close();
+	});
+	loseScreen.run();
 }
 
 void GameController::runEditScreen(sf::RenderWindow& window, LevelFileManager& levelFileManager, const LevelInfo& levelInfo)

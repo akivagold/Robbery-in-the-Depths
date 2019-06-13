@@ -17,8 +17,6 @@ public:
 	static const char CHAR = 's';
 	// constructor
 	explicit Shark(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
-	// event on die
-	virtual void onDie() override;
 	// draw
 	virtual void draw() override;
 	// convert to string
@@ -42,6 +40,8 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
 	virtual void onDirectionChanged() override;
+	// event on die
+	virtual void onDie() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 70;

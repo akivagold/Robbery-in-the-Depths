@@ -7,6 +7,8 @@
 #include "LevelInfo.h"
 #include "LevelFileManager.h"
 #include "ChooseLevelScreen.h"
+#include "LoseScreen.h"
+#include "WinScreen.h"
 
 //---- using section --------
 using std::string;
@@ -30,6 +32,8 @@ private:
 	void runChooseLevelScreen(sf::RenderWindow& window, LevelFileManager& lfm, std::function<void(const LevelInfo&)> onLevelChoosed);
 	// run game screen
 	void runGameScreen(sf::RenderWindow& window, const LevelInfo& levelInfo);
+	// run lose screen
+	void runLoseScreen(sf::RenderWindow& window, const LevelInfo& fromLevelInfo);
 	// run edit screen
 	void runEditScreen(sf::RenderWindow& window, LevelFileManager& levelFileManager, const LevelInfo& levelInfo);
 };

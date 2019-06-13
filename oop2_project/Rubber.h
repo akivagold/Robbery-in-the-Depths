@@ -24,8 +24,6 @@ public:
 	virtual void draw() override;
 	// get gun
 	const std::shared_ptr<Tool>& getTool() const { return m_tool; }
-	// event on die
-	virtual void onDie() override;
 	// convert to string
 	virtual string toString() const override { return "Rubber: { " + NPC::toString() + " }"; }
 	// collide events (using with double dispatch)
@@ -49,6 +47,8 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
 	virtual void onDirectionChanged() override;
+	// event on die
+	virtual void onDie() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 80;

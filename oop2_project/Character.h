@@ -25,8 +25,6 @@ public:
 	bool isDie() const { return m_isDie; }
 	// draw
 	virtual void draw() override;
-	// event on die
-	virtual void onDie();
 	// die (vanish after some time)
 	void die() { setNumOfLife(0); }
 	// convert to string
@@ -47,6 +45,8 @@ protected:
 	explicit Character(GameScreen& gameScreen, int numOfLife = 0);
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
+	// event on die
+	virtual void onDie();
 private:
 	// time before vanish when die
 	static const int DIE_VANISH_TIME = 5000;

@@ -139,6 +139,13 @@ void Player::onDie()
 		m_dieHandler();
 }
 
+void Player::onVanish()
+{
+	Character::onVanish();
+	if (m_vanishHandler)
+		m_vanishHandler();
+}
+
 void Player::onCollide(Shark* shark)
 {
 	if (!isDie() && !isRecover() && !shark->isDie()) {
