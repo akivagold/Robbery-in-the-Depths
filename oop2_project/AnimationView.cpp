@@ -106,7 +106,7 @@ void GUI::AnimationView::rotateAnimation(float relative_degrees)
 	m_sprite.setOrigin(float(y - position_y), -float(x - position_x));
 	// rotate anti clockwise
 	m_sprite.rotate(-relative_degrees);
-	
+
 }*/
 
 void GUI::AnimationView::updateComponents()
@@ -144,3 +144,16 @@ void GUI::AnimationView::updateSprite()
 		m_sprite.setScale(scaleX, scaleY);
 	}
 }
+
+/* an other option for rotate
+void GUI::AnimationView::rotateViewAt(sf::Vector2f coord, sf::Sprite& sprite, float rotation)
+{
+	const sf::Vector2f offset{ coord - sf::Vector2f(sprite.getPosition() - (sf::Vector2f(sprite.getTexture()->getSize())/2.f)) };
+	const float rotationInRadians{ rotation * 3.141592653f / 180.f };
+	const float sine{ std::sin(rotationInRadians) }; 
+	const float cosine{ std::cos(rotationInRadians) }; 
+	const sf::Vector2f rotatedOffset{ cosine * offset.x - sine * offset.y, sine * offset.x + cosine * offset.y };
+	sprite.rotate(rotation);
+	sprite.move(offset - rotatedOffset);
+}
+*/
