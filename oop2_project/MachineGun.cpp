@@ -28,7 +28,7 @@ void MachineGun::init()
 {
 	setDrawPriority(DRAW_PRIORITY);
 	setSize(getDefaultSize());
-	
+
 	// set default weapon
 	auto defWeapon = std::make_shared<AK47>(this);
 	defWeapon->setInfLimit();
@@ -43,11 +43,17 @@ void MachineGun::init()
 	else if (getDirection() == Direction::DOWN)
 		setAnimation("machine_gun_down");
 
-	int changeDirectionTime = 1000 + rand() % 1500;
-	m_time.start(changeDirectionTime, [this] {
-		float distanceFromPlayer = getRadiusFromPlayer();
-		// fire
-		if(distanceFromPlayer < RADIUS_SHOT)
-			getGun()->useTool();
+	int shootingTempo = 100 + rand() % 150;
+	m_time.start(shootingTempo, [this] {
+		if (shootingPauseClock.getElapsedTime().asSeconds() < SHOOTING_PAUSE_SECONDS) {
+			float distanceFromPlayer = getRadiusFromPlayer();
+			// fire
+			if (distanceFromPlayer < RADIUS_SHOT)
+				getGun()->useTool();	
+		}
+	
+		if (shootingPauseClock.getElapsedTime().asSeconds() > SHOOTING_PAUSE_SECONDS * 2) {
+			shootingPauseClock.restart();
+		}
 	});
 }

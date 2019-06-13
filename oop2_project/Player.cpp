@@ -132,6 +132,13 @@ void Player::decreaseLife(int numOfLife)
 	}
 }
 
+void Player::onDie()
+{
+	Character::onDie();
+	if (m_dieHandler)
+		m_dieHandler();
+}
+
 void Player::onCollide(Shark* shark)
 {
 	if (!isDie() && !isRecover() && !shark->isDie()) {
