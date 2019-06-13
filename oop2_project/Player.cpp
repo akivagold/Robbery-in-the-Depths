@@ -88,7 +88,7 @@ void Player::setNumOfLife(int numOfLife)
 	Character::setNumOfLife(numOfLife);
 
 	// update game menu
-	getGameScreen().getGameMenu()->getLifeView()->setLife(numOfLife);
+	getGameScreen().getGameMenu()->getLifeView()->setNumOfLife(numOfLife);
 }
 
 void Player::onDirectionChanged()
@@ -161,7 +161,7 @@ void Player::onCollide(Flow* flow)
 void Player::onCollide(Bullet* bullet)
 {
 	if (bullet->getMyOwner() != this) {
-		if (!isDie()) {
+		if (!isDie() && !bullet->isInShotTime()) {
 			if(!isRecover())
 				decreaseLife(bullet->getDamage());
 			bullet->explode();
@@ -172,7 +172,7 @@ void Player::onCollide(Bullet* bullet)
 void Player::onCollide(Grenade* grenade)
 {
 	if (grenade->getMyOwner() != this) {
-		if (!isDie()) {
+		if (!isDie() && !grenade->isInShotTime()) {
 			if (!isRecover())
 				decreaseLife(grenade->getDamage());
 			grenade->explode();

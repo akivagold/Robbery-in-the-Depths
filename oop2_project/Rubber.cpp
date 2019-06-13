@@ -60,7 +60,7 @@ void Rubber::onCollide(Bullet* bullet)
 	if (isDie())
 		return;
 
-	if (bullet->getMyOwner() != this) {
+	if ((bullet->getMyOwner() != this) && !bullet->isInShotTime()) {
 		decreaseLife(bullet->getDamage());
 		bullet->explode();
 	}
@@ -68,7 +68,7 @@ void Rubber::onCollide(Bullet* bullet)
 
 void Rubber::onCollide(Grenade* grenade)
 {
-	if (!isDie()) {
+	if (!isDie() && !grenade->isInShotTime()) {
 		decreaseLife(grenade->getDamage());
 		grenade->explode();
 	}

@@ -5,6 +5,7 @@
 #include "BODS.h"
 #include "LevelInfo.h"
 #include "GameCamera.h"
+#include <iostream>
 class GameScreen;
 
 //---- using section --------
@@ -46,5 +47,6 @@ private:
 	BODS m_bods;
 	// init
 	void init();
+	std::unique_ptr <GameCamera> m_gameCamera;
 };
 

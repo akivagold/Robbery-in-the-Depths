@@ -1,10 +1,10 @@
 #include "GameObjectsList.h"
 #include "GOIFileParser.h"
 
-GameObjectsList::GameObjectsList(sf::RenderWindow& window)
+GameObjectsList::GameObjectsList(sf::RenderWindow& window, const std::vector<GameObjectInfo>& gois)
 	: BaseClass(window)
 {
-	initComponents();
+	initComponents(gois);
 }
 
 void GameObjectsList::addGOVClickListener(std::function<void(const std::shared_ptr<GameObjectView>&)> onGOVClicked)
@@ -21,15 +21,12 @@ string GameObjectsList::toString() const
 	return "GameObjectsList: { " + BaseClass::toString() + " }";
 }
 
-void GameObjectsList::initComponents()
+void GameObjectsList::initComponents(const std::vector<GameObjectInfo>& gois)
 {
 	getBackground().setColor(sf::Color(235, 255, 247));
 
-	// read list of game object info from file
-	std::vector<GameObjectInfo> gois = GOIFileParser::parseGOIFile();
-
 	// add game object views
-	for (GameObjectInfo& goi : gois) {
+	for (const GameObjectInfo& goi : gois) {
 		// create GameObjectView
 		std::shared_ptr<GameObjectView> gov = std::make_shared<GameObjectView>(getWindow());
 		gov->setGOI(goi);

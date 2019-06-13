@@ -21,7 +21,7 @@ void GameMenu::initComponents()
 	getBorder().setSize(2);
 	getBorder().setColor(sf::Color::Black);
 	addView(m_coinView, 0.1f);
-	m_lifeView->setLife(3);
+	m_lifeView->setNumOfLife(3);
 	addView(m_lifeView, 0.5f);
 	m_levelNumTV->setText("Level num 1");
 	m_levelNumTV->setTextSize(30);

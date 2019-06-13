@@ -3,6 +3,7 @@
 #include "View.h"
 #include "HorizontalLayout.h"
 #include "ImageView.h"
+#include "Character.h"
 
 /*
  * LifeView class
@@ -13,8 +14,6 @@ class LifeView
 public:
 	// constructor
 	explicit LifeView(sf::RenderWindow& window, int numOfLife = 0);
-	// set life
-	void setLife(int numOflife);
 	// set num of life
 	void setNumOfLife(int numOfLife);
 	// get num of life
@@ -22,12 +21,13 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
+	// set life
+	void setLife(int numOflife);
 	// num of life
 	int m_numOfLife;
-	// create life image
-	std::shared_ptr<GUI::ImageView> createLifeImage();
 	// check if num  of life is legal
 	void checkLegalLife(int numOfLife) const;
 	// init
 	void init();
+	std::shared_ptr<GUI::ImageView> m_barFullPart, m_barEmptyPart;
 };

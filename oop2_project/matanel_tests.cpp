@@ -280,9 +280,9 @@ void testWorld() {
 		} break;
 		case sf::Keyboard::M: {
 			std::shared_ptr<MachineGun> mg = std::make_shared<MachineGun>(gameScreen, MachineGun::Direction::RIGHT);
-			//auto gl = std::make_shared<GrenadeLauncher>(mg.get());
-			//gl->setInfLimit();
-			//mg->setWeapon(gl);
+			auto gl = std::make_shared<GrenadeLauncher>(mg.get());
+			gl->setInfLimit();
+			mg->setWeapon(gl);
 			mg->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(mg);
 		} break;
@@ -304,7 +304,6 @@ void testWorld() {
 	gameScreen.getWorld().getCamera().zoom(1.5f);
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
-		gameScreen.getWorld().getCamera().setCenter(player->getCenter());
 	});
 }
 
@@ -434,7 +433,7 @@ void testBox2DLib() {
 
 
 void testGameObjectView() {
-	
+	/*
 
 	// create window
 	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
@@ -470,7 +469,7 @@ void testGameObjectView() {
 		window.clear();
 		mainLayout.draw();
 		window.display();
-	}
+	}*/
 }
 
 void testGameObjectInfo() {

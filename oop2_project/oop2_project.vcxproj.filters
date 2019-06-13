@@ -267,12 +267,6 @@
     <ClCompile Include="GameCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ChaserEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h">
@@ -543,12 +537,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameCamera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChaserEnemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

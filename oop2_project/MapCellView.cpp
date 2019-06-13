@@ -7,16 +7,15 @@
 #include "Rubber.h"
 #include "MachineGun.h"
 #include "ParseLevelException.h"
+#include "Box.h"
 
-MapCellView::MapCellView(sf::RenderWindow& window, char ch)
-	: GUI::ImageView(window)
-{ 
-	setChar(ch);
-}
+MapCellView::MapCellView(sf::RenderWindow& window)
+	: GUI::ImageView(window), m_ch(' ')
+{ }
 
-void MapCellView::setChar(char ch)
+void MapCellView::setChar(const std::vector<GameObjectInfo>& gois, char ch)
 {
-	updateImage(ch);
+	updateImage(gois, ch);
 	m_ch = ch;
 }
 
@@ -25,44 +24,15 @@ string MapCellView::toString() const
 	return "MapCellView: { char=" + string(1, m_ch) + ", " + GUI::ImageView::toString() + " }";
 }
 
-void MapCellView::updateImage(char ch)
+void MapCellView::updateImage(const std::vector<GameObjectInfo>& gois, char ch)
 {
-	switch (ch)
-	{
-		case ' ': {
-			getImage().setColor(sf::Color::Transparent);
-		} break;
-		case Player::CHAR: {
-			getImage().setTexture("diver");
-		} break;
-		case Crab::CHAR: {
-			getImage().setTexture("crab");
-		} break;
-		case Wall::CHAR: {
-			getImage().setTexture("wall");
-		} break;
-		case Chest::CHAR: {
-			getImage().setTexture("chest");
-		} break;
-		case Rubber::CHAR: {
-			getImage().setTexture("rubber");
-		} break;
-		case Shark::CHAR: {
-			getImage().setTexture("shark");
-		} break;
-		case MachineGun::CHAR_DOWN_MG: {
-			getImage().setTexture("machine_gun_down");
-		} break;
-		case MachineGun::CHAR_LEFT_MG: {
-			getImage().setTexture("machine_gun_left");
-		} break;
-		case MachineGun::CHAR_RIGHT_MG: {
-			getImage().setTexture("machine_gun_right");
-		} break;
-		case MachineGun::CHAR_UP_MG: {
-			getImage().setTexture("machine_gun_up");
-		} break;
-		default:
-			throw ParseLevelException("Cannot parse board object with char=" + string(1, ch));
-		}
+	if(ch == ' ')
+		getImage().setColor(sf::Color::Transparent);
+	else {
+		auto it = std::find_if(gois.cbegin(), gois.cend(), [ch](const GameObjectInfo& goi) { return goi.getSpecialChar() == ch; });
+		if (it == gois.cend())
+			throw ParseLevelException("Cannot find board object with char=" + string(1, ch));
+		const GameObjectInfo& goi = *it;
+		getImage().setTexture(goi.getName());
+	}
 }

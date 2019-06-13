@@ -9,8 +9,8 @@ sf::Vector2f MovingObject::getFriction() const
 	sf::Vector2f friction;
 	//TODO add external acc(?)
 
-	friction.x = m_speed.x / (m_maxSpeed.x);// + m_externalMaxSpeed.x);
-	friction.y = m_speed.y / (m_maxSpeed.y);// + m_externalMaxSpeed.y);
+	friction.x = m_speed.x / (m_maxSpeed.x);
+	friction.y = m_speed.y / (m_maxSpeed.y);
 	return friction;
 }
 
@@ -18,7 +18,7 @@ void MovingObject::floatEffect()
 {
 	sf::Int32 elapsedTime = m_floatEffectClock.getElapsedTime().asMilliseconds();
 
-	if (elapsedTime - m_lastFloatEffectClock > 1000) {
+	if (elapsedTime - m_lastFloatEffectClock > 2500) {
 		upLastFloatEffect = !upLastFloatEffect;
 		m_lastFloatEffectClock = elapsedTime;
 		if (upLastFloatEffect) {

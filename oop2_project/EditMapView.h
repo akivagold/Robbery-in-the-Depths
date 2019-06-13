@@ -19,7 +19,7 @@ public:
 	// edit mode
 	enum EditMode { Add, Remove, None };
 	// constructor
-	explicit EditMapView(sf::RenderWindow& window);
+	explicit EditMapView(sf::RenderWindow& window, const std::vector<GameObjectInfo>& gois);
 	// import level info
 	void importLevelInfo(const LevelInfo& levelInfo);
 	// set edit mode
@@ -57,6 +57,8 @@ private:
 	EditMode m_editMode;
 	// add char
 	char m_addChar;
+	// game objects list
+	const std::vector<GameObjectInfo>& m_gois;
 	// convert camera action to string
 	static string cameraActToStr(CameraAction cameraAct);
 	// initialize components

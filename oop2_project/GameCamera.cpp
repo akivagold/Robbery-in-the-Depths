@@ -1,8 +1,9 @@
 #include "GameCamera.h"
 #include "World.h"
 
-GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player, sf::Clock & clock)
-	:m_world(world), m_player(player), m_clock(clock)
+
+GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player)
+	:m_world(world), m_player(player)
 {
 }
 
@@ -18,7 +19,7 @@ void GameCamera::updateCamera()
 	sf::Vector2f worldPos = m_world->getPosition();
 
 	// update x axis
-	m_world->getCamera().move(sf::Vector2f(elapsedTime * (playerPos.x - cameraCenter.x) / 50, 0.f));
+	m_world->getCamera().move(sf::Vector2f(elapsedTime * (playerPos.x - cameraCenter.x) / 75, 0.f));
 	cameraCenter = m_world->getCamera().getCenter();
 	cameraPos = cameraCenter - (cameraSize / 2.f);
 	//check if update is OK
@@ -30,7 +31,7 @@ void GameCamera::updateCamera()
 	}
 
 	// update y axis
-	m_world->getCamera().move(sf::Vector2f(0.f, elapsedTime * (playerPos.y - cameraCenter.y) / 25));
+	m_world->getCamera().move(sf::Vector2f(0.f, elapsedTime * (playerPos.y - cameraCenter.y) / 50));
 	cameraCenter = m_world->getCamera().getCenter();
 	cameraPos = cameraCenter - (cameraSize / 2.f);
 	//check if update is OK

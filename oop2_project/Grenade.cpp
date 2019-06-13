@@ -15,6 +15,7 @@ Grenade::Grenade(GameScreen& gameScreen, Character* owner, float upAmplitude)
 
 void Grenade::onJoinedGame()
 {
+	Projectile::onJoinedGame();
 	GUI::SoundManager::getInterface().playSound("gl_fire");
 }
 
@@ -25,7 +26,7 @@ void Grenade::explode()
 	// create explosion
 	std::shared_ptr<Explosion> explosion = std::make_shared<Explosion>(getGameScreen());
 	sf::Vector2f myCenter = getCenter();
-	explosion->setPosition(myCenter.x - explosion->getSize().x/2.f, myCenter.y - explosion->getSize().y / 2.f);
+	explosion->setPosition(myCenter.x - explosion->getSize().x / 2.f, myCenter.y - explosion->getSize().y / 2.f);
 	getGameScreen().getWorld().getBODS().requestAddBO(explosion);
 }
 
