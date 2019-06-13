@@ -58,12 +58,16 @@ private:
 	static const int DRAW_PRIORITY = 7;
 	// default number of life
 	static const int DEFAULT_LIFE = INT_MAX;
+	// shooting pause seconds
+	static const int SHOOTING_PAUSE_SECONDS= 2;
 	// radius shot
 	static const float RADIUS_SHOT;
 	// gun
 	std::shared_ptr<HotWeapon> m_gun;
 	// timer
 	Timer m_time;
+	// shooting pause clock
+	sf::Clock shootingPauseClock;
 	// init
 	void init();
 	// register flags in BOFactory
