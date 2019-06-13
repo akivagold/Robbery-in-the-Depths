@@ -509,14 +509,14 @@ void testLevelFileManager() {
 
 
 	// create level
-	LevelInfo li;
+	/*LevelInfo li;
 	li.getLevelChars().resize(40, 50);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
 	li.setName("The Shark Territory");
 	li.setIndex(4);
-	lfm.addLevel(li);
+	lfm.addLevel(li);*/
 
 	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);

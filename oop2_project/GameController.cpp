@@ -60,6 +60,9 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	// load level info
 	gameScreen.loadLevel(levelInfo);
 
+	// play level music
+	GUI::SoundManager::getInterface().playBackgroundMusic(levelInfo.getBackMusicName());
+
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
