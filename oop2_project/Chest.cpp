@@ -16,7 +16,7 @@ void Chest::pickup(Player* owner)
 {
 	Container::pickup(owner);
 
-	GUI::SoundManager::getInterface().playSound("open_chest");
+	playSound("open_chest");
 
 	setAnimation("open_chest_anim");
 	setAnimationFrequency(50);

@@ -80,6 +80,7 @@ void akiva_main()
 	std::cout << "Hello Akiva World!\n";
 	// initialize random seed
 	srand(unsigned(time(NULL)));
+	GUI::SoundManager::getInterface();
 	try
 	{
 		testWorld();
@@ -262,6 +263,7 @@ void testWorld() {
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(0.00025f, 0.f));
+			flow->getBorder().setSize(3);
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		case sf::Keyboard::G: {
@@ -269,6 +271,7 @@ void testWorld() {
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(-0.00025f, 0.f));
+			flow->getBorder().setSize(3);
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		case sf::Keyboard::H: {
@@ -276,6 +279,7 @@ void testWorld() {
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(0.f, 0.00025f));
+			flow->getBorder().setSize(3);
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		case sf::Keyboard::J: {
@@ -283,6 +287,7 @@ void testWorld() {
 			flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);
 			flow->setPosition(mousePos);
 			flow->setFlow(sf::Vector2f(0.f, -0.00025f));
+			flow->getBorder().setSize(3);
 			gameScreen.getWorld().getBODS().requestAddBO(flow);
 		} break;
 		case sf::Keyboard::R: {

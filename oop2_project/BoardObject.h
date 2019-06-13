@@ -90,7 +90,13 @@ protected:
 	virtual void updateComponents() override;
 	// constructor
 	explicit BoardObject(GameScreen& gameScreen, int drawPriority = 0);
+	// play sound
+	void playSound(const string& name, float pitch = 1.f);
+	// get radius from player
+	float getRadiusFromPlayer() const;
 private:
+	// maximum hearing sound cells
+	static const int MAX_HEAR_SOUND_CELLS = 20;
 	// flag that check if object in game
 	bool m_inGame;
 	// draw priority

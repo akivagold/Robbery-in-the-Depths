@@ -98,6 +98,7 @@ void matanel_main()
     std::cout << "Hello Matanel World!\n";
 	// initialize random seed
 	srand(unsigned (time(NULL)));
+	GUI::SoundManager::getInterface();
 	try
 	{
 		//testBOFactory();
@@ -199,7 +200,7 @@ void testWorld() {
 
 	// load level info
 	LevelFileManager lfm;
-	const LevelInfo& levelInfo = lfm.getLevel("matanel map");
+	const LevelInfo& levelInfo = lfm.getLevel("The Shark Territory");
 	gameScreen.loadLevel(levelInfo);
 
 	// get player
@@ -290,6 +291,9 @@ void testWorld() {
 			std::shared_ptr<Box> box = std::make_shared<Box>(gameScreen);
 			box->setPosition(mousePos);
 			gameScreen.getWorld().getBODS().requestAddBO(box);
+		} break;
+		case sf::Keyboard::LControl: {
+			player->setNumOfLife(Player::getMaxLife());
 		} break;
 		}
 	});
@@ -505,14 +509,14 @@ void testLevelFileManager() {
 
 
 	// create level
-	/*LevelInfo li;
+	LevelInfo li;
 	li.getLevelChars().resize(40, 50);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
-	li.setName("small map");
+	li.setName("The Shark Territory");
 	li.setIndex(4);
-	lfm.addLevel(li);*/
+	lfm.addLevel(li);
 
 	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
 		const LevelInfo& levelInfo = lfm.getLevel(i);

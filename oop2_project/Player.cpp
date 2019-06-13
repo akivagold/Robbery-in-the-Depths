@@ -73,7 +73,7 @@ void Player::switchToNextTool()
 			nextToolIndex = currentToolIndex + 1;
 		auto& nextTool = m_tools[nextToolIndex];
 		changeTool(nextTool);
-		GUI::SoundManager::getInterface().playSound("change_tool");
+		playSound("change_tool");
 	}
 }
 
@@ -112,7 +112,7 @@ void Player::useCurrTool()
 			m_currTool->useTool();
 		}
 		else {
-			GUI::SoundManager::getInterface().playSound("no_ammo");
+			playSound("no_ammo");
 		}
 	}
 }
@@ -127,7 +127,7 @@ void Player::decreaseLife(int numOfLife)
 {
 	Character::decreaseLife(numOfLife);
 	if (numOfLife > 0) {
-		// TODO play sound
+		GUI::SoundManager::getInterface().playSound("player_hurt");
 		recover();
 	}
 }
@@ -136,6 +136,7 @@ void Player::onCollide(Shark* shark)
 {
 	if (!isDie() && !isRecover() && !shark->isDie()) {
 		decreaseLife(shark->getDamage());
+		GUI::SoundManager::getInterface().playSound("bite_sound");
 	}
 }
 

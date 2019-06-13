@@ -184,6 +184,22 @@
         {
             "name": "box",
             "path": "box.png"
+        },
+        {
+            "name": "flow_right",
+            "path": "flow_right.png"
+        },
+        {
+            "name": "flow_left",
+            "path": "flow_left.png"
+        },
+        {
+            "name": "flow_up",
+            "path": "flow_up.png"
+        },
+        {
+            "name": "flow_down",
+            "path": "flow_down.png"
         }
     ]
 }

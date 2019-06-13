@@ -45,6 +45,8 @@ public:
 protected:
 	// update components
 	virtual void updateComponents();
+	// TODO fix:	void rotateViewAt(sf::Vector2f coord, sf::Sprite & sprite, float rotation);
+	sf::Sprite& getSprite() { return m_sprite; }
 private:
 	// current sprite
 	sf::Sprite m_sprite;
