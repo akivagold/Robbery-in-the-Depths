@@ -168,6 +168,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ChaserEnemy.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="ChooseLevelScreen.cpp" />
     <ClCompile Include="CoinGift.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="EditMenu.cpp" />
     <ClCompile Include="EditScreen.cpp" />
     <ClCompile Include="EditText.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Flow.cpp" />
@@ -254,6 +256,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="ChaserEnemy.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="ChooseLevelScreen.h" />
     <ClInclude Include="CoinGift.h" />
@@ -264,6 +267,7 @@
     <ClInclude Include="EditMenu.h" />
     <ClInclude Include="EditScreen.h" />
     <ClInclude Include="EditText.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="ErrorDialog.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Flow.h" />
