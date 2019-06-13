@@ -51,12 +51,16 @@ private:
 	static const int DAMAGE = 2;
 	// register flag in BOFactory
 	static bool isRegistered;
-	// radius attack
-	float m_radiusAttack;
-	// timer
-	Timer m_time;
-	// flag that check if shark in chase
-	bool m_inChase;
+	// radius attak
+	static const float RADIUS_ATTACK;
+	// thinking time
+	Timer m_thinkingTime;
+	// flag that check if he is in thinking state
+	bool m_isInThinking;
+	// flag that check if he is in radius from player
+	bool m_isInRadiusFromPlayer;
+	// play when inside radius from player
+	void inRadiusFromPlayer();
 	// init
 	void init();
 	// get shark size

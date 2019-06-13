@@ -23,6 +23,10 @@ public:
 	static Direction getRandomDownDirections();
 	// get ranodm left directions
 	static Direction getRandomLeftDirections();
+	// set new direction after collid
+	void setDirectionAfterCollid(Direction direction);
+	// go by direction	
+	void goByDirection(Direction direction);
 	// get radius from player
 	float getRadiusFromPlayer() const;
 protected:

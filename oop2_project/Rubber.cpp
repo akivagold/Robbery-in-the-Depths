@@ -92,57 +92,16 @@ void Rubber::playChoice(Direction lastDirection, bool isCollided)
 
 	if (isCollided) {
 		m_isInthinking = true;
-		if (isUpDirections(lastDirection))
-			setDirection(getRandomDownDirections());
-		else if (isDownDirections(lastDirection))
-			setDirection(getRandomUPDirections());
-		else if (isRightDirections(lastDirection))
-			setDirection(getRandomLeftDirections());
-		else
-			setDirection(getRandomRightDirections());
+		setDirectionAfterCollid(lastDirection);
 	}
 	
-	
-	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
 	float distanceFromPlayer = getRadiusFromPlayer();
 	if (distanceFromPlayer <= RADIUS_ATTACK && !m_isInthinking) {
 		inRadiusFromPlayer();
 	}
 	else {
 		m_isInRadiusfromPlayer = false;
-		float offset = 0.00025f;
-		Direction direct = getDirection();
-		switch (direct)
-		{
-		case Direction::UP: {
-			getInteralAcceleration().y = -offset;
-		} break;
-		case Direction::UP_RIGHT: {
-			getInteralAcceleration().y = -offset;
-			getInteralAcceleration().x = offset;
-		} break;
-		case Direction::RIGHT: {
-			getInteralAcceleration().x = offset;
-		} break;
-		case Direction::DOWN_RIGHT: {
-			getInteralAcceleration().y = offset;
-			getInteralAcceleration().x = offset;
-		} break;
-		case Direction::DOWN: {
-			getInteralAcceleration().y = offset;
-		} break;
-		case Direction::DOWN_LEFT: {
-			getInteralAcceleration().y = offset;
-			getInteralAcceleration().x = -offset;
-		} break;
-		case Direction::LEFT: {
-			getInteralAcceleration().y = offset;
-		} break;
-		case Direction::UP_LEFT: {
-			getInteralAcceleration().y = -offset;
-			getInteralAcceleration().x = -offset;
-		} break;
-		}
+		goByDirection(getDirection());
 	}
 }
 
@@ -155,13 +114,11 @@ void Rubber::init()
 	setDirection(getRandomDirect());
 
 	int changeDirectionTime = 1000 + rand() % 2000;
+
+	// time for shot
 	m_time.start(changeDirectionTime, [this] {
 		if (isDie())
 			return;
-
-		// rand direction
-		//if (!m_isInRadiusfromPlayer)
-		//	setDirection(getRandomDirect());
 		
 		// fire
 		if (m_isInShot) {
@@ -169,6 +126,8 @@ void Rubber::init()
 			m_isInShot = false;
 		}
 	});
+
+	// time for think
 	m_thinkingTime.start(3000, [this] {
 		if (m_isInthinking)
 			m_isInthinking = false;

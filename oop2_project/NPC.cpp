@@ -37,6 +37,54 @@ MovingObject::Direction NPC::getRandomLeftDirections()
 	return direct;
 }
 
+void NPC::setDirectionAfterCollid(Direction direction)
+{
+	if (isUpDirections(direction))
+		setDirection(getRandomDownDirections());
+	else if (isDownDirections(direction))
+		setDirection(getRandomUPDirections());
+	else if (isRightDirections(direction))
+		setDirection(getRandomLeftDirections());
+	else
+		setDirection(getRandomRightDirections());
+}
+
+void NPC::goByDirection(Direction direction)
+{
+	float offset = 0.00025f;
+	switch (direction)
+	{
+		case Direction::UP: {
+			getInteralAcceleration().y = -offset;
+		} break;
+		case Direction::UP_RIGHT: {
+			getInteralAcceleration().y = -offset;
+			getInteralAcceleration().x = offset;
+		} break;
+		case Direction::RIGHT: {
+			getInteralAcceleration().x = offset;
+		} break;
+		case Direction::DOWN_RIGHT: {
+			getInteralAcceleration().y = offset;
+			getInteralAcceleration().x = offset;
+		} break;
+		case Direction::DOWN: {
+			getInteralAcceleration().y = offset;
+		} break;
+		case Direction::DOWN_LEFT: {
+			getInteralAcceleration().y = offset;
+			getInteralAcceleration().x = -offset;
+		} break;
+		case Direction::LEFT: {
+			getInteralAcceleration().y = offset;
+		} break;
+		case Direction::UP_LEFT: {
+			getInteralAcceleration().y = -offset;
+			getInteralAcceleration().x = -offset;
+		} break;
+	}
+}
+
 float NPC::getRadiusFromPlayer() const
 {
 	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());

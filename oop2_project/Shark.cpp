@@ -9,8 +9,11 @@
 // register
 bool Shark::isRegistered = BOFactory::getInterface().registerIn(Shark::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Shark>(gameScreen); });
 
+// init
+const float Shark::RADIUS_ATTACK = static_cast<float>(BoardObject::getDefaultSize().x)*5.f;
+
 Shark::Shark(GameScreen& gameScreen, int numOfLife)
-	: NPC(gameScreen, numOfLife)
+	: NPC(gameScreen, numOfLife), m_isInThinking(false), m_isInRadiusFromPlayer(false)
 {
 	init();
 }
@@ -39,7 +42,7 @@ void Shark::onDie()
 void Shark::draw()
 {
 	NPC::draw();
-	m_time.checkTimer();
+	m_thinkingTime.checkTimer();
 }
 
 void Shark::onCollide(Flow* flow)
@@ -81,64 +84,32 @@ void Shark::playChoice(Direction lastDirection, bool isCollided)
 		return;
 
 	if (isCollided) {
-		if (isUpDirections(lastDirection))
-			setDirection(getRandomDownDirections());
-		else if (isDownDirections(lastDirection))
-			setDirection(getRandomUPDirections());
-		else if (isRightDirections(lastDirection))
-			setDirection(getRandomLeftDirections());
-		else
-			setDirection(getRandomRightDirections());
+		m_isInThinking = true;
+		setDirectionAfterCollid(lastDirection);
 	}
-	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
-	float distanceFromPlayer = getDistance(player);
-	if (distanceFromPlayer <= m_radiusAttack) {
-		m_inChase = true;
-		sf::Vector2f direction = getPosition() - player->getPosition();
-		getInteralAcceleration().x = -direction.x*0.0000025f;
-		getInteralAcceleration().y = -direction.y*0.0000025f;
-		if (getPosition().x < player->getPosition().x) {
-			setDirection(Direction::RIGHT);
-		}
-		else
-			setDirection(Direction::LEFT);
+
+	float distanceFromPlayer = getRadiusFromPlayer();
+	if (distanceFromPlayer <= RADIUS_ATTACK && !m_isInThinking) {
+		inRadiusFromPlayer();
 	}
 	else{
-		m_inChase = false;
-		float offset = 0.00025f;
-		Direction direct = getDirection();
-		switch (direct)
-		{
-			case Direction::UP: {
-				getInteralAcceleration().y = -offset;
-			} break;
-			case Direction::UP_RIGHT: {
-				getInteralAcceleration().y = -offset;
-				getInteralAcceleration().x = offset;
-			} break;
-			case Direction::RIGHT: {
-				getInteralAcceleration().x = offset;
-			} break;
-			case Direction::DOWN_RIGHT: {
-				getInteralAcceleration().y = offset;
-				getInteralAcceleration().x = offset;
-			} break;
-			case Direction::DOWN: {
-				getInteralAcceleration().y = offset;
-			} break;
-			case Direction::DOWN_LEFT: {
-				getInteralAcceleration().y = offset;
-				getInteralAcceleration().x = -offset;
-			} break;
-			case Direction::LEFT: {
-				getInteralAcceleration().y = offset;
-			} break;
-			case Direction::UP_LEFT: {
-				getInteralAcceleration().y = -offset;
-				getInteralAcceleration().x = -offset;
-			} break;
-		}
+		m_isInRadiusFromPlayer = false;
+		goByDirection(getDirection());
 	}
+}
+
+void Shark::inRadiusFromPlayer()
+{
+	m_isInRadiusFromPlayer = true;
+	std::shared_ptr<Player> player = getGameScreen().getWorld().getBODS().getPlayer();
+	sf::Vector2f direction = getPosition() - player->getPosition();
+	getInteralAcceleration().x = -direction.x*0.0000025f;
+	getInteralAcceleration().y = -direction.y*0.0000025f;
+	if (getPosition().x < player->getPosition().x) {
+		setDirection(Direction::RIGHT);
+	}
+	else
+		setDirection(Direction::LEFT);
 }
 
 void Shark::init()
@@ -148,14 +119,11 @@ void Shark::init()
 	setDamage(DAMAGE);
 	setSize(getSharkSize());
 	setDrawPriority(DRAW_PRIORITY);
-
-	m_radiusAttack = 5.f*getSize().x;
 	setDirection(getRandomDirect());
-	m_inChase = false;
-	m_time.start(3000, [this] {
-		if (!m_inChase) {
-			setDirection(getRandomDirect());
-		}
+
+	m_thinkingTime.start(3000, [this] {
+		if (m_isInThinking)
+			m_isInThinking = false;
 	});
 }
 
