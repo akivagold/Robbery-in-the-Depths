@@ -127,7 +127,7 @@ void Player::decreaseLife(int numOfLife)
 {
 	Character::decreaseLife(numOfLife);
 	if (numOfLife > 0) {
-		// TODO play sound
+		GUI::SoundManager::getInterface().playSound("player_hurt");
 		recover();
 	}
 }
@@ -136,6 +136,7 @@ void Player::onCollide(Shark* shark)
 {
 	if (!isDie() && !isRecover() && !shark->isDie()) {
 		decreaseLife(shark->getDamage());
+		GUI::SoundManager::getInterface().playSound("bite_sound");
 	}
 }
 
