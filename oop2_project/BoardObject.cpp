@@ -145,3 +145,4 @@ void BoardObject::init()
 	//getBorder().setSize(1.f);
 	//getBorder().setColor(sf::Color::Black);
 }
+

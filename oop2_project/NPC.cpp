@@ -85,7 +85,3 @@ void NPC::goByDirection(Direction direction)
 	}
 }
 
-float NPC::getRadiusFromPlayer() const
-{
-	return getDistance(getGameScreen().getWorld().getBODS().getPlayer());
-}
