@@ -27,8 +27,6 @@ public:
 	void setDirectionAfterCollid(Direction direction);
 	// go by direction	
 	void goByDirection(Direction direction);
-	// get radius from player
-	float getRadiusFromPlayer() const;
 protected:
 	// constructor
 	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);
