@@ -20,7 +20,7 @@ void Character::setNumOfLife(int numOfLife)
 		throw std::out_of_range("Num of life " + std::to_string(numOfLife) + " is illegal");
 	if (isDie())
 		throw std::logic_error("The " + toString() + " already die. only god able to resurrection");
-	if (!(numOfLife > MAX_LIFE)) {
+	if (!(numOfLife > getMaxLife())) {
 		m_numOfLife = numOfLife;
 	}
 	if (numOfLife == 0) {
@@ -55,6 +55,12 @@ bool Character::isDownDirections(Direction direct)
 bool Character::isLeftDirections(Direction direct)
 {
 	return (direct == Direction::LEFT || direct == Direction::DOWN_LEFT || direct == Direction::UP_LEFT);
+}
+
+const int Character::getMaxLife()
+{
+	static const int MAX_LIFE = 20;
+	return MAX_LIFE;
 }
 
 void Character::draw()

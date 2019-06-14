@@ -33,6 +33,8 @@ public:
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 	virtual void onCollide(Box* box) override {}  // TODO use this
 	virtual void onCollide(ExitLevel* exitLevel) override {} // TODO use this
+	// convert to string
+	virtual string toString() const override { return "ExitLevel: { " + StaticObject::toString() + " }"; }
 private:
 	// char
 	static const char CHAR = 'e';

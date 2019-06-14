@@ -42,6 +42,8 @@ public:
 	virtual void onCollide(Explosion* explosion) override {}
 	virtual void onCollide(Box* box) override {}
 	virtual void onCollide(ExitLevel* exitLevel) override {}
+	// convert to string
+	virtual string toString() const override { return "Box: { " + StaticObject::toString() + " }"; }
 private:
 	// char
 	static const char CHAR = 'b';

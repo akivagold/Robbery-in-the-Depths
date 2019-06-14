@@ -39,7 +39,8 @@ public:
 	static bool isDownDirections(Direction direct);
 	// check if is left directions
 	static bool isLeftDirections(Direction direct);
-	static const int getMaxLife() { return MAX_LIFE; }
+	// get maximum life
+	static const int getMaxLife();
 protected:
 	// constructor
 	explicit Character(GameScreen& gameScreen, int numOfLife = 0);
@@ -57,8 +58,7 @@ private:
 	// vanish stopWatch
 	StopWatch m_vanishSW;
 	// disable using suicide. use die instead
-	using MovingObject::suicide;
-	static const int MAX_LIFE = 20;
+	using MovingObject::suicide;	
 };
 
 

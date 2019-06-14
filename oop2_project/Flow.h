@@ -20,10 +20,10 @@ class Flow
 public:
 	// constructor
 	explicit Flow(GameScreen& gameScreen, const sf::Vector2f& flowPower = DEFAULT_POWER);
-	// convert to string
-	virtual string toString() const override { return "Flow: { flowPower: { power=" + std::to_string(m_flowPower.x) + ", angle=" + std::to_string(m_flowPower.y) + " }, " + StaticObject::toString() + " }"; }
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
+	// set flow - power & angle
+	void setFlow(const sf::Vector2f& flow);
 	// get flow power
 	const sf::Vector2f& getFlowPower() const { return m_flowPower; }
 	// collide events (using with double dispatch)
@@ -41,8 +41,8 @@ public:
 	virtual void onCollide(Explosion* explosion) override {}
 	virtual void onCollide(Box* box) override {}
 	virtual void onCollide(ExitLevel* exitLevel) override {}
-	// set flow - power & angle
-	void setFlow(const sf::Vector2f& flow);
+	// convert to string
+	virtual string toString() const override { return "Flow: { flowPower: { power=" + std::to_string(m_flowPower.x) + ", angle=" + std::to_string(m_flowPower.y) + " }, " + StaticObject::toString() + " }"; }
 private:
 	// register flags in BOFactory
 	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
@@ -53,7 +53,7 @@ private:
 	static const char DOWN_CHAR = '6';
 	// draw priority
 	static const int DRAW_PRIORITY = 0;
-	// default power to x/y
+	// default power to x or y
 	static const float XY_DEFAULT_POWER;
 	// default power
 	static const sf::Vector2f DEFAULT_POWER;

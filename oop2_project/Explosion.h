@@ -16,8 +16,6 @@ class Explosion
 public:
 	// constructor
 	explicit Explosion(GameScreen& gameScreen, float power = DEFAULT_POWER);
-	// event when object joined to game
-	virtual void onJoinedGame() override;
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
 	// draw
@@ -26,8 +24,6 @@ public:
 	void setPower(float power) { m_power = power; }
 	// get power
 	float getPower() const { return m_power; }
-	// convert to string
-	virtual string toString() const override { return "Explosion: { " + InteractableObject::toString() + " }"; }
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {} // TODO use this
@@ -43,6 +39,11 @@ public:
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 	virtual void onCollide(Box* box) override {}  // TODO use this
 	virtual void onCollide(ExitLevel* exitLevel) override {} // TODO use this
+	// convert to string
+	virtual string toString() const override { return "Explosion: { " + InteractableObject::toString() + " }"; }
+protected:
+	// event when object joined to game
+	virtual void onJoinedGame() override;
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 150;

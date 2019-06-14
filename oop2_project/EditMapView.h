@@ -47,6 +47,8 @@ private:
 	static const float MOVE_CAM_ANIM;
 	// camera action of editor
 	enum CameraAction { RIGHT, LEFT, UP, DOWN, ZOOM_IN, ZOOM_OUT, NONE };
+	// convert camera action to string
+	static string cameraActToStr(CameraAction cameraAct);
 	// current level info
 	LevelInfo m_levelInfo;
 	// camera movement timer
@@ -59,8 +61,6 @@ private:
 	char m_addChar;
 	// game objects list
 	const std::vector<GameObjectInfo>& m_gois;
-	// convert camera action to string
-	static string cameraActToStr(CameraAction cameraAct);
 	// initialize components
 	void initComponents();
 };

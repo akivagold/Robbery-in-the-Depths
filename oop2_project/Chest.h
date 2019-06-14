@@ -15,8 +15,6 @@ class Chest :
 	public Container
 {
 public:
-	// char
-	static const char CHAR = 'm';
 	// constructor
 	explicit Chest(GameScreen& gameScreen);
 	// check if this object is don't blocking movement
@@ -43,17 +41,19 @@ public:
 	virtual void onCollide(Box* box) override {}  // TODO use this
 	virtual void onCollide(ExitLevel* exitLevel) override {} // TODO use this
 private:
+	// char
+	static const char CHAR = 'm';
 	// draw priority
 	static const int DRAW_PRIORITY = 10;
 	// open chest animation time
 	static const int OPEN_CHEST_ANIM_TIME = 300;
-	// open chest stopWatch
-	StopWatch m_openChestSW;
-	// init
-	void init();
 	// get chest size
 	static const sf::Vector2i& getChestSize();
 	// register flag in BOFactory
 	static bool isRegistered;
+	// open chest stopWatch
+	StopWatch m_openChestSW;
+	// init
+	void init();
 };
 

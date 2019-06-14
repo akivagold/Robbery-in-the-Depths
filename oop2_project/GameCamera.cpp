@@ -1,11 +1,9 @@
 #include "GameCamera.h"
 #include "World.h"
 
-
-GameCamera::GameCamera(World* world, const std::shared_ptr<Player> & player)
+GameCamera::GameCamera(World* world, const std::shared_ptr<Player>& player)
 	:m_world(world), m_player(player)
-{
-}
+{}
 
 void GameCamera::updateCamera()
 {
