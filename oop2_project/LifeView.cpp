@@ -10,7 +10,7 @@ LifeView::LifeView(sf::RenderWindow& window, int numOfLife)
 	setNumOfLife(numOfLife);
 }
 
-void LifeView::setLife(int numOfLife)
+void LifeView::updateLifeParts(int numOfLife)
 {
 	float lifeMissingPrecent, lifeLeftPrecent;
 	lifeMissingPrecent = lifeLeftPrecent = static_cast<float>(numOfLife);
@@ -23,7 +23,6 @@ void LifeView::setLife(int numOfLife)
 	}
 	else {
 		m_barFullPart->getBackground().setColor(sf::Color(255, int(255.f * lifeLeftPrecent * 2.f), 0));
-
 	}
 }
 
@@ -32,7 +31,7 @@ void LifeView::setNumOfLife(int numOfLife)
 	checkLegalLife(numOfLife);
 	if (numOfLife <= Character::getMaxLife()) {
 		m_numOfLife = numOfLife;
-		setLife(numOfLife);
+		updateLifeParts(numOfLife);
 	}
 }
 

@@ -21,13 +21,14 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
-	// set life
-	void setLife(int numOflife);
 	// num of life
 	int m_numOfLife;
+	// parts
+	std::shared_ptr<GUI::ImageView> m_barFullPart, m_barEmptyPart;
 	// check if num  of life is legal
 	void checkLegalLife(int numOfLife) const;
 	// init
 	void init();
-	std::shared_ptr<GUI::ImageView> m_barFullPart, m_barEmptyPart;
+	// update life parts
+	void updateLifeParts(int numOflife);
 };
