@@ -107,6 +107,7 @@ const sf::Vector2i& BoardObject::getDefaultSize()
 
 void BoardObject::vanish()
 {
+	onVanish();
 	getGameScreen().getWorld().getBODS().requestRemoveBO(getSelf());
 }
 

@@ -94,6 +94,8 @@ protected:
 	void playSound(const string& name, float pitch = 1.f);
 	// get radius from player
 	float getRadiusFromPlayer() const;
+	// event on vanish
+	virtual void onVanish() {}
 private:
 	// maximum hearing sound cells
 	static const int MAX_HEAR_SOUND_CELLS = 20;

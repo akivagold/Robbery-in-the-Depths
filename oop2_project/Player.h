@@ -51,10 +51,10 @@ public:
 	virtual void onToolUpdated(Tool* tool) override;
 	// decrease life
 	virtual void decreaseLife(int numOfLife);
-	// event on die
-	virtual void onDie() override;
 	// set on die listener
 	void setOnDieListener(std::function<void()> dieListener) { m_dieHandler = dieListener; }
+	// set on vanish listener
+	void setOnVanishListener(std::function<void()> vanishListener) { m_vanishHandler = vanishListener; }
 	// convert to string
 	virtual string toString() const override;
 	// collide events (using with double dispatch)
@@ -76,6 +76,10 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
 	virtual void onDirectionChanged() override;
+	// event on die
+	virtual void onDie() override;
+	// event on vanish
+	virtual void onVanish() override;
 private:
 	// swim animation frequency
 	static const int SWIM_ANIM_FREQUENCY = 30;
@@ -97,8 +101,8 @@ private:
 	StopWatch m_recoveSW;
 	// recover flag
 	bool m_isRecover;
-	// die event handler
-	std::function<void()> m_dieHandler;
+	// die & vanish event handlers
+	std::function<void()> m_dieHandler, m_vanishHandler;
 	// init
 	void init();
 	// check if player is recover

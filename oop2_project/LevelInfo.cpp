@@ -14,8 +14,9 @@ void LevelInfo::setIndex(int index)
 
 string LevelInfo::toString() const
 {
-	string str = "LevelInfo: { index=" + std::to_string(m_index) + ", name=" + m_name + ", " + m_levelChars.toString();
-	str += ", flows: {\n";
+	string str = "LevelInfo: { index=" + std::to_string(m_index) + ", name=" + m_name + ", " + m_levelChars.toString() + ", backMusicName="
+		         + m_backMusicName + ", ";
+	str += "flows: {\n";
 	for (auto& flow : m_flows) {
 		str += "flow: { power: { x=" + std::to_string(flow.flowPower.x) + ", y=" + std::to_string(flow.flowPower.y) + " }"
 			+ ", startCell=" + flow.m_startCell.toString() + ", endCell=" + flow.m_endCell.toString() + " }\n";
@@ -29,6 +30,7 @@ json LevelInfo::convertToJSON(const LevelInfo& levelInfo)
 	json levelInfoJson;
 	levelInfoJson["index"] = levelInfo.getIndex();
 	levelInfoJson["name"] = levelInfo.getName();
+	levelInfoJson["backMusicName"] = levelInfo.getBackMusicName();
 	levelInfoJson["mapChars"] = convertLevelCharsToStr(levelInfo.getLevelChars());
 	json mapSizeJson;
 	mapSizeJson["rows"] = levelInfo.getLevelChars().getNumOfRows();
@@ -46,6 +48,7 @@ LevelInfo LevelInfo::parse(const json& levelInfoJson)
 	try {		
 		levelInfo.setIndex(levelInfoJson.at("index").get<int>());
 		levelInfo.setName(levelInfoJson.at("name").get<string>());
+		levelInfo.setBackMusicName(levelInfoJson.at("backMusicName").get<string>());
 		const json& mapSizeJson = levelInfoJson.at("mapSize");
 		levelInfo.getLevelChars().resize(mapSizeJson.at("rows").get<int>(), mapSizeJson.at("cols").get<int>());
 		putStrInLevelChars(levelInfoJson.at("mapChars").get<string>(), levelInfo.getLevelChars());

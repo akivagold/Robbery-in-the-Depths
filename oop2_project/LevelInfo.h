@@ -30,12 +30,16 @@ public:
 	int getIndex() const { return m_index; }
 	// set name
 	void setName(const string& name) { m_name = name; }
+	// get name
+	const string& getName() const { return m_name; }
+	// set background music name
+	void setBackMusicName(const string& backMusicName) { m_backMusicName = backMusicName; }
+	// get background music name
+	const string& getBackMusicName() const { return m_backMusicName; }
 	// set flows
 	void setFlows(const std::vector<FlowInfo>& flows) { m_flows = flows; }
 	// get flows
 	const std::vector<FlowInfo>& getFlows() const { return m_flows; }
-	// get name
-	const string& getName() const { return m_name; }
 	// convert to JSON
 	json toJSON() const { return convertToJSON(*this); }
 	// convert to string
@@ -47,8 +51,8 @@ public:
 private:
 	// level index
 	int m_index;
-	// name
-	string m_name;
+	// name 7 background music name
+	string m_name, m_backMusicName;
 	// level map characters
 	Matrix<char> m_levelChars;
 	// flows
