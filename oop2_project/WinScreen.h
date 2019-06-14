@@ -21,6 +21,8 @@ public:
 	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// constructor
 	explicit WinScreen(sf::RenderWindow& window, int score);
+	// get back to menu button
+	const std::shared_ptr<GUI::Button>& getBackToMenuBT() const { return m_backToMenuBT; }
 	// convert to string
 	virtual string toString() const override { return "WinScreen: { " + BaseClass::toString() + " }"; }
 private:

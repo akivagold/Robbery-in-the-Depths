@@ -32,6 +32,8 @@ private:
 	void runChooseLevelScreen(sf::RenderWindow& window, LevelFileManager& lfm, std::function<void(const LevelInfo&)> onLevelChoosed);
 	// run game screen
 	void runGameScreen(sf::RenderWindow& window, const LevelInfo& levelInfo);
+	// run win screen
+	void runWinScreen(sf::RenderWindow& window, int score);
 	// run lose screen
 	void runLoseScreen(sf::RenderWindow& window, const LevelInfo& fromLevelInfo);
 	// run edit screen

@@ -42,6 +42,7 @@ public:
 	virtual void onCollide(Grenade* grenade) override {}; // TODO use this
 	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
 	virtual void onCollide(Box* box) override {}  // TODO use this
+	virtual void onCollide(ExitLevel* exitLevel) override {} // TODO use this
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 150;

@@ -13,16 +13,16 @@ LifeView::LifeView(sf::RenderWindow& window, int numOfLife)
 void LifeView::setLife(int numOfLife)
 {
 	float lifeMissingPrecent, lifeLeftPrecent;
-	lifeMissingPrecent = lifeLeftPrecent = numOfLife;
+	lifeMissingPrecent = lifeLeftPrecent = static_cast<float>(numOfLife);
 	lifeLeftPrecent /= Character::getMaxLife();
 	lifeMissingPrecent = (Character::getMaxLife() - lifeMissingPrecent) / Character::getMaxLife();
 	this->setRelativeWidth(0, lifeLeftPrecent);
 	this->setRelativeWidth(1, lifeMissingPrecent);
 	if (lifeLeftPrecent > lifeMissingPrecent) {
-		m_barFullPart->getBackground().setColor(sf::Color(255 * lifeMissingPrecent * 2, 255, 0.f));
+		m_barFullPart->getBackground().setColor(sf::Color(int(255.f * lifeMissingPrecent * 2.f), 255, 0));
 	}
 	else {
-		m_barFullPart->getBackground().setColor(sf::Color(255, 255 * lifeLeftPrecent * 2, 0.f));
+		m_barFullPart->getBackground().setColor(sf::Color(255, int(255.f * lifeLeftPrecent * 2.f), 0));
 
 	}
 }

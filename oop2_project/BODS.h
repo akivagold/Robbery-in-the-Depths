@@ -34,8 +34,6 @@ public:
 	void handleRequests();
 	// prepare level
 	void prepareLevel();
-	// clear
-	//TODO void clear();
 	// convert to string
 	virtual string toString() const;
 private:

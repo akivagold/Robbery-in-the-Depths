@@ -51,6 +51,8 @@ public:
 	virtual void onToolUpdated(Tool* tool) override;
 	// decrease life
 	virtual void decreaseLife(int numOfLife);
+	// set on come exit level listener
+	void setOnComeELListener(std::function<void()> comeELListener) { m_comeToELHandler = comeELListener; }
 	// set on die listener
 	void setOnDieListener(std::function<void()> dieListener) { m_dieHandler = dieListener; }
 	// set on vanish listener
@@ -71,6 +73,7 @@ public:
 	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override;
 	virtual void onCollide(Box* box) override {}  // TODO use this
+	virtual void onCollide(ExitLevel* exitLevel) override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -101,8 +104,8 @@ private:
 	StopWatch m_recoveSW;
 	// recover flag
 	bool m_isRecover;
-	// die & vanish event handlers
-	std::function<void()> m_dieHandler, m_vanishHandler;
+	// events handlers
+	std::function<void()> m_dieHandler, m_vanishHandler, m_comeToELHandler;
 	// init
 	void init();
 	// check if player is recover

@@ -19,6 +19,7 @@ class MachineGun;
 class Grenade;
 class Explosion;
 class Box;
+class ExitLevel;
 
 //---- using section --------
 using std::string;
@@ -30,11 +31,11 @@ class BoardObject :
 	public GUI::AnimationView
 {
 public:
+	// get default size of object
+	static const sf::Vector2i& getDefaultSize();
 	// get AABB
 	const b2AABB& getAABB() const { return m_aabb; }
-	// set draw priority
-	void setDrawPriority(int drawPriority);
-	// get main screen
+	// get game screen
 	GameScreen& getGameScreen() { return m_gameScreen; }
 	const GameScreen& getGameScreen() const { return m_gameScreen; }
 	// get draw priority
@@ -53,14 +54,8 @@ public:
 	int32 getProxyId() const { return m_proxyId; }
 	// set proxy id
 	void setProxyId(int32 proxyId) { m_proxyId = proxyId; }
-	// get collides list - log(n) complexity
-	std::forward_list<BoardObject*> getCollidesList();
 	// get self
 	const std::shared_ptr<BoardObject>& getSelf() const;
-	// get default size of object
-	static const sf::Vector2i& getDefaultSize();
-	// event when object joined to game
-	virtual void onJoinedGame() { };
 	// vanish from map
 	void vanish();
 	// check if object if above then another object
@@ -83,6 +78,7 @@ public:
 	virtual void onCollide(Grenade* grenade) = 0;
 	virtual void onCollide(Explosion* explosion) = 0;
 	virtual void onCollide(Box* box) = 0;
+	virtual void onCollide(ExitLevel* exitLevel) = 0;
 	// convert to string
 	virtual string toString() const override;
 protected:
@@ -96,6 +92,12 @@ protected:
 	float getRadiusFromPlayer() const;
 	// event on vanish
 	virtual void onVanish() {}
+	// event when object joined to game
+	virtual void onJoinedGame() {};
+	// set draw priority
+	void setDrawPriority(int drawPriority);
+	// get collides list - log(n) complexity
+	std::forward_list<BoardObject*> getCollidesList();
 private:
 	// maximum hearing sound cells
 	static const int MAX_HEAR_SOUND_CELLS = 20;

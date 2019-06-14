@@ -60,9 +60,6 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	// load level info
 	gameScreen.loadLevel(levelInfo);
 
-	// play level music
-	GUI::SoundManager::getInterface().playBackgroundMusic(levelInfo.getBackMusicName());
-
 	// get player
 	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
 
@@ -73,11 +70,24 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 		runLoseScreen(gameScreen.getWindow(), levelInfo);
 		gameScreen.close();
 	});
+	player->setOnComeELListener([this, &gameScreen, &player] {
+		runWinScreen(gameScreen.getWindow(), player->getNumOfScore());
+		gameScreen.close();
+	});
 
 	// run
 	gameScreen.run([&gameScreen, &player]() {
 		gameScreen.getWorld().getBODS().handleRequests();
 	});
+}
+
+void GameController::runWinScreen(sf::RenderWindow& window, int score)
+{
+	WinScreen winScreen(window, score);
+	winScreen.getBackToMenuBT()->addClickListener([&winScreen](GUI::View& v) {
+		winScreen.close();
+	});
+	winScreen.run();
 }
 
 void GameController::runLoseScreen(sf::RenderWindow& window, const LevelInfo& fromLevelInfo)

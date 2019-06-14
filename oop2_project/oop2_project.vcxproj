@@ -179,6 +179,7 @@
     <ClCompile Include="EditScreen.cpp" />
     <ClCompile Include="EditText.cpp" />
     <ClCompile Include="ErrorDialog.cpp" />
+    <ClCompile Include="ExitLevel.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Flow.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="EditScreen.h" />
     <ClInclude Include="EditText.h" />
     <ClInclude Include="ErrorDialog.h" />
+    <ClInclude Include="ExitLevel.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Flow.h" />
     <ClInclude Include="FontManager.h" />

@@ -9,6 +9,7 @@
 #include "Shark.h"
 #include "Crab.h"
 #include "Grenade.h"
+#include "ExitLevel.h"
 
 // register
 bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Player>(gameScreen); });
@@ -204,6 +205,12 @@ void Player::onCollide(Explosion* explosion)
 	setExternaAlcceleration(exAcc);
 }
 
+void Player::onCollide(ExitLevel* exitLevel)
+{
+	if (m_comeToELHandler)
+		m_comeToELHandler();
+}
+
 void Player::playChoice(Direction lastDirection, bool isCollided)
 {
 	Character::playChoice(lastDirection, isCollided);
@@ -231,6 +238,7 @@ void Player::init()
 	setDrawPriority(DRAW_PRIORITY);
 	setAnimationFrequency(STAND_ANIM_FREQUENCY);
 	setDirection(Direction::RIGHT);
+	setSize(static_cast<int>(0.7f*getDefaultSize().x), static_cast<int>(0.5f*getDefaultSize().y));
 	setMaxSpeed(sf::Vector2f(6.f*getSize().x, 6.f*getSize().y));
 	
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {

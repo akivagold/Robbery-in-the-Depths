@@ -11,7 +11,11 @@ void GameScreen::loadLevel(const LevelInfo& levelInfo)
 {
 	// TODO need clear game menu
 
+	// play level music
+	GUI::SoundManager::getInterface().playBackgroundMusic(levelInfo.getBackMusicName());
+	// update level name
 	getGameMenu()->getLevelNumTV()->setText(levelInfo.getName());
+	// load world
 	m_world->loadLevel(*this, levelInfo);
 }
 

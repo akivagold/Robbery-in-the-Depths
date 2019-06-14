@@ -200,6 +200,10 @@
         {
             "name": "flow_down",
             "path": "flow_down.png"
+        },
+        {
+            "name": "exit",
+            "path": "exit.png"
         }
     ]
 }
