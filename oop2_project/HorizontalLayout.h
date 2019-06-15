@@ -18,19 +18,20 @@ namespace GUI {
 		// constructor
 		explicit HorizontalLayout(sf::RenderWindow& window) : ViewGroup<ViewType>(window) { }
 		// add view with default width
-		virtual void addView(const std::shared_ptr<ViewType>& view) override;
+		virtual void addView(const std::shared_ptr<ViewType>& view, bool arrangeChilds = true);
 		// add view with custom width
-		virtual void addView(const std::shared_ptr<ViewType>& view, float relativeWidth);
+		virtual void addView(const std::shared_ptr<ViewType>& view, float relativeWidth, bool updateComps = true);
 		// remove view
 		virtual void removeView(int index) override;
 		// convert to string
 		virtual string toString() const override;
+		// arrange all childrens with same widths
+		void arrangeChildrens();
+		// set relative width
 		void setRelativeWidth(int index,float width);
 	protected:
 		// update components
 		virtual void updateComponents() override;
-		// arrange all childrens with same widths
-		void arrangeChildrens();
 		// remove all views
 		virtual void removeAllViews() override;
 	private:
@@ -42,21 +43,23 @@ namespace GUI {
 }
 
 template <class ViewType>
-void GUI::HorizontalLayout<ViewType>::addView(const std::shared_ptr<ViewType>& view)
+void GUI::HorizontalLayout<ViewType>::addView(const std::shared_ptr<ViewType>& view, bool arrangeChilds)
 {
 	float relativeWidth = (float)1 / (this->getNumOfViews() + 1);
-	addView(view, relativeWidth);
-	arrangeChildrens();
+	addView(view, relativeWidth, arrangeChilds);
+	if(arrangeChilds)
+		arrangeChildrens();
 }
 
 template <class ViewType>
-void GUI::HorizontalLayout<ViewType>::addView(const std::shared_ptr<ViewType>& view, float relativeWidth)
+void GUI::HorizontalLayout<ViewType>::addView(const std::shared_ptr<ViewType>& view, float relativeWidth, bool updateComps)
 {
 	ViewGroup<ViewType>::addView(view);
 	if (!checkRelativeWidth(relativeWidth))
 		throw std::invalid_argument("Can't set relative width " + std::to_string(relativeWidth));
 	m_relativeWidths.push_back(relativeWidth);
-	updateComponents();
+	if(updateComps)
+		updateComponents();
 }
 
 template <class ViewType>
