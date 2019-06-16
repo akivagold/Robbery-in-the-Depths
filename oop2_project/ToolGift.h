@@ -14,6 +14,8 @@ class ToolGift :
 	public Gift
 {
 public:
+	// random tool gift
+	static std::shared_ptr<ToolGift> randToolGift() { return std::make_shared<ToolGift>(Tool::randToolType()); }
 	// constructor
 	explicit ToolGift(Tool::ToolType toolType);
 	// set tool type
@@ -22,8 +24,6 @@ public:
 	Tool::ToolType getToolType() const { return m_toolType; }
 	// take surprise
 	virtual void takeSurprise(Player* owner);
-	// random tool gift
-	static std::shared_ptr<ToolGift> randToolGift() { return std::make_shared<ToolGift>(Tool::randToolType()); }
 	// convert to string
 	virtual string toString() const override;
 private:
