@@ -165,10 +165,10 @@ void Rubber::inRadiusFromPlayer()
 		getInteralAcceleration().x = 0;
 		getInteralAcceleration().y = 0;
 	}
-	else {
-		if (m_isInRadiusShot && !m_isInShot) {
+
+	if (m_isInRadiusShot && !m_isInShot) {
 			setAnimation("rubber_swim");
 			m_isInRadiusShot = false;
-		}
 	}
+
 }
