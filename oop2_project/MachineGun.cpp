@@ -8,7 +8,7 @@ bool MachineGun::isRegisteredUp = BOFactory::getInterface().registerIn(MachineGu
 bool MachineGun::isRegisteredDown = BOFactory::getInterface().registerIn(MachineGun::CHAR_DOWN_MG, [](GameScreen& gameScreen) { return std::make_shared<MachineGun>(gameScreen, Direction::DOWN); });
 
 // init
-const float MachineGun::RADIUS_SHOT = static_cast<float>(BoardObject::getDefaultSize().x)*15.f;
+const float MachineGun::RADIUS_SHOT = static_cast<float>(BoardObject::getDefaultSize().x)*10.f;
 
 MachineGun::MachineGun(GameScreen& gameScreen, MovingObject::Direction directoin)
 	: NPC(gameScreen, DEFAULT_LIFE), m_gun(nullptr)

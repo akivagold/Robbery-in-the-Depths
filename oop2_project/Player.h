@@ -17,8 +17,6 @@ class Player :
 public:
 	// draw priority
 	static const int DRAW_PRIORITY = 100;
-	// char
-	static const char CHAR = 'p';
 	// constructor
 	explicit Player(GameScreen& gameScreen, int numOfLife = DEFAULT_LIFE);
 	// add new tool
@@ -31,11 +29,6 @@ public:
 	bool haveCurrTool() const { return bool(m_currTool); }
 	// get number of tools
 	int getNumOfTool() const { return int(m_tools.size()) - 1; }
-	// get score
-	int getNumOfScore() const { return m_numOfScore; }
-	// set score
-	void setNumOfScore(int numOfScore);
-	void appendScore(int numOfScore);
 	// check if player have tool
 	bool haveTool(Tool::ToolType toolType) const;
 	bool haveTool(Tool* tool) const;
@@ -43,37 +36,42 @@ public:
 	void changeTool(const std::shared_ptr<Tool>& tool);
 	// get current tool
 	std::shared_ptr<Tool> getCurrTool() const { return m_currTool; }
-	// set life
-	virtual void setNumOfLife(int numOfLife) override;
 	// use current tool if can
 	void useCurrTool();
 	// event on update tool
 	virtual void onToolUpdated(Tool* tool) override;
+	// get score
+	int getNumOfScore() const { return m_numOfScore; }
+	// set score
+	void setNumOfScore(int numOfScore);
+	void appendScore(int numOfScore);
+	// set life
+	virtual void setNumOfLife(int numOfLife) override;
 	// decrease life
-	virtual void decreaseLife(int numOfLife);
+	virtual void decreaseLife(int numOfLife) override;
 	// set on come exit level listener
 	void setOnComeELListener(std::function<void()> comeELListener) { m_comeToELHandler = comeELListener; }
 	// set on die listener
 	void setOnDieListener(std::function<void()> dieListener) { m_dieHandler = dieListener; }
 	// set on vanish listener
 	void setOnVanishListener(std::function<void()> vanishListener) { m_vanishHandler = vanishListener; }
-	// convert to string
-	virtual string toString() const override;
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {}
 	virtual void onCollide(Shark* shark) override;
 	virtual void onCollide(Crab* crab) override;
-	virtual void onCollide(Rubber* rubber) override {} // TODO use this
+	virtual void onCollide(Rubber* rubber) override {}
 	virtual void onCollide(Chest* chest) override; 
-	virtual void onCollide(Wall* wall) override {} // TODO use this
+	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override;
-	virtual void onCollide(MachineGun* machineGun) override {} // TODO use this
+	virtual void onCollide(MachineGun* machineGun) override {}
 	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override;
-	virtual void onCollide(Box* box) override {}  // TODO use this
+	virtual void onCollide(Box* box) override {}
 	virtual void onCollide(ExitLevel* exitLevel) override;
+	// convert to string
+	virtual string toString() const override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -84,6 +82,8 @@ protected:
 	// event on vanish
 	virtual void onVanish() override;
 private:
+	// char
+	static const char CHAR = 'p';
 	// swim animation frequency
 	static const int SWIM_ANIM_FREQUENCY = 30;
 	// stand animation frequency
@@ -94,6 +94,8 @@ private:
 	static const int DEFAULT_LIFE = 20;
 	// time to recover
 	static const int RECOVERY_TIME = 1000;
+	// register flag in BOFactory
+	static bool isRegistered;
 	// my tools
 	std::vector<std::shared_ptr<Tool>> m_tools;
 	// current tool
@@ -116,6 +118,4 @@ private:
 	int findToolIndex(const std::shared_ptr<Tool>& tool);
 	// start recover
 	void recover();
-	// register flag in BOFactory
-	static bool isRegistered;
 };

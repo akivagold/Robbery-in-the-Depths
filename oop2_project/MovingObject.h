@@ -18,8 +18,12 @@ public:
 	enum Direction { UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT, STANDING };
 	// number of directions
 	static const int NUM_OF_DIRECTIONS = 8;
-	// convert to string
-	virtual string toString() const override { return "MovingObject: { " + InteractableObject::toString() + " }"; } // TODO print speed,acc etc.
+	// get ranodm direction
+	static Direction getRandomDirect();
+	// get ranodm direction
+	static Direction getRandomLeftRightDirect();
+	// get default size of moving object
+	static const sf::Vector2i& getMODefSize();
 	// draw
 	virtual void draw() override;
 	// set direction
@@ -30,10 +34,6 @@ public:
 	Direction getDirection() const { return m_direction; }
 	// get last direction
 	Direction getLastDirection() const { return m_lastDirection; }
-	// get ranodm direction
-	static Direction getRandomDirect();
-	// get ranodm direction
-	static Direction getRandomLeftRightDirect();
 	// get angle
 	float getAngle() const { return atan2(m_speed.y, m_speed.x); }
 	// suicide
@@ -46,8 +46,8 @@ public:
 	virtual bool canMoveThroughMe() const override { return true; }
 	// set external acceleration
 	void setExternaAlcceleration(sf::Vector2f acceleration);
-	// get default size of moving object
-	static const sf::Vector2i& getMODefSize();
+	// convert to string
+	virtual string toString() const override { return "MovingObject: { " + InteractableObject::toString() + " }"; }
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen, Direction direction = Direction::STANDING);
@@ -66,6 +66,8 @@ protected:
 	// event when direction changed
 	virtual void onDirectionChanged() = 0;
 private:
+	// max speed default
+	static const sf::Vector2f MAX_SPEED_DEFAULT;
 	// direction and last direction
 	Direction m_direction, m_lastDirection;
 	// flag that check if collide last time
@@ -78,10 +80,8 @@ private:
 	bool upLastFloatEffect;
 	// speed, internal and external acceleration
 	sf::Vector2f m_maxSpeed, m_speed, m_interalAcceleration, m_externalAcc;
-	// max speed default
-	static const sf::Vector2f MAX_SPEED_DEFAULT;
 	// if can move to new position
-	bool canMove(std::forward_list<BoardObject*> collideList) const;
+	bool canMove(const std::forward_list<BoardObject*>& collideList) const;
 	// return where the object is trying to move
 	sf::Vector2f getNextPosition();
 	// play
@@ -89,7 +89,7 @@ private:
 	// init
 	void init();
 	// check collide
-	void checkCollide(std::forward_list<BoardObject*> collideList);
+	void checkCollide(const std::forward_list<BoardObject*>& collideList);
 	// make float effect
-	virtual void floatEffect();
+	void floatEffect();
 };
