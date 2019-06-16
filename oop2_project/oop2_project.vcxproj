@@ -183,6 +183,7 @@
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Flow.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="GameAnimText.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameMenu.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Flow.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="GameAnimText.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameMenu.h" />

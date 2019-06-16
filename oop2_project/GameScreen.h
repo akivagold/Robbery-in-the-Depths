@@ -5,6 +5,7 @@
 #include "RelativeLayout.h"
 #include "GameMenu.h"
 #include "World.h"
+#include "GameAnimText.h"
 
 //---- using section --------
 using std::string;
@@ -35,6 +36,8 @@ private:
 	std::shared_ptr<World> m_world;
 	// game menu ptr
 	std::shared_ptr<GameMenu> m_gameMenu;
+	// game anim text
+	// TODO std::shared_ptr<GameAnimText> m_gameAnimText;
 	// init
 	void init();
 };
