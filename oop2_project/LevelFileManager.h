@@ -24,15 +24,13 @@ public:
 	void addLevel(const LevelInfo& levelInfo);
 	// edit level (by index)
 	void editLevel(const LevelInfo& levelInfo);
-	// delete level (by index)
-	//void deleteLevel(int index);                   // TODO
 	// convert to string
 	virtual string toString() const;
 private:
-	// levels info
-	std::vector<LevelInfo> m_levelsInfo;
 	// levels file path
 	static const string LEVELS_FILE_PATH;
+	// levels info
+	std::vector<LevelInfo> m_levelsInfo;
 	// load levels
 	void loadLevels();
 	// read levels file as JSON

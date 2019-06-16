@@ -1,6 +1,5 @@
 #include "LoseScreen.h"
 
-
 LoseScreen::LoseScreen(sf::RenderWindow& window)
 	: BaseClass(window)
 {

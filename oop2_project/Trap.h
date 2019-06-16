@@ -14,10 +14,10 @@ class Trap :
 	public InteractableObject
 {
 public:
-	// convert to string
-	virtual string toString() const override { return "Trap: { " + InteractableObject::toString() + " }"; }
 	// draw
 	virtual void draw() override;
+	// convert to string
+	virtual string toString() const override { return "Trap: { " + InteractableObject::toString() + " }"; }
 protected:
 	// constructor
 	explicit Trap(GameScreen& gameScreen);

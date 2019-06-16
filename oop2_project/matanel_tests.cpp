@@ -143,9 +143,9 @@ void testBOFactory() {
 	// create BOs
 	std::vector<std::shared_ptr<BoardObject>> bos;
 	for (int i = 0; i < 10; ++i) {
-		char c = (i % 2 == 0) ? Player::CHAR : Shark::CHAR;
-		auto bo = boFactory.create(c, gameScreen);
-		bos.push_back(bo);
+		//char c = (i % 2 == 0) ? Player::CHAR : Shark::CHAR;
+		//auto bo = boFactory.create(c, gameScreen);
+		//bos.push_back(bo);
 	}
 
 	std::cout << boFactory.getInterface().toString() << std::endl;

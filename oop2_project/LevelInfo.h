@@ -19,6 +19,10 @@ public:
 		Cell m_startCell, m_endCell;
 		sf::Vector2f flowPower;
 	};
+	// convert level info to JSON
+	static json convertToJSON(const LevelInfo& levelInfo);
+	// parse level info from JSON
+	static LevelInfo parse(const json& levelInfoJson);
 	// constructor
 	LevelInfo();
 	// get level map characters
@@ -44,21 +48,7 @@ public:
 	json toJSON() const { return convertToJSON(*this); }
 	// convert to string
 	virtual string toString() const;
-	// convert level info to JSON
-	static json convertToJSON(const LevelInfo& levelInfo);
-	// parse level info from JSON
-	static LevelInfo parse(const json& levelInfoJson);
 private:
-	// level index
-	int m_index;
-	// name 7 background music name
-	string m_name, m_backMusicName;
-	// level map characters
-	Matrix<char> m_levelChars;
-	// flows
-	std::vector<FlowInfo> m_flows;
-	// check if level have legal index
-	bool isLegalIndex(int index) const { return (index >= 0); }
 	// convert level characters to string
 	static string convertLevelCharsToStr(const Matrix<char>& levelChars);
 	// put string in level characters
@@ -71,5 +61,15 @@ private:
 	static json buildFlowsJSON(const std::vector<FlowInfo>& flows);
 	// build JSON of flow
 	static json buildFlowJSON(const FlowInfo& flow);
+	// level index
+	int m_index;
+	// name 7 background music name
+	string m_name, m_backMusicName;
+	// level map characters
+	Matrix<char> m_levelChars;
+	// flows
+	std::vector<FlowInfo> m_flows;
+	// check if level have legal index
+	bool isLegalIndex(int index) const { return (index >= 0); }
 };
 

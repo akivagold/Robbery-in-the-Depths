@@ -17,8 +17,6 @@ class LoseScreen :
 	public GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>
 {
 public:
-	// base class
-	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// constructor
 	explicit LoseScreen(sf::RenderWindow& window);
 	// get back to menu button
@@ -28,6 +26,8 @@ public:
 	// convert to string
 	virtual string toString() const override { return "LoseScreen: { " + BaseClass::toString() + " }"; }
 private:
+	// base class
+	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// title
 	std::shared_ptr<GUI::TextView> m_title;
 	// image

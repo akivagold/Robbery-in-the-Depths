@@ -5,7 +5,6 @@
 #include "TextView.h"
 #include "Button.h"
 
-
 //---- using section --------
 using std::string;
 
@@ -15,10 +14,8 @@ using std::string;
 class MainScreen : public GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>
 {
 public:
-	// base class
-	using BaseScreen = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// constructor
-	MainScreen(sf::RenderWindow& window);
+	explicit MainScreen(sf::RenderWindow& window);
 	// get title text view
 	const std::shared_ptr<GUI::TextView>& getTitleTV() const { return m_titleTV; }
 	// get start button
@@ -32,6 +29,8 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
+	// base class
+	using BaseScreen = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// title text view
 	std::shared_ptr<GUI::TextView> m_titleTV;
 	// buttons

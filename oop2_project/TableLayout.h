@@ -74,10 +74,12 @@ void TableLayout<ViewType>::resize(const sf::Vector2i& size)
 			cellView->getBorder().setColor(sf::Color(140, 140, 140));
 			cellView->getBorder().setSize(0.5f);
 
-			rowLayout->addView(cellView);
+			rowLayout->addView(cellView, false);
 		}
-		addView(rowLayout);
+		addView(rowLayout, false);
+		rowLayout->arrangeChildrens();
 	}
+	BaseClass::arrangeChildrens();
 }
 
 template<class ViewType>

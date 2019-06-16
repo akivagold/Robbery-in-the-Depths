@@ -15,10 +15,12 @@ class Tool
 public:
 	// number of tools
 	static const int NUM_OF_TOOLS = 2;
-	// weapon type
+	// tool type
 	enum ToolType { TT_AK47, TT_GRENADE_LAUNCHER };
 	// random tool type
 	static ToolType randToolType();
+	// create new tool by tool type
+	static std::shared_ptr<Tool> createTool(ToolType toolType, Character* owner);
 	// use tool
 	virtual void useTool();
 	// check if can use tool
@@ -29,8 +31,6 @@ public:
 	Character* getMyOwner() { return m_owner; }
 	// get tool name
 	virtual string getToolName() const = 0;
-	// create new tool by tool type
-	static std::shared_ptr<Tool> createTool(ToolType toolType, Character* owner);
 	// append use limit
 	void appendUseLimit(int useLimitCount) { setUseLimit(getUseLimit() + useLimitCount); }
 	// set use limit

@@ -13,14 +13,14 @@ class LifeGift :
 	public Gift
 {
 public:
+	// random life gift
+	static std::shared_ptr<LifeGift> randLifeGift() { return std::make_shared<LifeGift>(rand() % 6 + 1); }
 	// constructor
 	explicit LifeGift(int numOfLife = 0);
 	// set number of life
 	void setNumOfLife(int numOfLife);
 	// get num of life
 	int getNumOfLife() const { return m_numOfLife; }
-	// random life gift
-	static std::shared_ptr<LifeGift> randLifeGift() { return std::make_shared<LifeGift>(rand()%3 + 1); }
 	// take surprise
 	virtual void takeSurprise(Player* owner);
 	// convert to string

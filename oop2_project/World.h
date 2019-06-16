@@ -47,6 +47,7 @@ private:
 	BODS m_bods;
 	// init
 	void init();
+	// game camera
 	std::unique_ptr <GameCamera> m_gameCamera;
 };
 

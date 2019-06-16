@@ -27,7 +27,6 @@ void MovingObject::floatEffect()
 		else {
 			m_floatAcc.y = -0.0000003f*float(getSize().x) - (((rand() % 3) + 1) * 0.000001f);
 		}
-
 	}
 }
 
@@ -38,7 +37,7 @@ void MovingObject::setExternaAlcceleration(sf::Vector2f acceleration)
 	m_externalAcc.y = acceleration.y;
 }
 
-void MovingObject::checkCollide(std::forward_list<BoardObject*> collideList)
+void MovingObject::checkCollide(const std::forward_list<BoardObject*>& collideList)
 {
 	setExternaAlcceleration(sf::Vector2f(0.f, 0.f));
 	// check all list
@@ -145,7 +144,7 @@ void MovingObject::suicide()
 	vanish();
 }
 
-bool MovingObject::canMove(std::forward_list<BoardObject*> collideList) const
+bool MovingObject::canMove(const std::forward_list<BoardObject*>& collideList) const
 {
 	if ((getPosition().x < 0 || getPosition().x + getSize().x > getGameScreen().getWorld().getSize().x) ||
 		((getPosition().y < 0 || getPosition().y + getSize().y > getGameScreen().getWorld().getSize().y)))

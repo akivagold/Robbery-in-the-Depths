@@ -13,8 +13,6 @@ class NPC
 	: public Character
 {
 public:
-	// convert to string
-	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; }
 	// get ranodm up directions
 	static Direction getRandomUPDirections();
 	// get ranodm right directions
@@ -27,6 +25,8 @@ public:
 	void setDirectionAfterCollid(Direction direction);
 	// go by direction	
 	void goByDirection(Direction direction);
+	// convert to string
+	virtual string toString() const override { return "NPC: { " + Character::toString() + " }"; }
 protected:
 	// constructor
 	explicit NPC(GameScreen& gameScreen, int numOfLife = 0);

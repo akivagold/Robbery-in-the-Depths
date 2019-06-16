@@ -17,15 +17,8 @@ class MachineGun :
 	public NPC
 {
 public:
-	// chars
-	static const char CHAR_LEFT_MG = '1';
-	static const char CHAR_RIGHT_MG = '2';
-	static const char CHAR_UP_MG = '3';
-	static const char CHAR_DOWN_MG = '4';
 	// constructor
 	explicit MachineGun(GameScreen& gameScreen, MovingObject::Direction directoin);
-	// convert to string
-	virtual string toString() const override { return "MachineGun: { " + InteractableObject::toString() + " }"; }
 	// get gun
 	const std::shared_ptr<HotWeapon>& getGun() const { return m_gun; }
 	// check if this object is don't blocking movement
@@ -45,16 +38,25 @@ public:
 	virtual void onCollide(Flow* flow) override {}
 	virtual void onCollide(Bullet* bullet) override {}
 	virtual void onCollide(MachineGun* machineGun) override {}
-	virtual void onCollide(Grenade* grenade) override {} // TODO use this
-	virtual void onCollide(Explosion* explosion) override {}  // TODO use this
-	virtual void onCollide(Box* box) override {}  // TODO use this
-	virtual void onCollide(ExitLevel* exitLevel) override {} // TODO use this
+	virtual void onCollide(Grenade* grenade) override {}
+	virtual void onCollide(Explosion* explosion) override {}
+	virtual void onCollide(Box* box) override {}
+	virtual void onCollide(ExitLevel* exitLevel) override {}
+	// convert to string
+	virtual string toString() const override { return "MachineGun: { " + InteractableObject::toString() + " }"; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override {};
 	// event when direction changed
 	virtual void onDirectionChanged() override { }
 private:
+	// register flags in BOFactory
+	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
+	// chars
+	static const char CHAR_LEFT_MG = '1';
+	static const char CHAR_RIGHT_MG = '2';
+	static const char CHAR_UP_MG = '3';
+	static const char CHAR_DOWN_MG = '4';
 	// draw priority
 	static const int DRAW_PRIORITY = 7;
 	// default number of life
@@ -71,7 +73,5 @@ private:
 	sf::Clock shootingPauseClock;
 	// init
 	void init();
-	// register flags in BOFactory
-	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
 };
 
