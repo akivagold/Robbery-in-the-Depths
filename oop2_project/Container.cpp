@@ -2,6 +2,7 @@
 #include "LifeGift.h"
 #include "ToolGift.h"
 #include "CoinGift.h"
+#include "Utilities.h"
 
 Container::Container(GameScreen& gameScreen)
 	: StaticObject(gameScreen)
@@ -30,6 +31,11 @@ void Container::pickup(Player* owner)
 	for (auto& suprise : m_surprises)
 		suprise->takeSurprise(owner);
 	clearSurprises();
+}
+
+string Container::getContentInfo() const
+{
+	return Utilities::join<SurprisesList, SurprisesList::const_iterator>(" & ", m_surprises, [](SurprisesList::const_iterator it) { return (*it)->getInfo(); });
 }
 
 string Container::toString() const

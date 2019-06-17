@@ -6,9 +6,9 @@ GameAnimText::GameAnimText(sf::RenderWindow& window)
 	init();
 }
 
-void GameAnimText::showText(const string& text)
+void GameAnimText::showText(const TextInfo& textInfo)
 {
-	m_waitTexts.push(text);
+	m_waitTexts.push(textInfo);
 	if(canShowNextText())
 		showNextText();
 }
@@ -34,7 +34,9 @@ void GameAnimText::init()
 void GameAnimText::showNextText()
 {
 	// set text
-	setText(m_waitTexts.front());
+	TextInfo& textInfo = m_waitTexts.front();
+	setText(textInfo.m_text);
+	setTextColor(textInfo.m_color);
 	m_waitTexts.pop();
 	// listen to end
 	m_textSW.start(SHOW_TEXT_TIME, [this]() { onEndShowText(); });

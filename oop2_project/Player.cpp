@@ -165,7 +165,9 @@ void Player::onCollide(Crab* crab)
 void Player::onCollide(Chest* chest)
 {
 	if (!chest->isEmpty()) {
-		chest->pickup(this);
+		string message = "You received " + chest->getContentInfo();
+		getGameScreen().getGameAnimText()->showText(GameAnimText::TextInfo(message, sf::Color(108, 0, 118)));
+		chest->pickup(this);		
 	}
 }
 

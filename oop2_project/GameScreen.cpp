@@ -17,6 +17,8 @@ void GameScreen::loadLevel(const LevelInfo& levelInfo)
 	getGameMenu()->getLevelNumTV()->setText(levelInfo.getName());
 	// load world
 	m_world->loadLevel(*this, levelInfo);
+
+	m_gameAnimText->showText(GameAnimText::TextInfo("Start to play", sf::Color::Black));
 }
 
 string GameScreen::toString() const
@@ -32,4 +34,8 @@ void GameScreen::init()
 	addBackRootView(m_world);
 	// add game menu
 	addView(m_gameMenu, sf::FloatRect(0.f, 0.f, 1.f, 0.2f));
+
+	// add game animate text
+	m_gameAnimText = std::make_shared<GameAnimText>(getWindow());
+	addView(m_gameAnimText, sf::FloatRect(0.f, 0.08f, 1.f, 0.5));
 }

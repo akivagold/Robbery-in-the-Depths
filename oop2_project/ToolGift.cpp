@@ -1,6 +1,24 @@
 #include "ToolGift.h"
 #include "Player.h"
 
+string ToolGift::getToolName(Tool::ToolType toolType)
+{
+	string toolName;
+	switch (toolType)
+	{
+		case Tool::TT_AK47: {
+			toolName = "AK47";
+		} break;
+		case Tool::TT_GRENADE_LAUNCHER: {
+			toolName = "Granade Launcher";
+		} break;
+		default: {
+			throw std::invalid_argument("Cannot find tool name for the tool type " + std::to_string(toolType));
+		} break;
+	}
+	return toolName;
+}
+
 ToolGift::ToolGift(Tool::ToolType toolType)
 	: Gift()
 {
