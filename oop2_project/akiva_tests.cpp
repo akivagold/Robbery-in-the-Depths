@@ -88,8 +88,8 @@ void akiva_main()
 	GUI::SoundManager::getInterface();
 	try
 	{
-		testGameController();
-		//testLevelFileManager();
+		//testGameController();
+		testLevelFileManager();
 		//testWorld();
 	}
 	catch (const std::exception& ex)
@@ -326,12 +326,12 @@ void testLevelFileManager() {
 
 	// create level
 	LevelInfo li;
-	li.getLevelChars().resize(40, 50);
+	li.getLevelChars().resize(50, 100);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
 	li.setName("Into the Storm");
-	li.setIndex(4);
+	li.setIndex(6);
 	lfm.addLevel(li);
 
 	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
