@@ -36,6 +36,7 @@
 #include "EditScreen.h"
 #include "MachineGun.h"
 #include "GameCamera.h"
+#include "GameController.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -67,6 +68,10 @@ using namespace GUI; // for tests only
 #pragma region Declarations
 void testCleanScreen();
 void testWorld();
+void testGameController();
+void testEditor();
+void testLevelFileManager();
+
 #pragma endregion
 
 // -------------- globals & constants -----------
@@ -83,7 +88,9 @@ void akiva_main()
 	GUI::SoundManager::getInterface();
 	try
 	{
-		testWorld();
+		testGameController();
+		//testLevelFileManager();
+		//testWorld();
 	}
 	catch (const std::exception& ex)
 	{
@@ -119,18 +126,11 @@ void testCleanScreen() {
 	}
 }
 
-
-/*void testWorld() {
-	// create window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
-
-	GameScreen gameScreen(window);
-
-	std::shared_ptr<Player> player = std::make_shared<Player>(gameScreen);
-	player->setPosition(0,0);
-	gameScreen.getWorld().getBODS().requestAddBO(player);
-
-	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
+void testGameController() {
+	GameController gameController;
+	gameController.run();
+}
+/*	std::shared_ptr<Flow> flow = std::make_shared<Flow>(gameScreen);
 	flow->setSize(BoardObject::getDefaultSize().x * 4, BoardObject::getDefaultSize().y * 4);;
 	flow->setPosition(BoardObject::getDefaultSize().x * 4.f, BoardObject::getDefaultSize().y * 4.f);
 	flow->setFlowPower(sf::Vector2f(0.0025f, 0.f));
@@ -154,59 +154,6 @@ void testCleanScreen() {
 	flow3->setFlowPower(sf::Vector2f(-0.0025f, 0.f));
 	gameScreen.getWorld().getBODS().requestAddBO(flow3);
 
-
-	gameScreen.getWorld().addKeyDownListener([&gameScreen](sf::Keyboard::Key& keyCode) {
-		float offset = 10.f;
-		switch (keyCode)
-		{
-			case sf::Keyboard::Key::Left: {
-				gameScreen.getWorld().getCamera().move(-offset, 0);
-			} break;
-			case sf::Keyboard::Key::Right: {
-				gameScreen.getWorld().getCamera().move(offset, 0);
-			} break;
-			case sf::Keyboard::Key::Up: {
-				gameScreen.getWorld().getCamera().move(0, -offset);
-			} break;
-			case sf::Keyboard::Key::Down: {
-				gameScreen.getWorld().getCamera().move(0, offset);
-			} break;
-			case sf::Keyboard::Key::Q: {
-				gameScreen.getWorld().getCamera().zoom(0.95f);
-			} break;
-			case sf::Keyboard::Key::W: {
-				gameScreen.getWorld().getCamera().zoom(1.05f);
-			} break;
-		}
-	});
-	gameScreen.getWorld().addClickListener([&gameScreen](View& view) {
-		sf::Vector2f pos = gameScreen.getWorld().getWindow().mapPixelToCoords(sf::Mouse::getPosition(gameScreen.getWorld().getWindow()));
-
-		std::shared_ptr<Shark> shark = std::make_shared<Shark>(gameScreen);
-		shark->setPosition(pos);
-		shark->addClickListener([&gameScreen, shark](View& v) {
-			// TODO
-		});
-		gameScreen.getWorld().getBODS().requestAddBO(shark);
-	});
-
-
-
-	gameScreen.getWorld().getBODS().handleRequests();
-	gameScreen.getWorld().getBODS().prepareLevel();
-	// load level info
-	//LevelFileManager lfm;
-	//world.loadLevel(lfm.getLevel("testLevel"));
-
-
-	//LevelInfo li;
-	//li.getLevelChars().resize(100, 100);
-	//gameScreen.loadLevel(li);
-	Timer frameTimer;
-	frameTimer.start(10, [&gameScreen]() {
-		gameScreen.getWorld().getBODS().handleRequests();
-	});
-	gameScreen.run(frameTimer);
 }
 */
 void testWorld() {
@@ -330,5 +277,74 @@ void testWorld() {
 		gameScreen.getWorld().getBODS().handleRequests();
 		//gameCamera.updateCamera();
 	});
+}
+
+void testEditor() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1200, 800), "Screen");
+
+	// create editor
+	EditScreen editScreen(window);
+
+	// load level info
+	LevelFileManager lfm;
+	const LevelInfo& levelInfo = lfm.getLevel("akiva map");
+	editScreen.getEditMapView()->importLevelInfo(levelInfo);
+
+	editScreen.getEditMenu()->getExitButton()->addClickListener([&editScreen](View& v) {
+		editScreen.close();
+	});
+	editScreen.getEditMenu()->getSaveButton()->addClickListener([&editScreen, &lfm](View& v) {
+		const LevelInfo& levelInfo = editScreen.getEditMapView()->exportLevelInfo();
+		lfm.editLevel(levelInfo);
+		AlertDialog::show("Level saved!", "The level saved successfuly!", "OK");
+	});
+	editScreen.getEditMapView()->forEach([&editScreen](const Cell& cell, const std::shared_ptr<MapCellView>& mapCellView) {
+		mapCellView->addEnterListener([&editScreen, cell](View& v) {
+			editScreen.getEditMenu()->setCurrentCell(cell);
+		});
+	});
+	editScreen.getGameObjs()->addGOVClickListener([&editScreen](const std::shared_ptr<GameObjectView>& gov) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+		editScreen.getEditMapView()->setAddChar(gov->getGOI().getSpecialChar());
+	});
+	/*editScreen.getEditMenu()->getAddButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Add);
+	});*/
+	editScreen.getEditMenu()->getDeleteButton()->addClickListener([&editScreen](View& view) {
+		editScreen.getEditMapView()->setEditMode(EditMapView::EditMode::Remove);
+	});
+
+	editScreen.run();
+}
+
+
+void testLevelFileManager() {
+	LevelFileManager lfm;
+	//std::cout << lfm.toString() << std::endl;
+
+
+	// create level
+	LevelInfo li;
+	li.getLevelChars().resize(40, 50);
+	for (char& c : li.getLevelChars()) {
+		c = ' ';
+	}
+	li.setName("Into the Storm");
+	li.setIndex(4);
+	lfm.addLevel(li);
+
+	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {
+		const LevelInfo& levelInfo = lfm.getLevel(i);
+		std::cout << levelInfo.toString() << std::endl;
+		std::cout << levelInfo.toJSON() << std::endl;
+		std::cout << "-------------------------------------------------------" << std::endl;
+	}
+	//LevelInfo levelInfo = lfm.getLevel(0);
+	//levelInfo.getLevelChars().resize(0, 0);
+	//lfm.editLevel(levelInfo);
+
+	//const LevelInfo& levelInfo = lfm.getLevel("level2");
+	//lfm.addLevel(lfm.getLevel(0));
 }
 #endif // AKIVA_TESTS
