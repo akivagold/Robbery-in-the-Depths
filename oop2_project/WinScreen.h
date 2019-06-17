@@ -17,8 +17,6 @@ class WinScreen :
 	public GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>
 {
 public:
-	// base class
-	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// constructor
 	explicit WinScreen(sf::RenderWindow& window, int score);
 	// get back to menu button
@@ -26,6 +24,8 @@ public:
 	// convert to string
 	virtual string toString() const override { return "WinScreen: { " + BaseClass::toString() + " }"; }
 private:
+	// base class
+	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// title
 	std::shared_ptr<GUI::TextView> m_title;
 	// score

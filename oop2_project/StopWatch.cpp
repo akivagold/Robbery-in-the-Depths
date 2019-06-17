@@ -19,6 +19,9 @@ void StopWatch::stop()
 {
 	m_active = false;
 	m_tickActive = false;
+	m_onFinish = nullptr;
+	m_time = 0;
+	m_interval = 0;
 }
 
 void StopWatch::append(int timeToAppend)

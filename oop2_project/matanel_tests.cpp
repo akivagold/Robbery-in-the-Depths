@@ -40,6 +40,7 @@
 #include "Utilities.h"
 #include "MachineGun.h"
 #include "Box.h"
+#include "GameAnimText.h"
 #pragma endregion
 
  //-------------- libs -------------------------
@@ -69,6 +70,7 @@ using namespace GUI; // for tests only
 
 //-------------- declare functions -------------
 #pragma region Declarations
+void testGameAnimText();
 void testBOFactory();
 void testGameController();
 void testEditMenu();
@@ -101,9 +103,10 @@ void matanel_main()
 	GUI::SoundManager::getInterface();
 	try
 	{
+		testGameAnimText();
 		//testBOFactory();
 		//testGradientColor();
-		testGameController();
+		//testGameController();
 		//testEditor();
 		//testWorld();
 		//testEditMenu();
@@ -122,6 +125,44 @@ void matanel_main()
 	{
 		// Oh No! error...
 		ErrorDialog::show(ex.what());
+	}
+}
+
+void testGameAnimText() {
+	// create window
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Screen");
+
+	// create root view
+	VerticalLayout<> mainLayout(window);
+	mainLayout.makeRootView();
+	mainLayout.getBackground().setColor(sf::Color::White);
+	mainLayout.getBorder().setColor(sf::Color::Blue);
+	mainLayout.getBorder().setSize(1.f);
+
+	std::shared_ptr<GameAnimText> gat = std::make_shared<GameAnimText>(window);
+	//for(int i = 0; i < 10; ++i)
+	//	gat->showText("Text " + std::to_string(i));
+
+	int c = 0;
+	gat->addClickListener([&gat, &c](View& v) {
+		gat->showText("Text " + std::to_string(c));
+		c++;
+	});
+	mainLayout.addView(gat);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			mainLayout.handleEvent(event);
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		mainLayout.draw();
+		window.display();
 	}
 }
 
