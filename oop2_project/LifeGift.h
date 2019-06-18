@@ -21,6 +21,8 @@ public:
 	void setNumOfLife(int numOfLife);
 	// get num of life
 	int getNumOfLife() const { return m_numOfLife; }
+	// get info
+	virtual string getInfo() const override { return std::to_string(m_numOfLife) + " lifes"; }
 	// take surprise
 	virtual void takeSurprise(Player* owner);
 	// convert to string

@@ -14,6 +14,8 @@ class Surprise
 public:
 	// take surprise
 	virtual void takeSurprise(Player* owner) = 0;
+	// get info
+	virtual string getInfo() const = 0;
 	// convert to string
 	virtual string toString() const { return "Surprise: { }"; }
 protected:

@@ -103,10 +103,10 @@ void matanel_main()
 	GUI::SoundManager::getInterface();
 	try
 	{
-		testGameAnimText();
+		//testGameAnimText();
 		//testBOFactory();
 		//testGradientColor();
-		//testGameController();
+		testGameController();
 		//testEditor();
 		//testWorld();
 		//testEditMenu();
@@ -145,7 +145,7 @@ void testGameAnimText() {
 
 	int c = 0;
 	gat->addClickListener([&gat, &c](View& v) {
-		gat->showText("Text " + std::to_string(c));
+		//gat->showText("Text " + std::to_string(c));
 		c++;
 	});
 	mainLayout.addView(gat);
@@ -262,7 +262,10 @@ void testWorld() {
 			player->setTransparency(player->getTransparency() - 10);
 		} break;
 		case sf::Keyboard::Key::K: {
-			//player->rotateAnimation(10);
+			GameAnimText::TextInfo ti;
+			ti.m_color = sf::Color(255, 0, 0);
+			ti.m_text = "Example Text";
+			gameScreen.getGameAnimText()->showText(ti);
 		} break;
 		case sf::Keyboard::Key::Num2: {
 			gameScreen.getWorld().getCamera().zoom(0.95f);
@@ -551,12 +554,12 @@ void testLevelFileManager() {
 
 	// create level
 	/*LevelInfo li;
-	li.getLevelChars().resize(40, 50);
+	li.getLevelChars().resize(150, 25);
 	for (char& c : li.getLevelChars()) {
 		c = ' ';
 	}
-	li.setName("The Shark Territory");
-	li.setIndex(4);
+	li.setName("Tsunami on the way");
+	li.setIndex(8);
 	lfm.addLevel(li);*/
 
 	for (int i = 0; i < lfm.getNumOfLevels(); ++i) {

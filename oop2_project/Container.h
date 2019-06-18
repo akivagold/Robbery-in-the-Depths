@@ -22,6 +22,8 @@ public:
 	bool isEmpty() const { return m_surprises.empty(); }
 	// pickup content
 	virtual void pickup(Player* owner);
+	// get content info
+	string getContentInfo() const;
 	// clear all surprises
 	void clearSurprises() { m_surprises.clear(); }
 	// convert to string

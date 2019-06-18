@@ -21,6 +21,8 @@ public:
 	int getNumOfCoins() const { return m_numOfCoins; }
 	// take surprise
 	virtual void takeSurprise(Player* owner);
+	// get info
+	virtual string getInfo() const override { return std::to_string(m_numOfCoins) + " coins"; }
 	// random coin gift
 	static std::shared_ptr<CoinGift> randCoinGift() { return std::make_shared<CoinGift>(rand()%11 + 1); }
 	// convert to string

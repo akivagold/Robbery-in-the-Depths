@@ -16,10 +16,14 @@ class ToolGift :
 public:
 	// random tool gift
 	static std::shared_ptr<ToolGift> randToolGift() { return std::make_shared<ToolGift>(Tool::randToolType()); }
+	// get tool name
+	static string getToolName(Tool::ToolType toolType);
 	// constructor
 	explicit ToolGift(Tool::ToolType toolType);
 	// set tool type
 	void setToolType(Tool::ToolType toolType);
+	// get info
+	virtual string getInfo() const override { return getToolName(m_toolType); }
 	// get tool type
 	Tool::ToolType getToolType() const { return m_toolType; }
 	// take surprise

@@ -15,10 +15,17 @@ class GameAnimText
 	: public GUI::TextView
 {
 public:
+	// text info
+	struct TextInfo
+	{
+		explicit TextInfo(const string& text = "", const sf::Color& color = sf::Color::Black) : m_text(text), m_color(color) { }
+		string m_text;
+		sf::Color m_color;
+	};
 	// constructor
 	explicit GameAnimText(sf::RenderWindow& window);
 	// show text
-	void showText(const string& text);
+	void showText(const TextInfo& textInfo);
 	// draw
 	virtual void draw() override;
 	// convert to string
@@ -27,7 +34,7 @@ private:
 	// time to text
 	static const int SHOW_TEXT_TIME = 2000;
 	// wait texts
-	std::queue<string> m_waitTexts;
+	std::queue<TextInfo> m_waitTexts;
 	// text stop watch
 	StopWatch m_textSW;
 	// flag for ready to show next text

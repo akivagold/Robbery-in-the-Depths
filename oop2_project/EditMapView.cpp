@@ -1,8 +1,9 @@
 #include "EditMapView.h"
+#include "BoardObject.h"
 
 // init
 const float EditMapView::ZOOM_CAM_ANIM = 0.02f;
-const float EditMapView::MOVE_CAM_ANIM = 4.f;
+const float EditMapView::MOVE_CAM_ANIM = 1.f;
 
 EditMapView::EditMapView(sf::RenderWindow& window, const std::vector<GameObjectInfo>& gois)
 	: BaseClass(window), m_cameraAct(CameraAction::NONE), m_editMode(EditMode::None), m_addChar(' '), m_gois(gois)
@@ -15,7 +16,10 @@ void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 	m_levelInfo = levelInfo;
 
 	// load level
-	resize(levelInfo.getLevelChars().getSize());
+	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
+	const sf::Vector2i& defaultSize = BoardObject::getDefaultSize();
+	setSize(levelSize.y*defaultSize.y, levelSize.x*defaultSize.x);
+	resize(levelSize);
 	for (auto it = levelInfo.getLevelChars().cbegin(); it != levelInfo.getLevelChars().cend(); ++it) {
 		const Cell& cell = it.getCell();
 		char ch = *it;
@@ -24,6 +28,8 @@ void EditMapView::importLevelInfo(const LevelInfo& levelInfo)
 
 	// init cells
 	forEach([this](const Cell& cell, const std::shared_ptr<MapCellView>& view) {
+		view->getBorder().setColor(sf::Color(170, 170, 170));
+		view->getBorder().setSize(2.f);
 		view->addEnterListener([this](View& v) {
 			if (m_editMode == EditMode::Add) {
 				v.getBackground().setColor(sf::Color::Green);
@@ -144,19 +150,24 @@ void EditMapView::initComponents()
 
 	// create movement timer
 	m_cameraMoveTimer.start(ANIM_REFRESH_TIME, [this] {
+		
 		switch (m_cameraAct)
 		{
 		case CameraAction::RIGHT: {
-			getCamera().move(MOVE_CAM_ANIM, 0);
+			float moveBy = (MOVE_CAM_ANIM * getCamera().getSize().x) / float(getSize().x);
+			getCamera().move(moveBy, 0);
 		} break;
 		case CameraAction::LEFT: {
-			getCamera().move(-MOVE_CAM_ANIM, 0);
+			float moveBy = (MOVE_CAM_ANIM * getCamera().getSize().x) / float(getSize().x);
+			getCamera().move(-moveBy, 0);
 		} break;
 		case CameraAction::UP: {
-			getCamera().move(0, -MOVE_CAM_ANIM);
+			float moveBy = (MOVE_CAM_ANIM * getCamera().getSize().y) / float(getSize().y);
+			getCamera().move(0, -moveBy);
 		} break;
 		case CameraAction::DOWN: {
-			getCamera().move(0, MOVE_CAM_ANIM);
+			float moveBy = (MOVE_CAM_ANIM * getCamera().getSize().y) / float(getSize().y);
+			getCamera().move(0, moveBy);
 		} break;
 		case CameraAction::ZOOM_IN: {
 			getCamera().zoom(1 - ZOOM_CAM_ANIM);

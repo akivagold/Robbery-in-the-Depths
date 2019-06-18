@@ -58,12 +58,4 @@ void GUI::ImageButton::initComponents(sf::RenderWindow& window, const string& te
 
 	addView(m_image, 0.75f);
 	addView(m_text, 0.25f);
-
-	// init sounds at events
-	addEnterListener(View::EnterHandler::Listener([](View& view) {
-		SoundManager::getInterface().playSound("bt_hover");
-	}));
-	addClickListener(View::ClickHandler::Listener([](View& view) {
-		SoundManager::getInterface().playSound("bt_click");
-	}));
 }
