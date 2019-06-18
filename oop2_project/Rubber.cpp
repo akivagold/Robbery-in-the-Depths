@@ -51,7 +51,7 @@ void Rubber::onDie()
 
 void Rubber::onCollide(Flow* flow)
 {
-	setExternaAlcceleration(flow->getFlowPower());
+	setExternaAlcceleration(getExternaAlcceleration() + flow->getFlowPower());
 	m_isInRadiusShot = false;
 }
 
@@ -81,6 +81,30 @@ void Rubber::onCollide(Explosion* explosion)
 	exAcc.x /= float(getSize().x);
 	exAcc.y /= float(getSize().y);
 	setExternaAlcceleration(exAcc);
+}
+
+void Rubber::onCollide(Wall* wall)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Rubber::onCollide(Box* box)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Rubber::onCollide(MachineGun* machineGun)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
 }
 
 void Rubber::playChoice(Direction lastDirection, bool isCollided)

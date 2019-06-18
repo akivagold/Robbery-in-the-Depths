@@ -65,10 +65,10 @@ public:
 	virtual void onCollide(Wall* wall) override;
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override;
-	virtual void onCollide(MachineGun* machineGun) override {}
+	virtual void onCollide(MachineGun* machineGun) override;
 	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override;
-	virtual void onCollide(Box* box) override {}
+	virtual void onCollide(Box* box) override;
 	virtual void onCollide(ExitLevel* exitLevel) override;
 	// convert to string
 	virtual string toString() const override;
@@ -95,8 +95,6 @@ private:
 	static const int DEFAULT_LIFE = 20;
 	// time to recover
 	static const int RECOVERY_TIME = 1000;
-	// wall recovery clock
-	sf::Clock wallRecoveryClock;
 	// register flag in BOFactory
 	static bool isRegistered;
 	// my tools
@@ -107,12 +105,8 @@ private:
 	int m_numOfScore;
 	// recover stopWatch
 	StopWatch m_recoveSW;
-	// wall recover stopWatch
-	StopWatch m_wallRecoverSW;
 	// recover flag
 	bool m_isRecover;
-	// wall recover flag
-	bool m_isWallRecover;
 	// events handlers
 	std::function<void()> m_dieHandler, m_vanishHandler, m_comeToELHandler;
 	// init
@@ -127,5 +121,4 @@ private:
 	int findToolIndex(const std::shared_ptr<Tool>& tool);
 	// start recover
 	void recover();
-	void checkWallRecoverClock();
 };

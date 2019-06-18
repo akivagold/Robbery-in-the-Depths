@@ -11,14 +11,13 @@
 #include "Grenade.h"
 #include "ExitLevel.h"
 
-// time to wall recover
-static const double WALL_RECOVERY_TIME = 1000;
+
 
 // register
 bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Player>(gameScreen); });
 
 Player::Player(GameScreen& gameScreen, int numOfLife)
-	: Character(gameScreen, numOfLife), m_isRecover(false),m_isWallRecover(false)
+	: Character(gameScreen, numOfLife), m_isRecover(false)
 {
 	init();
 }
@@ -328,6 +327,22 @@ void Player::onCollide(Wall* wall)
 	checkWallRecoverClock();
 }
 
+void Player::onCollide(Box* box)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Player::onCollide(MachineGun* machineGun)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
 const sf::Vector2f Player::getExternaAlcceleration() const {
 	if (isWallRecover()) {
 		return sf::Vector2f(0, 0);
@@ -335,11 +350,3 @@ const sf::Vector2f Player::getExternaAlcceleration() const {
 	return MovingObject::getExternaAlcceleration();
 }
 
-void Player::checkWallRecoverClock() {
-	if (wallRecoveryClock.getElapsedTime().asMilliseconds() > WALL_RECOVERY_TIME / 8) {
-		m_isWallRecover = false;
-	}
-	if (wallRecoveryClock.getElapsedTime().asMilliseconds() > WALL_RECOVERY_TIME) {
-		wallRecoveryClock.restart();
-	}
-}

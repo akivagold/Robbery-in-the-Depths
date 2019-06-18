@@ -47,7 +47,7 @@ void Shark::draw()
 
 void Shark::onCollide(Flow* flow)
 {
-	setExternaAlcceleration(flow->getFlowPower());
+	setExternaAlcceleration(getExternaAlcceleration() + flow->getFlowPower());
 }
 
 
@@ -74,6 +74,30 @@ void Shark::onCollide(Explosion* explosion)
 	exAcc.x /= float(getSize().x);
 	exAcc.y /= float(getSize().y);
 	setExternaAlcceleration(exAcc);
+}
+
+void Shark::onCollide(Wall* wall)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Shark::onCollide(Box* box)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Shark::onCollide(MachineGun* machineGun)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
 }
 
 void Shark::playChoice(Direction lastDirection, bool isCollided)
