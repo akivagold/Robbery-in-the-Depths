@@ -64,7 +64,5 @@ private:
 	sf::Vector2f m_flowPower;
 	// init
 	void init();
-	// flow clock
-	sf::Clock flowClock;
 };
 

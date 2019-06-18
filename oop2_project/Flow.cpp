@@ -42,12 +42,5 @@ void Flow::setPosition(const sf::Vector2f& position) {
 }
 
 const sf::Vector2f& Flow::getFlowPower(){
-	/*if (flowClock.getElapsedTime().asSeconds() < 1) {
-		return m_flowPower;
-	}
-	else if (flowClock.getElapsedTime().asSeconds() > 3) {
-		flowClock.restart();
-	}
-	return -m_flowPower/2.f;*/
 	return m_flowPower;
 }
