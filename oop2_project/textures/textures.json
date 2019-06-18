@@ -1,12 +1,18 @@
 {
     "textures": [
         {
-            "name": "lose",
-            "path": "cry.png"
+            "name": "cry",
+            "path": "cry_anim.png",
+            "numOfRows": 7,
+            "numOfCols": 5,
+            "numOfImages": 32
         },
         {
-            "name": "win",
-            "path": "win.png"
+            "name": "win_cup",
+            "path": "win_cup_anim.png",
+            "numOfRows": 20,
+            "numOfCols": 5,
+            "numOfImages": 99
         },
         {
             "name": "life",

@@ -5,7 +5,7 @@
 #include "RelativeLayout.h"
 #include "Button.h"
 #include "VerticalLayout.h"
-#include "ImageView.h"
+#include "AnimationView.h"
 
 //---- using section --------
 using std::string;
@@ -30,8 +30,8 @@ private:
 	std::shared_ptr<GUI::TextView> m_title;
 	// score
 	std::shared_ptr<GUI::TextView> m_score;
-	// image
-	std::shared_ptr<GUI::ImageView> m_image;
+	// win animation
+	std::shared_ptr<GUI::AnimationView> m_animView;
 	// levels buttons
 	std::shared_ptr<GUI::Button> m_backToMenuBT;
 	// init components
