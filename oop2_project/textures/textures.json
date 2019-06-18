@@ -1,215 +1,227 @@
 {
-    "textures": [
-        {
-            "name": "cry",
-            "path": "cry_anim.png",
-            "numOfRows": 7,
-            "numOfCols": 5,
-            "numOfImages": 32
-        },
-        {
-            "name": "win_cup",
-            "path": "win_cup_anim.png",
-            "numOfRows": 20,
-            "numOfCols": 5,
-            "numOfImages": 99
-        },
-        {
-            "name": "life",
-            "path": "life.png"
-        },
-        {
-            "name": "coin",
-            "path": "coin.png"
-        },
-        {
-            "name": "ak47",
-            "path": "ak47.png"
-        },
-        {
-            "name": "main_background",
-            "path": "main_background.png"
-        },
-        {
-            "name": "load",
-            "path": "load.png",
-            "numOfRows": 8,
-            "numOfCols": 5,
-            "numOfImages": 36
-        },
-        {
-            "name": "flower",
-            "path": "flower.png",
-            "numOfRows": 5,
-            "numOfCols": 6,
-            "numOfImages": 27
-        },
-        {
-            "name": "sea_star",
-            "path": "sea_star.png"
-        },
-        {
-            "name": "seaweed",
-            "path": "seaweed.png"
-        },
-        {
-            "name": "rubber_fire",
-            "path": "rubber_fire_anim.png",
-            "numOfRows": 1,
-            "numOfCols": 8,
-            "numOfImages": 8
-        },
-        {
-            "name": "rubber",
-            "path": "rubber.png"
-        },
-        {
-            "name": "rubber_swim",
-            "path": "rubber_swim_anim.png",
-            "numOfRows": 2,
-            "numOfCols": 9,
-            "numOfImages": 10
-        },
-        {
-            "name": "rubber_die",
-            "path": "rubber_die.png"
-        },
-        {
-            "name": "walking_crab",
-            "path": "walking_crab.png",
-            "numOfRows": 4,
-            "numOfCols": 6,
-            "numOfImages": 22
-        },
-        {
-            "name": "adhd_crab",
-            "path": "adhd_crab.png",
-            "numOfRows": 4,
-            "numOfCols": 6,
-            "numOfImages": 24
-        },
-        {
-            "name": "diver_anim",
-            "path": "diver_sprite_sheet.png",
-            "numOfRows": 2,
-            "numOfCols": 4,
-            "numOfImages": 8
-        },
-        {
-            "name": "diver",
-            "path": "diver.png"
-        },
-        {
-            "name": "machine_gun_right",
-            "path": "machine_gun_right.png"
-        },
-        {
-            "name": "machine_gun_left",
-            "path": "machine_gun_left.png"
-        },
-        {
-            "name": "machine_gun_down",
-            "path": "machine_gun_down.png"
-        },
-        {
-            "name": "machine_gun_up",
-            "path": "machine_gun_up.png"
-        },
-        {
-            "name": "shark_anim",
-            "path": "shark_sprite_sheet.png",
-            "numOfRows": 3,
-            "numOfCols": 3,
-            "numOfImages": 9
-        },
-        {
-            "name": "shark",
-            "path": "shark.png"
-        },
-        {
-            "name": "die_shark",
-            "path": "die_shark.png"
-        },
-        {
-            "name": "open_chest_anim",
-            "path": "open_chest_sprite_sheet.png",
-            "numOfRows": 3,
-            "numOfCols": 5,
-            "numOfImages": 12
-        },
-        {
-            "name": "chest",
-            "path": "chest.png"
-        },
-        {
-            "name": "bullet_horizontal",
-            "path": "bullet_horizontal.png"
-        },
-        {
-            "name": "bullet_up",
-            "path": "bullet_up.png"
-        },
-        {
-            "name": "bullet_down",
-            "path": "bullet_down.png"
-        },
-        {
-            "name": "wall",
-            "path": "wall.png"
-        },
-        {
-            "name": "crab",
-            "path": "crab.png"
-        },
-        {
-            "name": "die_crab",
-            "path": "die_crab.png"
-        },
-        {
-            "name": "flow",
-            "path": "flow.png",
-            "numOfRows": 2,
-            "numOfCols": 5,
-            "numOfImages": 10
-        },
-        {
-            "name": "explosion",
-            "path": "explosion.png",
-            "numOfRows": 9,
-            "numOfCols": 9,
-            "numOfImages": 72
-        },
-        {
-            "name": "grenade",
-            "path": "grenade.png"
-        },
-        {
-            "name": "grenade_launcher",
-            "path": "grenade_launcher.png"
-        },
-        {
-            "name": "box",
-            "path": "box.png"
-        },
-        {
-            "name": "flow_right",
-            "path": "flow_right.png"
-        },
-        {
-            "name": "flow_left",
-            "path": "flow_left.png"
-        },
-        {
-            "name": "flow_up",
-            "path": "flow_up.png"
-        },
-        {
-            "name": "flow_down",
-            "path": "flow_down.png"
-        },
-        {
-            "name": "exit",
-            "path": "exit.png"
-        }
-    ]
+  "textures": [
+    {
+      "name": "cry",
+      "path": "cry_anim.png",
+      "numOfRows": 7,
+      "numOfCols": 5,
+      "numOfImages": 32
+    },
+    {
+      "name": "win_cup",
+      "path": "win_cup_anim.png",
+      "numOfRows": 20,
+      "numOfCols": 5,
+      "numOfImages": 99
+    },
+    {
+      "name": "life",
+      "path": "life.png"
+    },
+    {
+      "name": "coin",
+      "path": "coin.png"
+    },
+    {
+      "name": "ak47",
+      "path": "ak47.png"
+    },
+    {
+      "name": "main_background",
+      "path": "main_background.png"
+    },
+    {
+      "name": "load",
+      "path": "load.png",
+      "numOfRows": 8,
+      "numOfCols": 5,
+      "numOfImages": 36
+    },
+    {
+      "name": "flower",
+      "path": "flower.png",
+      "numOfRows": 5,
+      "numOfCols": 6,
+      "numOfImages": 27
+    },
+    {
+      "name": "sea_star",
+      "path": "sea_star.png"
+    },
+    {
+      "name": "seaweed",
+      "path": "seaweed.png"
+    },
+    {
+      "name": "rubber_fire",
+      "path": "rubber_fire_anim.png",
+      "numOfRows": 1,
+      "numOfCols": 8,
+      "numOfImages": 8
+    },
+    {
+      "name": "rubber",
+      "path": "rubber.png"
+    },
+    {
+      "name": "rubber_swim",
+      "path": "rubber_swim_anim.png",
+      "numOfRows": 2,
+      "numOfCols": 9,
+      "numOfImages": 10
+    },
+    {
+      "name": "rubber_die",
+      "path": "rubber_die.png"
+    },
+    {
+      "name": "walking_crab",
+      "path": "walking_crab.png",
+      "numOfRows": 4,
+      "numOfCols": 6,
+      "numOfImages": 22
+    },
+    {
+      "name": "adhd_crab",
+      "path": "adhd_crab.png",
+      "numOfRows": 4,
+      "numOfCols": 6,
+      "numOfImages": 24
+    },
+    {
+      "name": "diver_anim",
+      "path": "diver_sprite_sheet.png",
+      "numOfRows": 2,
+      "numOfCols": 4,
+      "numOfImages": 8
+    },
+    {
+      "name": "diver",
+      "path": "diver.png"
+    },
+    {
+      "name": "machine_gun_right",
+      "path": "machine_gun_right.png"
+    },
+    {
+      "name": "machine_gun_left",
+      "path": "machine_gun_left.png"
+    },
+    {
+      "name": "machine_gun_down",
+      "path": "machine_gun_down.png"
+    },
+    {
+      "name": "machine_gun_up",
+      "path": "machine_gun_up.png"
+    },
+    {
+      "name": "shark_anim",
+      "path": "shark_sprite_sheet.png",
+      "numOfRows": 3,
+      "numOfCols": 3,
+      "numOfImages": 9
+    },
+    {
+      "name": "shark",
+      "path": "shark.png"
+    },
+    {
+      "name": "die_shark",
+      "path": "die_shark.png"
+    },
+    {
+      "name": "open_chest_anim",
+      "path": "open_chest_sprite_sheet.png",
+      "numOfRows": 3,
+      "numOfCols": 5,
+      "numOfImages": 12
+    },
+    {
+      "name": "chest",
+      "path": "chest.png"
+    },
+    {
+      "name": "bullet_horizontal",
+      "path": "bullet_horizontal.png"
+    },
+    {
+      "name": "bullet_up",
+      "path": "bullet_up.png"
+    },
+    {
+      "name": "bullet_down",
+      "path": "bullet_down.png"
+    },
+    {
+      "name": "wall",
+      "path": "wall.png"
+    },
+    {
+      "name": "crab",
+      "path": "crab.png"
+    },
+    {
+      "name": "die_crab",
+      "path": "die_crab.png"
+    },
+    {
+      "name": "flow",
+      "path": "flow.png",
+      "numOfRows": 2,
+      "numOfCols": 5,
+      "numOfImages": 10
+    },
+    {
+      "name": "explosion",
+      "path": "explosion.png",
+      "numOfRows": 9,
+      "numOfCols": 9,
+      "numOfImages": 72
+    },
+    {
+      "name": "grenade",
+      "path": "grenade.png"
+    },
+    {
+      "name": "grenade_launcher",
+      "path": "grenade_launcher.png"
+    },
+    {
+      "name": "box",
+      "path": "box.png"
+    },
+    {
+      "name": "flow_right",
+      "path": "flow_right.png"
+    },
+    {
+      "name": "flow_left",
+      "path": "flow_left.png"
+    },
+    {
+      "name": "flow_up",
+      "path": "flow_up.png"
+    },
+    {
+      "name": "flow_down",
+      "path": "flow_down.png"
+    },
+    {
+      "name": "exit",
+      "path": "exit.png"
+    },
+    {
+      "name": "water_texture",
+      "path": "water_texture.png"
+    },
+    {
+      "name": "water_texture2",
+      "path": "water_texture2.png"
+    },
+    {
+      "name": "water_texture3",
+      "path": "water_texture3.png"
+    }
+  ]
 }
