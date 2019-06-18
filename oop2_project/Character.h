@@ -48,6 +48,14 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event on die
 	virtual void onDie();
+	// wall recovery clock
+	sf::Clock wallRecoveryClock;
+	// wall recover flag
+	bool m_isWallRecover;
+	// time to wall recover
+	static const int WALL_RECOVERY_TIME = 1000;
+	// check wall recover clock
+	void checkWallRecoverClock();
 private:
 	// time before vanish when die
 	static const int DIE_VANISH_TIME = 5000;
@@ -58,7 +66,7 @@ private:
 	// vanish stopWatch
 	StopWatch m_vanishSW;
 	// disable using suicide. use die instead
-	using MovingObject::suicide;	
+	using MovingObject::suicide;
 };
 
 

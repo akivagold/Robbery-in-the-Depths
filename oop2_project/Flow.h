@@ -25,7 +25,8 @@ public:
 	// set flow - power & angle
 	void setFlow(const sf::Vector2f& flow);
 	// get flow power
-	const sf::Vector2f& getFlowPower() const { return m_flowPower; }
+	const sf::Vector2f& getFlowPower();
+	virtual void setPosition(const sf::Vector2f& position) override;
 	// collide events (using with double dispatch)
 	virtual void onCollide(BoardObject* obj) override { obj->onCollide(this); }
 	virtual void onCollide(Player* player) override {}

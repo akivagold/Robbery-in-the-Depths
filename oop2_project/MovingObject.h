@@ -41,13 +41,14 @@ public:
 	// get speed (const access)
 	const sf::Vector2f& cGetSpeed() const { return m_speed; }
 	// get interalAcceleration (const access)
-	const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }	
+	virtual const sf::Vector2f& getInteralAcceleration() const { return m_interalAcceleration; }
 	// check if this object is don't blocking movement
 	virtual bool canMoveThroughMe() const override { return true; }
 	// set external acceleration
 	void setExternaAlcceleration(sf::Vector2f acceleration);
 	// convert to string
 	virtual string toString() const override { return "MovingObject: { " + InteractableObject::toString() + " }"; }
+	virtual const sf::Vector2f getExternaAlcceleration() const { return m_externalAcc; }
 protected:
 	// constructor
 	explicit MovingObject(GameScreen& gameScreen, Direction direction = Direction::STANDING);
@@ -65,6 +66,9 @@ protected:
 	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
 	// event when direction changed
 	virtual void onDirectionChanged() = 0;
+	// make float effect
+	virtual void floatEffect();
+	void setFloatAcc(sf::Vector2f floatAcc) { m_floatAcc = floatAcc; }
 private:
 	// max speed default
 	static const sf::Vector2f MAX_SPEED_DEFAULT;
@@ -90,6 +94,4 @@ private:
 	void init();
 	// check collide
 	void checkCollide(const std::forward_list<BoardObject*>& collideList);
-	// make float effect
-	void floatEffect();
 };

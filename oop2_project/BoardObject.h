@@ -60,6 +60,8 @@ public:
 	void vanish();
 	// check if object if above then another object
 	bool isAboveThen(const std::shared_ptr<BoardObject>& other) const { return (getPosition().y + getSize().y < other->getPosition().y); }
+	// check if object if below then another object
+	bool isBelowThen(const std::shared_ptr<BoardObject>& other) const { return (getPosition().y > other->getPosition().y + other->getSize().y); }
 	// check if object if left then another object
 	bool isLeftThen(const std::shared_ptr<BoardObject>& other) const { return (getPosition().x + getSize().x < other->getPosition().x); }
 	// check if object if right then another object
@@ -81,6 +83,8 @@ public:
 	virtual void onCollide(ExitLevel* exitLevel) = 0;
 	// convert to string
 	virtual string toString() const override;
+	// get radius from player
+	float getRadiusFromPlayer() const;
 protected:
 	// update components
 	virtual void updateComponents() override;
@@ -88,8 +92,6 @@ protected:
 	explicit BoardObject(GameScreen& gameScreen, int drawPriority = 0);
 	// play sound
 	void playSound(const string& name, float pitch = 1.f);
-	// get radius from player
-	float getRadiusFromPlayer() const;
 	// event on vanish
 	virtual void onVanish() {}
 	// event when object joined to game

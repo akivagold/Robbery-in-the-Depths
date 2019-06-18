@@ -8,6 +8,7 @@
 #include "Flow.h"
 #include "ParseLevelException.h"
 #include "BOFactory.h"
+#include <iostream>
 
 World::World(sf::RenderWindow& window)
 	: GUI::View(window)
@@ -76,8 +77,11 @@ void World::init()
 {
 	makeRootView(true);
 	setPosition(0, 0);
-	getBackground().setColor(sf::Color(155, 236, 255));
-	getBorder().setColor(sf::Color::Blue);
+	//getBackground().setColor(sf::Color(155, 236, 255));
+	//getBorder().setColor(sf::Color::Blue);
+	getBackground().setTexture("water_texture3");
+	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setRepeated(true);
+	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setSmooth(true);
 	getBorder().setSize(1);
 	getCamera().zoom(0.6f);
 	getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));

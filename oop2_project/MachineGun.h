@@ -49,6 +49,8 @@ protected:
 	virtual void playChoice(Direction lastDirection, bool isCollided) override {};
 	// event when direction changed
 	virtual void onDirectionChanged() override { }
+	// make float effect
+	virtual void floatEffect() override { setFloatAcc(sf::Vector2f(0.f, 0.f)); }
 private:
 	// register flags in BOFactory
 	static bool isRegisteredLeft, isRegisteredRight, isRegisteredUp, isRegisteredDown;
@@ -73,5 +75,7 @@ private:
 	sf::Clock shootingPauseClock;
 	// init
 	void init();
+	// check if can shot
+	bool canShot() const;
 };
 

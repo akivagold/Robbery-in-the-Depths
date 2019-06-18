@@ -120,8 +120,8 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
 	floatEffect();
-	m_speed.x += (m_interalAcceleration.x + m_externalAcc.x + m_floatAcc.x - friction.x) * elapsedTime; // TODO external acc
-	m_speed.y += (m_interalAcceleration.y + m_externalAcc.y + m_floatAcc.y - friction.y) * elapsedTime;
+	m_speed.x += (m_interalAcceleration.x + getExternaAlcceleration().x + m_floatAcc.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.y += (m_interalAcceleration.y + getExternaAlcceleration().y + m_floatAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;
 	return sf::Vector2f(x_pos, y_pos);

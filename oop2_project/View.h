@@ -104,7 +104,7 @@ public:
 	// set area
 	void setBound(const sf::Vector2f& position, int width, int height);
 	// set position
-	void setPosition(const sf::Vector2f& position);
+	virtual void setPosition(const sf::Vector2f& position);
 	void setPosition(float x, float y);
 	// get parent view
 	View& getParent() const;

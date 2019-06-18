@@ -5,7 +5,7 @@
 #include "RelativeLayout.h"
 #include "Button.h"
 #include "VerticalLayout.h"
-#include "ImageView.h"
+#include "AnimationView.h"
 
 //---- using section --------
 using std::string;
@@ -30,8 +30,8 @@ private:
 	using BaseClass = GUI::BaseScreen<GUI::RelativeLayout<GUI::View>>;
 	// title
 	std::shared_ptr<GUI::TextView> m_title;
-	// image
-	std::shared_ptr<GUI::ImageView> m_image;
+	// cry animation
+	std::shared_ptr<GUI::AnimationView> m_animView;
 	// restart level button
 	std::shared_ptr<GUI::Button> m_backToMenuBT;
 	// back to menu

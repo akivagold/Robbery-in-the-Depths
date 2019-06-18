@@ -11,6 +11,10 @@
         {
             "name": "got_horror",
             "path": "Game Of Thrones S8 - 12.ogg"
+        },
+        {
+            "name": "monster",
+            "path": "Skillet - Monster.ogg"
         }
     ]
 }

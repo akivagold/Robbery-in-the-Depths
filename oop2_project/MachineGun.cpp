@@ -1,6 +1,6 @@
 #include "MachineGun.h"
 #include "BOFactory.h"
-#include "Bullet.h"
+#include "Player.h"
 
 // register
 bool MachineGun::isRegisteredLeft = BOFactory::getInterface().registerIn(MachineGun::CHAR_LEFT_MG, [](GameScreen& gameScreen) { return std::make_shared<MachineGun>(gameScreen, Direction::LEFT); });
@@ -24,14 +24,7 @@ void MachineGun::draw()
 	m_time.checkTimer();
 }
 
-void MachineGun::onCollide(Bullet* bullet)
-{
-	if (bullet->getMyOwner() == this) {
-		bullet->isCollideWiteMyowner(true);
-	}
-}
 
-#include <iostream>
 void MachineGun::init()
 {
 	setDrawPriority(DRAW_PRIORITY);
@@ -54,9 +47,9 @@ void MachineGun::init()
 	int shootingTempo = 100 + rand() % 150;
 	m_time.start(shootingTempo, [this] {
 		if (shootingPauseClock.getElapsedTime().asSeconds() < SHOOTING_PAUSE_SECONDS) {
-			float distanceFromPlayer = getRadiusFromPlayer();
+			
 			// fire
-			if (distanceFromPlayer < RADIUS_SHOT)
+			if (canShot())
 				getGun()->useTool();	
 		}
 	
@@ -64,4 +57,34 @@ void MachineGun::init()
 			shootingPauseClock.restart();
 		}
 	});
+}
+
+bool MachineGun::canShot() const
+{
+	float distanceFromPlayer = getRadiusFromPlayer();
+	if(distanceFromPlayer > RADIUS_SHOT)
+		return false;
+
+	bool canShotResult = false;
+	const std::shared_ptr<Player>& player = getGameScreen().getWorld().getBODS().getPlayer();
+	switch (getDirection())
+	{
+		case Direction::DOWN: {
+			if (player->isBelowThen(getSelf()))
+				canShotResult = true;
+		} break;
+		case Direction::UP: {
+			if (player->isAboveThen(getSelf()))
+				canShotResult = true;
+		} break;
+		case Direction::LEFT: {
+			if (player->isLeftThen(getSelf()))
+				canShotResult = true;
+		} break;
+		case Direction::RIGHT: {
+			if (player->isRightThen(getSelf()))
+				canShotResult = true;
+		} break;
+	}
+	return canShotResult;
 }

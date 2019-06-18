@@ -39,6 +39,7 @@ public:
 	void draw(sf::RenderWindow& window);
 	// convert to string
 	virtual string toString() const;
+	sf::Sprite& getSpriteTexture();
 private:
 	// load mode of image texture 
 	LoadMode m_loadMode;

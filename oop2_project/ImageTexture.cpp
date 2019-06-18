@@ -115,3 +115,10 @@ string GUI::ImageTexture::toString() const
 	string loadModeStr = (m_loadMode == COLOR) ? "Color" : "Texture";
 	return "ImageTexture: { loadMode=" + loadModeStr + " }";
 }
+
+sf::Sprite& GUI::ImageTexture::getSpriteTexture() {
+	if (!m_spriteTexture) {
+		throw std::invalid_argument("The sprite pointer is null" + toString());
+	}
+	return *m_spriteTexture.get();
+}
