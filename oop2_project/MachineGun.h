@@ -75,5 +75,7 @@ private:
 	sf::Clock shootingPauseClock;
 	// init
 	void init();
+	// check if can shot
+	bool canShot() const;
 };
 
