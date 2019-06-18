@@ -5,7 +5,7 @@
 const sf::Vector2f Bullet::ACCELERATION = sf::Vector2f(0.0001f*Bullet::getMODefSize().x, 0.0001f*Bullet::getMODefSize().y);
 
 Bullet::Bullet(GameScreen& gameScreen, Character* owner)
-	: Projectile(gameScreen, owner)
+	: Projectile(gameScreen, owner), m_collideWithMyOwner(true)
 {
 	init();
 }
@@ -27,17 +27,23 @@ void Bullet::draw()
 	m_time.checkTimer();
 }
 
+
 void Bullet::onCollide(Box* box)
 {
 	box->decreaseDurabilityState(getDamage());
 	explode();
 }
-
+#include <iostream>
 void Bullet::playChoice(Direction lastDirection, bool isCollided)
 {
 	if (isCollided) {
-		explode();
-		return;
+		if (!m_collideWithMyOwner) {
+			explode();
+			return;
+		}
+		if (!getBound().intersects(getMyOwner()->getBound()))
+			m_collideWithMyOwner = false;
+		
 	}
 
 	// set speed
@@ -64,7 +70,7 @@ void Bullet::init()
 		setAnimation("bullet_down");
 	
 	if (getDirection() == Direction::LEFT) {
-		flipAnimation();
+		flipAnimation();   
 	}
 	setDamage(DAMAGE);
 

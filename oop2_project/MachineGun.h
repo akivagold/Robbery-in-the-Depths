@@ -36,7 +36,7 @@ public:
 	virtual void onCollide(Chest* chest) override {}
 	virtual void onCollide(Wall* wall) override {}
 	virtual void onCollide(Flow* flow) override {}
-	virtual void onCollide(Bullet* bullet) override {}
+	virtual void onCollide(Bullet* bullet) override;
 	virtual void onCollide(MachineGun* machineGun) override {}
 	virtual void onCollide(Grenade* grenade) override {}
 	virtual void onCollide(Explosion* explosion) override {}

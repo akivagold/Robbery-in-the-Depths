@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "AK47.h"
 #include "Tool.h"
+#include "MachineGun.h"
 
 //---- using section --------
 using std::string;
@@ -38,6 +39,7 @@ public:
 	virtual void onCollide(ExitLevel* exitLevel) override {}
 	// convert to string
 	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
+	void isCollideWiteMyowner(bool chackCollide) { m_collideWithMyOwner = chackCollide; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -50,6 +52,7 @@ private:
 	static const sf::Vector2f ACCELERATION;
 	// time
 	Timer m_time;
+	bool m_collideWithMyOwner;
 	// damage
 	static const int DAMAGE = 1;
 	// init
