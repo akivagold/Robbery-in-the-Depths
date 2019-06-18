@@ -62,16 +62,17 @@ public:
 	virtual void onCollide(Crab* crab) override;
 	virtual void onCollide(Rubber* rubber) override {}
 	virtual void onCollide(Chest* chest) override; 
-	virtual void onCollide(Wall* wall) override {}
+	virtual void onCollide(Wall* wall) override;
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override;
-	virtual void onCollide(MachineGun* machineGun) override {}
+	virtual void onCollide(MachineGun* machineGun) override;
 	virtual void onCollide(Grenade* grenade) override;
 	virtual void onCollide(Explosion* explosion) override;
-	virtual void onCollide(Box* box) override {}
+	virtual void onCollide(Box* box) override;
 	virtual void onCollide(ExitLevel* exitLevel) override;
 	// convert to string
 	virtual string toString() const override;
+	const sf::Vector2f getExternaAlcceleration() const override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -112,6 +113,8 @@ private:
 	void init();
 	// check if player is recover
 	bool isRecover() const { return m_isRecover; }
+	// check if player is wall recovered
+	bool isWallRecover() const { return m_isWallRecover; }
 	// switch current tool to next tool at list
 	void switchToNextTool();
 	// find tool index

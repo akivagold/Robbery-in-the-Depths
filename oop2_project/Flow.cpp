@@ -24,7 +24,7 @@ void Flow::setFlow(const sf::Vector2f& flow)
 	m_flowPower = flow;
 	// TODO fix this:    rotateAnimation(float(std::atan2(-flow.x , -flow.y) * 180.f / M_PI));
 	// or this:		rotateViewAt(getWindow().mapPixelToCoords(sf::Vector2i(getSprite().getPosition())), getSprite(), std::atan2(flow.x, -flow.y) * 180.f / M_PI);
-	
+
 }
 
 void Flow::init()
@@ -32,5 +32,15 @@ void Flow::init()
 	setDrawPriority(DRAW_PRIORITY);
 	setAnimation("flow");
 	setAnimationFrequency(ANIM_FREQUENCY);
+	//setSize(BoardObject::getDefaultSize() * 3 / 4);
+	//Flow::setPosition(getPosition());
 }
 
+void Flow::setPosition(const sf::Vector2f& position) {
+	//View::setPosition(position + (0.125f * sf::Vector2f(BoardObject::getDefaultSize())));
+	View::setPosition(position);
+}
+
+const sf::Vector2f& Flow::getFlowPower(){
+	return m_flowPower;
+}

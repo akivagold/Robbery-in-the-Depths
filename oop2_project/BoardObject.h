@@ -81,6 +81,8 @@ public:
 	virtual void onCollide(ExitLevel* exitLevel) = 0;
 	// convert to string
 	virtual string toString() const override;
+	// get radius from player
+	float getRadiusFromPlayer() const;
 protected:
 	// update components
 	virtual void updateComponents() override;
@@ -88,8 +90,6 @@ protected:
 	explicit BoardObject(GameScreen& gameScreen, int drawPriority = 0);
 	// play sound
 	void playSound(const string& name, float pitch = 1.f);
-	// get radius from player
-	float getRadiusFromPlayer() const;
 	// event on vanish
 	virtual void onVanish() {}
 	// event when object joined to game

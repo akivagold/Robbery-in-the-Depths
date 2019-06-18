@@ -11,6 +11,8 @@
 #include "Grenade.h"
 #include "ExitLevel.h"
 
+
+
 // register
 bool Player::isRegistered = BOFactory::getInterface().registerIn(Player::CHAR, [](GameScreen& gameScreen) { return std::make_shared<Player>(gameScreen); });
 
@@ -120,7 +122,7 @@ void Player::useCurrTool()
 
 void Player::onToolUpdated(Tool* tool)
 {
-	if(tool == m_currTool.get())
+	if (tool == m_currTool.get())
 		getGameScreen().getGameMenu()->getToolView()->updateUseLimit();
 }
 
@@ -173,18 +175,18 @@ void Player::onCollide(Chest* chest)
 
 void Player::onCollide(Flow* flow)
 {
-	setExternaAlcceleration(flow->getFlowPower());
+	setExternaAlcceleration(getExternaAlcceleration() + flow->getFlowPower());
 }
 
 void Player::onCollide(Bullet* bullet)
 {
 	if (bullet->getMyOwner() != this) {
 		if (!isDie() && !bullet->isInShotTime()) {
-			if(!isRecover())
+			if (!isRecover())
 				decreaseLife(bullet->getDamage());
 			bullet->explode();
 		}
-	}	
+	}
 }
 
 void Player::onCollide(Grenade* grenade)
@@ -217,6 +219,7 @@ void Player::playChoice(Direction lastDirection, bool isCollided)
 {
 	Character::playChoice(lastDirection, isCollided);
 	m_recoveSW.checkStopWatch();
+	checkWallRecoverClock();
 }
 
 string Player::toString() const
@@ -242,7 +245,7 @@ void Player::init()
 	setDirection(Direction::RIGHT);
 	setSize(static_cast<int>(0.7f*getDefaultSize().x), static_cast<int>(0.5f*getDefaultSize().y));
 	setMaxSpeed(sf::Vector2f(6.f*getSize().x, 6.f*getSize().y));
-	
+
 	addKeyDownListener([this](sf::Keyboard::Key& keyCode) {
 		if (isDie())
 			return;
@@ -251,28 +254,28 @@ void Player::init()
 		float offset = 0.00005f*float(getSize().x);
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Left: {
-				getInteralAcceleration().x = -offset;
-				setDirection(Direction::LEFT);
-			} break;
-			case sf::Keyboard::Key::Right: {
-				getInteralAcceleration().x = offset;
-				setDirection(Direction::RIGHT);
-			} break;
-			case sf::Keyboard::Key::Up: {
-				getInteralAcceleration().y = -offset;
-				//setDirection(Direction::UP);
-			} break;
-			case sf::Keyboard::Key::Down: {
-				getInteralAcceleration().y = offset;
-				//setDirection(Direction::DOWN);
-			} break;
-			case sf::Keyboard::Key::Space: {
-				useCurrTool();
-			} break;
-			case sf::Keyboard::Key::LShift: {
-				switchToNextTool();
-			} break;
+		case sf::Keyboard::Key::Left: {
+			getInteralAcceleration().x = -offset;
+			setDirection(Direction::LEFT);
+		} break;
+		case sf::Keyboard::Key::Right: {
+			getInteralAcceleration().x = offset;
+			setDirection(Direction::RIGHT);
+		} break;
+		case sf::Keyboard::Key::Up: {
+			getInteralAcceleration().y = -offset;
+			//setDirection(Direction::UP);
+		} break;
+		case sf::Keyboard::Key::Down: {
+			getInteralAcceleration().y = offset;
+			//setDirection(Direction::DOWN);
+		} break;
+		case sf::Keyboard::Key::Space: {
+			useCurrTool();
+		} break;
+		case sf::Keyboard::Key::LShift: {
+			switchToNextTool();
+		} break;
 		}
 	});
 	addKeyReleasedListener([this](sf::Keyboard::Key& keyCode) {
@@ -283,18 +286,18 @@ void Player::init()
 		float offset = 0;
 		switch (keyCode)
 		{
-			case sf::Keyboard::Key::Left: {
-				getInteralAcceleration().x = -offset;
-			} break;
-			case sf::Keyboard::Key::Right: {
-				getInteralAcceleration().x = offset;
-			} break;
-			case sf::Keyboard::Key::Up: {
-				getInteralAcceleration().y = -offset;
-			} break;
-			case sf::Keyboard::Key::Down: {
-				getInteralAcceleration().y = offset;
-			} break;
+		case sf::Keyboard::Key::Left: {
+			getInteralAcceleration().x = -offset;
+		} break;
+		case sf::Keyboard::Key::Right: {
+			getInteralAcceleration().x = offset;
+		} break;
+		case sf::Keyboard::Key::Up: {
+			getInteralAcceleration().y = -offset;
+		} break;
+		case sf::Keyboard::Key::Down: {
+			getInteralAcceleration().y = offset;
+		} break;
 		}
 	});
 }
@@ -315,3 +318,35 @@ void Player::recover()
 		m_isRecover = false;
 	});
 }
+
+void Player::onCollide(Wall* wall)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME/8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Player::onCollide(Box* box)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+void Player::onCollide(MachineGun* machineGun)
+{
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() < WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = true;
+	}
+	checkWallRecoverClock();
+}
+
+const sf::Vector2f Player::getExternaAlcceleration() const {
+	if (isWallRecover()) {
+		return sf::Vector2f(0, 0);
+	}
+	return MovingObject::getExternaAlcceleration();
+}
+

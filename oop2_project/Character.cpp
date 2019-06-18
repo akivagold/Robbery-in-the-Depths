@@ -1,7 +1,9 @@
 #include "Character.h"
 
+
+
 Character::Character(GameScreen& gameScreen, int numOfLife)
-	: MovingObject(gameScreen), m_isDie(false)
+	: MovingObject(gameScreen), m_isDie(false), m_isWallRecover(false)
 {
 	setNumOfLife(numOfLife);
 }
@@ -84,4 +86,13 @@ void Character::onDie()
 string Character::toString() const
 {
 	return "Character: { numOfLife=" + std::to_string(m_numOfLife) + ", " + MovingObject::toString() + " }";
+}
+
+void Character::checkWallRecoverClock() {
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() > WALL_RECOVERY_TIME / 8) {
+		m_isWallRecover = false;
+	}
+	if (wallRecoveryClock.getElapsedTime().asMilliseconds() > WALL_RECOVERY_TIME) {
+		wallRecoveryClock.restart();
+	}
 }
