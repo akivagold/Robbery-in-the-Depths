@@ -88,8 +88,8 @@ void akiva_main()
 	GUI::SoundManager::getInterface();
 	try
 	{
-		//testGameController();
-		testLevelFileManager();
+		testGameController();
+		//testLevelFileManager();
 		//testWorld();
 	}
 	catch (const std::exception& ex)

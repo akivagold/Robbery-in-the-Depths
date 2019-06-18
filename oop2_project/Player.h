@@ -62,7 +62,7 @@ public:
 	virtual void onCollide(Crab* crab) override;
 	virtual void onCollide(Rubber* rubber) override {}
 	virtual void onCollide(Chest* chest) override; 
-	virtual void onCollide(Wall* wall) override {}
+	virtual void onCollide(Wall* wall) override;
 	virtual void onCollide(Flow* flow) override;
 	virtual void onCollide(Bullet* bullet) override;
 	virtual void onCollide(MachineGun* machineGun) override {}
@@ -72,6 +72,7 @@ public:
 	virtual void onCollide(ExitLevel* exitLevel) override;
 	// convert to string
 	virtual string toString() const override;
+	const sf::Vector2f getExternaAlcceleration() const override;
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
@@ -94,6 +95,8 @@ private:
 	static const int DEFAULT_LIFE = 20;
 	// time to recover
 	static const int RECOVERY_TIME = 1000;
+	// wall recovery clock
+	sf::Clock wallRecoveryClock;
 	// register flag in BOFactory
 	static bool isRegistered;
 	// my tools
@@ -104,18 +107,25 @@ private:
 	int m_numOfScore;
 	// recover stopWatch
 	StopWatch m_recoveSW;
+	// wall recover stopWatch
+	StopWatch m_wallRecoverSW;
 	// recover flag
 	bool m_isRecover;
+	// wall recover flag
+	bool m_isWallRecover;
 	// events handlers
 	std::function<void()> m_dieHandler, m_vanishHandler, m_comeToELHandler;
 	// init
 	void init();
 	// check if player is recover
 	bool isRecover() const { return m_isRecover; }
+	// check if player is wall recovered
+	bool isWallRecover() const { return m_isWallRecover; }
 	// switch current tool to next tool at list
 	void switchToNextTool();
 	// find tool index
 	int findToolIndex(const std::shared_ptr<Tool>& tool);
 	// start recover
 	void recover();
+	void checkWallRecoverClock();
 };
