@@ -67,6 +67,10 @@
     {
       "name": "player_die",
       "path": "player_die.ogg"
+    },
+    {
+      "name": "box_explode",
+      "path": "box_explode.wav"
     }
   ]
 }
