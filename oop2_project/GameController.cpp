@@ -4,15 +4,10 @@
 
 void GameController::run()
 {
-	// TODO play background music
-
 	// create window
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1000, 500, desktop.bitsPerPixel), "Robbery in the Depths", sf::Style::Fullscreen);
-
-	// TODO set game icon at window
-
 	runMainScreen(window);
 }
 
@@ -35,7 +30,6 @@ void GameController::runMainScreen(sf::RenderWindow& window)
 		runChooseLevelScreen(v.getWindow(), lfm, [&v, this, &lfm](const LevelInfo& levelInfo) {
 			runEditScreen(v.getWindow(), lfm, levelInfo);
 		});
-		playMenuMusic();
 	});
 	mainScreen.getStartBt()->addClickListener([this, &lfm](GUI::View& v) {
 		runChooseLevelScreen(v.getWindow(), lfm, [&v, this](const LevelInfo& levelInfo) {
@@ -142,5 +136,5 @@ void GameController::runEditScreen(sf::RenderWindow& window, LevelFileManager& l
 
 void GameController::playMenuMusic()
 {
-	// TODO GUI::SoundManager::getInterface().playBackgroundMusic("");
+	GUI::SoundManager::getInterface().playBackgroundMusic("menu");
 }

@@ -30,11 +30,13 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 		if (ch != ' ') {
 			sf::Vector2f position(static_cast<float>(defaultSize.x*cell.getColNum()), static_cast<float>(defaultSize.y*cell.getRowNum()));
 			std::shared_ptr<BoardObject> boardObj = BOFactory::getInterface().create(ch, gameScreen);
+			// fix position
 			if (getSize().y != defaultSize.y) {
-				// fix position
 				position.y += (defaultSize.y - boardObj->getSize().y)*0.6f;
 			}
-			// TODO fix x:    position.x += (defaultSize.x - boardObj->getSize().x);
+			if (getSize().x != defaultSize.x) {
+				position.x += (defaultSize.x - boardObj->getSize().x)/2.f;
+			}
 			boardObj->setPosition(position);
 			m_bods.requestAddBO(boardObj);
 		}	

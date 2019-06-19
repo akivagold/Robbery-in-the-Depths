@@ -19,6 +19,14 @@
     {
       "name": "lose",
       "path": "Anime Music - Kyrie.ogg"
+    },
+    {
+      "name": "menu",
+      "path": "I am Legend - 10.ogg"
+    },
+    {
+      "name": "jazz2",
+      "path": "Jazz Jackrabbit Cutscenes.ogg"
     }
   ]
 }
