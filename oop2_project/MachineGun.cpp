@@ -1,6 +1,7 @@
 #include "MachineGun.h"
 #include "BOFactory.h"
 #include "Player.h"
+#include "Bullet.h"
 
 // register
 bool MachineGun::isRegisteredLeft = BOFactory::getInterface().registerIn(MachineGun::CHAR_LEFT_MG, [](GameScreen& gameScreen) { return std::make_shared<MachineGun>(gameScreen, Direction::LEFT); });
@@ -24,6 +25,12 @@ void MachineGun::draw()
 	m_time.checkTimer();
 }
 
+void MachineGun::onCollide(Bullet* bullet)
+{
+	if (bullet->getMyOwner() == this) {
+		bullet->isCollideWiteMyowner(true);
+	}
+}
 
 void MachineGun::init()
 {
