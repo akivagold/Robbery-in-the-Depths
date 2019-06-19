@@ -40,12 +40,10 @@ public:
 	void setTransparency(sf::Uint32 transparency);
 	// get transparency
 	sf::Uint32 getTransparency() const { return m_sprite.getColor().a; }
-	// rotate animation
-	// TODO fix:   void rotateAnimation(float degrees);
 protected:
 	// update components
 	virtual void updateComponents();
-	// TODO fix:	void rotateViewAt(sf::Vector2f coord, sf::Sprite & sprite, float rotation);
+	// get sprite
 	sf::Sprite& getSprite() { return m_sprite; }
 private:
 	// current sprite

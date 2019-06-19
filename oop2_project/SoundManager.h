@@ -28,7 +28,7 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
-	// maximum sound players
+	// maximum sound players (need limit because SFML is a stupid library)
 	static const int MAX_SOUND_PLAYERS = 50;
 	// sounds buffers map
 	std::unordered_map<string, sf::SoundBuffer> m_soundsBuffers;

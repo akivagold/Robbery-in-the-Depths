@@ -79,8 +79,6 @@ void World::init()
 {
 	makeRootView(true);
 	setPosition(0, 0);
-	//getBackground().setColor(sf::Color(155, 236, 255));
-	//getBorder().setColor(sf::Color::Blue);
 	getBackground().setTexture("water_texture3");
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setRepeated(true);
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setSmooth(true);

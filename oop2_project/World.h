@@ -39,9 +39,6 @@ protected:
 	// handle key released event
 	virtual void handleKeyReleasedEvent(sf::Keyboard::Key keyCode) override;
 private:
-
-	// TODO add WeatherView & LevelDecoration 
-
 	// BoardObjectDataStructure
 	BODS m_bods;
 	// init

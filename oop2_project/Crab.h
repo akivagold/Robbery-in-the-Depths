@@ -38,8 +38,8 @@ protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;
 	// event when direction changed
-	virtual void onDirectionChanged() override {}; // TODO: use this
-		// event on die
+	virtual void onDirectionChanged() override {}
+	// event on die
 	virtual void onDie() override;
 private:
 	// char
