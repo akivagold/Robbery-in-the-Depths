@@ -139,23 +139,33 @@ bool GUI::View::handleEvent(const sf::Event& event)
 	}
 
 	// get mouse position relative to camera (or without that)
-	sf::Vector2f mousePos = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+	sf::Vector2i relMousePos = sf::Mouse::getPosition(m_window);
+	sf::Vector2f mousePos = m_window.mapPixelToCoords(relMousePos);
+
+	bool mouseInViewport = true;
+	if (m_useCamera) {
+		sf::Vector2f windowRelMousePoint(float(relMousePos.x) / m_window.getSize().x, float(relMousePos.y) / m_window.getSize().y);
+		mouseInViewport = m_camera->getViewport().contains(windowRelMousePoint);
+	}
 
 	switch (event.type) {
 		case sf::Event::MouseButtonPressed: {
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)&& mouseInViewport)
 				handleClickEvent(mousePos.x, mousePos.y);
 			else
 				return false; // cannot handle the event
 		} break;
 		case sf::Event::MouseEntered: {
-			handleEnterEvent(mousePos.x, mousePos.y);
+			if(mouseInViewport)
+				handleEnterEvent(mousePos.x, mousePos.y);
 		} break;
 		case sf::Event::MouseLeft: { // mouse left the screen
 			handleLeaveEvent(-1, -1); // fake mouse coordinates
 		} break;
 		case sf::Event::MouseMoved: {
-			handleEnterEvent(mousePos.x, mousePos.y);
+			if (mouseInViewport) {
+				handleEnterEvent(mousePos.x, mousePos.y);
+			}
 			handleLeaveEvent(mousePos.x, mousePos.y);
 		} break;
 		case sf::Event::KeyPressed: {
