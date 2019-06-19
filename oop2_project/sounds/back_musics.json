@@ -1,20 +1,24 @@
 {
-    "back_musics": [
-        {
-            "name": "bm1",
-            "path": "Game of Thrones S8 - The Night King - Ramin Djawadi.ogg"
-        },
-        {
-            "name": "santorini",
-            "path": "santorini.ogg"
-        },
-        {
-            "name": "got_horror",
-            "path": "Game Of Thrones S8 - 12.ogg"
-        },
-        {
-            "name": "monster",
-            "path": "Skillet - Monster.ogg"
-        }
-    ]
+  "back_musics": [
+    {
+      "name": "santorini",
+      "path": "santorini.ogg"
+    },
+    {
+      "name": "got_horror",
+      "path": "Game Of Thrones S8 - 12.ogg"
+    },
+    {
+      "name": "monster",
+      "path": "Skillet - Monster.ogg"
+    },
+    {
+      "name": "win",
+      "path": "Jazz Jackrabbit 2 - 8.ogg"
+    },
+    {
+      "name": "lose",
+      "path": "Anime Music - Kyrie.ogg"
+    }
+  ]
 }

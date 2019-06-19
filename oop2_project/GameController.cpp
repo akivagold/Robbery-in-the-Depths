@@ -142,5 +142,5 @@ void GameController::runEditScreen(sf::RenderWindow& window, LevelFileManager& l
 
 void GameController::playMenuMusic()
 {
-	GUI::SoundManager::getInterface().playBackgroundMusic("bm1");
+	// TODO GUI::SoundManager::getInterface().playBackgroundMusic("");
 }
