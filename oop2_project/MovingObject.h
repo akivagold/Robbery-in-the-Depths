@@ -66,6 +66,8 @@ protected:
 	const sf::Vector2f& getMaxSpeed() const { return m_maxSpeed; }
 	// event when direction changed
 	virtual void onDirectionChanged() = 0;
+	// event when object joined to game
+	virtual void onJoinedGame() override { m_clock.restart(); }
 	// make float effect
 	virtual void floatEffect();
 	void setFloatAcc(sf::Vector2f floatAcc) { m_floatAcc = floatAcc; }

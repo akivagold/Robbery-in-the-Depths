@@ -2,6 +2,7 @@
 
 void Projectile::onJoinedGame()
 {
+	MovingObject::onJoinedGame();
 	m_inShotSW.start(SHOT_TIME, [this] {
 		m_inShot = false;
 	});

@@ -40,13 +40,13 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 		if (!m_collideWithMyOwner) {
 			explode();
 			return;
-		}
-		//if (!getBound().intersects(getMyOwner()->getBound()))
-			//m_collideWithMyOwner = false;
-		
+		}	
 	}
+
+	// chack if collide with his owner 
 	if (!getBound().intersects(getMyOwner()->getBound()))
 		m_collideWithMyOwner = false;
+
 	// set speed
 	if (getDirection() == Direction::RIGHT) {
 		getInteralAcceleration().x = ACCELERATION.x;
