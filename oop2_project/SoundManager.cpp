@@ -20,13 +20,17 @@ void GUI::SoundManager::playSound(const string& name, float volume, float pitch)
 	auto it = m_soundsBuffers.find(name);
 	if (it == m_soundsBuffers.end())
 		throw LoadResourceException("Cannot find the sound with name=" + name);
+
+
 	// load sound
-	sf::Sound& mediaPlayer = findFreeMediaPlayer();
-	mediaPlayer.setPitch(pitch);
-	mediaPlayer.setVolume(volume);
-	mediaPlayer.setBuffer(it->second);
-	// play sound
-	mediaPlayer.play();
+	sf::Sound* mediaPlayer = findFreeMediaPlayer();
+	if (mediaPlayer != nullptr) {
+		mediaPlayer->setPitch(pitch);
+		mediaPlayer->setVolume(volume);
+		mediaPlayer->setBuffer(it->second);
+		// play sound
+		mediaPlayer->play();
+	}	
 }
 
 void GUI::SoundManager::playBackgroundMusic(const string& name)
@@ -146,14 +150,21 @@ void GUI::SoundManager::loadBackgroundMusics()
 	}
 }
 
-sf::Sound& GUI::SoundManager::findFreeMediaPlayer()
+sf::Sound* GUI::SoundManager::findFreeMediaPlayer()
 {
 	// check free media player
 	for (auto& mediaPlayer : m_mediaPlayers) {
 		if (mediaPlayer.getStatus() != sf::SoundSource::Status::Playing)
-			return mediaPlayer;
+			return &mediaPlayer;
 	}
-	// create new media player
-	m_mediaPlayers.push_back(sf::Sound());
-	return m_mediaPlayers[m_mediaPlayers.size() - 1]; // return last media player
+
+	// check if can add new sound player
+	if (m_mediaPlayers.size() < MAX_SOUND_PLAYERS) {
+		// create new media player
+		m_mediaPlayers.push_back(sf::Sound());
+		return &m_mediaPlayers[m_mediaPlayers.size() - 1]; // return last media player
+	}
+
+	// can't add new sound player
+	return nullptr;
 }

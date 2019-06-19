@@ -35,7 +35,6 @@ void Shark::onDirectionChanged()
 void Shark::onDie()
 {
 	NPC::onDie();
-	// TODO play sound
 	setAnimation("die_shark");
 }
 

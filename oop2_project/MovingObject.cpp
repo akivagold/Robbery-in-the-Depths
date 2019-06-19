@@ -7,7 +7,6 @@ const sf::Vector2f MovingObject::MAX_SPEED_DEFAULT = sf::Vector2f(getDefaultSize
 sf::Vector2f MovingObject::getFriction() const
 {
 	sf::Vector2f friction;
-	//TODO add external acc(?)
 
 	friction.x = m_speed.x / (m_maxSpeed.x);
 	friction.y = m_speed.y / (m_maxSpeed.y);
@@ -120,7 +119,7 @@ sf::Vector2f MovingObject::getNextPosition()
 	sf::Int32 elapsedTime = m_clock.getElapsedTime().asMilliseconds();
 	m_clock.restart();
 	floatEffect();
-	m_speed.x += (m_interalAcceleration.x + getExternaAlcceleration().x + m_floatAcc.x - friction.x) * elapsedTime; // TODO external acc
+	m_speed.x += (m_interalAcceleration.x + getExternaAlcceleration().x + m_floatAcc.x - friction.x) * elapsedTime;
 	m_speed.y += (m_interalAcceleration.y + getExternaAlcceleration().y + m_floatAcc.y - friction.y) * elapsedTime;
 	float x_pos = getPosition().x + m_speed.x * elapsedTime;
 	float y_pos = getPosition().y + m_speed.y * elapsedTime;

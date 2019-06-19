@@ -18,8 +18,6 @@ World::World(sf::RenderWindow& window)
 
 void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 {
-	// TODO need clear BODS
-
 	const sf::Vector2i& defaultSize = BoardObject::getDefaultSize();
 	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
 	setSize(levelSize.y*defaultSize.y, levelSize.x*defaultSize.x);
@@ -30,11 +28,13 @@ void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 		if (ch != ' ') {
 			sf::Vector2f position(static_cast<float>(defaultSize.x*cell.getColNum()), static_cast<float>(defaultSize.y*cell.getRowNum()));
 			std::shared_ptr<BoardObject> boardObj = BOFactory::getInterface().create(ch, gameScreen);
+			// fix position
 			if (getSize().y != defaultSize.y) {
-				// fix position
 				position.y += (defaultSize.y - boardObj->getSize().y)*0.6f;
 			}
-			// TODO fix x:    position.x += (defaultSize.x - boardObj->getSize().x);
+			if (getSize().x != defaultSize.x) {
+				position.x += (defaultSize.x - boardObj->getSize().x)/2.f;
+			}
 			boardObj->setPosition(position);
 			m_bods.requestAddBO(boardObj);
 		}	
@@ -77,8 +77,6 @@ void World::init()
 {
 	makeRootView(true);
 	setPosition(0, 0);
-	//getBackground().setColor(sf::Color(155, 236, 255));
-	//getBorder().setColor(sf::Color::Blue);
 	getBackground().setTexture("water_texture3");
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setRepeated(true);
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setSmooth(true);

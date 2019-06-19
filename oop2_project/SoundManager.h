@@ -28,6 +28,8 @@ public:
 	// convert to string
 	virtual string toString() const override;
 private:
+	// maximum sound players (need limit because SFML is a stupid library)
+	static const int MAX_SOUND_PLAYERS = 50;
 	// sounds buffers map
 	std::unordered_map<string, sf::SoundBuffer> m_soundsBuffers;
 	// background musics map (name and path)
@@ -43,7 +45,7 @@ private:
 	// load background musics (name and path)
 	void loadBackgroundMusics();
 	// find free media player from list
-	sf::Sound& findFreeMediaPlayer();
+	sf::Sound* findFreeMediaPlayer();
 	// disable copy
 	SoundManager& operator=(const SoundManager&) = delete;
 	SoundManager(const SoundManager&) = delete;

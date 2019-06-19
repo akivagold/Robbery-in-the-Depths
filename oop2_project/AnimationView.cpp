@@ -86,29 +86,6 @@ void GUI::AnimationView::setTransparency(sf::Uint32 transparency)
 	m_sprite.setColor(newColor);
 }
 
-/* TODO fix
-void GUI::AnimationView::rotateAnimation(float relative_degrees)
-{
-	double xSize = getSize().x;
-	double ySize = getSize().y;
-	// find radius
-	double radius = std::sqrt(std::pow(ySize, 2) + std::pow(xSize, 2)) / 2;
-	// find real degree rotation
-	double degreeFix = std::atan2(xSize , ySize) * 180 / M_PI;
-	// find original center
-	double position_x = std::cos((360 - (90 - degreeFix)) * M_PI / 180) * radius;
-	double position_y = std::sin((360 - (90 - degreeFix)) * M_PI / 180) * radius;
-	double degrees = relative_degrees - (90 - degreeFix);
-	// find current center
-	double x = std::cos(degrees * M_PI / 180) * radius;
-	double y = std::sin(degrees * M_PI / 180) * radius;
-	// fix after rotation
-	m_sprite.setOrigin(float(y - position_y), -float(x - position_x));
-	// rotate anti clockwise
-	m_sprite.rotate(-relative_degrees);
-
-}*/
-
 void GUI::AnimationView::updateComponents()
 {
 	View::updateComponents();

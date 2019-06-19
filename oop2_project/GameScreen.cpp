@@ -9,8 +9,6 @@ GameScreen::GameScreen(sf::RenderWindow& window)
 
 void GameScreen::loadLevel(const LevelInfo& levelInfo)
 {
-	// TODO need clear game menu
-
 	// play level music if include
 	const string& backMusicName = levelInfo.getBackMusicName();
 	if(!backMusicName.empty())

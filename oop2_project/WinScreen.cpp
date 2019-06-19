@@ -1,4 +1,5 @@
 #include "WinScreen.h"
+#include "SoundManager.h"
 
 WinScreen::WinScreen(sf::RenderWindow & window, int score)
 	: BaseClass(window)
@@ -8,6 +9,8 @@ WinScreen::WinScreen(sf::RenderWindow & window, int score)
 
 void WinScreen::initComponents(int score)
 {
+	GUI::SoundManager::getInterface().playBackgroundMusic("win");
+
 	// init title
 	m_title = std::make_shared<GUI::TextView>(getWindow(), "You Win!");
 	m_title->setTextColor(sf::Color(58, 122, 19));

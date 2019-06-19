@@ -63,6 +63,14 @@
     {
       "name": "machine_gun",
       "path": "machine_gun.ogg"
+    },
+    {
+      "name": "player_die",
+      "path": "player_die.ogg"
+    },
+    {
+      "name": "box_explode",
+      "path": "box_explode.wav"
     }
   ]
 }

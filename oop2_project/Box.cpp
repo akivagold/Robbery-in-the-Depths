@@ -34,8 +34,7 @@ void Box::setDurabilityState(int durabilityState)
 
 void Box::destroy()
 {
-	// TODO play sound
-	// TODO show animation
+	playSound("box_explode");
 	vanish();
 }
 

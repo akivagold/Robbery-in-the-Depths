@@ -19,15 +19,6 @@ void BODS::prepareLevel()
 	handleRequests();
 	connectPlayerMember();
 }
-/*
-void BODS::clear()
-{
-	m_player = nullptr;
-	while (!m_addQueue.empty()) m_addQueue.pop();
-	while (!m_removeQueue.empty()) m_addQueue.pop();
-	// TODO delete tree
-}
-*/
 
 void BODS::handleAddRequestsQueue()
 {

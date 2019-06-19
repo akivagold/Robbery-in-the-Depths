@@ -4,15 +4,10 @@
 
 void GameController::run()
 {
-	// TODO play background music
-
 	// create window
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(1000, 500, desktop.bitsPerPixel), "Robbery in the Depths", sf::Style::Fullscreen);
-
-	// TODO set game icon at window
-
 	runMainScreen(window);
 }
 
@@ -23,6 +18,7 @@ string GameController::toString() const
 
 void GameController::runMainScreen(sf::RenderWindow& window)
 {
+	playMenuMusic();
 	// read levels
 	LevelFileManager lfm;
 
@@ -39,6 +35,7 @@ void GameController::runMainScreen(sf::RenderWindow& window)
 		runChooseLevelScreen(v.getWindow(), lfm, [&v, this](const LevelInfo& levelInfo) {
 			runGameScreen(v.getWindow(), levelInfo);
 		});	
+		playMenuMusic();
 	});
 	mainScreen.run();
 }
@@ -135,4 +132,9 @@ void GameController::runEditScreen(sf::RenderWindow& window, LevelFileManager& l
 	});
 
 	editScreen.run();
+}
+
+void GameController::playMenuMusic()
+{
+	GUI::SoundManager::getInterface().playBackgroundMusic("menu");
 }

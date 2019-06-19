@@ -1,4 +1,5 @@
 #include "LoseScreen.h"
+#include "SoundManager.h"
 
 LoseScreen::LoseScreen(sf::RenderWindow& window)
 	: BaseClass(window)
@@ -8,6 +9,8 @@ LoseScreen::LoseScreen(sf::RenderWindow& window)
 
 void LoseScreen::initComponents()
 {
+	GUI::SoundManager::getInterface().playBackgroundMusic("lose");
+
 	// init title
 	m_title = std::make_shared<GUI::TextView>(getWindow(), "You Lose!");
 	m_title->setTextColor(sf::Color::Red);

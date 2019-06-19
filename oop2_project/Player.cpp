@@ -138,6 +138,7 @@ void Player::decreaseLife(int numOfLife)
 void Player::onDie()
 {
 	Character::onDie();
+	playSound("player_die");
 	if (m_dieHandler)
 		m_dieHandler();
 }
@@ -166,9 +167,9 @@ void Player::onCollide(Crab* crab)
 
 void Player::onCollide(Chest* chest)
 {
-	if (!chest->isEmpty()) {
+	if (!isDie() && !chest->isEmpty()) {
 		string message = "You received " + chest->getContentInfo();
-		getGameScreen().getGameAnimText()->showText(GameAnimText::TextInfo(message, sf::Color(108, 0, 118)));
+		getGameScreen().getGameAnimText()->showText(GameAnimText::TextInfo(message, sf::Color::White));
 		chest->pickup(this);		
 	}
 }
@@ -211,8 +212,10 @@ void Player::onCollide(Explosion* explosion)
 
 void Player::onCollide(ExitLevel* exitLevel)
 {
-	if (m_comeToELHandler)
-		m_comeToELHandler();
+	if (!isDie()) {
+		if (m_comeToELHandler)
+			m_comeToELHandler();
+	}	
 }
 
 void Player::playChoice(Direction lastDirection, bool isCollided)

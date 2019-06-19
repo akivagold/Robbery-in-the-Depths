@@ -17,8 +17,10 @@ namespace GUI {
 		: public ViewType
 	{
 	public:
+		// close listener
+		using CloseListener = std::function<void()>;
 		// close screen
-		void close() { m_closeFlag = true; }
+		void close();
 		// open
 		void open() { m_closeFlag = false; }
 		// check if screen is closed
@@ -27,6 +29,8 @@ namespace GUI {
 		void run(std::function<void()> onScreenUpdated = nullptr);
 		// destructor
 		virtual ~BaseScreen() = default;
+		// set on close listener
+		void setOnCloseListener(CloseListener closeListener) { m_closeHandler = closeListener; }
 		// add backgroud root view
 		void addBackRootView(const std::shared_ptr<GUI::View>& rootView) { m_backRootViews.push_back(rootView); }
 		// convert to string
@@ -34,10 +38,14 @@ namespace GUI {
 	protected:
 		// close flag
 		bool m_closeFlag;
+		// close listener
+		CloseListener m_closeHandler;
 		// background root views
 		std::vector<std::shared_ptr<GUI::View>> m_backRootViews;
 		// constructor
 		explicit BaseScreen(sf::RenderWindow& window);
+		// close event
+		void onClose();
 	};
 
 	template<class ViewType>
@@ -53,6 +61,20 @@ namespace GUI {
 			}
 		});
 	}
+	template<class ViewType>
+	void BaseScreen<ViewType>::onClose()
+	{
+		if (m_closeHandler != nullptr)
+			m_closeHandler();
+	}
+
+	template<class ViewType>
+	void BaseScreen<ViewType>::close()
+	{
+		m_closeFlag = true;
+		onClose();
+	}
+
 	template<class ViewType>
 	void BaseScreen<ViewType>::run(std::function<void()> onScreenUpdated)
 	{
