@@ -21,7 +21,7 @@ void EditScreen::initComponents()
 
 	// init edit map view
 	m_editMapView = std::make_shared<EditMapView>(getWindow(), m_gois);
-	m_editMapView->getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.7f)); // TODO not work
+	m_editMapView->getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.7f));
 	addBackRootView(m_editMapView);
 
 	// init edit menu

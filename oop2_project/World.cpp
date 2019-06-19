@@ -18,8 +18,6 @@ World::World(sf::RenderWindow& window)
 
 void World::loadLevel(GameScreen& gameScreen, const LevelInfo& levelInfo)
 {
-	// TODO need clear BODS
-
 	const sf::Vector2i& defaultSize = BoardObject::getDefaultSize();
 	sf::Vector2i levelSize = levelInfo.getLevelChars().getSize();
 	setSize(levelSize.y*defaultSize.y, levelSize.x*defaultSize.x);
