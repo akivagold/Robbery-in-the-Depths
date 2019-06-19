@@ -138,6 +138,7 @@ void Player::decreaseLife(int numOfLife)
 void Player::onDie()
 {
 	Character::onDie();
+	playSound("player_die");
 	if (m_dieHandler)
 		m_dieHandler();
 }
@@ -168,7 +169,7 @@ void Player::onCollide(Chest* chest)
 {
 	if (!chest->isEmpty()) {
 		string message = "You received " + chest->getContentInfo();
-		getGameScreen().getGameAnimText()->showText(GameAnimText::TextInfo(message, sf::Color(108, 0, 118)));
+		getGameScreen().getGameAnimText()->showText(GameAnimText::TextInfo(message, sf::Color::White));
 		chest->pickup(this);		
 	}
 }

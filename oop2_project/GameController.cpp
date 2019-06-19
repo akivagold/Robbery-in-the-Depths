@@ -23,6 +23,7 @@ string GameController::toString() const
 
 void GameController::runMainScreen(sf::RenderWindow& window)
 {
+	playMenuMusic();
 	// read levels
 	LevelFileManager lfm;
 
@@ -34,11 +35,13 @@ void GameController::runMainScreen(sf::RenderWindow& window)
 		runChooseLevelScreen(v.getWindow(), lfm, [&v, this, &lfm](const LevelInfo& levelInfo) {
 			runEditScreen(v.getWindow(), lfm, levelInfo);
 		});
+		playMenuMusic();
 	});
 	mainScreen.getStartBt()->addClickListener([this, &lfm](GUI::View& v) {
 		runChooseLevelScreen(v.getWindow(), lfm, [&v, this](const LevelInfo& levelInfo) {
 			runGameScreen(v.getWindow(), levelInfo);
 		});	
+		playMenuMusic();
 	});
 	mainScreen.run();
 }
@@ -135,4 +138,9 @@ void GameController::runEditScreen(sf::RenderWindow& window, LevelFileManager& l
 	});
 
 	editScreen.run();
+}
+
+void GameController::playMenuMusic()
+{
+	GUI::SoundManager::getInterface().playBackgroundMusic("bm1");
 }

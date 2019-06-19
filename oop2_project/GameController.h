@@ -38,4 +38,6 @@ private:
 	void runLoseScreen(sf::RenderWindow& window, const LevelInfo& fromLevelInfo);
 	// run edit screen
 	void runEditScreen(sf::RenderWindow& window, LevelFileManager& levelFileManager, const LevelInfo& levelInfo);
+	// play menu music
+	void playMenuMusic();
 };
