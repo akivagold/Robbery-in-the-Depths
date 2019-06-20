@@ -60,7 +60,8 @@ void GameController::runGameScreen(sf::RenderWindow& window, const LevelInfo& le
 	gameScreen.loadLevel(levelInfo);
 
 	// get player
-	std::shared_ptr<Player> player = gameScreen.getWorld().getBODS().getPlayer();
+	const std::shared_ptr<Player>&
+		player = gameScreen.getWorld().getBODS().getPlayer();
 
 	player->setOnDieListener([&gameScreen] {
 		gameScreen.getGameAnimText()->showText(GameAnimText::TextInfo("You lose", sf::Color::Red));
