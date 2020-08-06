@@ -1,6 +1,7 @@
 #pragma once
 //---- include section ------
 #include <string>
+#include<memory>
 #include "Gift.h"
 
 //---- using section --------

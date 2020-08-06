@@ -72,7 +72,7 @@ string KeyValueFile::toString() const
 void KeyValueFile::loadJsonFromFile()
 {
 	// check if file dont exists
-	if (!std::experimental::filesystem::exists(m_fileName)) {
+	if (!std::filesystem::exists(m_fileName)) {
 		// save empty file
 		saveFile();
 	}

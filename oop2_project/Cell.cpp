@@ -1,5 +1,6 @@
 //---- include section ------
 #include "Cell.h"
+#include <stdexcept>
 
 GUI::Cell::Cell(int rowNum, int colNum)
 {
