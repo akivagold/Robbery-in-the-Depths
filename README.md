@@ -1,6 +1,6 @@
 
 <div>
-    <a href="https://github.com/MatanelAbayof/Robbery-in-the-Depths"><img src="https://bitbucket.org/matanelabayof/robbery-in-the-depths/raw/b3b840ce807fdb514270d3ba91cd6ba439b648d3/oop2_project/textures/diver.png" alt="Jazz² Resurrection" title="Robbery in the Depths"></a>
+    <a href="https://github.com/MatanelAbayof/Robbery-in-the-Depths"><img src="https://raw.githubusercontent.com/MatanelAbayof/Robbery-in-the-Depths/master/oop2_project/textures/diver.png" alt="Robbery in the Depths" title="Robbery in the Depths"></a>
 </div>
 
 <div>
@@ -9,7 +9,7 @@
 
 <div>
   <sub>
-    Developed by <a href="https://github.com/MatanelAbayof">@MatanelAbayof</a>, <a href="https://bitbucket.org/nahumnoga1/">@NahumNoga</a>, <a href="https://bitbucket.org/Akiva+Goldstein/">@AkivaGoldshtein</a>
+    Developed by <a href="https://github.com/MatanelAbayof">@MatanelAbayof</a>, <a href="https://github.com/NahumNoga">@NahumNoga</a>, <a href="https://github.com/akivagold">@AkivaGoldshtein</a>
   </sub>
 </div>
 <hr/>
@@ -23,7 +23,7 @@ This project uses [SFML library](https://www.sfml-dev.org/download/sfml/2.5.1/).
 
 ## Preview
 <div>
-    <img src="https://bitbucket.org/matanelabayof/robbery-in-the-depths/raw/7c37d86f31befa540b8e8a299e57a411297ecbfb/screenshots/gameplay1.gif" alt="Preview">
+    <img src="https://raw.githubusercontent.com/MatanelAbayof/Robbery-in-the-Depths/master/screenshots/gameplay1.gif" alt="Preview">
 </div>
 
 ## Running the application
