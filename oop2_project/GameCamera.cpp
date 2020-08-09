@@ -20,7 +20,7 @@ void GameCamera::updateCamera()
 	m_world->getCamera().move(sf::Vector2f(elapsedTime * (playerPos.x - cameraCenter.x) / 75, 0.f));
 	cameraCenter = m_world->getCamera().getCenter();
 	cameraPos = cameraCenter - (cameraSize / 2.f);
-	//check if update is OK
+	// check if update is OK
 	if (!(abs(playerPos.x - cameraCenter.x) > cameraSize.x / 3 && (cameraPos.x > worldPos.x && cameraPos.x + cameraSize.x < worldPos.x + m_world->getWidth()))) {
 		// return to pre update
 		m_world->getCamera().setCenter(sf::Vector2f(cameraPreCenter.x, cameraCenter.y));
@@ -32,7 +32,7 @@ void GameCamera::updateCamera()
 	m_world->getCamera().move(sf::Vector2f(0.f, elapsedTime * (playerPos.y - cameraCenter.y) / 50));
 	cameraCenter = m_world->getCamera().getCenter();
 	cameraPos = cameraCenter - (cameraSize / 2.f);
-	//check if update is OK
+	// check if update is OK
 	if (!(abs(playerPos.y - cameraCenter.y) > (cameraSize.y) / 4 && (cameraPos.y > worldPos.y && cameraPos.y + cameraSize.y < worldPos.y + m_world->getHeight()))) {
 		// return to pre update
 		m_world->getCamera().setCenter(sf::Vector2f(cameraCenter.x, cameraPreCenter.y));

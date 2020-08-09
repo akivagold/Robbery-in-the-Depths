@@ -81,7 +81,7 @@ void World::init()
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setRepeated(true);
 	const_cast<sf::Texture*>(getBackground().getSpriteTexture().getTexture())->setSmooth(true);
 	getBorder().setSize(1);
-	getCamera().zoom(0.6f);
+	getCamera().zoom(0.3f);
 	getCamera().setViewport(sf::FloatRect(0.f, 0.2f, 1.f, 0.8f));
 	getCamera().setCenter(sf::Vector2f(getCenter()));
 }
