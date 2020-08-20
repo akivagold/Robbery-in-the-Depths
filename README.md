@@ -26,6 +26,9 @@ This project uses [SFML library](https://www.sfml-dev.org/download/sfml/2.5.1/).
     <img src="https://raw.githubusercontent.com/MatanelAbayof/Robbery-in-the-Depths/master/screenshots/gameplay1.gif" alt="Preview">
 </div>
 
+[click here](https://www.youtube.com/watch?v=3kY2XuKDCcU) to watch gameplay on youtube
+
+
 ## Running the application
 ### Windows
 * Download Visual C++ 15 (2017) - 32-bit from [this link](https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip)
