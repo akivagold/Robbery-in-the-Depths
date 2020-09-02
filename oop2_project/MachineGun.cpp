@@ -28,7 +28,7 @@ void MachineGun::draw()
 void MachineGun::onCollide(Bullet* bullet)
 {
 	if (bullet->getMyOwner() == this) {
-		bullet->isCollideWiteMyowner(true);
+		bullet->setCollideWithMyOwner(true);
 	}
 }
 

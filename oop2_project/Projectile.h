@@ -35,6 +35,8 @@ protected:
 private:
 	// draw priority
 	static const int DRAW_PRIORITY = 22;
+	// relative position from owner
+	static const float REL_POS_OWNER;
 	// shot time
 	static const int SHOT_TIME = 30;
 	// my owner

@@ -10,13 +10,13 @@ BoardObject::BoardObject(GameScreen& gameScreen, int drawPriority)
 	init();
 }
 
-void BoardObject::playSound(const string& name, float pitch)
+void BoardObject::playSound(const string& name, float pitch, float volume)
 {
 	static float maxHearPixels = static_cast<float>(MAX_HEAR_SOUND_CELLS * getDefaultSize().x);
 	float diffP = maxHearPixels - getRadiusFromPlayer();
 	if (diffP > 0.f) {
-		float volume = (100.f*diffP)/maxHearPixels;
-		GUI::SoundManager::getInterface().playSound(name, volume, pitch);
+		float realVolume = (volume*diffP)/maxHearPixels;
+		GUI::SoundManager::getInterface().playSound(name, realVolume, pitch);
 	}	
 }
 

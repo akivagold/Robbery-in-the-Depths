@@ -37,9 +37,9 @@ public:
 	virtual void onCollide(Explosion* explosion) override {}
 	virtual void onCollide(Box* box) override;
 	virtual void onCollide(ExitLevel* exitLevel) override {}
+	void setCollideWithMyOwner(bool isCollided) { m_collideWithMyOwner = isCollided; }
 	// convert to string
 	virtual string toString() const override { return "Bullet: { " + Projectile::toString() + " }"; }
-	void isCollideWiteMyowner(bool chackCollide) { m_collideWithMyOwner = chackCollide; }
 protected:
 	// the object choose where to go
 	virtual void playChoice(Direction lastDirection, bool isCollided) override;

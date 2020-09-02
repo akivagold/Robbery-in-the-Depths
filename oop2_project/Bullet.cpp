@@ -13,7 +13,7 @@ Bullet::Bullet(GameScreen& gameScreen, Character* owner)
 void Bullet::onJoinedGame()
 {
 	Projectile::onJoinedGame();
-	playSound("bullet_fire");
+	playSound("bullet_fire", 1.f, 30.f);
 }
 
 void Bullet::explode()
@@ -33,19 +33,19 @@ void Bullet::onCollide(Box* box)
 	box->decreaseDurabilityState(getDamage());
 	explode();
 }
-#include <iostream>
+
 void Bullet::playChoice(Direction lastDirection, bool isCollided)
 {
-	if (isCollided) {
-		if (!m_collideWithMyOwner) {
-			explode();
-			return;
-		}	
+	if (isCollided && !m_collideWithMyOwner) {
+		explode();
+		return;
 	}
 
-	// chack if collide with his owner 
+	// check if collide with his owner 
 	if (!getBound().intersects(getMyOwner()->getBound()))
 		m_collideWithMyOwner = false;
+	else
+		m_collideWithMyOwner = true;
 
 	// set speed
 	if (getDirection() == Direction::RIGHT) {
@@ -57,8 +57,9 @@ void Bullet::playChoice(Direction lastDirection, bool isCollided)
 	else if (getDirection() == Direction::UP) {
 		getInteralAcceleration().y = -ACCELERATION.y;
 	}
-	else
+	else {
 		getInteralAcceleration().y = ACCELERATION.y;
+	}		
 }
 
 void Bullet::init()

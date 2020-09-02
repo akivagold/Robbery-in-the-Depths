@@ -91,7 +91,7 @@ protected:
 	// constructor
 	explicit BoardObject(GameScreen& gameScreen, int drawPriority = 0);
 	// play sound
-	void playSound(const string& name, float pitch = 1.f);
+	void playSound(const string& name, float pitch = 1.f, float volume = 100.f);
 	// event on vanish
 	virtual void onVanish() {}
 	// event when object joined to game
