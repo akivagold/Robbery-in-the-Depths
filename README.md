@@ -49,4 +49,4 @@ This project uses [SFML library](https://www.sfml-dev.org/download/sfml/2.5.1/).
 * Click on build solution
 
 ## License
-This project is licensed under the terms of the [GNU General Public License v3.0](./LICENSE).
+This project is licensed under the terms of the [Apache-2.0 License](./LICENSE).
