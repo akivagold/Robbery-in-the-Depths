@@ -26,7 +26,7 @@ This project uses [SFML library](https://www.sfml-dev.org/download/sfml/2.5.1/).
     <img src="https://raw.githubusercontent.com/MatanelAbayof/Robbery-in-the-Depths/master/screenshots/gameplay1.gif" alt="Preview">
 </div>
 
-[click here](https://youtu.be/1QnggP0GTys) to watch gameplay on youtube
+[click here](https://www.youtube.com/playlist?list=PLyDBipkb19gLUC5sXXbI8OzLh-oFhR6XU) to watch gameplay on youtube
 
 
 ## Running the application
