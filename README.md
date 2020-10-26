@@ -45,7 +45,7 @@ This project uses [SFML library](https://www.sfml-dev.org/download/sfml/2.5.1/).
 
 ## Building the solution
 ### Windows
-* Open the solution in [Microsoft Visual Studio 2019](https://www.visualstudio.com/) (or newer) and build it
+* Open the solution in [Microsoft Visual Studio 2019](https://www.visualstudio.com/) (or newer)
 * Click on build solution
 
 ## License
