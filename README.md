@@ -9,7 +9,7 @@
 
 <div>
   <sub>
-    Developed by <a href="https://github.com/MatanelAbayof">@MatanelAbayof</a>, <a href="https://github.com/NahumNoga">@NahumNoga</a>, <a href="https://github.com/akivagold">@AkivaGoldshtein</a>
+    Developed by <a href="https://github.com/MatanelAbayof">@MatanelAbayof</a>, <a href="https://github.com/NahumNoga">@NahumNoga</a>, <a href="https://github.com/akivagold">@AkivaGoldstein</a>
   </sub>
 </div>
 <hr/>
